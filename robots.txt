@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://wangjc95.com/sitemap.xml
