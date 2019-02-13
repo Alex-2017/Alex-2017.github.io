@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>策略模式 - Alex的博客</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="Alex" />
+  <meta name="description" content="介绍: 这是阅读head first design patterns的阅读笔记. 1.应用场景 我们有一个鸭子模拟器,通过Duck父类表示鸭子的行为,子类通过重写disp" />
+
+  <meta name="keywords" content="博客, java" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.53" />
+
+
+<link rel="canonical" href="https://wangjc95.com/post/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.c8c1ff75dee09b44060a6c38f41b9036bac2512ccdb22d7f296cec12dc786375.css" integrity="sha256-yMH/dd7gm0QGCmw49BuQNrrCUSzNsi1/KWzsEtx4Y3U=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="策略模式" />
+<meta property="og:description" content="介绍: 这是阅读head first design patterns的阅读笔记. 1.应用场景 我们有一个鸭子模拟器,通过Duck父类表示鸭子的行为,子类通过重写disp" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wangjc95.com/post/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" /><meta property="article:published_time" content="2019-02-13T21:30:48&#43;08:00"/>
+<meta property="article:modified_time" content="2019-02-13T21:30:48&#43;08:00"/>
+
+<meta itemprop="name" content="策略模式">
+<meta itemprop="description" content="介绍: 这是阅读head first design patterns的阅读笔记. 1.应用场景 我们有一个鸭子模拟器,通过Duck父类表示鸭子的行为,子类通过重写disp">
+
+
+<meta itemprop="datePublished" content="2019-02-13T21:30:48&#43;08:00" />
+<meta itemprop="dateModified" content="2019-02-13T21:30:48&#43;08:00" />
+<meta itemprop="wordCount" content="1215">
+
+
+
+<meta itemprop="keywords" content="head first design patterns读书笔记," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="策略模式"/>
+<meta name="twitter:description" content="介绍: 这是阅读head first design patterns的阅读笔记. 1.应用场景 我们有一个鸭子模拟器,通过Duck父类表示鸭子的行为,子类通过重写disp"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Alex的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangjc95.com/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangjc95.com/post/">全部文章</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangjc95.com/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangjc95.com/categories/">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangjc95.com/about/">About</a>
+          
+        
+      </li>
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      Alex的博客
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangjc95.com/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangjc95.com/post/">全部文章</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangjc95.com/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangjc95.com/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangjc95.com/about/">About</a>
+          
+
+        
+
+      </li>
+    
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">策略模式</h1>
+      
+      <div class="post-meta">
+        <time datetime="2019-02-13" class="post-time">
+          2019-02-13
+        </time>
+        <div class="post-category">
+            <a href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"> java设计模式 </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#1-应用场景">1.应用场景</a></li>
+<li><a href="#2-解决思路">2.解决思路</a>
+<ul>
+<li><a href="#2-1在父类中添加-fly-方法">2.1在父类中添加<code>fly</code>方法</a></li>
+<li><a href="#2-2使用-flyable-quackable-接口">2.2使用<code>Flyable</code>,<code>Quackable</code>接口</a></li>
+<li><a href="#2-3设计原则">2.3设计原则</a>
+<ul>
+<li><a href="#2-3-1封装变化">2.3.1封装变化</a></li>
+<li><a href="#2-3-2面向接口编程">2.3.2面向接口编程</a></li>
+<li><a href="#2-3-3多用组合-少用继承">2.3.3多用组合,少用继承</a></li>
+</ul></li>
+<li><a href="#2-4封装行为">2.4封装行为</a></li>
+</ul></li>
+<li><a href="#3-代码展示">3.代码展示</a>
+<ul>
+<li><a href="#3-1行为接口">3.1行为接口</a></li>
+<li><a href="#3-2行为接口实现类">3.2行为接口实现类</a></li>
+<li><a href="#3-3鸭子父类">3.3鸭子父类</a></li>
+<li><a href="#3-4鸭子子类">3.4鸭子子类</a></li>
+<li><a href="#3-5测试类">3.5测试类</a></li>
+</ul></li>
+<li><a href="#4-策略模式定义">4.策略模式定义</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      
+
+<p><strong>介绍:</strong> 这是阅读<code>head first design patterns</code>的阅读笔记.</p>
+
+<h1 id="1-应用场景">1.应用场景</h1>
+
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190213161054.png" alt="" /></p>
+
+<p>我们有一个鸭子模拟器,通过<code>Duck</code>父类表示鸭子的行为,子类通过重写<code>display</code>方法来表示鸭子的特征行为.现在有一个新需求,需要添加一个<code>fly</code>方法,让鸭子飞起来.</p>
+
+<h1 id="2-解决思路">2.解决思路</h1>
+
+<h2 id="2-1在父类中添加-fly-方法">2.1在父类中添加<code>fly</code>方法</h2>
+
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190213163020.png" alt="" /></p>
+
+<p><code>RubberDuck</code>无法飞行,所以需要重写<code>fly</code>方法.<code>WoodenDuck</code>不能飞行不能叫,需要重写<code>fly</code>,<code>quack</code>方法.假设以后还会有新的鸭子被添加而且频率很多!那么维护该项目将会成为一个噩梦.<strong>这是典型的过度使用继承,导致项目维护起来很繁琐!</strong></p>
+
+<h2 id="2-2使用-flyable-quackable-接口">2.2使用<code>Flyable</code>,<code>Quackable</code>接口</h2>
+
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190213172535.png" alt="" /></p>
+
+<p>对需要重写方法的子类,让它们去实现对应的接口.这样做的坏处很明显,若新增了需要重写的方法,就要添加对应的接口.另外用接口实现的方法无法达到代码复用的目的!</p>
+
+<p>以上两种方式都无法优雅的解决添加<code>fly</code>方法的问题,下面我们来看几个设计原则.</p>
+
+<h2 id="2-3设计原则">2.3设计原则</h2>
+
+<h3 id="2-3-1封装变化">2.3.1封装变化</h3>
+
+<p><code>Identity the aspects of your application that vary and separate them from what stays the same.</code></p>
+
+<h3 id="2-3-2面向接口编程">2.3.2面向接口编程</h3>
+
+<p><code>Program to an interface,not an implementation.</code></p>
+
+<h3 id="2-3-3多用组合-少用继承">2.3.3多用组合,少用继承</h3>
+
+<p><code>Favor composition over inheritance</code></p>
+
+<h2 id="2-4封装行为">2.4封装行为</h2>
+
+<p>以设计原则为基础,对变化的部分进行封装.</p>
+
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190213204139.png" alt="" /></p>
+
+<p>将飞行行为和呱呱叫行为封装为接口并根据不同类型生成对应的实现类.然后将<code>FlyBeahvior</code>和<code>QuackBehavior</code>放置在<code>Duck</code>类中.</p>
+
+<p><code>Duck.java</code></p>
+
+<pre><code class="language-java">public abstract class Duck {
+
+    public Duck(){
+
+    }
+
+    /**
+     * 将会变化的飞行,呱呱叫行为从不会变化的代码中分离出来,通过用接口来替代.在Duck的子类中给Behavior设定对应的实现对象.
+     */
+    protected FlyBehavior flyBehavior;
+    protected QuackBehavior quackBehavior;
+    
+    public abstract void display();
+
+    public void swim() {
+        System.out.println(&quot;we all can swim!&quot;);
+    }
+
+    public void performFly() {
+        flyBehavior.fly();
+    }
+
+    public void performQuack() {
+        quackBehavior.quack();
+    }
+
+}
+</code></pre>
+
+<h1 id="3-代码展示">3.代码展示</h1>
+
+<h2 id="3-1行为接口">3.1行为接口</h2>
+
+<p><strong>FlyBehavior.java</strong></p>
+
+<pre><code class="language-java">/**
+ * @Author Alex
+ * @Date 2019/1/30 17:41
+ * @Desc 代表飞行行为,通过不同的接口来实现不同的飞行行为.
+ */
+public interface FlyBehavior {
+    void fly();
+}
+</code></pre>
+
+<p><strong>QuackBehavior.java</strong></p>
+
+<pre><code class="language-java">/**
+ * @Author Alex
+ * @Date 2019/1/30 17:42
+ * @Desc 代表呱呱叫行为
+ */
+public interface QuackBehavior {
+    void quack();
+}
+</code></pre>
+
+<h2 id="3-2行为接口实现类">3.2行为接口实现类</h2>
+
+<p><strong>FlyByRocket.java</strong></p>
+
+<pre><code class="language-java">public class FlyByRocket implements FlyBehavior {
+    @Override
+    public void fly() {
+        System.out.println(&quot;fly by rocket&quot;);
+    }
+}
+</code></pre>
+
+<p><strong>FlyNoWay.java</strong></p>
+
+<pre><code class="language-java">public class FlyNoWay implements FlyBehavior {
+    //无法飞行
+    @Override
+    public void fly() {
+        System.out.println(&quot;can not fly!&quot;);
+    }
+}
+</code></pre>
+
+<p><strong>FlyWithWings.java</strong></p>
+
+<pre><code class="language-java">public class FlyWithWings implements FlyBehavior {
+    //用翅膀飞行
+    @Override
+    public void fly() {
+        System.out.println(&quot;fly with wings in the sky!&quot;);
+    }
+}
+</code></pre>
+
+<p><strong>MuteQuack.java</strong></p>
+
+<pre><code class="language-java">public class MuteQuack implements QuackBehavior {
+    //变异鸭子 无法叫出声.
+    @Override
+    public void quack() {
+        System.out.println(&quot;I'm mute duck,can not quack!&quot;);
+    }
+}
+</code></pre>
+
+<p><strong>Quack.java</strong></p>
+
+<pre><code class="language-java">public class Quack implements QuackBehavior {
+    //表示正常鸭子的呱呱叫
+    @Override
+    public void quack() {
+        System.out.println(&quot;quack quack quack&quot;);
+    }
+}
+</code></pre>
+
+<h2 id="3-3鸭子父类">3.3鸭子父类</h2>
+
+<p><strong>Duck.java</strong></p>
+
+<pre><code class="language-java">public abstract class Duck {
+
+    public Duck(){
+
+    }
+
+    /**
+     * 将会变化的飞行,呱呱叫行为从不会变化的代码中分离出来,通过用接口来替代.在Duck的子类中给Behavior设定对应的实现对象.
+     */
+    protected FlyBehavior flyBehavior;
+    protected QuackBehavior quackBehavior;
+
+    /**
+     * 动态设置FlyBehavior实现类
+     */
+    public void setFlyBehavior(FlyBehavior f) {
+        flyBehavior = f;
+    }
+
+    public abstract void display();
+
+    public void swim() {
+        System.out.println(&quot;we all can swim!&quot;);
+    }
+
+    public void performFly() {
+        flyBehavior.fly();
+    }
+
+    public void performQuack() {
+        quackBehavior.quack();
+    }
+
+}
+</code></pre>
+
+<h2 id="3-4鸭子子类">3.4鸭子子类</h2>
+
+<p><strong>MallardDuck.java</strong></p>
+
+<pre><code class="language-java">public class MallardDuck extends Duck {
+
+
+    public MallardDuck() {
+        flyBehavior = new FlyWithWings();
+        quackBehavior = new Quack();
+    }
+
+    @Override
+    public void display() {
+        System.out.println(&quot;I'm MallardDuck&quot;);
+    }
+}
+</code></pre>
+
+<h2 id="3-5测试类">3.5测试类</h2>
+
+<p><strong>StrategyTest.java</strong></p>
+
+<pre><code class="language-java">public class StrategyTest {
+    @Test
+    public void test1() {
+        Duck mallardDuck = new MallardDuck();
+        mallardDuck.display();
+        mallardDuck.performFly();
+        mallardDuck.performQuack();
+    }
+
+    @Test
+    public void test2() {
+        Duck duck = new MallardDuck();
+        duck.performFly();
+        //动态设置 Behavior
+        duck.setFlyBehavior(new FlyByRocket());
+        duck.performFly();
+    }
+}
+</code></pre>
+
+<h1 id="4-策略模式定义">4.策略模式定义</h1>
+
+<p>这样的解决方法就叫做策略模式,策略模式就是<strong>定义并进行封装一组算法,它们之间可自由交互,独立于客户端.</strong></p>
+
+<p>当前的解决办法并不是最佳的解决办法!因为在子类的构造器中手动构造了所需的行为实现类.</p>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Alex</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2019-02-13</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a href="https://github.com/gohugoio/hugoBasicExample" rel="noopener" target="_blank">See origin</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+  
+  
+    
+
+
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  
+  
+    <a href="mailto:1017086516@qq.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://wangjc95.com/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2019/1/6 -
+    2019
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        Alex
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.dee43230127a73d039a734510fa896c89c3c7ce0cf0be0c7a7433f8fd69b76dc.js" integrity="sha256-3uQyMBJ6c9A5pzRRD6iWyJw8fODPC&#43;DHp0M/j9abdtw=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

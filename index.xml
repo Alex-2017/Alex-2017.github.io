@@ -24,13 +24,263 @@
     </item>
     
     <item>
-      <title>第一篇博客</title>
-      <link>https://wangjc95.com/post/first-blog/</link>
-      <pubDate>Sun, 06 Jan 2019 22:47:48 +0800</pubDate>
+      <title>策略模式</title>
+      <link>https://wangjc95.com/post/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Wed, 13 Feb 2019 21:30:48 +0800</pubDate>
       
-      <guid>https://wangjc95.com/post/first-blog/</guid>
+      <guid>https://wangjc95.com/post/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</guid>
       
-        <description>&lt;p&gt;简简单单的用&lt;code&gt;Hugo&lt;/code&gt;搭了个博客,希望自己能够持续的学习,总结下去!&lt;/p&gt;
+        <description>
+
+&lt;p&gt;&lt;strong&gt;介绍:&lt;/strong&gt; 这是阅读&lt;code&gt;head first design patterns&lt;/code&gt;的阅读笔记.&lt;/p&gt;
+
+&lt;h1 id=&#34;1-应用场景&#34;&gt;1.应用场景&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190213161054.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们有一个鸭子模拟器,通过&lt;code&gt;Duck&lt;/code&gt;父类表示鸭子的行为,子类通过重写&lt;code&gt;display&lt;/code&gt;方法来表示鸭子的特征行为.现在有一个新需求,需要添加一个&lt;code&gt;fly&lt;/code&gt;方法,让鸭子飞起来.&lt;/p&gt;
+
+&lt;h1 id=&#34;2-解决思路&#34;&gt;2.解决思路&lt;/h1&gt;
+
+&lt;h2 id=&#34;2-1在父类中添加-fly-方法&#34;&gt;2.1在父类中添加&lt;code&gt;fly&lt;/code&gt;方法&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190213163020.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;RubberDuck&lt;/code&gt;无法飞行,所以需要重写&lt;code&gt;fly&lt;/code&gt;方法.&lt;code&gt;WoodenDuck&lt;/code&gt;不能飞行不能叫,需要重写&lt;code&gt;fly&lt;/code&gt;,&lt;code&gt;quack&lt;/code&gt;方法.假设以后还会有新的鸭子被添加而且频率很多!那么维护该项目将会成为一个噩梦.&lt;strong&gt;这是典型的过度使用继承,导致项目维护起来很繁琐!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;2-2使用-flyable-quackable-接口&#34;&gt;2.2使用&lt;code&gt;Flyable&lt;/code&gt;,&lt;code&gt;Quackable&lt;/code&gt;接口&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190213172535.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;对需要重写方法的子类,让它们去实现对应的接口.这样做的坏处很明显,若新增了需要重写的方法,就要添加对应的接口.另外用接口实现的方法无法达到代码复用的目的!&lt;/p&gt;
+
+&lt;p&gt;以上两种方式都无法优雅的解决添加&lt;code&gt;fly&lt;/code&gt;方法的问题,下面我们来看几个设计原则.&lt;/p&gt;
+
+&lt;h2 id=&#34;2-3设计原则&#34;&gt;2.3设计原则&lt;/h2&gt;
+
+&lt;h3 id=&#34;2-3-1封装变化&#34;&gt;2.3.1封装变化&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Identity the aspects of your application that vary and separate them from what stays the same.&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;2-3-2面向接口编程&#34;&gt;2.3.2面向接口编程&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Program to an interface,not an implementation.&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;2-3-3多用组合-少用继承&#34;&gt;2.3.3多用组合,少用继承&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Favor composition over inheritance&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;2-4封装行为&#34;&gt;2.4封装行为&lt;/h2&gt;
+
+&lt;p&gt;以设计原则为基础,对变化的部分进行封装.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190213204139.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;将飞行行为和呱呱叫行为封装为接口并根据不同类型生成对应的实现类.然后将&lt;code&gt;FlyBeahvior&lt;/code&gt;和&lt;code&gt;QuackBehavior&lt;/code&gt;放置在&lt;code&gt;Duck&lt;/code&gt;类中.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Duck.java&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public abstract class Duck {
+
+    public Duck(){
+
+    }
+
+    /**
+     * 将会变化的飞行,呱呱叫行为从不会变化的代码中分离出来,通过用接口来替代.在Duck的子类中给Behavior设定对应的实现对象.
+     */
+    protected FlyBehavior flyBehavior;
+    protected QuackBehavior quackBehavior;
+    
+    public abstract void display();
+
+    public void swim() {
+        System.out.println(&amp;quot;we all can swim!&amp;quot;);
+    }
+
+    public void performFly() {
+        flyBehavior.fly();
+    }
+
+    public void performQuack() {
+        quackBehavior.quack();
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;3-代码展示&#34;&gt;3.代码展示&lt;/h1&gt;
+
+&lt;h2 id=&#34;3-1行为接口&#34;&gt;3.1行为接口&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;FlyBehavior.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
+ * @Author Alex
+ * @Date 2019/1/30 17:41
+ * @Desc 代表飞行行为,通过不同的接口来实现不同的飞行行为.
+ */
+public interface FlyBehavior {
+    void fly();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;QuackBehavior.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
+ * @Author Alex
+ * @Date 2019/1/30 17:42
+ * @Desc 代表呱呱叫行为
+ */
+public interface QuackBehavior {
+    void quack();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;3-2行为接口实现类&#34;&gt;3.2行为接口实现类&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;FlyByRocket.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class FlyByRocket implements FlyBehavior {
+    @Override
+    public void fly() {
+        System.out.println(&amp;quot;fly by rocket&amp;quot;);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;FlyNoWay.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class FlyNoWay implements FlyBehavior {
+    //无法飞行
+    @Override
+    public void fly() {
+        System.out.println(&amp;quot;can not fly!&amp;quot;);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;FlyWithWings.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class FlyWithWings implements FlyBehavior {
+    //用翅膀飞行
+    @Override
+    public void fly() {
+        System.out.println(&amp;quot;fly with wings in the sky!&amp;quot;);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;MuteQuack.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class MuteQuack implements QuackBehavior {
+    //变异鸭子 无法叫出声.
+    @Override
+    public void quack() {
+        System.out.println(&amp;quot;I&#39;m mute duck,can not quack!&amp;quot;);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Quack.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class Quack implements QuackBehavior {
+    //表示正常鸭子的呱呱叫
+    @Override
+    public void quack() {
+        System.out.println(&amp;quot;quack quack quack&amp;quot;);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;3-3鸭子父类&#34;&gt;3.3鸭子父类&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Duck.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public abstract class Duck {
+
+    public Duck(){
+
+    }
+
+    /**
+     * 将会变化的飞行,呱呱叫行为从不会变化的代码中分离出来,通过用接口来替代.在Duck的子类中给Behavior设定对应的实现对象.
+     */
+    protected FlyBehavior flyBehavior;
+    protected QuackBehavior quackBehavior;
+
+    /**
+     * 动态设置FlyBehavior实现类
+     */
+    public void setFlyBehavior(FlyBehavior f) {
+        flyBehavior = f;
+    }
+
+    public abstract void display();
+
+    public void swim() {
+        System.out.println(&amp;quot;we all can swim!&amp;quot;);
+    }
+
+    public void performFly() {
+        flyBehavior.fly();
+    }
+
+    public void performQuack() {
+        quackBehavior.quack();
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;3-4鸭子子类&#34;&gt;3.4鸭子子类&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;MallardDuck.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class MallardDuck extends Duck {
+
+
+    public MallardDuck() {
+        flyBehavior = new FlyWithWings();
+        quackBehavior = new Quack();
+    }
+
+    @Override
+    public void display() {
+        System.out.println(&amp;quot;I&#39;m MallardDuck&amp;quot;);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;3-5测试类&#34;&gt;3.5测试类&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;StrategyTest.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class StrategyTest {
+    @Test
+    public void test1() {
+        Duck mallardDuck = new MallardDuck();
+        mallardDuck.display();
+        mallardDuck.performFly();
+        mallardDuck.performQuack();
+    }
+
+    @Test
+    public void test2() {
+        Duck duck = new MallardDuck();
+        duck.performFly();
+        //动态设置 Behavior
+        duck.setFlyBehavior(new FlyByRocket());
+        duck.performFly();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;4-策略模式定义&#34;&gt;4.策略模式定义&lt;/h1&gt;
+
+&lt;p&gt;这样的解决方法就叫做策略模式,策略模式就是&lt;strong&gt;定义并进行封装一组算法,它们之间可自由交互,独立于客户端.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;当前的解决办法并不是最佳的解决办法!因为在子类的构造器中手动构造了所需的行为实现类.&lt;/p&gt;
 </description>
       
     </item>
