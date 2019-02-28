@@ -17,7 +17,7 @@
       <pubDate>Thu, 28 Feb 2019 21:00:00 +0800</pubDate>
       
       <guid>https://wangjc95.com/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记. [TOC] 1.应用场景 ​ 一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.</description>
+      <description>介绍: 这是阅读head first design patterns的阅读笔记. 1.应用场景 ​ 一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Sun, 17 Feb 2019 17:34:00 +0800</pubDate>
       
       <guid>https://wangjc95.com/post/2-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记. [TOC] 1.观察者模式 1.1定义 观察者模式定义了对象之间的一对多依赖,这样一来,当一个对象改</description>
+      <description>介绍: 这是阅读head first design patterns的阅读笔记. 1.观察者模式 1.1定义 观察者模式定义了对象之间的一对多依赖,这样一来,当一个对象改变</description>
     </item>
     
     <item>
@@ -35,7 +35,7 @@
       <pubDate>Wed, 13 Feb 2019 21:30:48 +0800</pubDate>
       
       <guid>https://wangjc95.com/post/1-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记. [TOC] 1.应用场景 我们有一个鸭子模拟器,通过Duck父类表示鸭子的行为,子类通过重写dis</description>
+      <description>介绍: 这是阅读head first design patterns的阅读笔记. 1.应用场景 我们有一个鸭子模拟器,通过Duck父类表示鸭子的行为,子类通过重写disp</description>
     </item>
     
   </channel>
