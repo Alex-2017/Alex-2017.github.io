@@ -24,15 +24,389 @@
     </item>
     
     <item>
-      <title>观察者模式</title>
-      <link>https://wangjc95.com/post/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</link>
-      <pubDate>Sun, 17 Feb 2019 17:34:00 +0800</pubDate>
+      <title>装饰者模式</title>
+      <link>https://wangjc95.com/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Thu, 28 Feb 2019 21:00:00 +0800</pubDate>
       
-      <guid>https://wangjc95.com/post/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
+      <guid>https://wangjc95.com/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
       
         <description>
 
 &lt;p&gt;&lt;strong&gt;介绍:&lt;/strong&gt; 这是阅读&lt;code&gt;head first design patterns&lt;/code&gt;的阅读笔记.&lt;/p&gt;
+
+&lt;p&gt;[TOC]&lt;/p&gt;
+
+&lt;h1 id=&#34;1-应用场景&#34;&gt;1.应用场景&lt;/h1&gt;
+
+&lt;p&gt;​   一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与此同时带来了一个问题,由于订单量暴增,他们的订单管理系统支撑不住了.需要设计一个新的系统,并且能够灵活,快速的改动.&lt;/p&gt;
+
+&lt;p&gt;​   下面介绍下一点点,它是一家饮品店.主要卖的饮料分为奶制品,茶,果汁,在饮料的基础上可以根据个人需要添加配料,常见的配料有珍珠,椰果,奶盖等.因此饮品的价钱是由客户选择的饮品类型和配料多少来决定的.&lt;/p&gt;
+
+&lt;h1 id=&#34;2-如何设计&#34;&gt;2.如何设计?&lt;/h1&gt;
+
+&lt;h2 id=&#34;2-1第一种&#34;&gt;2.1第一种&lt;/h2&gt;
+
+&lt;p&gt;创建一个&lt;code&gt;Bverage&lt;/code&gt;抽象类,抽象方法&lt;code&gt;cost()&lt;/code&gt;,每种不同类型的饮品都需要新建一个类并且重写&lt;code&gt;cost()&lt;/code&gt;方法返回对应的价钱.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190228204606.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;从上面的类图中可以看出,10种饮料就意味着要10个子类.如果遇上了配料价格变动的需求,就需要将所有涉及到该配料的&lt;code&gt;cost&lt;/code&gt;方法重写.维护这种项目光是想想就让人头皮发麻.&lt;/p&gt;
+
+&lt;h2 id=&#34;2-2第二种&#34;&gt;2.2第二种&lt;/h2&gt;
+
+&lt;p&gt;另一种的方式就是将是否添加配料和配料的价钱放在父类&lt;code&gt;Bverage&lt;/code&gt;中,只有每种不同的饮品才会去继承&lt;code&gt;Bverage&lt;/code&gt;类,根据是否添加配料的方法来计算价钱.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190228205320.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这种方式比第一种要简洁了很多,但是有如下问题:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;饮品必须强制继承所有的配料方法,这是不实际的.&lt;/li&gt;
+&lt;li&gt;无法添加多个相同的配料&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;3-装饰者模式&#34;&gt;3.装饰者模式&lt;/h1&gt;
+
+&lt;p&gt;在这种情况下就可以引入装饰者模式了!&lt;/p&gt;
+
+&lt;h2 id=&#34;3-1定义&#34;&gt;3.1定义&lt;/h2&gt;
+
+&lt;p&gt;通过继承和组合的方式动态地将责任附加到对象上,而不会改动原有的代码.&lt;/p&gt;
+
+&lt;h2 id=&#34;3-2设计原则&#34;&gt;3.2设计原则&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;开放原则:&lt;/strong&gt;类应该对扩展开放,对修改关闭.&lt;/p&gt;
+
+&lt;h2 id=&#34;3-3类图&#34;&gt;3.3类图&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190228173424.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;3-4实现代码&#34;&gt;3.4实现代码&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;Bverage.java&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;package decorator.bverages;
+
+/**
+ * @Author WangJiChao
+ * @Date 2019/2/26 22:20
+ * @Desc 饮料抽象类
+ */
+public abstract class Bverage {
+
+    public static final int BIG = 1;
+    public static final int MEDIUM = 2;
+    public static final int SMALL = 3;
+
+    //描述信息
+    protected String descrption;
+
+    //容量大小
+    private int size;
+
+    //返回描述信息
+    public String getDescrption() {
+        return descrption;
+    }
+
+    //返回价格
+    public abstract double cost();
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    protected Bverage() {
+    }
+
+    public Bverage(int size) {
+        this.size = size;
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Bverage&lt;/code&gt;的饮品子类&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;package decorator.bverages.subClasses;
+
+import decorator.bverages.Bverage;
+
+/**
+ * @Author WangJiChao
+ * @Date 2019/2/26 22:21
+ * @Desc 果汁
+ */
+public class Juice extends Bverage {
+
+    public Juice() {
+        descrption = &amp;quot;Juice&amp;quot;;
+    }
+
+    @Override
+    public double cost() {
+        return 10.5;
+    }
+}
+
+
+package decorator.bverages.subClasses;
+
+import decorator.bverages.Bverage;
+
+/**
+ * @Author WangJiChao
+ * @Date 2019/2/26 22:20
+ * @Desc 奶茶
+ */
+public class MilkTea extends Bverage{
+
+    public MilkTea() {
+        descrption = &amp;quot;Milk Tea&amp;quot;;
+    }
+
+    @Override
+    public double cost() {
+        return 9.5;
+    }
+}
+
+
+package decorator.bverages.subClasses;
+
+import decorator.bverages.Bverage;
+
+/**
+ * @Author WangJiChao
+ * @Date 2019/2/26 22:20
+ * @Desc 茶
+ */
+public class Tea extends Bverage {
+
+    public Tea() {
+        descrption = &amp;quot;Tea&amp;quot;;
+    }
+
+    @Override
+    public double cost() {
+        return 8.5;
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Ingredient.java&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;package decorator.ingredients;
+
+import decorator.bverages.Bverage;
+
+/**
+ * @Author WangJiChao
+ * @Date 2019/2/26 22:21
+ * @Desc 配料
+ */
+public abstract class Ingredient extends Bverage {
+
+    //将getDescrption重写为抽象方法
+    @Override
+    public abstract String getDescrption();
+
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Ingredient&lt;/code&gt;的配料子类&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;package decorator.ingredients.subClasses;
+
+import decorator.bverages.Bverage;
+import decorator.ingredients.Ingredient;
+
+/**
+ * @Author WangJiChao
+ * @Date 2019/2/26 22:21
+ * @Desc 椰果
+ */
+public class Cocount extends Ingredient {
+
+    private Bverage bverage;
+
+    public Cocount(Bverage bverage) {
+        this.bverage = bverage;
+    }
+
+    @Override
+    public String getDescrption() {
+        return bverage.getDescrption() + &amp;quot;,Cocount&amp;quot;;
+    }
+
+    @Override
+    public int getSize() {
+        return bverage.getSize();
+    }
+
+    //根据饮料容量大小设置配料价格
+    @Override
+    public double cost() {
+        double cost = bverage.cost();
+        if (bverage.getSize() == Bverage.BIG) {
+            cost += 3;
+        } else if (bverage.getSize() == Bverage.MEDIUM) {
+            cost += 2.5;
+        } else if (bverage.getSize() == Bverage.SMALL) {
+            cost += 2;
+        }
+        return cost;
+    }
+}
+
+
+package decorator.ingredients.subClasses;
+
+import decorator.bverages.Bverage;
+import decorator.ingredients.Ingredient;
+
+/**
+ * @Author WangJiChao
+ * @Date 2019/2/26 22:22
+ * @Desc 奶盖
+ */
+public class MilkCap extends Ingredient {
+    private Bverage bverage;
+
+    public MilkCap(Bverage bverage) {
+        this.bverage = bverage;
+    }
+
+    @Override
+    public String getDescrption() {
+        return bverage.getDescrption() + &amp;quot;,MilkCap&amp;quot;;
+    }
+
+    @Override
+    public int getSize() {
+        return bverage.getSize();
+    }
+
+    //根据饮料容量大小设置配料价格
+    @Override
+    public double cost() {
+        double cost = bverage.cost();
+        if (bverage.getSize() == Bverage.BIG) {
+            cost += 4;
+        } else if (bverage.getSize() == Bverage.MEDIUM) {
+            cost += 3.5;
+        } else if (bverage.getSize() == Bverage.SMALL) {
+            cost += 3;
+        }
+        return cost;
+    }
+
+}
+
+
+package decorator.ingredients.subClasses;
+
+import decorator.bverages.Bverage;
+import decorator.ingredients.Ingredient;
+
+/**
+ * @Author WangJiChao
+ * @Date 2019/2/26 22:21
+ * @Desc 珍珠
+ */
+public class Pearl extends Ingredient {
+
+    private Bverage bverage;
+
+    public Pearl(Bverage bverage) {
+        this.bverage = bverage;
+    }
+
+    @Override
+    public String getDescrption() {
+        return bverage.getDescrption() + &amp;quot;,Pearl&amp;quot;;
+    }
+
+    @Override
+    public int getSize() {
+        return bverage.getSize();
+    }
+
+    //根据饮料容量大小设置配料价格
+    @Override
+    public double cost() {
+        double cost = bverage.cost();
+        if (bverage.getSize() == Bverage.BIG) {
+            cost += 5;
+        } else if (bverage.getSize() == Bverage.MEDIUM) {
+            cost += 4.5;
+        } else if (bverage.getSize() == Bverage.SMALL) {
+            cost += 4;
+        }
+        return cost;
+    }
+}
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;测试代码&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Test
+    public void test1() {
+        //纯奶茶
+        Bverage milkTea = new MilkTea();
+        System.out.println(milkTea.getDescrption() + &amp;quot; costs $&amp;quot; + milkTea.cost());
+
+        //茶+奶盖+珍珠+椰果
+        Bverage tea = new Tea();
+        //设置饮品容量为大
+        tea.setSize(Bverage.BIG);
+        tea = new MilkCap(tea);
+        tea = new Pearl(tea);
+        tea = new Cocount(tea);
+        System.out.println(tea.getDescrption() + &amp;quot; costs $&amp;quot; + tea.cost());
+
+        //果汁+珍珠+双奶盖
+        Bverage juice = new Juice();
+        //设置饮品容量为中
+        juice.setSize(Bverage.MEDIUM);
+        juice = new Pearl(juice);
+        juice = new MilkCap(juice);
+        juice = new MilkCap(juice);
+        System.out.println(juice.getDescrption() + &amp;quot; costs $&amp;quot; + juice.cost());
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;3-5总结&#34;&gt;3.5总结&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;装饰者模式可以在不改变原有代码的情况下,给对象赋予新功能.既对扩展开发,对修改关闭&lt;/li&gt;
+&lt;li&gt;装饰者模式会导致有过多的子类,如果使用者在不了解该模式的情况下,会觉得此设计晦涩难懂.&lt;/li&gt;
+&lt;li&gt;使用装饰者模式会可能会有大量的实例化代码,可搭配工厂模式或者建造者模式.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>观察者模式</title>
+      <link>https://wangjc95.com/post/2-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Sun, 17 Feb 2019 17:34:00 +0800</pubDate>
+      
+      <guid>https://wangjc95.com/post/2-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
+      
+        <description>
+
+&lt;p&gt;&lt;strong&gt;介绍:&lt;/strong&gt; 这是阅读&lt;code&gt;head first design patterns&lt;/code&gt;的阅读笔记.&lt;/p&gt;
+
+&lt;p&gt;[TOC]&lt;/p&gt;
 
 &lt;h1 id=&#34;1-观察者模式&#34;&gt;1.观察者模式&lt;/h1&gt;
 
@@ -443,14 +817,16 @@ CurrentCondition is 12.120000 temperatrue and 13.000000 humidity
     
     <item>
       <title>策略模式</title>
-      <link>https://wangjc95.com/post/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</link>
+      <link>https://wangjc95.com/post/1-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</link>
       <pubDate>Wed, 13 Feb 2019 21:30:48 +0800</pubDate>
       
-      <guid>https://wangjc95.com/post/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</guid>
+      <guid>https://wangjc95.com/post/1-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</guid>
       
         <description>
 
 &lt;p&gt;&lt;strong&gt;介绍:&lt;/strong&gt; 这是阅读&lt;code&gt;head first design patterns&lt;/code&gt;的阅读笔记.&lt;/p&gt;
+
+&lt;p&gt;[TOC]&lt;/p&gt;
 
 &lt;h1 id=&#34;1-应用场景&#34;&gt;1.应用场景&lt;/h1&gt;
 
@@ -468,7 +844,7 @@ CurrentCondition is 12.120000 temperatrue and 13.000000 humidity
 
 &lt;h2 id=&#34;2-2使用-flyable-quackable-接口&#34;&gt;2.2使用&lt;code&gt;Flyable&lt;/code&gt;,&lt;code&gt;Quackable&lt;/code&gt;接口&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190213172535.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190228201407.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;对需要重写方法的子类,让它们去实现对应的接口.这样做的坏处很明显,若新增了需要重写的方法,就要添加对应的接口.另外用接口实现的方法无法达到代码复用的目的!&lt;/p&gt;
 
@@ -529,7 +905,7 @@ CurrentCondition is 12.120000 temperatrue and 13.000000 humidity
 
 &lt;h1 id=&#34;3-代码展示&#34;&gt;3.代码展示&lt;/h1&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190214095959.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190228203725.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;3-1行为接口&#34;&gt;3.1行为接口&lt;/h2&gt;
 
@@ -712,11 +1088,9 @@ public interface QuackBehavior {
 &lt;h3 id=&#34;4-3-1优点&#34;&gt;4.3.1优点&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;策略类之间可以自由切换,由于策略类实现自同一个抽象,所以他们之间可以自由切换.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;易于扩展,增加一个新的策略对策略模式来说非常容易,基本上可以在不改变原有代码的基础上进行扩展.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;避免使用多重条件,如果不使用策略模式,对于所有的算法,必须使用条件语句进行连接,通过条件判断来决定使用哪一种算法,在上一篇文章中我们已经提到,使用多重条件判断是非常不容易维护的.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;策略类之间可以自由切换,由于策略类实现自同一个抽象,所以他们之间可以自由切换.&lt;/li&gt;
+&lt;li&gt;易于扩展,增加一个新的策略对策略模式来说非常容易,基本上可以在不改变原有代码的基础上进行扩展.&lt;/li&gt;
+&lt;li&gt;避免使用多重条件,如果不使用策略模式,对于所有的算法,必须使用条件语句进行连接,通过条件判断来决定使用哪一种算法,在上一篇文章中我们已经提到,使用多重条件判断是非常不容易维护的.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;4-3-2缺点&#34;&gt;4.3.2缺点&lt;/h3&gt;
