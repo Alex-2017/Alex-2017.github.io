@@ -5,11 +5,23 @@
     <link>https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
     <description>Recent content in Java设计模式 on Alex的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Thu, 28 Feb 2019 21:00:00 +0800</lastBuildDate>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 11 Mar 2019 22:08:48 +0800</lastBuildDate>
     
 	<atom:link href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>工厂模式</title>
+      <link>https://wangjc95.com/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Mon, 11 Mar 2019 22:08:48 +0800</pubDate>
+      
+      <guid>https://wangjc95.com/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</guid>
+      <description>1.简单工厂 1.1应用场景 最近开了一家披萨店,有四种不同口味的披萨.客人只需要输入他需要的口味就可以得到对应的披萨.那么如何用java来设计这样的一个系统呢?
+1.2解决方法 最简单的方法就是在一个类中封装一个方法,根据输入的口味,来生成对应的披萨.但是如果商店的披萨品种需要变动时,此类的代码就需要修改.这肯定不是我们所希望的.下面就来使用简单工厂模式来解决这一问题.
+1.2.1类图 1.2.2代码 披萨代码:
+Pizza.java</description>
+    </item>
     
     <item>
       <title>装饰者模式</title>
@@ -17,7 +29,9 @@
       <pubDate>Thu, 28 Feb 2019 21:00:00 +0800</pubDate>
       
       <guid>https://wangjc95.com/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记. 1.应用场景 ​ 一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与</description>
+      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+1.应用场景 ​ 一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与此同时带来了一个问题,由于订单量暴增,他们的订单管理系统支撑不住了.需要设计一个新的系统,并且能够灵活,快速的改动.
+​ 下面介绍下一点点,它是一家饮品店.</description>
     </item>
     
     <item>
@@ -26,7 +40,9 @@
       <pubDate>Sun, 17 Feb 2019 17:34:00 +0800</pubDate>
       
       <guid>https://wangjc95.com/post/2-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记. 1.观察者模式 1.1定义 观察者模式定义了对象之间的一对多依赖,这样一来,当一个对象改变</description>
+      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+1.观察者模式 1.1定义 观察者模式定义了对象之间的一对多依赖,这样一来,当一个对象改变状态时,它的所有依赖者都会收到通知并自动更新.
+1.2设计原则 为了交互对象之间的松耦合设计而努力.</description>
     </item>
     
     <item>
@@ -35,7 +51,9 @@
       <pubDate>Wed, 13 Feb 2019 21:30:48 +0800</pubDate>
       
       <guid>https://wangjc95.com/post/1-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记. 1.应用场景 我们有一个鸭子模拟器,通过Duck父类表示鸭子的行为,子类通过重写disp</description>
+      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+1.应用场景 我们有一个鸭子模拟器,通过Duck父类表示鸭子的行为,子类通过重写display方法来表示鸭子的特征行为.现在有一个新需求,需要添加一个fly方法,让鸭子飞起来.
+2.解决思路 2.1在父类中添加fly方法 RubberDuck无法飞行,所以需要重写fly方法.</description>
     </item>
     
   </channel>
