@@ -6,10 +6,21 @@
     <description>Recent content in Java设计模式 on Alex的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 11 Mar 2019 22:08:48 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 12 Mar 2019 23:09:48 +0800</lastBuildDate>
     
 	<atom:link href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>单例模式</title>
+      <link>https://wangjc95.com/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Tue, 12 Mar 2019 23:09:48 +0800</pubDate>
+      
+      <guid>https://wangjc95.com/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</guid>
+      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+1.应用场景 在项目中,有些对象我们只需要一个!比如说线程池,缓存,对话框等等.这类对象只能有一个实例,如果制造出多个实例,就会导致很多问题产生.
+2.定义 确保一个类只有一个实例,并提供全局访问点.</description>
+    </item>
     
     <item>
       <title>工厂模式</title>
