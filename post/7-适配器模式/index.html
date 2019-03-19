@@ -7,20 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>单例模式 | Alex的博客</title>
-    <meta property="og:title" content="单例模式 - Alex的博客">
+    <title>适配器模式 | Alex的博客</title>
+    <meta property="og:title" content="适配器模式 - Alex的博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2019-03-12T23:09:48&#43;08:00">
+    <meta property="article:published_time" content="2019-03-19T22:46:48&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2019-03-12T23:09:48&#43;08:00">
+    <meta property="article:modified_time" content="2019-03-19T22:46:48&#43;08:00">
         
     <meta name="Keywords" content="Java,设计模式">
-    <meta name="description" content="单例模式">
+    <meta name="description" content="适配器模式">
         <meta name="author" content="Alex">
         
-    <meta property="og:url" content="https://wangjc95.com/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+    <meta property="og:url" content="https://wangjc95.com/post/7-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/normalize.css">
@@ -72,10 +72,10 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title">单例模式</h1>
+                            <h1 class="post-title">适配器模式</h1>
                         </header>
                         <date class="post-meta meta-date">
-                            2019年3月12日
+                            2019年3月19日
                         </date>
                         
                         <div class="post-meta">
@@ -95,140 +95,241 @@
 
 <p><strong>介绍:</strong> 这是阅读<code>head first design patterns</code>的阅读笔记.</p>
 
-<h1 id="1-应用场景">1.应用场景</h1>
+<h1 id="1-场景介绍">1.场景介绍</h1>
 
-<p>在项目中,有些对象我们只需要一个!比如说线程池,缓存,对话框等等.这类对象只能有一个实例,如果制造出多个实例,就会导致很多问题产生.</p>
+<p>假设已有一个软件系统,你希望它能和一个新的厂商类库搭配使用,但是这个新厂商所设计出来的接口,不同于旧厂商的接口.你不想改变现有的代码,这样的话就可以编写一个类,让新厂商接口转接成你所期望的接口.</p>
 
-<h1 id="2-定义">2.定义</h1>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190319191044.png" alt="" /></p>
 
-<p>确保一个类只有一个实例,并提供全局访问点.</p>
+<p>这个适配器工作起来就如同一个中间人,它将客户所发出的请求转换成厂商类能理解的请求.</p>
 
-<h1 id="3-单例模式">3.单例模式</h1>
+<h1 id="2-应用举例">2.应用举例</h1>
 
-<p><code>Singleton1.java</code></p>
+<h2 id="2-1介绍">2.1介绍</h2>
 
-<pre><code class="language-java">package singleton;
+<p>有两个动物模拟器,分别是<code>Duck</code>(鸭子),<code>Turkey</code>(火鸡).通过适配器模式让<code>Turkey</code>模仿<code>Duck</code>.</p>
 
-/**
- * 线程不安全的单例模式
+<h2 id="2-2类图">2.2类图</h2>
+
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190319192803.png" alt="" /></p>
+
+<h2 id="2-3代码实现">2.3代码实现</h2>
+
+<p><code>Duck.java</code></p>
+
+<pre><code class="language-java">/**
+ * 鸭子接口
  */
-public class Singleton1 {
+public interface Duck {
 
-    private static Singleton1 singleton1;
+    //呱呱叫
+    public void quack();
 
-    private Singleton1() {
-
-    }
-
-    public static Singleton1 getInstance() {
-        if (singleton1 == null) {
-            singleton1 = new Singleton1();
-        }
-        return singleton1;
-    }
-
-}
-
-</code></pre>
-
-<p>通过将构造器私有化,用内部的私有静态变量存储实例,通过静态方法获取该实例.</p>
-
-<h1 id="4-线程安全问题">4.线程安全问题</h1>
-
-<p>上面的单例模式线程不安全,打个比方,如果两个线程同时在<code>singleton1</code>还未实例化时都进入了<code>getInstance</code>方法,这样就会导致出现两个不同的实例.</p>
-
-<h2 id="4-1-synchronized-修饰方法">4.1<code>synchronized</code>修饰方法</h2>
-
-<p><code>Singleton2.java</code></p>
-
-<pre><code class="language-java">package singleton;
-
-/**
- * 使用synchronized修饰方法
- */
-public class Singleton2 {
-
-    private static Singleton2 singleton2;
-
-    private Singleton2() {
-
-    }
-
-
-    //synchronized可以保证方法线程安全,但是会降低执行效率(100倍左右)
-    public static synchronized Singleton2 getInstance() {
-        if (singleton2 == null) {
-            singleton2 = new Singleton2();
-        }
-        return singleton2;
-    }
-}
-
-</code></pre>
-
-<p>使用<code>synchronized</code>确保方法线程安全,但是会降低方法的执行效率.如果此方法对程序不会造成性能上的问题,可以考虑用此方法.</p>
-
-<h2 id="4-2直接生成单例对象">4.2直接生成单例对象</h2>
-
-<p><code>Singleton3.java</code></p>
-
-<pre><code class="language-java">package singleton;
-
-/**
- * 直接实例化变量,避免了多线程问题.但是移除了懒加载.
- */
-public class Singleton3 {
-    private static Singleton3 singleton3 = new Singleton3();
-
-    private Singleton3() {
-
-    }
-
-    public static Singleton3 getInstance() {
-        return singleton3;
-    }
-}
-</code></pre>
-
-<p>直接实例化变量,避免了线程问题,但是失去了对象懒加载.</p>
-
-<h2 id="4-3双重检查加锁">4.3双重检查加锁</h2>
-
-<p><code>Singleton4.java</code></p>
-
-<pre><code class="language-java">package singleton;
-
-/**
- * 双重检查加锁机制(既解决了线程安全问题,还保证了效率和懒加载)
- */
-public class Singleton4 {
-
-    //volatile确保多线程正确的处理singleton4变量
-    private volatile static Singleton4 singleton4;
-
-    private Singleton4() {
-
-    }
-
-    public static Singleton4 getInstance() {
-        if (singleton4 == null) {
-            //仅在第一次实例化时加锁
-            synchronized (Singleton4.class) {
-                if (singleton4 == null) {
-                    singleton4 = new Singleton4();
-                }
-            }
-        }
-        return singleton4;
-    }
+    //飞行
+    public void fly();
     
 }
+</code></pre>
+
+<p><code>MallardDuck.java</code></p>
+
+<pre><code class="language-java">package adapter;
+
+public class MallardDuck implements Duck{
+    @Override
+    public void quack() {
+        System.out.println(&quot;Quack&quot;);
+    }
+
+    @Override
+    public void fly() {
+        System.out.println(&quot;I'm flying&quot;);
+    }
+}
 
 </code></pre>
 
-<p>仅在第一实例化时进行<code>synchronized</code>,控制线程安全.既保证了效率,又保留了懒加载.</p>
+<p><code>Turkey.java</code></p>
 
-<p><strong>注意:双重检查加锁仅在<code>jdk1.5</code>及之后的版本有效</strong></p>
+<pre><code class="language-java">package adapter;
+
+/**
+ * 火鸡
+ */
+public interface Turkey {
+
+    //咯咯叫
+    public void gobble();
+
+    //飞行
+    public void fly();
+
+}
+
+</code></pre>
+
+<p><code>WildTurkey.java</code></p>
+
+<pre><code class="language-java">package adapter;
+
+public class WildTurkey implements Turkey {
+
+    @Override
+    public void gobble() {
+        System.out.println(&quot;Gobble gobble&quot;);
+    }
+
+    @Override
+    public void fly() {
+        System.out.println(&quot;I'm flying with a little distance&quot;);
+    }
+}
+
+</code></pre>
+
+<p><code>TurkeyAdapter.java</code></p>
+
+<pre><code class="language-java">package adapter;
+
+/**
+ * 适配器
+ * 将Turkey接口适配为Duck接口
+ */
+public class TurkeyAdapter implements Duck {
+
+    //存储Turkey变量
+    private Turkey turkey;
+
+    //传入Turkey变量,给turkey赋值
+    public TurkeyAdapter(Turkey turkey) {
+        this.turkey = turkey;
+    }
+
+    @Override
+    public void quack() {
+        turkey.gobble();
+    }
+
+    //火鸡飞五次相当于鸭子飞一次
+    @Override
+    public void fly() {
+        for (int i = 0; i &lt; 5; i++) {
+            turkey.fly();
+        }
+    }
+}
+
+</code></pre>
+
+<p><strong>测试代码:</strong></p>
+
+<pre><code class="language-java">@Test
+    public void test1() {
+        //初始化鸭子,火鸡和适配器
+        Duck duck = new MallardDuck();
+        Turkey wildTurkey = new WildTurkey();
+        TurkeyAdapter turkeyAdapter = new TurkeyAdapter(wildTurkey);
+
+        //分别执行鸭子,火鸡和适配器中的方法
+        System.out.println(&quot;The Duck ==================&quot;);
+        testDuck(duck);
+
+        System.out.println(&quot;The Turkey ==================&quot;);
+        wildTurkey.gobble();
+        wildTurkey.fly();
+
+        System.out.println(&quot;The TurkeyApapter ==================&quot;);
+        testDuck(turkeyAdapter);
+
+    }
+
+    //测试鸭子方法
+    private void testDuck(Duck duck) {
+        duck.quack();
+        duck.fly();
+    }
+</code></pre>
+
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>The Duck ==================
+Quack
+I'm flying
+The Turkey ==================
+Gobble gobble
+I'm flying with a little distance
+The TurkeyApapter ==================
+Gobble gobble
+I'm flying with a little distance
+I'm flying with a little distance
+I'm flying with a little distance
+I'm flying with a little distance
+I'm flying with a little distance
+</code></pre>
+
+<h1 id="3-适配器模式">3.适配器模式</h1>
+
+<h2 id="3-1定义">3.1定义</h2>
+
+<p><strong>适配器模式</strong>将一个类的接口,转换成客户期望的另一个接口.适配器让原本接口不兼容的类可以合作无间.</p>
+
+<h2 id="3-2特点">3.2特点</h2>
+
+<ul>
+<li>通过创建适配器进行接口转换,让不兼容的接口变成兼容,让客户从实现的接口解耦.</li>
+<li>使用对象组合,以修改的接口包装被适配者.被适配者的任何子类都可以搭配着适配器使用.</li>
+</ul>
+
+<h2 id="3-3类图">3.3类图</h2>
+
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190319194136.png" alt="" /></p>
+
+<h2 id="3-4拓展">3.4拓展</h2>
+
+<h3 id="3-4-1对象和类的适配器">3.4.1对象和类的适配器</h3>
+
+<p>适配器分为两种,分别是对象适配器和类适配器.之前的内容我们讲的是对象适配器.对象适配器和类适配器使用两种不同的适配方法.对象使用的是组合,类使用的是多继承.由于<code>Java</code>中不支持多继承,故不再赘述.</p>
+
+<h3 id="3-4-2将枚举适配到迭代器">3.4.2将枚举适配到迭代器</h3>
+
+<p>由于<code>Java</code>早期集合类使用的是<code>Enumeration</code>接口,而随后推出的新集合类使用的是<code>Iterator</code>接口.为了在新集合类中能够兼容旧集合类<code>Enumeration</code>接口.需要将枚举适配到迭代器.</p>
+
+<p><code>EnumerationIterator.java</code></p>
+
+<pre><code class="language-java">package adapter;
+
+import java.util.Enumeration;
+import java.util.Iterator;
+
+/**
+ * 枚举适配器(将枚举适配到迭代器)
+ */
+public class EnumerationIterator implements Iterator {
+
+    private Enumeration enumeration;
+
+    public EnumerationIterator(Enumeration enumeration) {
+        this.enumeration = enumeration;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return enumeration.hasMoreElements();
+    }
+
+    @Override
+    public Object next() {
+        return enumeration.nextElement();
+    }
+
+    //Enumeration 中没有类似的remove方法,所以抛出UnsupportedOperationException
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException();
+    }
+}
+
+</code></pre>
 
                         </div>
 
@@ -241,15 +342,15 @@ public class Singleton4 {
     <h2>See Also</h2>
     <ul class="listing">
         
+        <li><a href="/post/6-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">命令模式</a></li>
+        
+        <li><a href="/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式</a></li>
+        
         <li><a href="/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">工厂模式</a></li>
         
         <li><a href="/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/">装饰者模式</a></li>
         
         <li><a href="/post/2-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">观察者模式</a></li>
-        
-        <li><a href="/post/1-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">策略模式</a></li>
-        
-        <li><a href="/about/">About</a></li>
         
     </ul>
 </div>

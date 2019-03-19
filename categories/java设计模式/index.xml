@@ -6,10 +6,33 @@
     <description>Recent content in Java设计模式 on Alex的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 12 Mar 2019 23:09:48 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 19 Mar 2019 22:46:48 +0800</lastBuildDate>
     
 	<atom:link href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>适配器模式</title>
+      <link>https://wangjc95.com/post/7-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Tue, 19 Mar 2019 22:46:48 +0800</pubDate>
+      
+      <guid>https://wangjc95.com/post/7-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</guid>
+      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+1.场景介绍 假设已有一个软件系统,你希望它能和一个新的厂商类库搭配使用,但是这个新厂商所设计出来的接口,不同于旧厂商的接口.你不想改变现有的代码,这样的话就可以编写一个类,让新厂商接口转接成你所期望的接口.
+这个适配器工作起来就如同一个中间人,它将客户所发出的请求转换成厂商类能理解的请求.
+2.应用举例 2.</description>
+    </item>
+    
+    <item>
+      <title>命令模式</title>
+      <link>https://wangjc95.com/post/6-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Tue, 19 Mar 2019 22:45:48 +0800</pubDate>
+      
+      <guid>https://wangjc95.com/post/6-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/</guid>
+      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+1.应用场景 当前有若干个电器,有着不同的方法.需要设计一款遥控器,能够控制所有的电器.并且遥控器便于修改和添加新的电器.
+2.命令模式的简单实现 2.1类图 Light,GarageDoor:电器类,灯和车库门.</description>
+    </item>
     
     <item>
       <title>单例模式</title>

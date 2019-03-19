@@ -7,20 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>单例模式 | Alex的博客</title>
-    <meta property="og:title" content="单例模式 - Alex的博客">
+    <title>命令模式 | Alex的博客</title>
+    <meta property="og:title" content="命令模式 - Alex的博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2019-03-12T23:09:48&#43;08:00">
+    <meta property="article:published_time" content="2019-03-19T22:45:48&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2019-03-12T23:09:48&#43;08:00">
+    <meta property="article:modified_time" content="2019-03-19T22:45:48&#43;08:00">
         
     <meta name="Keywords" content="Java,设计模式">
-    <meta name="description" content="单例模式">
+    <meta name="description" content="命令模式">
         <meta name="author" content="Alex">
         
-    <meta property="og:url" content="https://wangjc95.com/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+    <meta property="og:url" content="https://wangjc95.com/post/6-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/normalize.css">
@@ -72,10 +72,10 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title">单例模式</h1>
+                            <h1 class="post-title">命令模式</h1>
                         </header>
                         <date class="post-meta meta-date">
-                            2019年3月12日
+                            2019年3月19日
                         </date>
                         
                         <div class="post-meta">
@@ -97,138 +97,219 @@
 
 <h1 id="1-应用场景">1.应用场景</h1>
 
-<p>在项目中,有些对象我们只需要一个!比如说线程池,缓存,对话框等等.这类对象只能有一个实例,如果制造出多个实例,就会导致很多问题产生.</p>
+<p>当前有若干个电器,有着不同的方法.需要设计一款遥控器,能够控制所有的电器.并且遥控器便于修改和添加新的电器.</p>
 
-<h1 id="2-定义">2.定义</h1>
+<h1 id="2-命令模式的简单实现">2.命令模式的简单实现</h1>
 
-<p>确保一个类只有一个实例,并提供全局访问点.</p>
+<h2 id="2-1类图">2.1类图</h2>
 
-<h1 id="3-单例模式">3.单例模式</h1>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190319144401.png" alt="" /></p>
 
-<p><code>Singleton1.java</code></p>
+<p><code>Light</code>,<code>GarageDoor</code>:电器类,灯和车库门.</p>
 
-<pre><code class="language-java">package singleton;
+<p><code>Command</code>:命令接口,创建自定义对象来整合<code>Light</code>和<code>GarageDoor</code>等电器类.</p>
+
+<p><code>LightOnCommand</code>,<code>GarageDoorOpenCommand</code>:自定义命令类,实现<code>Command</code>接口.</p>
+
+<p><code>SimpleRemoteControl</code>:用于统一调用自定义命令对象.</p>
+
+<h2 id="2-2代码实现">2.2代码实现</h2>
+
+<p><strong>电器类</strong></p>
+
+<p><code>Light.java</code></p>
+
+<pre><code class="language-java">package command.receiver;
 
 /**
- * 线程不安全的单例模式
+ * 接收者!
+ * 灯,可以开,可以关.
  */
-public class Singleton1 {
+public class Light {
 
-    private static Singleton1 singleton1;
+    private String name;
 
-    private Singleton1() {
-
+    public Light(String name) {
+        this.name = name;
     }
 
-    public static Singleton1 getInstance() {
-        if (singleton1 == null) {
-            singleton1 = new Singleton1();
-        }
-        return singleton1;
+    public void on() {
+        System.out.println(name + &quot; light is on&quot;);
+    }
+
+    public void off() {
+        System.out.println(name + &quot; light is off&quot;);
     }
 
 }
 
 </code></pre>
 
-<p>通过将构造器私有化,用内部的私有静态变量存储实例,通过静态方法获取该实例.</p>
+<p><code>GarageDoor.java</code></p>
 
-<h1 id="4-线程安全问题">4.线程安全问题</h1>
-
-<p>上面的单例模式线程不安全,打个比方,如果两个线程同时在<code>singleton1</code>还未实例化时都进入了<code>getInstance</code>方法,这样就会导致出现两个不同的实例.</p>
-
-<h2 id="4-1-synchronized-修饰方法">4.1<code>synchronized</code>修饰方法</h2>
-
-<p><code>Singleton2.java</code></p>
-
-<pre><code class="language-java">package singleton;
+<pre><code class="language-java">package command.receiver;
 
 /**
- * 使用synchronized修饰方法
+ * 接收者!
+ * 车库门,可以开,可以关,停车,开灯,关灯.
  */
-public class Singleton2 {
+public class GarageDoor {
 
-    private static Singleton2 singleton2;
+    private String name;
 
-    private Singleton2() {
-
+    public GarageDoor(String name) {
+        this.name = name;
     }
 
+    public void up() {
+        System.out.println(name + &quot; Garage Door Is Open&quot;);
+    }
 
-    //synchronized可以保证方法线程安全,但是会降低执行效率(100倍左右)
-    public static synchronized Singleton2 getInstance() {
-        if (singleton2 == null) {
-            singleton2 = new Singleton2();
-        }
-        return singleton2;
+    public void down() {
+        System.out.println(name + &quot; Garage Door Is Close&quot;);
+    }
+
+    public void stop() {
+        System.out.println(name + &quot; Garage Door Is Stop A Car&quot;);
+    }
+
+    public void lightOn() {
+        System.out.println(name + &quot; Garage Door Light Is On&quot;);
+    }
+
+    public void lightOff() {
+        System.out.println(name + &quot; Garage Door Light Is Off&quot;);
+    }
+
+}
+
+</code></pre>
+
+<p><strong>命令对象</strong></p>
+
+<p><code>Command.java</code></p>
+
+<pre><code class="language-java">package command.commands;
+
+/**
+ * 命令抽象类
+ */
+public interface Command {
+
+    //封装要执行的一系列方法
+    public void execute();
+
+}
+
+</code></pre>
+
+<p><code>LightOnCommand.java</code></p>
+
+<pre><code class="language-java">
+</code></pre>
+
+<p><code>GarageDoorOpenCommand.java</code></p>
+
+<pre><code class="language-java">package command.commands;
+
+import command.receiver.GarageDoor;
+
+/**
+ * GarageDoor的自定义命令开启对象
+ * 封装GarageDoor(接收者)的引用和GarageDoor的执行方法
+ */
+public class GarageDoorOpenCommand implements Command{
+
+    private GarageDoor garageDoor;
+
+    public GarageDoorOpenCommand(GarageDoor garageDoor) {
+        this.garageDoor = garageDoor;
+    }
+
+    @Override
+    public void execute() {
+        garageDoor.up();
+    }
+
+}
+
+</code></pre>
+
+<p><strong>调用者</strong></p>
+
+<p><code>SimpleRemoteControl.java</code></p>
+
+<pre><code class="language-java">package command.invoker;
+
+import command.commands.Command;
+
+/**
+ * 调用者,封装自定义命令对象并执行.
+ */
+public class SimpleRemoteControl {
+
+    private Command command;
+
+    public SimpleRemoteControl() {
+    }
+
+    public void setCommand(Command command) {
+        this.command = command;
+    }
+
+    public void buttonWasPressed() {
+        command.execute();
     }
 }
 
 </code></pre>
 
-<p>使用<code>synchronized</code>确保方法线程安全,但是会降低方法的执行效率.如果此方法对程序不会造成性能上的问题,可以考虑用此方法.</p>
+<p><strong>测试代码</strong></p>
 
-<h2 id="4-2直接生成单例对象">4.2直接生成单例对象</h2>
+<pre><code class="language-java">@Test
+    public void test2() {
+        //初始化调用者
+        SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl();
 
-<p><code>Singleton3.java</code></p>
+        //初始化两个接收者
+        Light light = new Light(&quot;KitchenRoom&quot;);
+        GarageDoor garageDoor = new GarageDoor(&quot;ShangHai&quot;);
 
-<pre><code class="language-java">package singleton;
+        //初始化两个自定义命令对象
+        LightOnCommand lightOnCommand = new LightOnCommand(light);
+        GarageDoorOpenCommand garageDoorOpenCommand = new GarageDoorOpenCommand(garageDoor);
 
-/**
- * 直接实例化变量,避免了多线程问题.但是移除了懒加载.
- */
-public class Singleton3 {
-    private static Singleton3 singleton3 = new Singleton3();
+        //传递LightOnCommand到调用者并执行方法
+        simpleRemoteControl.setCommand(lightOnCommand);
+        simpleRemoteControl.buttonWasPressed();
 
-    private Singleton3() {
+        //传递garageDoorOpenCommand到调用者并执行方法
+        simpleRemoteControl.setCommand(garageDoorOpenCommand);
+        simpleRemoteControl.buttonWasPressed();
 
     }
-
-    public static Singleton3 getInstance() {
-        return singleton3;
-    }
-}
 </code></pre>
 
-<p>直接实例化变量,避免了线程问题,但是失去了对象懒加载.</p>
+<p><strong>控制台输出</strong></p>
 
-<h2 id="4-3双重检查加锁">4.3双重检查加锁</h2>
-
-<p><code>Singleton4.java</code></p>
-
-<pre><code class="language-java">package singleton;
-
-/**
- * 双重检查加锁机制(既解决了线程安全问题,还保证了效率和懒加载)
- */
-public class Singleton4 {
-
-    //volatile确保多线程正确的处理singleton4变量
-    private volatile static Singleton4 singleton4;
-
-    private Singleton4() {
-
-    }
-
-    public static Singleton4 getInstance() {
-        if (singleton4 == null) {
-            //仅在第一次实例化时加锁
-            synchronized (Singleton4.class) {
-                if (singleton4 == null) {
-                    singleton4 = new Singleton4();
-                }
-            }
-        }
-        return singleton4;
-    }
-    
-}
-
+<pre><code>KitchenRoom light is on
+ShangHai Garage Door Is Open
 </code></pre>
 
-<p>仅在第一实例化时进行<code>synchronized</code>,控制线程安全.既保证了效率,又保留了懒加载.</p>
+<h1 id="3-命令模式">3.命令模式</h1>
 
-<p><strong>注意:双重检查加锁仅在<code>jdk1.5</code>及之后的版本有效</strong></p>
+<h2 id="3-1定义">3.1定义</h2>
+
+<p>命令模式将<strong>请求</strong>封装成对象,以便使用不同的请求,队列或者日志来参数化其他对象.命令模式也支持可撤销的操作.</p>
+
+<h2 id="3-2特点">3.2特点</h2>
+
+<ul>
+<li>命令模式将发出请求的对象和执行请求的对象解耦.</li>
+<li>在被解耦的两者之间是通过命令对象进行沟通的.命令对象封装了接收者的一个或一组动作.</li>
+<li>调用者通过调用命令对象的<code>execute()</code>发出请求,这会使得接收者的动作被调用.</li>
+<li>调用者可以接受命令当做参数,甚至在运行时动态地进行.</li>
+</ul>
 
                         </div>
 
@@ -241,6 +322,8 @@ public class Singleton4 {
     <h2>See Also</h2>
     <ul class="listing">
         
+        <li><a href="/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式</a></li>
+        
         <li><a href="/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">工厂模式</a></li>
         
         <li><a href="/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/">装饰者模式</a></li>
@@ -248,8 +331,6 @@ public class Singleton4 {
         <li><a href="/post/2-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">观察者模式</a></li>
         
         <li><a href="/post/1-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">策略模式</a></li>
-        
-        <li><a href="/about/">About</a></li>
         
     </ul>
 </div>
