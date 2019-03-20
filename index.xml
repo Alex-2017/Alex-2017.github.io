@@ -21,6 +21,30 @@
     </item>
     
     <item>
+      <title>模版方法模式</title>
+      <link>https://wangjc95.com/post/9-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Wed, 20 Mar 2019 22:15:15 +0800</pubDate>
+      
+      <guid>https://wangjc95.com/post/9-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/</guid>
+      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+1.场景介绍 假设当前有两种咖啡因饮料,分别是茶和咖啡.
+茶的制作方法是:
+ 把水煮沸 用沸水浸泡茶叶 把茶倒进杯子 加柠檬  咖啡的制作方法:</description>
+    </item>
+    
+    <item>
+      <title>外观模式</title>
+      <link>https://wangjc95.com/post/8-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Wed, 20 Mar 2019 22:14:15 +0800</pubDate>
+      
+      <guid>https://wangjc95.com/post/8-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</guid>
+      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+1.场景介绍 家里有一套家庭影院的设备(爆米花机,屏幕,投影仪).每次看电影的时候需要打开爆米花机,开始爆米花,把屏幕放下来,打开投影仪来看电影.结束后要关闭投影仪,收起屏幕,关掉爆米花机.整个过程实在太过于繁琐.
+为了改善这个过程,就需要用到外观模式了.通过实现一个提供合理接口的外观类,你可以将复杂的子系统变得容易使用.而且还能够保留原有的子系统接口.
+2.应用举例 2.</description>
+    </item>
+    
+    <item>
       <title>适配器模式</title>
       <link>https://wangjc95.com/post/7-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</link>
       <pubDate>Tue, 19 Mar 2019 22:46:48 +0800</pubDate>
