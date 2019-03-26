@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.53" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>组合模式 | Alex的博客</title>
+    <meta property="og:title" content="组合模式 - Alex的博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-03-26T21:51:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-03-26T21:51:00&#43;08:00">
+        
+    <meta name="Keywords" content="Java,设计模式">
+    <meta name="description" content="组合模式">
+        <meta name="author" content="Alex">
+        
+    <meta property="og:url" content="https://wangjc95.com/post/11-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wangjc95.com">
+                        Alex的博客
+                    </a>
+                
+                <p class="description">Java程序猿</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://wangjc95.com">首页</a>
+                    
+                    <a  href="https://wangjc95.com/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wangjc95.com/about/" title="About">About</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">组合模式</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年3月26日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">java设计模式</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<p><strong>介绍:</strong> 这是阅读<code>head first design patterns</code>的阅读笔记.</p>
+
+<h1 id="1-场景介绍">1.场景介绍</h1>
+
+<p>基于之前<a href="https://wangjc95.com/post/10-迭代器模式/">迭代器模式</a>的菜单整合模式下提出了一个新的需求,餐厅要创建一份甜点菜单,并把这个菜单放到餐厅菜单中.</p>
+
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190326103635.png" alt="" /></p>
+
+<p>新增的需求让当前的系统到达了一个复杂级别,如果现在不重新设计,就无法容纳未来增加的菜单或子菜单等需求.我们需要某种树形结构,可以容纳菜单,子菜单和菜单项,同时能够确定在每个菜单的各个项之间游走,而且至少要像现在用迭代器一样方便.</p>
+
+<h1 id="2-解决方案">2.解决方案</h1>
+
+<h2 id="2-1类图">2.1类图</h2>
+
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190326112759.png" alt="" /></p>
+
+<p><code>MenuComponent</code>:菜单组件提供了一个接口,让菜单项和菜单共同使用.因为我们希望能够为这些方法提供默认的实现.所以我们在这里使用了一个抽象类.</p>
+
+<p><code>MenuItem</code>:菜单项覆盖了对它有意义的方法.至于那么没有意义的方法(<code>add()</code>),就置之不理.<code>add()</code>之所以没意义,是因为菜单项已经是叶节点,它的下面不能再有任何组件.</p>
+
+<p><code>Menu</code>:菜单也覆盖了一些对它有意义的方法,例如增加或删除菜单项.除此之外,我们也使用<code>getName()</code>和<code>getDescription()</code>方法来返回菜单名称与描述.</p>
+
+<p><code>Waitress</code>:女招待将使用菜单组件接口访问菜单和菜单项.</p>
+
+<h2 id="2-2代码实现">2.2代码实现</h2>
+
+<p><code>MenuComponent.java</code></p>
+
+<pre><code class="language-java">package composite;
+
+/**
+ * 菜单组件的抽象类
+ * 为菜单和菜单集合提供一个共同的接口
+ * 所有的组件都必须继承MenuComponent类,由于MenuItem和Menu的角色不同,并不能适用于所有方法.所以默认抛出UnsupportedOperationException
+ */
+public abstract class MenuComponent {
+
+    //添加
+    public void add(MenuComponent menuComponent) {
+        throw new UnsupportedOperationException();
+    }
+
+    //移除
+    public void remove(MenuComponent menuComponent) {
+        throw new UnsupportedOperationException();
+    }
+
+    //根据index获取
+    public MenuComponent getChild(int i) {
+        throw new UnsupportedOperationException();
+    }
+
+    //获取名称
+    public String getName() {
+        throw new UnsupportedOperationException();
+    }
+
+    //获取描述信息
+    public String getDescription() {
+        throw new UnsupportedOperationException();
+    }
+
+    //获取价格
+    public double getPrice() {
+        throw new UnsupportedOperationException();
+    }
+
+    //是否是素食
+    public boolean isVegetarian() {
+        throw new UnsupportedOperationException();
+    }
+
+    //打印自身信息
+    public void print() {
+        throw new UnsupportedOperationException();
+    }
+
+}
+
+</code></pre>
+
+<p><code>MenuItem.java</code></p>
+
+<pre><code class="language-java">package composite;
+
+/**
+ * 菜单子项
+ */
+public class MenuItem extends MenuComponent {
+
+    //名称
+    private String name;
+    //描述
+    private String description;
+    //是否是蔬菜
+    private boolean vegetarian;
+    //价格
+    private double price;
+
+    public MenuItem(String name, String description, boolean vegetarian, double price) {
+        this.name = name;
+        this.description = description;
+        this.vegetarian = vegetarian;
+        this.price = price;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public boolean isVegetarian() {
+        return vegetarian;
+    }
+
+    @Override
+    public void print() {
+        System.out.print(&quot;   &quot; + getName());
+        if (isVegetarian()) {
+            System.out.print(&quot;(v)&quot;);
+        }
+        System.out.println(&quot;, &quot; + getPrice());
+        System.out.println(&quot;      --&quot; + getDescription());
+    }
+}
+
+</code></pre>
+
+<p><code>Menu.java</code></p>
+
+<pre><code class="language-java">package composite;
+
+import java.util.ArrayList;
+
+/**
+ * 菜单集合
+ */
+public class Menu extends MenuComponent {
+
+    //存储MenuComponent
+    private ArrayList&lt;MenuComponent&gt; list = new ArrayList&lt;&gt;();
+    //姓名
+    private String name;
+    //描述
+    private String description;
+
+    public Menu(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    @Override
+    public void add(MenuComponent menuComponent) {
+        list.add(menuComponent);
+    }
+
+    @Override
+    public void remove(MenuComponent menuComponent) {
+        list.remove(menuComponent);
+    }
+
+    @Override
+    public MenuComponent getChild(int i) {
+        return list.get(i);
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public void print() {
+        System.out.print(&quot;\n&quot; + getName());
+        System.out.println(&quot;, &quot; + getDescription());
+        System.out.println(&quot;-------------------&quot;);
+
+        for (MenuComponent menuComponent : list) {
+            //在遍历期间,如果遇到了另一个菜单对象.会继续调用print()方法.继续遍历---递归
+            menuComponent.print();
+        }
+    }
+}
+
+</code></pre>
+
+<p><code>Waitress.java</code></p>
+
+<pre><code class="language-java">package composite;
+
+/**
+ * 服务员类
+ * 整合MenuComponent并对其操作
+ */
+public class Waitress {
+
+    private MenuComponent allMenus;
+
+    public Waitress(MenuComponent allMenus) {
+        this.allMenus = allMenus;
+    }
+
+    public void printMenu() {
+        allMenus.print();
+    }
+}
+
+</code></pre>
+
+<p><strong>测试代码:</strong></p>
+
+<pre><code class="language-java">        //全部的菜单
+        MenuComponent allMenus = new Menu(&quot;All Menu&quot;, &quot;There have all menues&quot;);
+
+        //菜单集合的生成
+        MenuComponent pancake = new Menu(&quot;Breakfast&quot;,&quot;I'm Breakfast!&quot;);
+        MenuComponent dinner = new Menu(&quot;Dinner&quot;,&quot;I'm Dinner!&quot;);
+        MenuComponent dessert = new Menu(&quot;Dessert&quot;,&quot;I'm Dessert!&quot;);
+        MenuComponent coffee = new Menu(&quot;Coffee&quot;,&quot;I'm Coffee!&quot;);
+
+        //菜单子项的生成
+        //Pancake
+        MenuComponent pancake1 = new MenuItem(&quot;pancake1&quot;, &quot;This is Pancake1&quot;, false, 3.5);
+        MenuComponent pancake2 = new MenuItem(&quot;pancake2&quot;, &quot;This is Pancake2&quot;, true, 4.5);
+        MenuComponent pancake3 = new MenuItem(&quot;pancake3&quot;, &quot;This is Pancake3&quot;, false, 5.5);
+
+        //Dinner
+        MenuComponent dinner1 = new MenuItem(&quot;dinner1&quot;, &quot;This is Dinner1&quot;, false, 6.5);
+        MenuComponent dinner2 = new MenuItem(&quot;dinner2&quot;, &quot;This is Dinner2&quot;, true, 10.5);
+
+        //Dessert
+        MenuComponent dessert1 = new MenuItem(&quot;Dessert1&quot;, &quot;This is Dessert1&quot;, false, 3.5);
+        MenuComponent dessert2 = new MenuItem(&quot;Dessert2&quot;, &quot;This is Dessert2&quot;, true, 4.0);
+
+        //Coffee
+        MenuComponent coffee1 = new MenuItem(&quot;Coffee1&quot;, &quot;This is Coffee1&quot;, false, 5.0);
+        MenuComponent coffee2 = new MenuItem(&quot;Coffee2&quot;, &quot;This is Coffee2&quot;, false, 6.0);
+
+        //菜单子项放置到菜单中
+        //pancake菜单的组合
+        pancake.add(pancake1);
+        pancake.add(pancake2);
+        pancake.add(pancake3);
+
+        //dessert菜单的组合
+        dessert.add(dessert1);
+        dessert.add(dessert2);
+
+        //dinner菜单的组合
+        dinner.add(dinner1);
+        dinner.add(dinner2);
+        //将dessert菜单放置到dinner中
+        dinner.add(dessert);
+
+        //coffee菜单的组合
+        coffee.add(coffee1);
+        coffee.add(coffee2);
+
+        //allMenus菜单整合其余菜单
+        allMenus.add(pancake);
+        allMenus.add(dinner);
+        allMenus.add(coffee);
+
+        //初始化服务员类
+        Waitress waitress = new Waitress(allMenus);
+        waitress.printMenu();
+</code></pre>
+
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>All Menu, There have all menues
+-------------------
+
+Breakfast, I'm Breakfast!
+-------------------
+   pancake1, 3.5
+      --This is Pancake1
+   pancake2(v), 4.5
+      --This is Pancake2
+   pancake3, 5.5
+      --This is Pancake3
+
+Dinner, I'm Dinner!
+-------------------
+   dinner1, 6.5
+      --This is Dinner1
+   dinner2(v), 10.5
+      --This is Dinner2
+
+Dessert, I'm Dessert!
+-------------------
+   Dessert1, 3.5
+      --This is Dessert1
+   Dessert2(v), 4.0
+      --This is Dessert2
+
+Coffee, I'm Coffee!
+-------------------
+   Coffee1, 5.0
+      --This is Coffee1
+   Coffee2, 6.0
+      --This is Coffee2
+</code></pre>
+
+<h1 id="3-组合模式">3.组合模式</h1>
+
+<h2 id="3-1定义">3.1定义</h2>
+
+<p><strong>组合模式</strong>允许你将对象组成树形结构来表现&rdquo;整体/部分&rdquo;的层次结构.组合能让客户以一致的方式处理个别对象和对象组合.</p>
+
+<h2 id="3-2特点">3.2特点</h2>
+
+<ul>
+<li>组合模式提供一个结构,可同时包容个别对象和组合对象.</li>
+<li>组合模式允许客户对个别对象以及组合对象一视同仁.</li>
+<li>组合结构内的任意对象称为组件,组件可以是组合,也可以是叶节点.</li>
+<li>在实现组合模式时,有许多设计上的折衷.你要根据需要平衡透明性和安全性.</li>
+</ul>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/10-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">迭代器模式</a></li>
+        
+        <li><a href="/post/9-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">模版方法模式</a></li>
+        
+        <li><a href="/post/8-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">外观模式</a></li>
+        
+        <li><a href="/post/7-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">适配器模式</a></li>
+        
+        <li><a href="/post/6-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">命令模式</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wangjc95.com/tags/head-first-design-patterns%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">head first design patterns读书笔记</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "Alex-2017/comment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wangjc95.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wangjc95.com/post/11-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" title="组合模式">组合模式</a>
+    </li>
+    
+    <li>
+        <a href="https://wangjc95.com/post/10-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式">迭代器模式</a>
+    </li>
+    
+    <li>
+        <a href="https://wangjc95.com/post/9-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" title="模版方法模式">模版方法模式</a>
+    </li>
+    
+    <li>
+        <a href="https://wangjc95.com/post/8-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" title="外观模式">外观模式</a>
+    </li>
+    
+    <li>
+        <a href="https://wangjc95.com/post/7-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="适配器模式">适配器模式</a>
+    </li>
+    
+    <li>
+        <a href="https://wangjc95.com/post/6-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="命令模式">命令模式</a>
+    </li>
+    
+    <li>
+        <a href="https://wangjc95.com/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">单例模式</a>
+    </li>
+    
+    <li>
+        <a href="https://wangjc95.com/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" title="工厂模式">工厂模式</a>
+    </li>
+    
+    <li>
+        <a href="https://wangjc95.com/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/" title="装饰者模式">装饰者模式</a>
+    </li>
+    
+    <li>
+        <a href="https://wangjc95.com/post/2-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" title="观察者模式">观察者模式</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">java设计模式(11)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wangjc95.com/tags/head-first-design-patterns%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">head-first-design-patterns读书笔记</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wangjc95.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wangjc95.com">Alex的博客 By Alex</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>
