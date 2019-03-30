@@ -105,7 +105,7 @@
 
 <h2 id="2-1在父类中添加-fly-方法">2.1在父类中添加<code>fly</code>方法</h2>
 
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190213163020.png" alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190329171343.png" alt="" /></p>
 
 <p><code>RubberDuck</code>无法飞行,所以需要重写<code>fly</code>方法.<code>WoodenDuck</code>不能飞行不能叫,需要重写<code>fly</code>,<code>quack</code>方法.假设以后还会有新的鸭子被添加而且频率很多!那么维护该项目将会成为一个噩梦.<strong>这是典型的过度使用继承,导致项目维护起来很繁琐!</strong></p>
 
@@ -172,7 +172,7 @@
 
 <h1 id="3-代码展示">3.代码展示</h1>
 
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190228203725.png" alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190329173316.png" alt="" /></p>
 
 <h2 id="3-1行为接口">3.1行为接口</h2>
 
@@ -340,6 +340,21 @@ public interface QuackBehavior {
 }
 </code></pre>
 
+<p><strong>控制台输出:</strong></p>
+
+<p><code>test1输出</code></p>
+
+<pre><code>I'm MallardDuck
+fly with wings in the sky!
+quack quack quack
+</code></pre>
+
+<p><code>test2输出</code></p>
+
+<pre><code>fly with wings in the sky!
+fly by rocket
+</code></pre>
+
 <h1 id="4-策略模式">4.策略模式</h1>
 
 <h2 id="4-1定义">4.1定义</h2>
@@ -355,9 +370,11 @@ public interface QuackBehavior {
 <h3 id="4-3-1优点">4.3.1优点</h3>
 
 <ul>
-<li>策略类之间可以自由切换,由于策略类实现自同一个抽象,所以他们之间可以自由切换.</li>
-<li>易于扩展,增加一个新的策略对策略模式来说非常容易,基本上可以在不改变原有代码的基础上进行扩展.</li>
-<li>避免使用多重条件,如果不使用策略模式,对于所有的算法,必须使用条件语句进行连接,通过条件判断来决定使用哪一种算法,在上一篇文章中我们已经提到,使用多重条件判断是非常不容易维护的.</li>
+<li><p>策略类之间可以自由切换,由于策略类实现自同一个抽象,所以他们之间可以自由切换.</p></li>
+
+<li><p>易于扩展,增加一个新的策略对策略模式来说非常容易,基本上可以在不改变原有代码的基础上进行扩展.</p></li>
+
+<li><p>避免使用多重条件,如果不使用策略模式,对于所有的算法,必须使用条件语句进行连接,通过条件判断来决定使用哪一种算法,在上一篇文章中我们已经提到,使用多重条件判断是非常不容易维护的.</p></li>
 </ul>
 
 <h3 id="4-3-2缺点">4.3.2缺点</h3>
@@ -441,6 +458,10 @@ public interface QuackBehavior {
 <ul class="widget-list">
     
     <li>
+        <a href="https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">代理模式</a>
+    </li>
+    
+    <li>
         <a href="https://wangjc95.com/post/12-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" title="状态模式">状态模式</a>
     </li>
     
@@ -476,10 +497,6 @@ public interface QuackBehavior {
         <a href="https://wangjc95.com/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" title="工厂模式">工厂模式</a>
     </li>
     
-    <li>
-        <a href="https://wangjc95.com/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/" title="装饰者模式">装饰者模式</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -490,7 +507,7 @@ public interface QuackBehavior {
 <ul class="widget-list">
     
     <li>
-        <a href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">java设计模式(12)</a>
+        <a href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">java设计模式(13)</a>
     </li>
     
 </ul>

@@ -205,7 +205,27 @@ public interface Command {
 
 <p><code>LightOnCommand.java</code></p>
 
-<pre><code class="language-java">
+<pre><code class="language-java">package command.commands;
+
+import command.receiver.Light;
+
+/**
+ * Light的自定义命令开启对象
+ * 封装Light(接收者)的引用和Light的执行方法
+ */
+public class LightOnCommand implements Command {
+
+    private Light light;
+
+    public LightOnCommand(Light light) {
+        this.light = light;
+    }
+
+    @Override
+    public void execute() {
+        light.on();
+    }
+}
 </code></pre>
 
 <p><code>GarageDoorOpenCommand.java</code></p>
@@ -378,6 +398,10 @@ ShangHai Garage Door Is Open
 <ul class="widget-list">
     
     <li>
+        <a href="https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">代理模式</a>
+    </li>
+    
+    <li>
         <a href="https://wangjc95.com/post/12-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" title="状态模式">状态模式</a>
     </li>
     
@@ -413,10 +437,6 @@ ShangHai Garage Door Is Open
         <a href="https://wangjc95.com/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" title="工厂模式">工厂模式</a>
     </li>
     
-    <li>
-        <a href="https://wangjc95.com/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/" title="装饰者模式">装饰者模式</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -427,7 +447,7 @@ ShangHai Garage Door Is Open
 <ul class="widget-list">
     
     <li>
-        <a href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">java设计模式(12)</a>
+        <a href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">java设计模式(13)</a>
     </li>
     
 </ul>

@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Alex的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 28 Mar 2019 21:58:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 30 Mar 2019 19:26:00 +0800</lastBuildDate>
     
 	<atom:link href="https://wangjc95.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>代理模式</title>
+      <link>https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Sat, 30 Mar 2019 19:26:00 +0800</pubDate>
+      
+      <guid>https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</guid>
+      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+1.代理模式 1.1定义 代理模式为另一个对象提供一个替身或占位符以访问这个对象.
+1.2特点  代理模式为另一个对象提供代表,以便控制客户对对象的访问,管理访问的方式有许多种.</description>
+    </item>
     
     <item>
       <title>状态模式</title>
@@ -20,7 +31,7 @@
       <description>介绍: 这是阅读head first design patterns的阅读笔记.
 1.场景介绍 假设我们要为糖果机设置一个控制器,来控制糖果器正常运转.控制流程如下图所示.
 这张图可以这么理解:
-糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如为投币时是不可以进行退回25分钱,扭动曲柄等操作的.</description>
+糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.</description>
     </item>
     
     <item>
