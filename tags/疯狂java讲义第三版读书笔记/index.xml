@@ -6,10 +6,21 @@
     <description>Recent content in 疯狂Java讲义第三版读书笔记 on BaseC的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 07 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 15 Jun 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://wangjc95.com/tags/%E7%96%AF%E7%8B%82java%E8%AE%B2%E4%B9%89%E7%AC%AC%E4%B8%89%E7%89%88%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Annotation</title>
+      <link>https://wangjc95.com/post/15-annotation/</link>
+      <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangjc95.com/post/15-annotation/</guid>
+      <description>1.JDK的元Annotation 1.1@Retention @Retention只能用于修饰Annotation定义,用于指定被修饰的Annotation可以保留多长时间.@Retention包含一个RetentionPolicy类型的value成员变量,所以使用@Retention时必须为该value成员变量指定值.
+value成员变量的值只能是如下三个:
+ RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.SOURCE:Annotation只能保留在源代码中,编译器直接丢弃这种Annotation.  示例代码:</description>
+    </item>
     
     <item>
       <title>Java集合</title>

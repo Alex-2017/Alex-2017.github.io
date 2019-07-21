@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Annotation</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
+  
+
+  
+
+  
+  
+  <meta name="description" content="1.JDK的元Annotation 1.1@Retention @Retention只能用于修饰Annotation定义,用于指定被修饰的Annotation可以保留多长时间.@Retention包含一个RetentionPolicy类型的value成员变量,所以使用@Retention时必须为该value成员变量指定值.
+value成员变量的值只能是如下三个:
+ RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.SOURCE:Annotation只能保留在源代码中,编译器直接丢弃这种Annotation.  示例代码:">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="Annotation">
+    <meta name="twitter:description" content="1.JDK的元Annotation 1.1@Retention @Retention只能用于修饰Annotation定义,用于指定被修饰的Annotation可以保留多长时间.@Retention包含一个RetentionPolicy类型的value成员变量,所以使用@Retention时必须为该value成员变量指定值.
+value成员变量的值只能是如下三个:
+ RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.SOURCE:Annotation只能保留在源代码中,编译器直接丢弃这种Annotation.  示例代码:">
+    <meta name="twitter:image" content="/images/avatar.png">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Annotation">
+  <meta property="og:description" content="1.JDK的元Annotation 1.1@Retention @Retention只能用于修饰Annotation定义,用于指定被修饰的Annotation可以保留多长时间.@Retention包含一个RetentionPolicy类型的value成员变量,所以使用@Retention时必须为该value成员变量指定值.
+value成员变量的值只能是如下三个:
+ RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.SOURCE:Annotation只能保留在源代码中,编译器直接丢弃这种Annotation.  示例代码:">
+  <meta property="og:url" content="https://wangjc95.com/post/15-annotation/">
+  <meta property="og:image" content="/images/avatar.png">
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6">
+
+
+<link rel="canonical" href="https://wangjc95.com/post/15-annotation/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+
+
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="BaseC的博客">
+<meta name="msapplication-tooltip" content="BaseC的博客">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="manifest" href="/manifest.json">
+
+
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+	<a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  
+  <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
+  
+  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+           is-active">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:1017086516@qq.com" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="/images/qrcode.jpg" rel="me" title="Wechat" aria-label="Wechat">
+            <span class="icon icon-wechat" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Annotation</h1>
+      <p class="post-meta">@BaseC · Jun 15, 2019 · 4 min read</p>
+    </header>
+    <article class="post-content">
+
+<h1 id="1-jdk-的元-annotation">1.<code>JDK</code>的元<code>Annotation</code></h1>
+
+<h2 id="1-1-retention">1.1<code>@Retention</code></h2>
+
+<p><code>@Retention</code>只能用于修饰<code>Annotation</code>定义,用于指定被修饰的<code>Annotation</code>可以保留多长时间.<code>@Retention</code>包含一个<code>RetentionPolicy</code>类型的<code>value</code>成员变量,所以使用<code>@Retention</code>时必须为该<code>value</code>成员变量指定值.</p>
+
+<p><code>value</code>成员变量的值只能是如下三个:</p>
+
+<ul>
+<li><code>RetentionPolicy.CLASS</code>:编译器将把<code>Annotation</code>记录在<code>class</code>文件中.当运行<code>Java</code>程序时,<code>JVM</code>不可获取<code>Annotation</code>信息.这是默认值.</li>
+<li><code>RetentionPolicy.RUNTIME</code>：编译器将把<code>Annotation</code>记录在<code>class</code>文件中.当运行<code>Java</code>程序时,<code>JVM</code>可获取<code>Annotation</code>信息,程序可以通过反射获取该<code>Annotation</code>信息.</li>
+<li><code>RetentionPolicy.SOURCE</code>:<code>Annotation</code>只能保留在源代码中,编译器直接丢弃这种<code>Annotation</code>.</li>
+</ul>
+
+<p><strong>示例代码:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Retention</span><span style="color:#f92672">(</span>RetentionPolicy<span style="color:#f92672">.</span><span style="color:#a6e22e">RUNTIME</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@interface</span> Testable <span style="color:#f92672">{</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<p>如果使用注解时只需要为<code>value</code>成员变量指定值,则使用该注解时可以直接在该注解后的括号里指定<code>value</code>成员变量的值,无须使用<strong><code>value</code>==变量值</strong>的形式.</p>
+
+<h2 id="1-2-target">1.2<code>@Target</code></h2>
+
+<p><code>@Target</code>也只能修饰一个<code>Annotation</code>定义,它用于指定被修饰的<code>Annotation</code>能用于修饰哪些程序单元.<code>@Target</code>元<code>Annotation</code>也包含一个名为<code>value</code>的成员变量,该成员变量的值只能是如下几个:</p>
+
+<ul>
+<li><code>ElementType.ANNOTATION_TYPE</code>：指定该策略的<code>Annotation</code>只能修饰<code>Annotation</code>.</li>
+<li><code>ElementType.CONSTRUCTOR</code>：只能修饰构造器</li>
+<li><code>ElementType.FIELD</code>：只能修饰成员变量</li>
+<li><code>ElementType.LOCAL_VARIABLE</code>: 只能修饰局部变量</li>
+<li><code>ElementType.METHOD</code>:只能修饰方法定义</li>
+<li><code>ElementType.PACKAGE</code>:只能修饰包定义</li>
+<li><code>ElementType.PARAMETER</code>:只能修饰参数</li>
+<li><code>ElementType.TYPE</code>:指定该策略的<code>Annotation</code>可以修饰类,接口(包括注解类型)或枚举定义.</li>
+</ul>
+
+<p><strong>示例代码:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Target</span><span style="color:#f92672">(</span>ElementType<span style="color:#f92672">.</span><span style="color:#a6e22e">FIELD</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@interface</span> OnlyForField <span style="color:#f92672">{</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<h2 id="1-3-documented">1.3<code>@Documented</code></h2>
+
+<p><code>@Documented</code>用于指定被该元<code>Annotation</code>修饰的<code>Annotation</code>类将被<code>javadoc</code>工具提取成文档,如果定义<code>Annotation</code>类时使用了<code>@Documented</code>修饰,则所有使用<code>Annotation</code>修饰的程序元素的<code>API</code>文档将会包含该<code>Annotation</code>说明.</p>
+
+<h2 id="1-4-inherited">1.4<code>@Inherited</code></h2>
+
+<p><code>@Inherited</code>元<code>Annotation</code>指定被它修饰的<code>Annotation</code>将具有继承性,如果某个类使用了<code>@Xxx</code>注解修饰(定义该<code>Annotation</code>时使用了<code>@Inherited</code>修饰)修饰,则其子类将自动被<code>@Xxx</code>修饰.</p>
+
+<p><strong>示例代码:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Target</span><span style="color:#f92672">(</span>ElementType<span style="color:#f92672">.</span><span style="color:#a6e22e">TYPE</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Retention</span><span style="color:#f92672">(</span>RetentionPolicy<span style="color:#f92672">.</span><span style="color:#a6e22e">RUNTIME</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Inherited</span>
+    <span style="color:#a6e22e">@interface</span> Inheritable <span style="color:#f92672">{</span>
+
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@Inheritable</span>
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span> <span style="color:#f92672">{</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sub</span> <span style="color:#66d9ef">extends</span> Base <span style="color:#f92672">{</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test59</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>Sub<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">isAnnotationPresent</span><span style="color:#f92672">(</span>Inheritable<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">));</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>true
+</code></pre>
+
+<h1 id="2-自定义-annotation">2.自定义<code>Annotation</code></h1>
+
+<h2 id="2-1定义-annotation">2.1定义<code>Annotation</code></h2>
+
+<p>定义新的<code>Annotation</code>类型使用<code>@interface</code>关键字定义一个新的<code>Annotation</code>类型与定义一个接口非常像.</p>
+
+<p><strong>定义Annotation</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Retention</span><span style="color:#f92672">(</span>RetentionPolicy<span style="color:#f92672">.</span><span style="color:#a6e22e">RUNTIME</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@interface</span> MyAnnotation <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//声明变量,使用此注解时需要声明此变量值
+</span><span style="color:#75715e"></span>        String <span style="color:#a6e22e">name</span><span style="color:#f92672">();</span>
+
+        <span style="color:#75715e">//设置默认值,使用注解时无需声明此变量值
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">age</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">default</span> 24<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<p>根据<code>Annotation</code>是否可以包含成员变量,可以把<code>Annotation</code>分为如下两类.</p>
+
+<ul>
+<li>标记<code>Annotation</code>:没有定义成员变量的<code>Annotation</code>类型被称为标记.这种<code>Annotation</code>仅利用自身的存在与否来提供信息,如<code>@Override</code>,<code>@Test</code>.</li>
+<li>元数据<code>Annotation</code>:包含成员变量的<code>Annotation</code>,因为它们可以接受更多的元数据.</li>
+</ul>
+
+<h2 id="2-2提取-annotation-信息">2.2提取<code>Annotation</code>信息</h2>
+
+<p>主要方法介绍:</p>
+
+<ul>
+<li><code>&lt;A extends Annotation&gt; A getAnnotation(Class&lt;A&gt; annotationClass)</code>:返回该程序元素上存在的,指定类型的注解,如果该类型的注解不存在,则返回<code>null</code>.</li>
+<li><code>&lt;A extends Annotation&gt; A getDeclaredAnnotation(Class&lt;A&gt; annotationClass)</code>:这是<code>Java</code>8新增的方法,该方法尝试获取直接修饰该程序元素,制定类型的<code>Annotation</code>.如果该类型的注解不存在,则返回<code>null</code>.</li>
+<li><code>Annotation[] getAnnotations()</code>:返回该程序元素上存在的所有注解.</li>
+<li><code>Annotaton[] getDeclaredAnnotations()</code>:返回直接修饰该程序元素的所有<code>Annotation</code>.</li>
+<li><code>boolean isAnnotationPresent(Class&lt;? extends Annotation&gt; annotationClass)</code>:判断该程序元素上是否存在指定类型的注解,如果存在则返回<code>true</code>,否则返回<code>false</code>.</li>
+<li><code>&lt;A extends Annotation&gt; A[] getAnnotationByType(Class&lt;A&gt; annotationClass)</code> :该方法的功能与<code>getAnnotation()</code>方法基本类似.但此方法可用于获取<code>Java8</code>添加的重复注解数据.</li>
+<li><code>&lt;A extends Annotation&gt; A[] getDeclaredAnnotationByType(Class&lt;A&gt; annotationClass)</code> :该方法的功能与<code>getDeclaredAnnotation()</code>方法基本类似.但此方法可用于获取<code>Java8</code>添加的重复注解数据.</li>
+</ul>
+
+<h3 id="2-2-1提取-annotation-信息">2.2.1提取<code>Annotation</code>信息</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@MyAnnotation</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Alex&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test60</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//通过反射获取方法
+</span><span style="color:#75715e"></span>            Method method <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;PersonalTest&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getMethod</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;test60&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#75715e">//获取并输出方法所有的注解
+</span><span style="color:#75715e"></span>            Annotation<span style="color:#f92672">[]</span> annotations <span style="color:#f92672">=</span> method<span style="color:#f92672">.</span><span style="color:#a6e22e">getAnnotations</span><span style="color:#f92672">();</span>
+            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Annotation annotation <span style="color:#f92672">:</span> annotations<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>annotation<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;**************************&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#75715e">//获取特定Annotation
+</span><span style="color:#75715e"></span>            MyAnnotation myAnnotation <span style="color:#f92672">=</span> method<span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredAnnotation</span><span style="color:#f92672">(</span>MyAnnotation<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>myAnnotation<span style="color:#f92672">);</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;myAnnotation&#39;s name is &#34;</span> <span style="color:#f92672">+</span> myAnnotation<span style="color:#f92672">.</span><span style="color:#a6e22e">name</span><span style="color:#f92672">());</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;myAnnotation&#39;s age is &#34;</span> <span style="color:#f92672">+</span> myAnnotation<span style="color:#f92672">.</span><span style="color:#a6e22e">age</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>ClassNotFoundException <span style="color:#f92672">|</span> NoSuchMethodException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>@PersonalTest$MyAnnotation(age=24, name=Alex)
+@org.junit.Test(timeout=0, expected=class org.junit.Test$None)
+**************************
+@PersonalTest$MyAnnotation(age=24, name=Alex)
+myAnnotation's name is Alex
+myAnnotation's age is 24
+</code></pre>
+
+<h3 id="2-2-2-getannotations-和-getdeclaredannotations-的区别">2.2.2<code>getAnnotations</code>和<code>getDeclaredAnnotations</code>的区别</h3>
+
+<p><code>AnnotationParent.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@MyAnnotation</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;annotationTest&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Inheritable</span>
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AnnotationParent</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#f92672">}</span></code></pre></div>
+<p><code>AnnotationChild.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@MyAnnotation</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;annotationTest&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AnnotationChild</span> <span style="color:#66d9ef">extends</span> AnnotationParent <span style="color:#f92672">{</span>
+
+    <span style="color:#f92672">}</span></code></pre></div>
+<p><code>Test</code>代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test61</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            Class<span style="color:#f92672">&lt;?&gt;</span> aClass <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;PersonalTest$AnnotationChild&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#75715e">//获取当前类及从父类继承而来的注解
+</span><span style="color:#75715e"></span>            Annotation<span style="color:#f92672">[]</span> annotations <span style="color:#f92672">=</span> aClass<span style="color:#f92672">.</span><span style="color:#a6e22e">getAnnotations</span><span style="color:#f92672">();</span>
+            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Annotation annotation <span style="color:#f92672">:</span> annotations<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>annotation<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;***************************&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#75715e">//仅获取当前类的注解
+</span><span style="color:#75715e"></span>            Annotation<span style="color:#f92672">[]</span> declaredAnnotation <span style="color:#f92672">=</span> aClass<span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredAnnotations</span><span style="color:#f92672">();</span>
+            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Annotation annotation <span style="color:#f92672">:</span> declaredAnnotation<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>annotation<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>ClassNotFoundException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>@PersonalTest$Inheritable()
+@PersonalTest$MyAnnotation(age=24, name=annotationTest)
+***************************
+@PersonalTest$MyAnnotation(age=24, name=annotationTest)
+</code></pre>
+
+<h3 id="2-2-3不同类上相同类型注解的比较">2.2.3不同类上相同类型注解的比较</h3>
+
+<p><code>AnnotationTest.java</code></p>
+
+<pre><code>    @MyAnnotation(name = &quot;AnnotationTest&quot;)
+    class AnnotationTest {
+
+    }
+</code></pre>
+
+<p><strong>测试代码:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test62</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//不同类上相同内容注解的比较
+</span><span style="color:#75715e"></span>            MyAnnotation parent <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;PersonalTest$AnnotationParent&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getDeclaredAnnotation</span><span style="color:#f92672">(</span>MyAnnotation<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+            MyAnnotation child <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;PersonalTest$AnnotationChild&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getDeclaredAnnotation</span><span style="color:#f92672">(</span>MyAnnotation<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>parent<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>child<span style="color:#f92672">));</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;parent hashCode -&gt; &#34;</span> <span style="color:#f92672">+</span> parent<span style="color:#f92672">.</span><span style="color:#a6e22e">hashCode</span><span style="color:#f92672">());</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;child hashCode -&gt; &#34;</span> <span style="color:#f92672">+</span> child<span style="color:#f92672">.</span><span style="color:#a6e22e">hashCode</span><span style="color:#f92672">());</span>
+
+            <span style="color:#75715e">//不同类上不同内容注解的比较
+</span><span style="color:#75715e"></span>            MyAnnotation myAnnotationTest <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;PersonalTest$AnnotationTest&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getDeclaredAnnotation</span><span style="color:#f92672">(</span>MyAnnotation<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>parent<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>myAnnotationTest<span style="color:#f92672">));</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>ClassNotFoundException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>true
+parent hashCode -&gt; 1348781357
+child hashCode -&gt; 1348781357
+false
+</code></pre>
+
+<p><strong>结论:</strong></p>
+
+<ul>
+<li>不同类上相同内容的同一类型注解相同</li>
+<li>不同类上不同内容的同一类型注解不同</li>
+</ul>
+
+<h2 id="2-3使用-annotation-的示例">2.3使用<code>Annotation</code>的示例</h2>
+
+<h3 id="2-3-1标记-annotation">2.3.1标记<code>Annotation</code></h3>
+
+<p><code>Testable.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * @Author Alex
+</span><span style="color:#75715e"> * @Date 2019/5/30 16:05
+</span><span style="color:#75715e"> * @Desc 定义一个标记注解,不包含任何成员变量
+</span><span style="color:#75715e"> */</span>
+<span style="color:#a6e22e">@Retention</span><span style="color:#f92672">(</span>RetentionPolicy<span style="color:#f92672">.</span><span style="color:#a6e22e">RUNTIME</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@Target</span><span style="color:#f92672">(</span>ElementType<span style="color:#f92672">.</span><span style="color:#a6e22e">METHOD</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">@interface</span> Testable <span style="color:#f92672">{</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><code>TestableTest.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * @Author Alex
+</span><span style="color:#75715e"> * @Date 2019/5/30 16:05
+</span><span style="color:#75715e"> * @Desc Testable测试类
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestableTest</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">m1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+
+    <span style="color:#a6e22e">@Testable</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">m2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;系统出错了&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@Testable</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">m3</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">m4</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+
+    <span style="color:#a6e22e">@Testable</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">m5</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;业务系统出错&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@Testable</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">m6</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>注解处理方法(获取<code>TestableTest</code>中被<code>Testable</code>注解修饰的方法并进行执行和统计)</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test63</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> ClassNotFoundException <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span> total <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> passed <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> failed <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+
+        Class<span style="color:#f92672">&lt;?&gt;</span> aClass <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;personal.TestableTest&#34;</span><span style="color:#f92672">);</span>
+        Method<span style="color:#f92672">[]</span> methods <span style="color:#f92672">=</span> aClass<span style="color:#f92672">.</span><span style="color:#a6e22e">getMethods</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Method method <span style="color:#f92672">:</span> methods<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>method<span style="color:#f92672">.</span><span style="color:#a6e22e">isAnnotationPresent</span><span style="color:#f92672">(</span>annotations<span style="color:#f92672">.</span><span style="color:#a6e22e">Testable</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+                total<span style="color:#f92672">++;</span>
+                <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                    <span style="color:#75715e">//调用方法时需要传入实例
+</span><span style="color:#75715e"></span>                    method<span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>aClass<span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">());</span>
+                    passed<span style="color:#f92672">++;</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IllegalAccessException <span style="color:#f92672">|</span> InvocationTargetException <span style="color:#f92672">|</span> InstantiationException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;方法&#34;</span> <span style="color:#f92672">+</span> method <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;运行失败,异常:&#34;</span> <span style="color:#f92672">+</span> e<span style="color:#f92672">.</span><span style="color:#a6e22e">getCause</span><span style="color:#f92672">());</span>
+                    failed<span style="color:#f92672">++;</span>
+                <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Testable修饰的方法共有:&#34;</span> <span style="color:#f92672">+</span> total<span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;passed:&#34;</span> <span style="color:#f92672">+</span> passed<span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;failed:&#34;</span> <span style="color:#f92672">+</span> failed<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>方法public void personal.TestableTest.m5()运行失败,异常:java.lang.RuntimeException: 业务系统出错
+方法public void personal.TestableTest.m2()运行失败,异常:java.lang.RuntimeException: 系统出错了
+Testable修饰的方法共有:4
+passed:2
+failed:2
+</code></pre>
+
+<h3 id="2-3-2元数据-annotation">2.3.2元数据<code>Annotation</code></h3>
+
+<p><code>ActionListenerFor.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Retention</span><span style="color:#f92672">(</span>RetentionPolicy<span style="color:#f92672">.</span><span style="color:#a6e22e">RUNTIME</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@Target</span><span style="color:#f92672">(</span>ElementType<span style="color:#f92672">.</span><span style="color:#a6e22e">FIELD</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">@interface</span> ActionListenerFor <span style="color:#f92672">{</span>
+    <span style="color:#75715e">//定义一个成员变量,用于设置元数据.
+</span><span style="color:#75715e"></span>    Class<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">extends</span> ActionListener<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">listener</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><code>ActionListenerInstaller.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 处理注解工具类
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ActionListenerInstaller</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processAnnotations</span><span style="color:#f92672">(</span>Object object<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//获取Class和属性数组
+</span><span style="color:#75715e"></span>        Class<span style="color:#f92672">&lt;?&gt;</span> aClass <span style="color:#f92672">=</span> object<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">();</span>
+        Field<span style="color:#f92672">[]</span> declaredFields <span style="color:#f92672">=</span> aClass<span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredFields</span><span style="color:#f92672">();</span>
+
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Field field <span style="color:#f92672">:</span> declaredFields<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//将field中private设置为可访问
+</span><span style="color:#75715e"></span>            field<span style="color:#f92672">.</span><span style="color:#a6e22e">setAccessible</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+            <span style="color:#75715e">//获取修饰属性的ActionListenerFor注解
+</span><span style="color:#75715e"></span>            ActionListenerFor annotation <span style="color:#f92672">=</span> field<span style="color:#f92672">.</span><span style="color:#a6e22e">getAnnotation</span><span style="color:#f92672">(</span>ActionListenerFor<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                <span style="color:#75715e">//获取Field对象
+</span><span style="color:#75715e"></span>                Object fieldObj <span style="color:#f92672">=</span> field<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>object<span style="color:#f92672">);</span>
+                <span style="color:#75715e">//如果Field对象是AbstractButton的子类,并且被ActionListenerFor修饰,进入判断体
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>annotation <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> fieldObj <span style="color:#66d9ef">instanceof</span> AbstractButton<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    <span style="color:#75715e">//获取注解中的Listener class
+</span><span style="color:#75715e"></span>                    Class<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">extends</span> ActionListener<span style="color:#f92672">&gt;</span> listenerClazz <span style="color:#f92672">=</span> annotation<span style="color:#f92672">.</span><span style="color:#a6e22e">listener</span><span style="color:#f92672">();</span>
+                    <span style="color:#75715e">//生成Listener实例并将其绑定到Button中
+</span><span style="color:#75715e"></span>                    ActionListener actionListener <span style="color:#f92672">=</span> listenerClazz<span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">();</span>
+                    AbstractButton abstractButton <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>AbstractButton<span style="color:#f92672">)</span> fieldObj<span style="color:#f92672">;</span>
+                    abstractButton<span style="color:#f92672">.</span><span style="color:#a6e22e">addActionListener</span><span style="color:#f92672">(</span>actionListener<span style="color:#f92672">);</span>
+                <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IllegalAccessException <span style="color:#f92672">|</span> InstantiationException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><code>AnnotationTest.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * ActionListenerFor测试方法
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AnnotationTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> JFrame mainWin <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> JFrame<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;使用注解绑定事件监听器&#34;</span><span style="color:#f92672">);</span>
+
+    <span style="color:#a6e22e">@ActionListenerFor</span><span style="color:#f92672">(</span>listener <span style="color:#f92672">=</span> OKListener<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> JButton ok <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> JButton<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;确定&#34;</span><span style="color:#f92672">);</span>
+
+    <span style="color:#a6e22e">@ActionListenerFor</span><span style="color:#f92672">(</span>listener <span style="color:#f92672">=</span> CancelListener<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> JButton cancel <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> JButton<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;取消&#34;</span><span style="color:#f92672">);</span>
+
+    <span style="color:#75715e">//测试方法
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">init</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        JPanel jp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> JPanel<span style="color:#f92672">();</span>
+        jp<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>ok<span style="color:#f92672">);</span>
+        jp<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>cancel<span style="color:#f92672">);</span>
+        mainWin<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>jp<span style="color:#f92672">);</span>
+        ActionListenerInstaller<span style="color:#f92672">.</span><span style="color:#a6e22e">processAnnotations</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">);</span>
+        mainWin<span style="color:#f92672">.</span><span style="color:#a6e22e">setDefaultCloseOperation</span><span style="color:#f92672">(</span>JFrame<span style="color:#f92672">.</span><span style="color:#a6e22e">EXIT_ON_CLOSE</span><span style="color:#f92672">);</span>
+        mainWin<span style="color:#f92672">.</span><span style="color:#a6e22e">pack</span><span style="color:#f92672">();</span>
+        mainWin<span style="color:#f92672">.</span><span style="color:#a6e22e">setVisible</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">//注意Swing编程需要在main方法中启动
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">new</span> AnnotationTest<span style="color:#f92672">().</span><span style="color:#a6e22e">init</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OKListener</span> <span style="color:#66d9ef">implements</span> ActionListener <span style="color:#f92672">{</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">actionPerformed</span><span style="color:#f92672">(</span>ActionEvent e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        JOptionPane<span style="color:#f92672">.</span><span style="color:#a6e22e">showMessageDialog</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;单击了确认按钮!&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CancelListener</span> <span style="color:#66d9ef">implements</span> ActionListener <span style="color:#f92672">{</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">actionPerformed</span><span style="color:#f92672">(</span>ActionEvent e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        JOptionPane<span style="color:#f92672">.</span><span style="color:#a6e22e">showMessageDialog</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;单击了取消按钮&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>运行<code>main</code>方法,点击按钮,查看对应弹窗</strong></p>
+
+<h2 id="2-4-java8-新增的重复注解">2.4<code>Java8</code>新增的重复注解</h2>
+
+<p><code>CJTag.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 定义可重复注解
+</span><span style="color:#75715e"> */</span>
+<span style="color:#a6e22e">@Retention</span><span style="color:#f92672">(</span>RetentionPolicy<span style="color:#f92672">.</span><span style="color:#a6e22e">RUNTIME</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@Target</span><span style="color:#f92672">(</span>ElementType<span style="color:#f92672">.</span><span style="color:#a6e22e">TYPE</span><span style="color:#f92672">)</span>
+<span style="color:#75715e">//若要重复使用该注解,需要使用如下注解指明其容器注解
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">@Repeatable</span><span style="color:#f92672">(</span>CJTags<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">@interface</span> CJTag <span style="color:#f92672">{</span>
+    String <span style="color:#a6e22e">name</span><span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">age</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><code>CJTags.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * CJTag的容器注解
+</span><span style="color:#75715e"> */</span>
+<span style="color:#75715e">//容器注解的保留期必须比它所包含的注解的保留期更长,否则编译器会报错.
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">@Retention</span><span style="color:#f92672">(</span>RetentionPolicy<span style="color:#f92672">.</span><span style="color:#a6e22e">RUNTIME</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@Target</span><span style="color:#f92672">(</span>ElementType<span style="color:#f92672">.</span><span style="color:#a6e22e">TYPE</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">@interface</span> CJTags <span style="color:#f92672">{</span>
+    <span style="color:#75715e">//数组方法名必须为value()
+</span><span style="color:#75715e"></span>    CJTag<span style="color:#f92672">[]</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>调用重复注解,<code>Java8</code>之前的写法</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@CJTags</span><span style="color:#f92672">({</span><span style="color:#a6e22e">@CJTag</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Alex&#34;</span><span style="color:#f92672">,</span> age <span style="color:#f92672">=</span> 24<span style="color:#f92672">),</span> <span style="color:#a6e22e">@CJTag</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Wang&#34;</span><span style="color:#f92672">,</span> age <span style="color:#f92672">=</span> 25<span style="color:#f92672">)})</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CJTagTest1</span> <span style="color:#f92672">{</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong><code>Java8</code>新增的重复注解</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@CJTag</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Alex&#34;</span><span style="color:#f92672">,</span> age <span style="color:#f92672">=</span> 24<span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@CJTag</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Wang&#34;</span><span style="color:#f92672">,</span> age <span style="color:#f92672">=</span> 25<span style="color:#f92672">)</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CKTagTest2</span> <span style="color:#f92672">{</span>
+
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>测试代码:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test64</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            Class<span style="color:#f92672">&lt;?&gt;</span> clazz <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;PersonalTest$CKTagTest2&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#75715e">//getDeclaredAnnotationsByType是getDeclaredAnnotation的升级版,可以获取多个重复注解
+</span><span style="color:#75715e"></span>            CJTag<span style="color:#f92672">[]</span> cjTags <span style="color:#f92672">=</span> clazz<span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredAnnotationsByType</span><span style="color:#f92672">(</span>CJTag<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>CJTag cjTag <span style="color:#f92672">:</span> cjTags<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>cjTag<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;================&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#75715e">//只能获取一个注解
+</span><span style="color:#75715e"></span>            CJTags cjtag <span style="color:#f92672">=</span> clazz<span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredAnnotation</span><span style="color:#f92672">(</span>CJTags<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>cjtag<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>ClassNotFoundException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<pre><code>@annotations.CJTag(name=Alex, age=24)
+@annotations.CJTag(name=Wang, age=25)
+================
+@annotations.CJTags(value=[@annotations.CJTag(name=Alex, age=24), @annotations.CJTag(name=Wang, age=25)])
+</code></pre>
+
+<h2 id="2-5-java8-新增的-type-annotation">2.5<code>Java8</code>新增的<code>Type Annotation</code></h2>
+
+<p><strong>自定义<code>Type Annotation</code></strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">//自定义类型注解,设置Target为ElementType.TYPE_USE
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Target</span><span style="color:#f92672">(</span>ElementType<span style="color:#f92672">.</span><span style="color:#a6e22e">TYPE_USE</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@interface</span> NotNull <span style="color:#f92672">{</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<p><strong>使用示例:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test65</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@NotNull</span> String string<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> <span style="color:#a6e22e">@NotNull</span> FileNotFoundException <span style="color:#f92672">{</span>
+    String str <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">@NotNull</span> String<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;123412&#34;</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span></code></pre></div></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/%E7%96%AF%E7%8B%82java%E8%AE%B2%E4%B9%89%E7%AC%AC%E4%B8%89%E7%89%88%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0"><span class="tag">疯狂Java讲义第三版读书笔记</span></a></li>
+        
+          <li><a href="/tags/javase"><span class="tag">JavaSE</span></a></li>
+        
+      </ul>
+      
+      
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "http-wangjc95-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2019 BaseC的博客</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

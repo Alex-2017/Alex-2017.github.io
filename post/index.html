@@ -194,6 +194,21 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/15-annotation/" class="post-link">Annotation</a></h3>
+    <p class="post-meta">@BaseC · Jun 15, 2019 · 4 min read</p>
+  </header>
+  
+  <p class="post-summary">1.JDK的元Annotation 1.1@Retention @Retention只能用于修饰Annotation定义,用于指定被修饰的Annotation可以保留多长时间.@Retention包含一个RetentionPolicy类型的value成员变量,所以使用@Retention时必须为该value成员变量指定值.
+value成员变量的值只能是如下三个:
+ RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.SOURCE:Annotation只能保留在源代码中,编译器直接丢弃这种Annotation.  示例代码:</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/15-annotation/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://wangjc95.com/post/14-java%E9%9B%86%E5%90%88/" class="post-link">Java集合</a></h3>
     <p class="post-meta">@BaseC · Jun 7, 2019 · 8 min read</p>
   </header>
@@ -329,21 +344,6 @@ package iterator; import lombok.</p>
 2.命令模式的简单实现 2.1类图 Light,GarageDoor:电器类,灯和车库门.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://wangjc95.com/post/6-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://wangjc95.com/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="post-link">单例模式</a></h3>
-    <p class="post-meta">@BaseC · Mar 17, 2019 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">介绍: 这是阅读head first design patterns的阅读笔记.
-1.应用场景 在项目中,有些对象我们只需要一个!比如说线程池,缓存,对话框等等.这类对象只能有一个实例,如果制造出多个实例,就会导致很多问题产生.
-2.定义 确保一个类只有一个实例,并提供全局访问点.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://wangjc95.com/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">Read More →</a>
   </footer>
 </article>
 
