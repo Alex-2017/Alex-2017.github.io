@@ -1,97 +1,211 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 
-    <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.53" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
 
-    <title>工厂模式 | Alex的博客</title>
-    <meta property="og:title" content="工厂模式 - Alex的博客">
-    <meta property="og:type" content="article">
-        
-    <meta property="article:published_time" content="2019-03-11T22:08:48&#43;08:00">
-        
-        
-    <meta property="article:modified_time" content="2019-03-11T22:08:48&#43;08:00">
-        
-    <meta name="Keywords" content="Java,设计模式">
-    <meta name="description" content="工厂模式">
-        <meta name="author" content="Alex">
-        
-    <meta property="og:url" content="https://wangjc95.com/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+  <title>工厂模式</title>
 
-    <link rel="stylesheet" href="/css/normalize.css">
-    
-        <link rel="stylesheet" href="/css/prism.css">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
+  
 
-    
+  
+
+  
+  
+  <meta name="description" content="1.简单工厂 1.1应用场景 最近开了一家披萨店,有四种不同口味的披萨.客人只需要输入他需要的口味就可以得到对应的披萨.那么如何用java来设计这样的一个系统呢?
+1.2解决方法 最简单的方法就是在一个类中封装一个方法,根据输入的口味,来生成对应的披萨.但是如果商店的披萨品种需要变动时,此类的代码就需要修改.这肯定不是我们所希望的.下面就来使用简单工厂模式来解决这一问题.
+1.2.1类图 1.2.2代码 披萨代码:
+Pizza.java">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="工厂模式">
+    <meta name="twitter:description" content="1.简单工厂 1.1应用场景 最近开了一家披萨店,有四种不同口味的披萨.客人只需要输入他需要的口味就可以得到对应的披萨.那么如何用java来设计这样的一个系统呢?
+1.2解决方法 最简单的方法就是在一个类中封装一个方法,根据输入的口味,来生成对应的披萨.但是如果商店的披萨品种需要变动时,此类的代码就需要修改.这肯定不是我们所希望的.下面就来使用简单工厂模式来解决这一问题.
+1.2.1类图 1.2.2代码 披萨代码:
+Pizza.java">
+    <meta name="twitter:image" content="/images/avatar.png">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="工厂模式">
+  <meta property="og:description" content="1.简单工厂 1.1应用场景 最近开了一家披萨店,有四种不同口味的披萨.客人只需要输入他需要的口味就可以得到对应的披萨.那么如何用java来设计这样的一个系统呢?
+1.2解决方法 最简单的方法就是在一个类中封装一个方法,根据输入的口味,来生成对应的披萨.但是如果商店的披萨品种需要变动时,此类的代码就需要修改.这肯定不是我们所希望的.下面就来使用简单工厂模式来解决这一问题.
+1.2.1类图 1.2.2代码 披萨代码:
+Pizza.java">
+  <meta property="og:url" content="https://wangjc95.com/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+  <meta property="og:image" content="/images/avatar.png">
 
 
-    
-    
+
+
+<meta name="generator" content="Hugo 0.55.6">
+
+
+<link rel="canonical" href="https://wangjc95.com/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+
+
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="BaseC的博客">
+<meta name="msapplication-tooltip" content="BaseC的博客">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="manifest" href="/manifest.json">
+
+
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
 </head>
-
-<body>
-<header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://wangjc95.com">
-                        Alex的博客
-                    </a>
-                
-                <p class="description">Java程序猿</p>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://wangjc95.com">首页</a>
-                    
-                    <a  href="https://wangjc95.com/archives/" title="归档">归档</a>
-                    
-                    <a  href="https://wangjc95.com/about/" title="About">About</a>
-                    
-                </nav>
-            </div>
-        </div>
+  <body>
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+	<a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
+        
+      
     </div>
+    
+    
+  <header class="site-header">
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  
+  <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
+  
+  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+           is-active">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:1017086516@qq.com" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="/images/qrcode.jpg" rel="me" title="Wechat" aria-label="Wechat">
+            <span class="icon icon-wechat" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
 </header>
 
-
-<div id="body">
-    <div class="container">
-        <div class="col-group">
-
-            <div class="col-8" id="main">
-                <div class="res-cons">
-                    <article class="post">
-                        <header>
-                            <h1 class="post-title">工厂模式</h1>
-                        </header>
-                        <date class="post-meta meta-date">
-                            2019年3月11日
-                        </date>
-                        
-                        <div class="post-meta">
-                            <span>|</span>
-                            
-                                <span class="meta-category"><a href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">java设计模式</a></span>
-                            
-                        </div>
-                        
-                        
-                        <div class="post-meta">
-                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
-                        </div>
-                        
-                        <div class="post-content">
-                            
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">工厂模式</h1>
+      <p class="post-meta">@BaseC · Mar 11, 2019 · 5 min read</p>
+    </header>
+    <article class="post-content">
 
 <h1 id="1-简单工厂">1.简单工厂</h1>
 
@@ -112,119 +226,100 @@
 <p><strong>披萨代码:</strong></p>
 
 <p><code>Pizza.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.simple<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.simple;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Pizza</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">prepare</span><span style="color:#f92672">();</span>
 
-public interface Pizza {
-    void prepare();
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bake</span><span style="color:#f92672">();</span>
 
-    void bake();
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cut</span><span style="color:#f92672">();</span>
 
-    void cut();
-
-    void box();
-}
-
-</code></pre>
-
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">box</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>CheesePizza.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.simple<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.simple;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CheesePizza</span> <span style="color:#66d9ef">implements</span> Pizza <span style="color:#f92672">{</span>
 
-public class CheesePizza implements Pizza {
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">CheesePizza</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;CheesePizza&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
 
-    public CheesePizza() {
-        System.out.println(&quot;CheesePizza&quot;);
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">prepare</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
 
-    @Override
-    public void prepare() {
+    <span style="color:#f92672">}</span>
 
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bake</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
 
-    @Override
-    public void bake() {
+    <span style="color:#f92672">}</span>
 
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cut</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
 
-    @Override
-    public void cut() {
+    <span style="color:#f92672">}</span>
 
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">box</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
 
-    @Override
-    public void box() {
-
-    }
-}
-
-</code></pre>
-
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p>剩余几种披萨类差别不大,仅需要在构造器中输出对应的类名称即可.</p>
 
 <p><strong>披萨工厂</strong></p>
 
 <p><code>SimplePizzaFactory</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.simple<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.simple;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimplePizzaFactory</span> <span style="color:#f92672">{</span>
 
-public class SimplePizzaFactory {
+    <span style="color:#66d9ef">public</span> Pizza <span style="color:#a6e22e">createPizza</span><span style="color:#f92672">(</span>String type<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Pizza pizza<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;cheese&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            pizza <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CheesePizza<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;clam&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            pizza <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ClamPizza<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;pepperoni&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            pizza <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PepperoniPizza<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            pizza <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> VeggiePizza<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> pizza<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    public Pizza createPizza(String type) {
-        Pizza pizza;
-        if (&quot;cheese&quot;.equals(type)) {
-            pizza = new CheesePizza();
-        } else if (&quot;clam&quot;.equals(type)) {
-            pizza = new ClamPizza();
-        } else if (&quot;pepperoni&quot;.equals(type)) {
-            pizza = new PepperoniPizza();
-        } else {
-            pizza = new VeggiePizza();
-        }
-        return pizza;
-    }
-
-}
-
-</code></pre>
-
+<span style="color:#f92672">}</span></code></pre></div>
 <p><strong>披萨商店</strong></p>
 
 <p><code>PizzaStore.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.simple<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.simple;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PizzaStore</span> <span style="color:#f92672">{</span>
 
-public class PizzaStore {
+    <span style="color:#66d9ef">private</span> SimplePizzaFactory simplePizzaFactory<span style="color:#f92672">;</span>
 
-    private SimplePizzaFactory simplePizzaFactory;
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">PizzaStore</span><span style="color:#f92672">(</span>SimplePizzaFactory simplePizzaFactory<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">simplePizzaFactory</span> <span style="color:#f92672">=</span> simplePizzaFactory<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    public PizzaStore(SimplePizzaFactory simplePizzaFactory) {
-        this.simplePizzaFactory = simplePizzaFactory;
-    }
-
-    public Pizza orderPizza(String type) {
-        Pizza pizza = simplePizzaFactory.createPizza(type);
-        pizza.prepare();
-        pizza.bake();
-        pizza.cut();
-        pizza.box();
-        return pizza;
-    }
-}
-
-</code></pre>
-
+    <span style="color:#66d9ef">public</span> Pizza <span style="color:#a6e22e">orderPizza</span><span style="color:#f92672">(</span>String type<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Pizza pizza <span style="color:#f92672">=</span> simplePizzaFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">createPizza</span><span style="color:#f92672">(</span>type<span style="color:#f92672">);</span>
+        pizza<span style="color:#f92672">.</span><span style="color:#a6e22e">prepare</span><span style="color:#f92672">();</span>
+        pizza<span style="color:#f92672">.</span><span style="color:#a6e22e">bake</span><span style="color:#f92672">();</span>
+        pizza<span style="color:#f92672">.</span><span style="color:#a6e22e">cut</span><span style="color:#f92672">();</span>
+        pizza<span style="color:#f92672">.</span><span style="color:#a6e22e">box</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">return</span> pizza<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><strong>测试代码:</strong></p>
-
-<pre><code class="language-java">@Test
-    public void test1() {
-        SimplePizzaFactory factory = new SimplePizzaFactory();
-        PizzaStore pizzaStore = new PizzaStore(factory);
-        pizzaStore.orderPizza(&quot;pepperoni&quot;);
-        pizzaStore.orderPizza(&quot;veggie&quot;);
-    }
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        SimplePizzaFactory factory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SimplePizzaFactory<span style="color:#f92672">();</span>
+        PizzaStore pizzaStore <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PizzaStore<span style="color:#f92672">(</span>factory<span style="color:#f92672">);</span>
+        pizzaStore<span style="color:#f92672">.</span><span style="color:#a6e22e">orderPizza</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;pepperoni&#34;</span><span style="color:#f92672">);</span>
+        pizzaStore<span style="color:#f92672">.</span><span style="color:#a6e22e">orderPizza</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;veggie&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span></code></pre></div>
 <p><strong>控制台输出:</strong></p>
 
 <pre><code>PepperoniPizza
@@ -254,162 +349,134 @@ VeggiePizza
 <p><strong>披萨类:</strong></p>
 
 <p><code>Pizza.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.pattern.pizza<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.pattern.pizza;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Pizza</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">protected</span> String name<span style="color:#f92672">;</span>
 
-public abstract class Pizza {
-    protected String name;
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">prepare</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Preparing &#34;</span> <span style="color:#f92672">+</span> name<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
 
-    public void prepare() {
-        System.out.println(&quot;Preparing &quot; + name);
-    }
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bake</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Bake for 25 minutes at 350&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
 
-    public void bake() {
-        System.out.println(&quot;Bake for 25 minutes at 350&quot;);
-    }
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cut</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Cutting the pizza into diagonal slices&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
 
-    public void cut() {
-        System.out.println(&quot;Cutting the pizza into diagonal slices&quot;);
-    }
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">box</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Place pizza in official PizzaStore box&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
 
-    public void box() {
-        System.out.println(&quot;Place pizza in official PizzaStore box&quot;);
-    }
-
-    public String getName() {
-        return name;
-    }
-}
-
-</code></pre>
-
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> name<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>ChicagoStyleCheesePizza.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.pattern.pizza<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.pattern.pizza;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ChicagoStyleCheesePizza</span> <span style="color:#66d9ef">extends</span> Pizza <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ChicagoStyleCheesePizza</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ChicagoStyleCheesePizza&#34;</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-public class ChicagoStyleCheesePizza extends Pizza {
-    public ChicagoStyleCheesePizza() {
-        name = &quot;ChicagoStyleCheesePizza&quot;;
-    }
-
-    @Override
-    public void bake() {
-        System.out.println(&quot;Bake for 30 minutes at 150&quot;);
-    }
-}
-
-</code></pre>
-
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bake</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Bake for 30 minutes at 150&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>NYStyleClamPizza.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.pattern.pizza<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.pattern.pizza;
-
-public class NYStyleClamPizza extends Pizza {
-    public NYStyleClamPizza() {
-        name = &quot;NYStyleClamPizza&quot;;
-    }
-}
-
-</code></pre>
-
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NYStyleClamPizza</span> <span style="color:#66d9ef">extends</span> Pizza <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">NYStyleClamPizza</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;NYStyleClamPizza&#34;</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>ChicagoStyleClamPizza.java</code>和<code>NYStyleCheesePizza.java</code>类似,不再举例!</p>
 
 <p><strong>披萨商店:</strong></p>
 
 <p><code>PizzaStore.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.pattern.pizzastore<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.pattern.pizzastore;
+<span style="color:#f92672">import</span> factory.pattern.pizza.Pizza<span style="color:#f92672">;</span>
 
-import factory.pattern.pizza.Pizza;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PizzaStore</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> Pizza <span style="color:#a6e22e">orderPizza</span><span style="color:#f92672">(</span>String type<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Pizza pizza <span style="color:#f92672">=</span> createPizza<span style="color:#f92672">(</span>type<span style="color:#f92672">);</span>
+        pizza<span style="color:#f92672">.</span><span style="color:#a6e22e">prepare</span><span style="color:#f92672">();</span>
+        pizza<span style="color:#f92672">.</span><span style="color:#a6e22e">bake</span><span style="color:#f92672">();</span>
+        pizza<span style="color:#f92672">.</span><span style="color:#a6e22e">cut</span><span style="color:#f92672">();</span>
+        pizza<span style="color:#f92672">.</span><span style="color:#a6e22e">box</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">return</span> pizza<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-public abstract class PizzaStore {
-    public Pizza orderPizza(String type) {
-        Pizza pizza = createPizza(type);
-        pizza.prepare();
-        pizza.bake();
-        pizza.cut();
-        pizza.box();
-        return pizza;
-    }
-
-    protected abstract Pizza createPizza(String type);
-}
-
-</code></pre>
-
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">abstract</span> Pizza <span style="color:#a6e22e">createPizza</span><span style="color:#f92672">(</span>String type<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>ChicagoPizzaStore.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.pattern.pizzastore<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.pattern.pizzastore;
+<span style="color:#f92672">import</span> factory.pattern.pizza.ChicagoStyleCheesePizza<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.pattern.pizza.ChicagoStyleClamPizza<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.pattern.pizza.Pizza<span style="color:#f92672">;</span>
 
-import factory.pattern.pizza.ChicagoStyleCheesePizza;
-import factory.pattern.pizza.ChicagoStyleClamPizza;
-import factory.pattern.pizza.Pizza;
-
-public class ChicagoPizzaStore extends PizzaStore {
-    @Override
-    protected Pizza createPizza(String type) {
-        Pizza pizza;
-        if (type.equals(&quot;cheese&quot;)) {
-            pizza = new ChicagoStyleCheesePizza();
-        } else {
-            pizza = new ChicagoStyleClamPizza();
-        }
-        return pizza;
-    }
-}
-</code></pre>
-
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ChicagoPizzaStore</span> <span style="color:#66d9ef">extends</span> PizzaStore <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">protected</span> Pizza <span style="color:#a6e22e">createPizza</span><span style="color:#f92672">(</span>String type<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Pizza pizza<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>type<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;cheese&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            pizza <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChicagoStyleCheesePizza<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            pizza <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChicagoStyleClamPizza<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> pizza<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>NYPizzaStore.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.pattern.pizzastore<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.pattern.pizzastore;
+<span style="color:#f92672">import</span> factory.pattern.pizza.NYStyleCheesePizza<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.pattern.pizza.NYStyleClamPizza<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.pattern.pizza.Pizza<span style="color:#f92672">;</span>
 
-import factory.pattern.pizza.NYStyleCheesePizza;
-import factory.pattern.pizza.NYStyleClamPizza;
-import factory.pattern.pizza.Pizza;
-
-public class NYPizzaStore extends PizzaStore {
-    @Override
-    protected Pizza createPizza(String type) {
-        Pizza pizza;
-        if (type.equals(&quot;cheese&quot;)) {
-            pizza = new NYStyleCheesePizza();
-        } else {
-            pizza = new NYStyleClamPizza();
-        }
-        return pizza;
-    }
-}
-</code></pre>
-
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NYPizzaStore</span> <span style="color:#66d9ef">extends</span> PizzaStore <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">protected</span> Pizza <span style="color:#a6e22e">createPizza</span><span style="color:#f92672">(</span>String type<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Pizza pizza<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>type<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;cheese&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            pizza <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NYStyleCheesePizza<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            pizza <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NYStyleClamPizza<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> pizza<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><strong>测试代码:</strong></p>
-
-<pre><code class="language-java">@Test
-    public void test2() {
-        factory.pattern.pizzastore.PizzaStore nyPizzaStore = new NYPizzaStore();
-        factory.pattern.pizzastore.PizzaStore chicagoPizzaStore = new ChicagoPizzaStore();
-        Pizza nyPizza = nyPizzaStore.orderPizza(&quot;clam&quot;);
-        System.out.println(&quot;Alex ordered &quot; + nyPizza.getName());
-        System.out.println(&quot;=================================&quot;);
-        Pizza chicagoPizza = chicagoPizzaStore.orderPizza(&quot;cheese&quot;);
-        System.out.println(&quot;Jason ordered &quot; + chicagoPizza.getName());
-    }
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        factory<span style="color:#f92672">.</span><span style="color:#a6e22e">pattern</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pizzastore</span><span style="color:#f92672">.</span><span style="color:#a6e22e">PizzaStore</span> nyPizzaStore <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NYPizzaStore<span style="color:#f92672">();</span>
+        factory<span style="color:#f92672">.</span><span style="color:#a6e22e">pattern</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pizzastore</span><span style="color:#f92672">.</span><span style="color:#a6e22e">PizzaStore</span> chicagoPizzaStore <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChicagoPizzaStore<span style="color:#f92672">();</span>
+        Pizza nyPizza <span style="color:#f92672">=</span> nyPizzaStore<span style="color:#f92672">.</span><span style="color:#a6e22e">orderPizza</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;clam&#34;</span><span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Alex ordered &#34;</span> <span style="color:#f92672">+</span> nyPizza<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">());</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;=================================&#34;</span><span style="color:#f92672">);</span>
+        Pizza chicagoPizza <span style="color:#f92672">=</span> chicagoPizzaStore<span style="color:#f92672">.</span><span style="color:#a6e22e">orderPizza</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;cheese&#34;</span><span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Jason ordered &#34;</span> <span style="color:#f92672">+</span> chicagoPizza<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">());</span>
+    <span style="color:#f92672">}</span></code></pre></div>
 <p><strong>控制台输出:</strong></p>
-
-<pre><code class="language-java">reparing NYStyleClamPizza
-Bake for 25 minutes at 350
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">reparing NYStyleClamPizza
+Bake <span style="color:#66d9ef">for</span> 25 minutes at 350
 Cutting the pizza into diagonal slices
 Place pizza in official PizzaStore box
 Alex ordered NYStyleClamPizza
-=================================
+<span style="color:#f92672">=================================</span>
 Preparing ChicagoStyleCheesePizza
-Bake for 30 minutes at 150
+Bake <span style="color:#66d9ef">for</span> 30 minutes at 150
 Cutting the pizza into diagonal slices
 Place pizza in official PizzaStore box
-Jason ordered ChicagoStyleCheesePizza
-</code></pre>
-
+Jason ordered ChicagoStyleCheesePizza</code></pre></div>
 <h2 id="2-3定义">2.3定义</h2>
 
 <h3 id="2-3-1设计原则">2.3.1设计原则</h3>
@@ -443,40 +510,32 @@ Jason ordered ChicagoStyleCheesePizza
 <p><strong>原料:</strong></p>
 
 <p><code>Dough.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.abstractpattern.ingredient<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.abstractpattern.ingredient;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dough</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">protected</span> String name<span style="color:#f92672">;</span>
 
-public class Dough {
-    protected String name;
-
-    @Override
-    public String toString() {
-        return &quot;Dough{&quot; +
-                &quot;name='&quot; + name + '\'' +
-                '}';
-    }
-}
-
-</code></pre>
-
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">toString</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Dough{&#34;</span> <span style="color:#f92672">+</span>
+                <span style="color:#e6db74">&#34;name=&#39;&#34;</span> <span style="color:#f92672">+</span> name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;\&#39;&#39;</span> <span style="color:#f92672">+</span>
+                <span style="color:#e6db74">&#39;}&#39;</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>Sauce.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.abstractpattern.ingredient<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.abstractpattern.ingredient;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sauce</span> <span style="color:#f92672">{</span>
 
-public class Sauce {
+    <span style="color:#66d9ef">protected</span> String name<span style="color:#f92672">;</span>
 
-    protected String name;
-
-    @Override
-    public String toString() {
-        return &quot;Sauce{&quot; +
-                &quot;name='&quot; + name + '\'' +
-                '}';
-    }
-}
-
-</code></pre>
-
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">toString</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Sauce{&#34;</span> <span style="color:#f92672">+</span>
+                <span style="color:#e6db74">&#34;name=&#39;&#34;</span> <span style="color:#f92672">+</span> name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;\&#39;&#39;</span> <span style="color:#f92672">+</span>
+                <span style="color:#e6db74">&#39;}&#39;</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>CHIDoughIngredient.java</code></p>
 
 <pre><code>package factory.abstractpattern.ingredient;
@@ -493,212 +552,182 @@ public class CHIDoughIngredient extends Dough {
 <p><strong>原料工厂:</strong></p>
 
 <p><code>IngredientFactory.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.abstractpattern.ingredient<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.abstractpattern.ingredient;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IngredientFactory</span> <span style="color:#f92672">{</span>
 
-public interface IngredientFactory {
+    Sauce <span style="color:#a6e22e">createSauce</span><span style="color:#f92672">();</span>
 
-    Sauce createSauce();
+    Dough <span style="color:#a6e22e">createDough</span><span style="color:#f92672">();</span>
 
-    Dough createDough();
-
-}
-</code></pre>
-
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>ChicagoIngredientFactory.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.abstractpattern.ingredient<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.abstractpattern.ingredient;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ChicagoIngredientFactory</span> <span style="color:#66d9ef">implements</span> IngredientFactory <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> Sauce <span style="color:#a6e22e">createSauce</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> CHISauceIngredient<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
 
-public class ChicagoIngredientFactory implements IngredientFactory {
-    @Override
-    public Sauce createSauce() {
-        return new CHISauceIngredient();
-    }
-
-    @Override
-    public Dough createDough() {
-        return new CHIDoughIngredient();
-    }
-}
-
-</code></pre>
-
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> Dough <span style="color:#a6e22e">createDough</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> CHIDoughIngredient<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>NYIngredientFactory.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.abstractpattern.ingredient<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.abstractpattern.ingredient;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NYIngredientFactory</span> <span style="color:#66d9ef">implements</span> IngredientFactory <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> Sauce <span style="color:#a6e22e">createSauce</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> NYSauceIngredent<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
 
-public class NYIngredientFactory implements IngredientFactory {
-    @Override
-    public Sauce createSauce() {
-        return new NYSauceIngredent();
-    }
-
-    @Override
-    public Dough createDough() {
-        return new NYDoughIngredient();
-    }
-}
-</code></pre>
-
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> Dough <span style="color:#a6e22e">createDough</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> NYDoughIngredient<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><strong>披萨:</strong></p>
 
 <p><code>Pizza.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.abstractpattern.pizza<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.abstractpattern.pizza;
+<span style="color:#f92672">import</span> factory.abstractpattern.ingredient.Dough<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.abstractpattern.ingredient.IngredientFactory<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.abstractpattern.ingredient.Sauce<span style="color:#f92672">;</span>
 
-import factory.abstractpattern.ingredient.Dough;
-import factory.abstractpattern.ingredient.IngredientFactory;
-import factory.abstractpattern.ingredient.Sauce;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Pizza</span> <span style="color:#f92672">{</span>
 
-public class Pizza {
+    <span style="color:#66d9ef">protected</span> IngredientFactory ingredientFactory<span style="color:#f92672">;</span>
 
-    protected IngredientFactory ingredientFactory;
+    <span style="color:#66d9ef">protected</span> String name<span style="color:#f92672">;</span>
 
-    protected String name;
+    <span style="color:#66d9ef">protected</span> Sauce sauce<span style="color:#f92672">;</span>
 
-    protected Sauce sauce;
+    <span style="color:#66d9ef">protected</span> Dough dough<span style="color:#f92672">;</span>
 
-    protected Dough dough;
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">prepare</span><span style="color:#f92672">(){</span>
+        sauce <span style="color:#f92672">=</span> ingredientFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">createSauce</span><span style="color:#f92672">();</span>
+        dough <span style="color:#f92672">=</span> ingredientFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">createDough</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
 
-    public void prepare(){
-        sauce = ingredientFactory.createSauce();
-        dough = ingredientFactory.createDough();
-    }
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bake</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Baking Pizza&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
 
-    public void bake() {
-        System.out.println(&quot;Baking Pizza&quot;);
-    }
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cut</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Cutting Pizza&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
 
-    public void cut() {
-        System.out.println(&quot;Cutting Pizza&quot;);
-    }
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">box</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Boxing Pizza&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
 
-    public void box() {
-        System.out.println(&quot;Boxing Pizza&quot;);
-    }
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> name<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String toString() {
-        return &quot;Pizza{&quot; +
-                &quot;name='&quot; + name + '\'' +
-                &quot;, sauce=&quot; + sauce +
-                &quot;, dough=&quot; + dough +
-                '}';
-    }
-}
-
-</code></pre>
-
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">toString</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Pizza{&#34;</span> <span style="color:#f92672">+</span>
+                <span style="color:#e6db74">&#34;name=&#39;&#34;</span> <span style="color:#f92672">+</span> name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;\&#39;&#39;</span> <span style="color:#f92672">+</span>
+                <span style="color:#e6db74">&#34;, sauce=&#34;</span> <span style="color:#f92672">+</span> sauce <span style="color:#f92672">+</span>
+                <span style="color:#e6db74">&#34;, dough=&#34;</span> <span style="color:#f92672">+</span> dough <span style="color:#f92672">+</span>
+                <span style="color:#e6db74">&#39;}&#39;</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>CHICheesePizza.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.abstractpattern.pizza<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.abstractpattern.pizza;
+<span style="color:#f92672">import</span> factory.abstractpattern.ingredient.IngredientFactory<span style="color:#f92672">;</span>
 
-import factory.abstractpattern.ingredient.IngredientFactory;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CHICheesePizza</span> <span style="color:#66d9ef">extends</span> Pizza <span style="color:#f92672">{</span>
 
-public class CHICheesePizza extends Pizza {
-
-    public CHICheesePizza(IngredientFactory ingredientFactory) {
-        this.ingredientFactory = ingredientFactory;
-        name = &quot;CHICheesePizza&quot;;
-    }
-}
-
-</code></pre>
-
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">CHICheesePizza</span><span style="color:#f92672">(</span>IngredientFactory ingredientFactory<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">ingredientFactory</span> <span style="color:#f92672">=</span> ingredientFactory<span style="color:#f92672">;</span>
+        name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;CHICheesePizza&#34;</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p>剩余几种披萨代码类似,不再展示!</p>
 
 <p><strong>披萨商店:</strong></p>
 
 <p><code>PizzaStore.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.abstractpattern.pizzastore<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.abstractpattern.pizzastore;
+<span style="color:#f92672">import</span> factory.abstractpattern.pizza.Pizza<span style="color:#f92672">;</span>
 
-import factory.abstractpattern.pizza.Pizza;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PizzaStore</span> <span style="color:#f92672">{</span>
 
-public abstract class PizzaStore {
+    <span style="color:#66d9ef">public</span> Pizza <span style="color:#a6e22e">orderPizza</span><span style="color:#f92672">(</span>String type<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Pizza pizza <span style="color:#f92672">=</span> createPizza<span style="color:#f92672">(</span>type<span style="color:#f92672">);</span>
+        pizza<span style="color:#f92672">.</span><span style="color:#a6e22e">prepare</span><span style="color:#f92672">();</span>
+        pizza<span style="color:#f92672">.</span><span style="color:#a6e22e">bake</span><span style="color:#f92672">();</span>
+        pizza<span style="color:#f92672">.</span><span style="color:#a6e22e">cut</span><span style="color:#f92672">();</span>
+        pizza<span style="color:#f92672">.</span><span style="color:#a6e22e">box</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">return</span> pizza<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    public Pizza orderPizza(String type) {
-        Pizza pizza = createPizza(type);
-        pizza.prepare();
-        pizza.bake();
-        pizza.cut();
-        pizza.box();
-        return pizza;
-    }
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">abstract</span> Pizza <span style="color:#a6e22e">createPizza</span><span style="color:#f92672">(</span>String type<span style="color:#f92672">);</span>
 
-    protected abstract Pizza createPizza(String type);
-
-}
-</code></pre>
-
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>CHIPizzaStore.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.abstractpattern.pizzastore<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.abstractpattern.pizzastore;
+<span style="color:#f92672">import</span> factory.abstractpattern.ingredient.ChicagoIngredientFactory<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.abstractpattern.ingredient.IngredientFactory<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.abstractpattern.pizza.CHICheesePizza<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.abstractpattern.pizza.CHIClamPizza<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.abstractpattern.pizza.Pizza<span style="color:#f92672">;</span>
 
-import factory.abstractpattern.ingredient.ChicagoIngredientFactory;
-import factory.abstractpattern.ingredient.IngredientFactory;
-import factory.abstractpattern.pizza.CHICheesePizza;
-import factory.abstractpattern.pizza.CHIClamPizza;
-import factory.abstractpattern.pizza.Pizza;
-
-public class CHIPizzaStore extends PizzaStore {
-    @Override
-    protected Pizza createPizza(String type) {
-        Pizza pizza;
-        IngredientFactory ingredientFactory = new ChicagoIngredientFactory();
-        if (&quot;cheese&quot;.equals(type)) {
-            pizza = new CHICheesePizza(ingredientFactory);
-        } else {
-            pizza = new CHIClamPizza(ingredientFactory);
-        }
-        return pizza;
-    }
-}
-</code></pre>
-
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CHIPizzaStore</span> <span style="color:#66d9ef">extends</span> PizzaStore <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">protected</span> Pizza <span style="color:#a6e22e">createPizza</span><span style="color:#f92672">(</span>String type<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Pizza pizza<span style="color:#f92672">;</span>
+        IngredientFactory ingredientFactory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChicagoIngredientFactory<span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;cheese&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            pizza <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CHICheesePizza<span style="color:#f92672">(</span>ingredientFactory<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            pizza <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CHIClamPizza<span style="color:#f92672">(</span>ingredientFactory<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> pizza<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>NYPizzaStore.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> factory.abstractpattern.pizzastore<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package factory.abstractpattern.pizzastore;
+<span style="color:#f92672">import</span> factory.abstractpattern.ingredient.IngredientFactory<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.abstractpattern.ingredient.NYIngredientFactory<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.abstractpattern.pizza.NYCheesePizza<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.abstractpattern.pizza.NYClamPizza<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> factory.abstractpattern.pizza.Pizza<span style="color:#f92672">;</span>
 
-import factory.abstractpattern.ingredient.IngredientFactory;
-import factory.abstractpattern.ingredient.NYIngredientFactory;
-import factory.abstractpattern.pizza.NYCheesePizza;
-import factory.abstractpattern.pizza.NYClamPizza;
-import factory.abstractpattern.pizza.Pizza;
-
-public class NYPizzaStore extends PizzaStore {
-    @Override
-    protected Pizza createPizza(String type) {
-        Pizza pizza;
-        IngredientFactory ingredientFactory = new NYIngredientFactory();
-        if (type.equals(&quot;cheese&quot;)) {
-            pizza = new NYCheesePizza(ingredientFactory);
-        } else {
-            pizza = new NYClamPizza(ingredientFactory);
-        }
-        return pizza;
-    }
-}
-</code></pre>
-
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NYPizzaStore</span> <span style="color:#66d9ef">extends</span> PizzaStore <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">protected</span> Pizza <span style="color:#a6e22e">createPizza</span><span style="color:#f92672">(</span>String type<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Pizza pizza<span style="color:#f92672">;</span>
+        IngredientFactory ingredientFactory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NYIngredientFactory<span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>type<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;cheese&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            pizza <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NYCheesePizza<span style="color:#f92672">(</span>ingredientFactory<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            pizza <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NYClamPizza<span style="color:#f92672">(</span>ingredientFactory<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> pizza<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><strong>测试代码:</strong></p>
-
-<pre><code class="language-java">@Test
-    public void test3() {
-        factory.abstractpattern.pizzastore.PizzaStore nyPizzaStore = new factory.abstractpattern.pizzastore.NYPizzaStore();
-        factory.abstractpattern.pizzastore.PizzaStore chicagoPizzaStore = new factory.abstractpattern.pizzastore.CHIPizzaStore();
-        factory.abstractpattern.pizza.Pizza nyCheesePizza = nyPizzaStore.orderPizza(&quot;cheese&quot;);
-        System.out.println(nyCheesePizza);
-        System.out.println(&quot;================================&quot;);
-        factory.abstractpattern.pizza.Pizza clamCheesePizza = chicagoPizzaStore.orderPizza(&quot;clam&quot;);
-        System.out.println(clamCheesePizza);
-    }
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test3</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        factory<span style="color:#f92672">.</span><span style="color:#a6e22e">abstractpattern</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pizzastore</span><span style="color:#f92672">.</span><span style="color:#a6e22e">PizzaStore</span> nyPizzaStore <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> factory<span style="color:#f92672">.</span><span style="color:#a6e22e">abstractpattern</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pizzastore</span><span style="color:#f92672">.</span><span style="color:#a6e22e">NYPizzaStore</span><span style="color:#f92672">();</span>
+        factory<span style="color:#f92672">.</span><span style="color:#a6e22e">abstractpattern</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pizzastore</span><span style="color:#f92672">.</span><span style="color:#a6e22e">PizzaStore</span> chicagoPizzaStore <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> factory<span style="color:#f92672">.</span><span style="color:#a6e22e">abstractpattern</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pizzastore</span><span style="color:#f92672">.</span><span style="color:#a6e22e">CHIPizzaStore</span><span style="color:#f92672">();</span>
+        factory<span style="color:#f92672">.</span><span style="color:#a6e22e">abstractpattern</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pizza</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Pizza</span> nyCheesePizza <span style="color:#f92672">=</span> nyPizzaStore<span style="color:#f92672">.</span><span style="color:#a6e22e">orderPizza</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;cheese&#34;</span><span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>nyCheesePizza<span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;================================&#34;</span><span style="color:#f92672">);</span>
+        factory<span style="color:#f92672">.</span><span style="color:#a6e22e">abstractpattern</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pizza</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Pizza</span> clamCheesePizza <span style="color:#f92672">=</span> chicagoPizzaStore<span style="color:#f92672">.</span><span style="color:#a6e22e">orderPizza</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;clam&#34;</span><span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>clamCheesePizza<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span></code></pre></div>
 <p><strong>控制台输出:</strong></p>
 
 <pre><code>Baking Pizza
@@ -717,185 +746,101 @@ Pizza{name='CHIClamPizza', sauce=Sauce{name='CHISauceIngredient'}, dough=Dough{n
 <p><strong>抽象工厂模式提供一个接口,用于创建相关或依赖对象的家族,而不需要明确指定具体类</strong></p>
 
 <p>抽象工厂允许客户使用抽象的接口创建一组相关的产品,而不需要知道实际产出的具体产品是什么.这样一来,客户就从具体的产品中被解耦.</p>
-
-                        </div>
-
-                        
-
-
-                        
-
-<div class="post-archive">
-    <h2>See Also</h2>
-    <ul class="listing">
-        
-        <li><a href="/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/">装饰者模式</a></li>
-        
-        <li><a href="/post/2-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">观察者模式</a></li>
-        
-        <li><a href="/post/1-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">策略模式</a></li>
-        
-        <li><a href="/about/">About</a></li>
-        
-        <li><a href="/archives/">博客</a></li>
-        
-    </ul>
-</div>
-
-
-                        <div class="post-meta meta-tags">
-                            
-                            <ul class="clearfix">
-                                
-                                <li><a href="https://wangjc95.com/tags/head-first-design-patterns%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">head first design patterns读书笔记</a></li>
-                                
-                            </ul>
-                            
-                        </div>
-                    </article>
-                    
-    
-
-    
-    
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "Alex-2017/comment"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
-    
-                </div>
-            </div>
-            <div id="secondary">
-    <section class="widget">
-        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+</article>
+    <footer class="post-footer">
       
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://wangjc95.com">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">代理模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/12-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" title="状态模式">状态模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/11-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" title="组合模式">组合模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/10-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式">迭代器模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/9-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" title="模版方法模式">模版方法模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/8-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" title="外观模式">外观模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/7-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="适配器模式">适配器模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/6-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="命令模式">命令模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">单例模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" title="工厂模式">工厂模式</a>
-    </li>
-    
-</ul>
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title">分类</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">java设计模式(13)</a>
-    </li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title">标签</h3>
-<div class="tagcloud">
-    
-    <a href="https://wangjc95.com/tags/head-first-design-patterns%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">head-first-design-patterns读书笔记</a>
-    
-</div>
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://wangjc95.com/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
-</div>
-        </div>
-    </div>
-</div>
-<footer id="footer">
-    <div class="container">
-        &copy; 2019 <a href="https://wangjc95.com">Alex的博客 By Alex</a>.
-        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
-        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+      <ul class="post-tags">
         
-    </div>
+          <li><a href="/tags/head-first-design-patterns%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0"><span class="tag">Head First Design Patterns读书笔记</span></a></li>
+        
+          <li><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="tag">设计模式</span></a></li>
+        
+      </ul>
+      
+      
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "http-wangjc95-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2019 BaseC的博客</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
 </footer>
 
 
-    <script type="text/javascript">
-    
-    (function(){
-        $("pre code").parent().addClass("line-numbers")
-    }())
-
-    window.MathJax = {
-        tex2jax: {
-            inlineMath: [ ['$','$'] ],
-            processEscapes: true
-        }
-    };
-    </script>
-    <script type="text/javascript" src="/js/prism.js" async="true"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
 
 
 
-<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
 
 
 
 
-</body>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+  </body>
 </html>

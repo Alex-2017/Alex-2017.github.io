@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Javase on Alex的博客</title>
+    <link>https://wangjc95.com/categories/javase/</link>
+    <description>Recent content in Javase on Alex的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 25 May 2019 23:02:48 +0800</lastBuildDate>
+    
+	<atom:link href="https://wangjc95.com/categories/javase/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java集合</title>
+      <link>https://wangjc95.com/post/1-java%E9%9B%86%E5%90%88/</link>
+      <pubDate>Sat, 25 May 2019 23:02:48 +0800</pubDate>
+      
+      <guid>https://wangjc95.com/post/1-java%E9%9B%86%E5%90%88/</guid>
+      <description>[TOC]
+1.Collection和Iterator接口 1.1Iterator Iterator接口也是Java集合框架的成员,但它与Collection系列,Map系列的集合不一样:Collection系列集合,Map系列集合主要用于装其他对象,而Iterator则主要用于遍历(即迭代访问)Collection集合中的元素,Iterator对象也被称为迭代器.
+示例代码:
+@Test public void test5() { List&amp;lt;String&amp;gt; list = new ArrayList&amp;lt;&amp;gt;(Arrays.</description>
+    </item>
+    
+    <item>
+      <title>Java集合</title>
+      <link>https://wangjc95.com/post/14-java%E9%9B%86%E5%90%88/</link>
+      <pubDate>Sat, 25 May 2019 23:02:48 +0800</pubDate>
+      
+      <guid>https://wangjc95.com/post/14-java%E9%9B%86%E5%90%88/</guid>
+      <description>[TOC]
+1.Collection和Iterator接口 1.1Iterator Iterator接口也是Java集合框架的成员,但它与Collection系列,Map系列的集合不一样:Collection系列集合,Map系列集合主要用于装其他对象,而Iterator则主要用于遍历(即迭代访问)Collection集合中的元素,Iterator对象也被称为迭代器.
+示例代码:
+@Test public void test5() { List&amp;lt;String&amp;gt; list = new ArrayList&amp;lt;&amp;gt;(Arrays.</description>
+    </item>
+    
+  </channel>
+</rss>

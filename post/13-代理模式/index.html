@@ -1,97 +1,208 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 
-    <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.53" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
 
-    <title>代理模式 | Alex的博客</title>
-    <meta property="og:title" content="代理模式 - Alex的博客">
-    <meta property="og:type" content="article">
-        
-    <meta property="article:published_time" content="2019-03-30T19:26:00&#43;08:00">
-        
-        
-    <meta property="article:modified_time" content="2019-03-30T19:26:00&#43;08:00">
-        
-    <meta name="Keywords" content="Java,设计模式">
-    <meta name="description" content="代理模式">
-        <meta name="author" content="Alex">
-        
-    <meta property="og:url" content="https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  
+  <title>代理模式</title>
 
-    <link rel="stylesheet" href="/css/normalize.css">
-    
-        <link rel="stylesheet" href="/css/prism.css">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
+  
 
-    
+  
+
+  
+  
+  <meta name="description" content="介绍: 这是阅读head first design patterns的阅读笔记.
+1.代理模式 1.1定义 代理模式为另一个对象提供一个替身或占位符以访问这个对象.
+1.2特点  代理模式为另一个对象提供代表,以便控制客户对对象的访问,管理访问的方式有许多种.">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="代理模式">
+    <meta name="twitter:description" content="介绍: 这是阅读head first design patterns的阅读笔记.
+1.代理模式 1.1定义 代理模式为另一个对象提供一个替身或占位符以访问这个对象.
+1.2特点  代理模式为另一个对象提供代表,以便控制客户对对象的访问,管理访问的方式有许多种.">
+    <meta name="twitter:image" content="/images/avatar.png">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="代理模式">
+  <meta property="og:description" content="介绍: 这是阅读head first design patterns的阅读笔记.
+1.代理模式 1.1定义 代理模式为另一个对象提供一个替身或占位符以访问这个对象.
+1.2特点  代理模式为另一个对象提供代表,以便控制客户对对象的访问,管理访问的方式有许多种.">
+  <meta property="og:url" content="https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
+  <meta property="og:image" content="/images/avatar.png">
 
 
-    
-    
+
+
+<meta name="generator" content="Hugo 0.55.6">
+
+
+<link rel="canonical" href="https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+
+
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="BaseC的博客">
+<meta name="msapplication-tooltip" content="BaseC的博客">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="manifest" href="/manifest.json">
+
+
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
 </head>
-
-<body>
-<header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://wangjc95.com">
-                        Alex的博客
-                    </a>
-                
-                <p class="description">Java程序猿</p>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://wangjc95.com">首页</a>
-                    
-                    <a  href="https://wangjc95.com/archives/" title="归档">归档</a>
-                    
-                    <a  href="https://wangjc95.com/about/" title="About">About</a>
-                    
-                </nav>
-            </div>
-        </div>
+  <body>
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+	<a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
+        
+      
     </div>
+    
+    
+  <header class="site-header">
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  
+  <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
+  
+  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+           is-active">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:1017086516@qq.com" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="/images/qrcode.jpg" rel="me" title="Wechat" aria-label="Wechat">
+            <span class="icon icon-wechat" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
 </header>
 
-
-<div id="body">
-    <div class="container">
-        <div class="col-group">
-
-            <div class="col-8" id="main">
-                <div class="res-cons">
-                    <article class="post">
-                        <header>
-                            <h1 class="post-title">代理模式</h1>
-                        </header>
-                        <date class="post-meta meta-date">
-                            2019年3月30日
-                        </date>
-                        
-                        <div class="post-meta">
-                            <span>|</span>
-                            
-                                <span class="meta-category"><a href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">java设计模式</a></span>
-                            
-                        </div>
-                        
-                        
-                        <div class="post-meta">
-                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
-                        </div>
-                        
-                        <div class="post-content">
-                            
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">代理模式</h1>
+      <p class="post-meta">@BaseC · May 2, 2019 · 4 min read</p>
+    </header>
+    <article class="post-content">
 
 <p><strong>介绍:</strong> 这是阅读<code>head first design patterns</code>的阅读笔记.</p>
 
@@ -140,164 +251,146 @@
 <h2 id="2-3代码实现">2.3代码实现</h2>
 
 <p><code>GumballMachineRemote.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.remote<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package proxy.remote;
+<span style="color:#f92672">import</span> state.State<span style="color:#f92672">;</span>
 
-import state.State;
+<span style="color:#f92672">import</span> java.rmi.Remote<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.rmi.RemoteException<span style="color:#f92672">;</span>
 
-import java.rmi.Remote;
-import java.rmi.RemoteException;
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 自定义远程接口
+</span><span style="color:#75715e"> * 继承java.rmi.Remote接口
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">GumballMachineRemote</span> <span style="color:#66d9ef">extends</span> Remote <span style="color:#f92672">{</span>
 
-/**
- * 自定义远程接口
- * 继承java.rmi.Remote接口
- */
-public interface GumballMachineRemote extends Remote {
+    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getCount</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> RemoteException<span style="color:#f92672">;</span>
 
-    int getCount() throws RemoteException;
+    String <span style="color:#a6e22e">getLocation</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> RemoteException<span style="color:#f92672">;</span>
 
-    String getLocation() throws RemoteException;
-
-    State getState() throws RemoteException;
-}
-
-</code></pre>
-
+    State <span style="color:#a6e22e">getState</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> RemoteException<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>GumballMachine.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.remote<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package proxy.remote;
+<span style="color:#f92672">import</span> state.NoQuarterState<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> state.SoldOutState<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> state.State<span style="color:#f92672">;</span>
 
-import state.NoQuarterState;
-import state.SoldOutState;
-import state.State;
+<span style="color:#f92672">import</span> java.rmi.RemoteException<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.rmi.server.UnicastRemoteObject<span style="color:#f92672">;</span>
 
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 远程接口的实现:远程服务
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GumballMachine</span> <span style="color:#66d9ef">extends</span> UnicastRemoteObject <span style="color:#66d9ef">implements</span> GumballMachineRemote <span style="color:#f92672">{</span>
 
-/**
- * 远程接口的实现:远程服务
- */
-public class GumballMachine extends UnicastRemoteObject implements GumballMachineRemote {
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> count <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> String location<span style="color:#f92672">;</span>
+    <span style="color:#75715e">//State是自定义类型并且需要返回,所以需要实现或继承Serializable接口
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> State state <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SoldOutState<span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
 
-    private int count = 0;
-    private String location;
-    //State是自定义类型并且需要返回,所以需要实现或继承Serializable接口
-    private State state = new SoldOutState(null);
+    <span style="color:#75715e">//由于继承了UnicastRemoteObject需要抛出RemoteException
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">GumballMachine</span><span style="color:#f92672">(</span>String location<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> count<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> RemoteException <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">location</span> <span style="color:#f92672">=</span> location<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">count</span> <span style="color:#f92672">=</span> count<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>count <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            state <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NoQuarterState<span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
 
-    //由于继承了UnicastRemoteObject需要抛出RemoteException
-    public GumballMachine(String location, int count) throws RemoteException {
-        this.location = location;
-        this.count = count;
-        if (count &gt; 0) {
-            state = new NoQuarterState(null);
-        }
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getCount</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> count<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    @Override
-    public int getCount() {
-        return count;
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getLocation</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> location<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    @Override
-    public String getLocation() {
-        return location;
-    }
-
-    @Override
-    public State getState() {
-        return state;
-    }
-}
-</code></pre>
-
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> State <span style="color:#a6e22e">getState</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> state<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>GumballMonitor.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.remote<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package proxy.remote;
+<span style="color:#f92672">import</span> java.rmi.RemoteException<span style="color:#f92672">;</span>
 
-import java.rmi.RemoteException;
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 糖果监视器
+</span><span style="color:#75715e"> * 输出糖果机的相关信息
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GumballMonitor</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> GumballMachineRemote remote<span style="color:#f92672">;</span>
 
-/**
- * 糖果监视器
- * 输出糖果机的相关信息
- */
-public class GumballMonitor {
-    private GumballMachineRemote remote;
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">GumballMonitor</span><span style="color:#f92672">(</span>GumballMachineRemote remote<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">remote</span> <span style="color:#f92672">=</span> remote<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    public GumballMonitor(GumballMachineRemote remote) {
-        this.remote = remote;
-    }
-
-    public void report() {
-        try {
-            System.out.println(&quot;GumballMachine Location:&quot;+remote.getLocation());
-            System.out.println(&quot;GumballMachine Count:&quot;+remote.getCount());
-            System.out.println(&quot;GumballMachine State:&quot;+remote.getState());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }
-}
-
-</code></pre>
-
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">report</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;GumballMachine Location:&#34;</span><span style="color:#f92672">+</span>remote<span style="color:#f92672">.</span><span style="color:#a6e22e">getLocation</span><span style="color:#f92672">());</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;GumballMachine Count:&#34;</span><span style="color:#f92672">+</span>remote<span style="color:#f92672">.</span><span style="color:#a6e22e">getCount</span><span style="color:#f92672">());</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;GumballMachine State:&#34;</span><span style="color:#f92672">+</span>remote<span style="color:#f92672">.</span><span style="color:#a6e22e">getState</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>RemoteException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>GumballMachineTestDrive.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.remote<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package proxy.remote;
+<span style="color:#f92672">import</span> java.rmi.registry.LocateRegistry<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.rmi.registry.Registry<span style="color:#f92672">;</span>
 
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 将糖果机(GumballMachineRemote)注册到RMI中
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GumballMachineTestDrive</span> <span style="color:#f92672">{</span>
 
-/**
- * 将糖果机(GumballMachineRemote)注册到RMI中
- */
-public class GumballMachineTestDrive {
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            GumballMachineRemote machine1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GumballMachine<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;machine1&#34;</span><span style="color:#f92672">,</span> 5<span style="color:#f92672">);</span>
+            GumballMachineRemote machine2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GumballMachine<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;machine2&#34;</span><span style="color:#f92672">,</span> 10<span style="color:#f92672">);</span>
+            GumballMachineRemote machine3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GumballMachine<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;machine3&#34;</span><span style="color:#f92672">,</span> 15<span style="color:#f92672">);</span>
+            Registry registry <span style="color:#f92672">=</span> LocateRegistry<span style="color:#f92672">.</span><span style="color:#a6e22e">createRegistry</span><span style="color:#f92672">(</span>8888<span style="color:#f92672">);</span>
+            registry<span style="color:#f92672">.</span><span style="color:#a6e22e">bind</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;machine1&#34;</span><span style="color:#f92672">,</span>machine1<span style="color:#f92672">);</span>
+            registry<span style="color:#f92672">.</span><span style="color:#a6e22e">bind</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;machine2&#34;</span><span style="color:#f92672">,</span>machine2<span style="color:#f92672">);</span>
+            registry<span style="color:#f92672">.</span><span style="color:#a6e22e">bind</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;machine3&#34;</span><span style="color:#f92672">,</span>machine3<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception  e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
 
-    public static void main(String[] args) {
-        try {
-            GumballMachineRemote machine1 = new GumballMachine(&quot;machine1&quot;, 5);
-            GumballMachineRemote machine2 = new GumballMachine(&quot;machine2&quot;, 10);
-            GumballMachineRemote machine3 = new GumballMachine(&quot;machine3&quot;, 15);
-            Registry registry = LocateRegistry.createRegistry(8888);
-            registry.bind(&quot;machine1&quot;,machine1);
-            registry.bind(&quot;machine2&quot;,machine2);
-            registry.bind(&quot;machine3&quot;,machine3);
-        } catch (Exception  e) {
-            e.printStackTrace();
-        }
-    }
-
-}
-
-</code></pre>
-
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>GumballMonitorTestDrive.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.remote<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package proxy.remote;
+<span style="color:#f92672">import</span> java.rmi.registry.LocateRegistry<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.rmi.registry.Registry<span style="color:#f92672">;</span>
 
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-
-/**
- * 从RMI中获取糖果机(GumballMachineRemote)
- */
-public class GumballMonitorTestDrive {
-    public static void main(String[] args) {
-        try {
-            //因为是在本地运行的,所以是localhost
-            Registry registry = LocateRegistry.getRegistry(&quot;localhost&quot;, 8888);
-            String[] names = {&quot;machine1&quot;, &quot;machine2&quot;,&quot;machine3&quot;};
-            for (String name : names) {
-                GumballMachineRemote machineRemote = (GumballMachineRemote)registry.lookup(name);
-                GumballMonitor monitor = new GumballMonitor(machineRemote);
-                monitor.report();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
-</code></pre>
-
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 从RMI中获取糖果机(GumballMachineRemote)
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GumballMonitorTestDrive</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//因为是在本地运行的,所以是localhost
+</span><span style="color:#75715e"></span>            Registry registry <span style="color:#f92672">=</span> LocateRegistry<span style="color:#f92672">.</span><span style="color:#a6e22e">getRegistry</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;localhost&#34;</span><span style="color:#f92672">,</span> 8888<span style="color:#f92672">);</span>
+            String<span style="color:#f92672">[]</span> names <span style="color:#f92672">=</span> <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;machine1&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;machine2&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;machine3&#34;</span><span style="color:#f92672">};</span>
+            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>String name <span style="color:#f92672">:</span> names<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                GumballMachineRemote machineRemote <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>GumballMachineRemote<span style="color:#f92672">)</span>registry<span style="color:#f92672">.</span><span style="color:#a6e22e">lookup</span><span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
+                GumballMonitor monitor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GumballMonitor<span style="color:#f92672">(</span>machineRemote<span style="color:#f92672">);</span>
+                monitor<span style="color:#f92672">.</span><span style="color:#a6e22e">report</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p>先执行<code>GumballMachineTestDrive</code>的<code>main</code>方法,然后再执行<code>GumballMonitorTestDrive</code>的<code>main</code>方法.<strong>控制台输出:</strong></p>
 
 <pre><code>GumballMachine Location:machine1
@@ -330,238 +423,218 @@ GumballMachine State:NoQuarterState{}
 <h2 id="3-3代码实现">3.3代码实现</h2>
 
 <p><code>PersonBean.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.protect<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package proxy.protect;
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 个人信息接口
+</span><span style="color:#75715e"> * 封装了获取和设置用户信息的接口
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">PersonBean</span> <span style="color:#f92672">{</span>
+    String <span style="color:#a6e22e">getName</span><span style="color:#f92672">();</span>
 
-/**
- * 个人信息接口
- * 封装了获取和设置用户信息的接口
- */
-public interface PersonBean {
-    String getName();
+    String <span style="color:#a6e22e">getGender</span><span style="color:#f92672">();</span>
 
-    String getGender();
+    String <span style="color:#a6e22e">getInterests</span><span style="color:#f92672">();</span>
 
-    String getInterests();
+    <span style="color:#75715e">//获取魅力值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getHotOrNotRating</span><span style="color:#f92672">();</span>
 
-    //获取魅力值
-    int getHotOrNotRating();
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setName</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">);</span>
 
-    void setName(String name);
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setGender</span><span style="color:#f92672">(</span>String gender<span style="color:#f92672">);</span>
 
-    void setGender(String gender);
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setInterests</span><span style="color:#f92672">(</span>String interests<span style="color:#f92672">);</span>
 
-    void setInterests(String interests);
-
-    //设置魅力值
-    void setHotOrNotRating(int hotOrNotRating);
-}
-
-</code></pre>
-
+    <span style="color:#75715e">//设置魅力值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setHotOrNotRating</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> hotOrNotRating<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>PersonBeanImpl.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.protect<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package proxy.protect;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PersonBeanImpl</span> <span style="color:#66d9ef">implements</span> PersonBean <span style="color:#f92672">{</span>
+    <span style="color:#75715e">//名称
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> String name<span style="color:#f92672">;</span>
+    <span style="color:#75715e">//性别
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> String gender<span style="color:#f92672">;</span>
+    <span style="color:#75715e">//兴趣
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> String interests<span style="color:#f92672">;</span>
+    <span style="color:#75715e">//魅力值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> hotOrNotRating<span style="color:#f92672">;</span>
+    <span style="color:#75715e">//用于计算魅力值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> ratingCount <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
 
-public class PersonBeanImpl implements PersonBean {
-    //名称
-    private String name;
-    //性别
-    private String gender;
-    //兴趣
-    private String interests;
-    //魅力值
-    private int hotOrNotRating;
-    //用于计算魅力值
-    private int ratingCount = 0;
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> name<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    @Override
-    public String getName() {
-        return name;
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getGender</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> gender<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    @Override
-    public String getGender() {
-        return gender;
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getInterests</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> interests<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    @Override
-    public String getInterests() {
-        return interests;
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getHotOrNotRating</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>ratingCount <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> hotOrNotRating <span style="color:#f92672">/</span> ratingCount<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
 
-    @Override
-    public int getHotOrNotRating() {
-        if (ratingCount == 0) {
-            return 0;
-        } else {
-            return hotOrNotRating / ratingCount;
-        }
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setName</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setGender</span><span style="color:#f92672">(</span>String gender<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">gender</span> <span style="color:#f92672">=</span> gender<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    @Override
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setInterests</span><span style="color:#f92672">(</span>String interests<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">interests</span> <span style="color:#f92672">=</span> interests<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    @Override
-    public void setInterests(String interests) {
-        this.interests = interests;
-    }
-
-    @Override
-    public void setHotOrNotRating(int hotOrNotRating) {
-        this.hotOrNotRating += hotOrNotRating;
-        ratingCount += 1;
-    }
-}
-
-</code></pre>
-
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setHotOrNotRating</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> hotOrNotRating<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">hotOrNotRating</span> <span style="color:#f92672">+=</span> hotOrNotRating<span style="color:#f92672">;</span>
+        ratingCount <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>OwnerInvocationHandler.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.protect<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package proxy.protect;
+<span style="color:#f92672">import</span> java.lang.reflect.InvocationHandler<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.lang.reflect.InvocationTargetException<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.lang.reflect.Method<span style="color:#f92672">;</span>
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 实现所有者的调用处理器
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OwnerInvocationHandler</span> <span style="color:#66d9ef">implements</span> InvocationHandler <span style="color:#f92672">{</span>
 
-/**
- * 实现所有者的调用处理器
- */
-public class OwnerInvocationHandler implements InvocationHandler {
+    <span style="color:#75715e">//将personBean注入进来
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> PersonBean personBean<span style="color:#f92672">;</span>
 
-    //将personBean注入进来
-    private PersonBean personBean;
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">OwnerInvocationHandler</span><span style="color:#f92672">(</span>PersonBean personBean<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">personBean</span> <span style="color:#f92672">=</span> personBean<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    public OwnerInvocationHandler(PersonBean personBean) {
-        this.personBean = personBean;
-    }
-
-    //控制personBean方法的访问
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws IllegalAccessException {
-        try {
-            //用户如果访问setHotOrNotRating方法,抛出异常!
-            if (method.getName().equals(&quot;setHotOrNotRating&quot;)) {
-                throw new IllegalAccessException();
-            } else {
-                return method.invoke(personBean, args);
-            }
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-}
-
-</code></pre>
-
+    <span style="color:#75715e">//控制personBean方法的访问
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> Object <span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>Object proxy<span style="color:#f92672">,</span> Method method<span style="color:#f92672">,</span> Object<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IllegalAccessException <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//用户如果访问setHotOrNotRating方法,抛出异常!
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>method<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">().</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;setHotOrNotRating&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalAccessException<span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">return</span> method<span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>personBean<span style="color:#f92672">,</span> args<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InvocationTargetException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><code>NonOwnerInvocationHandler.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.protect<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package proxy.protect;
+<span style="color:#f92672">import</span> java.lang.reflect.InvocationHandler<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.lang.reflect.InvocationTargetException<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.lang.reflect.Method<span style="color:#f92672">;</span>
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 实现非所有者的调用处理器
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NonOwnerInvocationHandler</span> <span style="color:#66d9ef">implements</span> InvocationHandler <span style="color:#f92672">{</span>
 
-/**
- * 实现非所有者的调用处理器
- */
-public class NonOwnerInvocationHandler implements InvocationHandler {
+    <span style="color:#66d9ef">private</span> PersonBean personBean<span style="color:#f92672">;</span>
 
-    private PersonBean personBean;
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">NonOwnerInvocationHandler</span><span style="color:#f92672">(</span>PersonBean personBean<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">personBean</span> <span style="color:#f92672">=</span> personBean<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    public NonOwnerInvocationHandler(PersonBean personBean) {
-        this.personBean = personBean;
-    }
-
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws IllegalAccessException {
-        String name = method.getName();
-        //PersonBean中set开头的方法,用户只能执行setHotOrNotRating方法
-        try {
-            //拦截方法时,要注意!别把默认方法拦截了.比如Object中的toString()方法
-            if (name.startsWith(&quot;set&quot;) &amp;&amp; !name.equals(&quot;setHotOrNotRating&quot;)) {
-                throw new IllegalAccessException();
-            } else {
-                return method.invoke(personBean, args);
-            }
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-}
-
-</code></pre>
-
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> Object <span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>Object proxy<span style="color:#f92672">,</span> Method method<span style="color:#f92672">,</span> Object<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IllegalAccessException <span style="color:#f92672">{</span>
+        String name <span style="color:#f92672">=</span> method<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">();</span>
+        <span style="color:#75715e">//PersonBean中set开头的方法,用户只能执行setHotOrNotRating方法
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//拦截方法时,要注意!别把默认方法拦截了.比如Object中的toString()方法
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">startsWith</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;set&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;setHotOrNotRating&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalAccessException<span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">return</span> method<span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>personBean<span style="color:#f92672">,</span> args<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InvocationTargetException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><strong>测试代码:</strong><code>MatchMakingTestDrive.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.protect<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package proxy.protect;
+<span style="color:#f92672">import</span> java.lang.reflect.InvocationHandler<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.lang.reflect.Proxy<span style="color:#f92672">;</span>
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Proxy;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MatchMakingTestDrive</span> <span style="color:#f92672">{</span>
 
-public class MatchMakingTestDrive {
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        MatchMakingTestDrive testDrive <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MatchMakingTestDrive<span style="color:#f92672">();</span>
+        testDrive<span style="color:#f92672">.</span><span style="color:#a6e22e">drive</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
 
-    public static void main(String[] args) {
-        MatchMakingTestDrive testDrive = new MatchMakingTestDrive();
-        testDrive.drive();
-    }
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drive</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//初始化个人信息对象
+</span><span style="color:#75715e"></span>        PersonBean personBean <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PersonBeanImpl<span style="color:#f92672">();</span>
+        personBean<span style="color:#f92672">.</span><span style="color:#a6e22e">setName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Alex&#34;</span><span style="color:#f92672">);</span>
+        personBean<span style="color:#f92672">.</span><span style="color:#a6e22e">setGender</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Man&#34;</span><span style="color:#f92672">);</span>
+        personBean<span style="color:#f92672">.</span><span style="color:#a6e22e">setInterests</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Game,Movie&#34;</span><span style="color:#f92672">);</span>
+        personBean<span style="color:#f92672">.</span><span style="color:#a6e22e">setHotOrNotRating</span><span style="color:#f92672">(</span>6<span style="color:#f92672">);</span>
+        printPerson<span style="color:#f92672">(</span>personBean<span style="color:#f92672">);</span>
 
-    private void drive() {
-        //初始化个人信息对象
-        PersonBean personBean = new PersonBeanImpl();
-        personBean.setName(&quot;Alex&quot;);
-        personBean.setGender(&quot;Man&quot;);
-        personBean.setInterests(&quot;Game,Movie&quot;);
-        personBean.setHotOrNotRating(6);
-        printPerson(personBean);
+        <span style="color:#75715e">//创建所有者的调用处理器
+</span><span style="color:#75715e"></span>        OwnerInvocationHandler ownerHandler <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> OwnerInvocationHandler<span style="color:#f92672">(</span>personBean<span style="color:#f92672">);</span>
+        <span style="color:#75715e">//获取所有者代理对象
+</span><span style="color:#75715e"></span>        PersonBean ownerPerson <span style="color:#f92672">=</span> getProxy<span style="color:#f92672">(</span>personBean<span style="color:#f92672">,</span> ownerHandler<span style="color:#f92672">);</span>
+        ownerPerson<span style="color:#f92672">.</span><span style="color:#a6e22e">setInterests</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Run,Exercise&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            ownerPerson<span style="color:#f92672">.</span><span style="color:#a6e22e">setHotOrNotRating</span><span style="color:#f92672">(</span>10<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;所有者不可以设置自己的hotOrNotRating&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        printPerson<span style="color:#f92672">(</span>personBean<span style="color:#f92672">);</span>
 
-        //创建所有者的调用处理器
-        OwnerInvocationHandler ownerHandler = new OwnerInvocationHandler(personBean);
-        //获取所有者代理对象
-        PersonBean ownerPerson = getProxy(personBean, ownerHandler);
-        ownerPerson.setInterests(&quot;Run,Exercise&quot;);
-        try {
-            ownerPerson.setHotOrNotRating(10);
-        } catch (Exception e) {
-            System.out.println(&quot;所有者不可以设置自己的hotOrNotRating&quot;);
-        }
-        printPerson(personBean);
+        <span style="color:#75715e">//创建非所有者的调用处理器
+</span><span style="color:#75715e"></span>        NonOwnerInvocationHandler nonOwnerHandler <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NonOwnerInvocationHandler<span style="color:#f92672">(</span>personBean<span style="color:#f92672">);</span>
+        <span style="color:#75715e">//获取非所有者代理对象
+</span><span style="color:#75715e"></span>        PersonBean nonOwnerPerson <span style="color:#f92672">=</span> getProxy<span style="color:#f92672">(</span>ownerPerson<span style="color:#f92672">,</span> nonOwnerHandler<span style="color:#f92672">);</span>
+        nonOwnerPerson<span style="color:#f92672">.</span><span style="color:#a6e22e">setHotOrNotRating</span><span style="color:#f92672">(</span>2<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            nonOwnerPerson<span style="color:#f92672">.</span><span style="color:#a6e22e">setInterests</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Smoking&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;非所有者只能设置别人的hotOrNotRating&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        printPerson<span style="color:#f92672">(</span>personBean<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
 
-        //创建非所有者的调用处理器
-        NonOwnerInvocationHandler nonOwnerHandler = new NonOwnerInvocationHandler(personBean);
-        //获取非所有者代理对象
-        PersonBean nonOwnerPerson = getProxy(ownerPerson, nonOwnerHandler);
-        nonOwnerPerson.setHotOrNotRating(2);
-        try {
-            nonOwnerPerson.setInterests(&quot;Smoking&quot;);
-        } catch (Exception e) {
-            System.out.println(&quot;非所有者只能设置别人的hotOrNotRating&quot;);
-        }
-        printPerson(personBean);
-    }
+    <span style="color:#75715e">//获取代理对象
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> PersonBean <span style="color:#a6e22e">getProxy</span><span style="color:#f92672">(</span>PersonBean personBean<span style="color:#f92672">,</span> InvocationHandler handler<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>PersonBean<span style="color:#f92672">)</span> Proxy<span style="color:#f92672">.</span><span style="color:#a6e22e">newProxyInstance</span><span style="color:#f92672">(</span>personBean<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">(),</span> personBean<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getInterfaces</span><span style="color:#f92672">(),</span> handler<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
 
-    //获取代理对象
-    private PersonBean getProxy(PersonBean personBean, InvocationHandler handler) {
-        return (PersonBean) Proxy.newProxyInstance(personBean.getClass().getClassLoader(), personBean.getClass().getInterfaces(), handler);
-    }
-
-    //输出个人信息
-    private void printPerson(PersonBean person) {
-        System.out.println(String.format(&quot;Person[name = %s,gender = %s,interests = %s,hotOrNotRating is %d]&quot;, person.getName(), person.getGender(), person.getInterests(), person.getHotOrNotRating()));
-    }
-}
-
-</code></pre>
-
+    <span style="color:#75715e">//输出个人信息
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printPerson</span><span style="color:#f92672">(</span>PersonBean person<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>String<span style="color:#f92672">.</span><span style="color:#a6e22e">format</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Person[name = %s,gender = %s,interests = %s,hotOrNotRating is %d]&#34;</span><span style="color:#f92672">,</span> person<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(),</span> person<span style="color:#f92672">.</span><span style="color:#a6e22e">getGender</span><span style="color:#f92672">(),</span> person<span style="color:#f92672">.</span><span style="color:#a6e22e">getInterests</span><span style="color:#f92672">(),</span> person<span style="color:#f92672">.</span><span style="color:#a6e22e">getHotOrNotRating</span><span style="color:#f92672">()));</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p><strong>控制台输出:</strong></p>
 
 <pre><code>Person[name = Alex,gender = Man,interests = Game,Movie,hotOrNotRating is 6]
@@ -576,185 +649,101 @@ Person[name = Alex,gender = Man,interests = Run,Exercise,hotOrNotRating is 4]
 <p><code>Java</code>在<code>java.lang.reflect</code>包中有自己的代理支持,利用这个包我们可以在运行时动态地创建一个代理类,实现一个或多个接口,并将方法的调用转发到你所指定的类.因为实际的代理类是在运行时创建的,我们称这个<code>Java</code>技术为:动态代理.</p>
 
 <p><strong>保护代理</strong>就是基于动态代理实现的.</p>
-
-                        </div>
-
-                        
-
-
-                        
-
-<div class="post-archive">
-    <h2>See Also</h2>
-    <ul class="listing">
-        
-        <li><a href="/post/12-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">状态模式</a></li>
-        
-        <li><a href="/post/11-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">组合模式</a></li>
-        
-        <li><a href="/post/10-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">迭代器模式</a></li>
-        
-        <li><a href="/post/9-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">模版方法模式</a></li>
-        
-        <li><a href="/post/8-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">外观模式</a></li>
-        
-    </ul>
-</div>
-
-
-                        <div class="post-meta meta-tags">
-                            
-                            <ul class="clearfix">
-                                
-                                <li><a href="https://wangjc95.com/tags/head-first-design-patterns%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">head first design patterns读书笔记</a></li>
-                                
-                            </ul>
-                            
-                        </div>
-                    </article>
-                    
-    
-
-    
-    
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "Alex-2017/comment"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
-    
-                </div>
-            </div>
-            <div id="secondary">
-    <section class="widget">
-        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+</article>
+    <footer class="post-footer">
       
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://wangjc95.com">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">代理模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/12-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" title="状态模式">状态模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/11-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" title="组合模式">组合模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/10-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式">迭代器模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/9-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" title="模版方法模式">模版方法模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/8-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" title="外观模式">外观模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/7-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="适配器模式">适配器模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/6-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="命令模式">命令模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">单例模式</a>
-    </li>
-    
-    <li>
-        <a href="https://wangjc95.com/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" title="工厂模式">工厂模式</a>
-    </li>
-    
-</ul>
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title">分类</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://wangjc95.com/categories/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">java设计模式(13)</a>
-    </li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title">标签</h3>
-<div class="tagcloud">
-    
-    <a href="https://wangjc95.com/tags/head-first-design-patterns%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">head-first-design-patterns读书笔记</a>
-    
-</div>
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://wangjc95.com/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
-</div>
-        </div>
-    </div>
-</div>
-<footer id="footer">
-    <div class="container">
-        &copy; 2019 <a href="https://wangjc95.com">Alex的博客 By Alex</a>.
-        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
-        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+      <ul class="post-tags">
         
-    </div>
+          <li><a href="/tags/head-first-design-patterns%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0"><span class="tag">Head First Design Patterns读书笔记</span></a></li>
+        
+          <li><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="tag">设计模式</span></a></li>
+        
+      </ul>
+      
+      
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "http-wangjc95-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2019 BaseC的博客</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
 </footer>
 
 
-    <script type="text/javascript">
-    
-    (function(){
-        $("pre code").parent().addClass("line-numbers")
-    }())
-
-    window.MathJax = {
-        tex2jax: {
-            inlineMath: [ ['$','$'] ],
-            processEscapes: true
-        }
-    };
-    </script>
-    <script type="text/javascript" src="/js/prism.js" async="true"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
 
 
 
-<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
 
 
 
 
-</body>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+  </body>
 </html>
