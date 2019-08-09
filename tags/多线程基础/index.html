@@ -6,7 +6,7 @@
 
   
   <title>
-  Tag → javaSE
+  Tag → 多线程基础
   
    | BaseC的博客
 </title>
@@ -43,7 +43,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="BaseC的博客">
   
-  <meta property="og:url" content="https://wangjc95.com/tags/javase/">
+  <meta property="og:url" content="https://wangjc95.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/">
   <meta property="og:image" content="/images/avatar.png">
 
 
@@ -52,8 +52,8 @@
 <meta name="generator" content="Hugo 0.55.6">
 
 
-<link rel="canonical" href="https://wangjc95.com/tags/javase/">
-<link rel="alternate" type="application/rss+xml" href="https://wangjc95.com/tags/javase/index.xml" title="BaseC的博客">
+<link rel="canonical" href="https://wangjc95.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/">
+<link rel="alternate" type="application/rss+xml" href="https://wangjc95.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/index.xml" title="BaseC的博客">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -195,32 +195,18 @@
       
         <article class="post-entry">
   <header class="post-header">
-    <h3 class="post-title"><a href="https://wangjc95.com/post/15-annotation/" class="post-link">Annotation</a></h3>
-    <p class="post-meta">@BaseC · Jun 15, 2019 · 4 min read</p>
+    <h3 class="post-title"><a href="https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-link">线程的基本概念</a></h3>
+    <p class="post-meta">@BaseC · Aug 9, 2019 · 9 min read</p>
   </header>
   
-  <p class="post-summary">介绍: 这是疯狂Java讲义第三版阅读笔记.
-1.JDK的元Annotation 1.1@Retention @Retention只能用于修饰Annotation定义,用于指定被修饰的Annotation可以保留多长时间.@Retention包含一个RetentionPolicy类型的value成员变量,所以使用@Retention时必须为该value成员变量指定值.
-value成员变量的值只能是如下三个:
- RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.</p>
+  <p class="post-summary">介绍: 这是Java多线程编程核心技术阅读笔记
+1.进程与线程 进程:以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
+线程:在进程中独立运行的子任务.
+一个进程在运行时至少会有一个线程在运行.
+2.多线程的创建方式 在Java中,多线程有三种创建方式,分别是:
+ 继承Thread类 实现Runnable接口 FutureTask方式创建  2.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://wangjc95.com/post/15-annotation/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://wangjc95.com/post/14-java%E9%9B%86%E5%90%88/" class="post-link">Java集合</a></h3>
-    <p class="post-meta">@BaseC · Jun 7, 2019 · 8 min read</p>
-  </header>
-  
-  <p class="post-summary">介绍: 这是疯狂Java讲义第三版阅读笔记.
-1.Collection和Iterator接口 1.1Iterator Iterator接口也是Java集合框架的成员,但它与Collection系列,Map系列的集合不一样:Collection系列集合,Map系列集合主要用于装其他对象,而Iterator则主要用于遍历(即迭代访问)Collection集合中的元素,Iterator对象也被称为迭代器.
-示例代码:
-@Test public void test5() { List&lt;String&gt; list = new ArrayList&lt;&gt;(Arrays.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://wangjc95.com/post/14-java%E9%9B%86%E5%90%88/">Read More →</a>
+    <a class="read-more" href="https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">Read More →</a>
   </footer>
 </article>
 

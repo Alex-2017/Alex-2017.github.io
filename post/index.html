@@ -194,13 +194,32 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-link">线程的基本概念</a></h3>
+    <p class="post-meta">@BaseC · Aug 9, 2019 · 9 min read</p>
+  </header>
+  
+  <p class="post-summary">介绍: 这是Java多线程编程核心技术阅读笔记
+1.进程与线程 进程:以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
+线程:在进程中独立运行的子任务.
+一个进程在运行时至少会有一个线程在运行.
+2.多线程的创建方式 在Java中,多线程有三种创建方式,分别是:
+ 继承Thread类 实现Runnable接口 FutureTask方式创建  2.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://wangjc95.com/post/15-annotation/" class="post-link">Annotation</a></h3>
     <p class="post-meta">@BaseC · Jun 15, 2019 · 4 min read</p>
   </header>
   
-  <p class="post-summary">1.JDK的元Annotation 1.1@Retention @Retention只能用于修饰Annotation定义,用于指定被修饰的Annotation可以保留多长时间.@Retention包含一个RetentionPolicy类型的value成员变量,所以使用@Retention时必须为该value成员变量指定值.
+  <p class="post-summary">介绍: 这是疯狂Java讲义第三版阅读笔记.
+1.JDK的元Annotation 1.1@Retention @Retention只能用于修饰Annotation定义,用于指定被修饰的Annotation可以保留多长时间.@Retention包含一个RetentionPolicy类型的value成员变量,所以使用@Retention时必须为该value成员变量指定值.
 value成员变量的值只能是如下三个:
- RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.SOURCE:Annotation只能保留在源代码中,编译器直接丢弃这种Annotation.  示例代码:</p>
+ RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://wangjc95.com/post/15-annotation/">Read More →</a>
   </footer>
@@ -213,7 +232,8 @@ value成员变量的值只能是如下三个:
     <p class="post-meta">@BaseC · Jun 7, 2019 · 8 min read</p>
   </header>
   
-  <p class="post-summary">1.Collection和Iterator接口 1.1Iterator Iterator接口也是Java集合框架的成员,但它与Collection系列,Map系列的集合不一样:Collection系列集合,Map系列集合主要用于装其他对象,而Iterator则主要用于遍历(即迭代访问)Collection集合中的元素,Iterator对象也被称为迭代器.
+  <p class="post-summary">介绍: 这是疯狂Java讲义第三版阅读笔记.
+1.Collection和Iterator接口 1.1Iterator Iterator接口也是Java集合框架的成员,但它与Collection系列,Map系列的集合不一样:Collection系列集合,Map系列集合主要用于装其他对象,而Iterator则主要用于遍历(即迭代访问)Collection集合中的元素,Iterator对象也被称为迭代器.
 示例代码:
 @Test public void test5() { List&lt;String&gt; list = new ArrayList&lt;&gt;(Arrays.</p>
   <footer class="post-footer">
@@ -228,7 +248,7 @@ value成员变量的值只能是如下三个:
     <p class="post-meta">@BaseC · May 2, 2019 · 4 min read</p>
   </header>
   
-  <p class="post-summary">介绍: 这是阅读head first design patterns的阅读笔记.
+  <p class="post-summary">介绍: 这是head first design patterns阅读笔记.
 1.代理模式 1.1定义 代理模式为另一个对象提供一个替身或占位符以访问这个对象.
 1.2特点  代理模式为另一个对象提供代表,以便控制客户对对象的访问,管理访问的方式有许多种.</p>
   <footer class="post-footer">
@@ -243,7 +263,7 @@ value成员变量的值只能是如下三个:
     <p class="post-meta">@BaseC · Apr 27, 2019 · 6 min read</p>
   </header>
   
-  <p class="post-summary">介绍: 这是阅读head first design patterns的阅读笔记.
+  <p class="post-summary">介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设我们要为糖果机设置一个控制器,来控制糖果器正常运转.控制流程如下图所示.
 这张图可以这么理解:
 糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.</p>
@@ -259,7 +279,7 @@ value成员变量的值只能是如下三个:
     <p class="post-meta">@BaseC · Apr 21, 2019 · 3 min read</p>
   </header>
   
-  <p class="post-summary">介绍: 这是阅读head first design patterns的阅读笔记.
+  <p class="post-summary">介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 基于之前迭代器模式的菜单整合模式下提出了一个新的需求,餐厅要创建一份甜点菜单,并把这个菜单放到餐厅菜单中.
 新增的需求让当前的系统到达了一个复杂级别,如果现在不重新设计,就无法容纳未来增加的菜单或子菜单等需求.我们需要某种树形结构,可以容纳菜单,子菜单和菜单项,同时能够确定在每个菜单的各个项之间游走,而且至少要像现在用迭代器一样方便.
 2.解决方案 2.</p>
@@ -275,7 +295,7 @@ value成员变量的值只能是如下三个:
     <p class="post-meta">@BaseC · Apr 14, 2019 · 3 min read</p>
   </header>
   
-  <p class="post-summary">介绍: 这是阅读head first design patterns的阅读笔记.
+  <p class="post-summary">介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 有两种菜单,分别是DinerMenu和PancakeHouseMenu.将这两种菜单整合,需要一个特定的服务员类Waitress来进行整合和菜单的遍历等功能.
 MenuItem.java
 package iterator; import lombok.</p>
@@ -291,7 +311,7 @@ package iterator; import lombok.</p>
     <p class="post-meta">@BaseC · Apr 10, 2019 · 3 min read</p>
   </header>
   
-  <p class="post-summary">介绍: 这是阅读head first design patterns的阅读笔记.
+  <p class="post-summary">介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设当前有两种咖啡因饮料,分别是茶和咖啡.
 茶的制作方法是:
  把水煮沸 用沸水浸泡茶叶 把茶倒进杯子 加柠檬  咖啡的制作方法:</p>
@@ -307,7 +327,7 @@ package iterator; import lombok.</p>
     <p class="post-meta">@BaseC · Apr 4, 2019 · 2 min read</p>
   </header>
   
-  <p class="post-summary">介绍: 这是阅读head first design patterns的阅读笔记.
+  <p class="post-summary">介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 家里有一套家庭影院的设备(爆米花机,屏幕,投影仪).每次看电影的时候需要打开爆米花机,开始爆米花,把屏幕放下来,打开投影仪来看电影.结束后要关闭投影仪,收起屏幕,关掉爆米花机.整个过程实在太过于繁琐.
 为了改善这个过程,就需要用到外观模式了.通过实现一个提供合理接口的外观类,你可以将复杂的子系统变得容易使用.而且还能够保留原有的子系统接口.
 2.应用举例 2.</p>
@@ -323,27 +343,12 @@ package iterator; import lombok.</p>
     <p class="post-meta">@BaseC · Mar 31, 2019 · 2 min read</p>
   </header>
   
-  <p class="post-summary">介绍: 这是阅读head first design patterns的阅读笔记.
+  <p class="post-summary">介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设已有一个软件系统,你希望它能和一个新的厂商类库搭配使用,但是这个新厂商所设计出来的接口,不同于旧厂商的接口.你不想改变现有的代码,这样的话就可以编写一个类,让新厂商接口转接成你所期望的接口.
 这个适配器工作起来就如同一个中间人,它将客户所发出的请求转换成厂商类能理解的请求.
 2.应用举例 2.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://wangjc95.com/post/7-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://wangjc95.com/post/6-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" class="post-link">命令模式</a></h3>
-    <p class="post-meta">@BaseC · Mar 23, 2019 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">介绍: 这是阅读head first design patterns的阅读笔记.
-1.应用场景 当前有若干个电器,有着不同的方法.需要设计一款遥控器,能够控制所有的电器.并且遥控器便于修改和添加新的电器.
-2.命令模式的简单实现 2.1类图 Light,GarageDoor:电器类,灯和车库门.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://wangjc95.com/post/6-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">Read More →</a>
   </footer>
 </article>
 

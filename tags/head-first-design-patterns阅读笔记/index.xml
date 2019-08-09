@@ -1,62 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>BaseC的博客</title>
-    <link>https://wangjc95.com/</link>
-    <description>Recent content on BaseC的博客</description>
+    <title>head first design patterns阅读笔记 on BaseC的博客</title>
+    <link>https://wangjc95.com/tags/head-first-design-patterns%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</link>
+    <description>Recent content in head first design patterns阅读笔记 on BaseC的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 May 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://wangjc95.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://wangjc95.com/tags/head-first-design-patterns%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>关于</title>
-      <link>https://wangjc95.com/about/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://wangjc95.com/about/</guid>
-      <description>BaseC,一个普普通通的程序猿!</description>
-    </item>
-    
-    <item>
-      <title>线程的基本概念</title>
-      <link>https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</link>
-      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</guid>
-      <description>介绍: 这是Java多线程编程核心技术阅读笔记
-1.进程与线程 进程:以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
-线程:在进程中独立运行的子任务.
-一个进程在运行时至少会有一个线程在运行.
-2.多线程的创建方式 在Java中,多线程有三种创建方式,分别是:
- 继承Thread类 实现Runnable接口 FutureTask方式创建  2.</description>
-    </item>
-    
-    <item>
-      <title>Annotation</title>
-      <link>https://wangjc95.com/post/15-annotation/</link>
-      <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://wangjc95.com/post/15-annotation/</guid>
-      <description>介绍: 这是疯狂Java讲义第三版阅读笔记.
-1.JDK的元Annotation 1.1@Retention @Retention只能用于修饰Annotation定义,用于指定被修饰的Annotation可以保留多长时间.@Retention包含一个RetentionPolicy类型的value成员变量,所以使用@Retention时必须为该value成员变量指定值.
-value成员变量的值只能是如下三个:
- RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.</description>
-    </item>
-    
-    <item>
-      <title>Java集合</title>
-      <link>https://wangjc95.com/post/14-java%E9%9B%86%E5%90%88/</link>
-      <pubDate>Fri, 07 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://wangjc95.com/post/14-java%E9%9B%86%E5%90%88/</guid>
-      <description>介绍: 这是疯狂Java讲义第三版阅读笔记.
-1.Collection和Iterator接口 1.1Iterator Iterator接口也是Java集合框架的成员,但它与Collection系列,Map系列的集合不一样:Collection系列集合,Map系列集合主要用于装其他对象,而Iterator则主要用于遍历(即迭代访问)Collection集合中的元素,Iterator对象也被称为迭代器.
-示例代码:
-@Test public void test5() { List&amp;lt;String&amp;gt; list = new ArrayList&amp;lt;&amp;gt;(Arrays.</description>
-    </item>
     
     <item>
       <title>代理模式</title>

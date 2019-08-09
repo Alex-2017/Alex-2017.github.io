@@ -6,10 +6,28 @@
     <description>Recent content in Tags on BaseC的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 15 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://wangjc95.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java多线程编程核心技术阅读笔记</title>
+      <link>https://wangjc95.com/tags/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangjc95.com/tags/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>多线程基础</title>
+      <link>https://wangjc95.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangjc95.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>javaSE</title>
@@ -21,20 +39,20 @@
     </item>
     
     <item>
-      <title>疯狂Java讲义第三版读书笔记</title>
-      <link>https://wangjc95.com/tags/%E7%96%AF%E7%8B%82java%E8%AE%B2%E4%B9%89%E7%AC%AC%E4%B8%89%E7%89%88%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+      <title>疯狂Java讲义第三版阅读笔记</title>
+      <link>https://wangjc95.com/tags/%E7%96%AF%E7%8B%82java%E8%AE%B2%E4%B9%89%E7%AC%AC%E4%B8%89%E7%89%88%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://wangjc95.com/tags/%E7%96%AF%E7%8B%82java%E8%AE%B2%E4%B9%89%E7%AC%AC%E4%B8%89%E7%89%88%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://wangjc95.com/tags/%E7%96%AF%E7%8B%82java%E8%AE%B2%E4%B9%89%E7%AC%AC%E4%B8%89%E7%89%88%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>head first design patterns读书笔记</title>
-      <link>https://wangjc95.com/tags/head-first-design-patterns%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+      <title>head first design patterns阅读笔记</title>
+      <link>https://wangjc95.com/tags/head-first-design-patterns%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Thu, 02 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://wangjc95.com/tags/head-first-design-patterns%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://wangjc95.com/tags/head-first-design-patterns%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</guid>
       <description></description>
     </item>
     

@@ -6,10 +6,24 @@
     <description>Recent content in Posts on BaseC的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 15 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://wangjc95.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>线程的基本概念</title>
+      <link>https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</guid>
+      <description>介绍: 这是Java多线程编程核心技术阅读笔记
+1.进程与线程 进程:以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
+线程:在进程中独立运行的子任务.
+一个进程在运行时至少会有一个线程在运行.
+2.多线程的创建方式 在Java中,多线程有三种创建方式,分别是:
+ 继承Thread类 实现Runnable接口 FutureTask方式创建  2.</description>
+    </item>
     
     <item>
       <title>Annotation</title>
@@ -17,9 +31,10 @@
       <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/15-annotation/</guid>
-      <description>1.JDK的元Annotation 1.1@Retention @Retention只能用于修饰Annotation定义,用于指定被修饰的Annotation可以保留多长时间.@Retention包含一个RetentionPolicy类型的value成员变量,所以使用@Retention时必须为该value成员变量指定值.
+      <description>介绍: 这是疯狂Java讲义第三版阅读笔记.
+1.JDK的元Annotation 1.1@Retention @Retention只能用于修饰Annotation定义,用于指定被修饰的Annotation可以保留多长时间.@Retention包含一个RetentionPolicy类型的value成员变量,所以使用@Retention时必须为该value成员变量指定值.
 value成员变量的值只能是如下三个:
- RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.SOURCE:Annotation只能保留在源代码中,编译器直接丢弃这种Annotation.  示例代码:</description>
+ RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.</description>
     </item>
     
     <item>
@@ -28,7 +43,8 @@ value成员变量的值只能是如下三个:
       <pubDate>Fri, 07 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/14-java%E9%9B%86%E5%90%88/</guid>
-      <description>1.Collection和Iterator接口 1.1Iterator Iterator接口也是Java集合框架的成员,但它与Collection系列,Map系列的集合不一样:Collection系列集合,Map系列集合主要用于装其他对象,而Iterator则主要用于遍历(即迭代访问)Collection集合中的元素,Iterator对象也被称为迭代器.
+      <description>介绍: 这是疯狂Java讲义第三版阅读笔记.
+1.Collection和Iterator接口 1.1Iterator Iterator接口也是Java集合框架的成员,但它与Collection系列,Map系列的集合不一样:Collection系列集合,Map系列集合主要用于装其他对象,而Iterator则主要用于遍历(即迭代访问)Collection集合中的元素,Iterator对象也被称为迭代器.
 示例代码:
 @Test public void test5() { List&amp;lt;String&amp;gt; list = new ArrayList&amp;lt;&amp;gt;(Arrays.</description>
     </item>
@@ -39,7 +55,7 @@ value成员变量的值只能是如下三个:
       <pubDate>Thu, 02 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+      <description>介绍: 这是head first design patterns阅读笔记.
 1.代理模式 1.1定义 代理模式为另一个对象提供一个替身或占位符以访问这个对象.
 1.2特点  代理模式为另一个对象提供代表,以便控制客户对对象的访问,管理访问的方式有许多种.</description>
     </item>
@@ -50,7 +66,7 @@ value成员变量的值只能是如下三个:
       <pubDate>Sat, 27 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/12-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+      <description>介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设我们要为糖果机设置一个控制器,来控制糖果器正常运转.控制流程如下图所示.
 这张图可以这么理解:
 糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.</description>
@@ -62,7 +78,7 @@ value成员变量的值只能是如下三个:
       <pubDate>Sun, 21 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/11-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+      <description>介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 基于之前迭代器模式的菜单整合模式下提出了一个新的需求,餐厅要创建一份甜点菜单,并把这个菜单放到餐厅菜单中.
 新增的需求让当前的系统到达了一个复杂级别,如果现在不重新设计,就无法容纳未来增加的菜单或子菜单等需求.我们需要某种树形结构,可以容纳菜单,子菜单和菜单项,同时能够确定在每个菜单的各个项之间游走,而且至少要像现在用迭代器一样方便.
 2.解决方案 2.</description>
@@ -74,7 +90,7 @@ value成员变量的值只能是如下三个:
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/10-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+      <description>介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 有两种菜单,分别是DinerMenu和PancakeHouseMenu.将这两种菜单整合,需要一个特定的服务员类Waitress来进行整合和菜单的遍历等功能.
 MenuItem.java
 package iterator; import lombok.</description>
@@ -86,7 +102,7 @@ package iterator; import lombok.</description>
       <pubDate>Wed, 10 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/9-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+      <description>介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设当前有两种咖啡因饮料,分别是茶和咖啡.
 茶的制作方法是:
  把水煮沸 用沸水浸泡茶叶 把茶倒进杯子 加柠檬  咖啡的制作方法:</description>
@@ -98,7 +114,7 @@ package iterator; import lombok.</description>
       <pubDate>Thu, 04 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/8-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+      <description>介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 家里有一套家庭影院的设备(爆米花机,屏幕,投影仪).每次看电影的时候需要打开爆米花机,开始爆米花,把屏幕放下来,打开投影仪来看电影.结束后要关闭投影仪,收起屏幕,关掉爆米花机.整个过程实在太过于繁琐.
 为了改善这个过程,就需要用到外观模式了.通过实现一个提供合理接口的外观类,你可以将复杂的子系统变得容易使用.而且还能够保留原有的子系统接口.
 2.应用举例 2.</description>
@@ -110,7 +126,7 @@ package iterator; import lombok.</description>
       <pubDate>Sun, 31 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/7-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+      <description>介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设已有一个软件系统,你希望它能和一个新的厂商类库搭配使用,但是这个新厂商所设计出来的接口,不同于旧厂商的接口.你不想改变现有的代码,这样的话就可以编写一个类,让新厂商接口转接成你所期望的接口.
 这个适配器工作起来就如同一个中间人,它将客户所发出的请求转换成厂商类能理解的请求.
 2.应用举例 2.</description>
@@ -122,7 +138,7 @@ package iterator; import lombok.</description>
       <pubDate>Sat, 23 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/6-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+      <description>介绍: 这是head first design patterns阅读笔记.
 1.应用场景 当前有若干个电器,有着不同的方法.需要设计一款遥控器,能够控制所有的电器.并且遥控器便于修改和添加新的电器.
 2.命令模式的简单实现 2.1类图 Light,GarageDoor:电器类,灯和车库门.</description>
     </item>
@@ -133,7 +149,7 @@ package iterator; import lombok.</description>
       <pubDate>Sun, 17 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+      <description>介绍: 这是head first design patterns阅读笔记.
 1.应用场景 在项目中,有些对象我们只需要一个!比如说线程池,缓存,对话框等等.这类对象只能有一个实例,如果制造出多个实例,就会导致很多问题产生.
 2.定义 确保一个类只有一个实例,并提供全局访问点.</description>
     </item>
@@ -144,10 +160,9 @@ package iterator; import lombok.</description>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</guid>
-      <description>1.简单工厂 1.1应用场景 最近开了一家披萨店,有四种不同口味的披萨.客人只需要输入他需要的口味就可以得到对应的披萨.那么如何用java来设计这样的一个系统呢?
-1.2解决方法 最简单的方法就是在一个类中封装一个方法,根据输入的口味,来生成对应的披萨.但是如果商店的披萨品种需要变动时,此类的代码就需要修改.这肯定不是我们所希望的.下面就来使用简单工厂模式来解决这一问题.
-1.2.1类图 1.2.2代码 披萨代码:
-Pizza.java</description>
+      <description>介绍: 这是head first design patterns阅读笔记.
+1.简单工厂 1.1应用场景 最近开了一家披萨店,有四种不同口味的披萨.客人只需要输入他需要的口味就可以得到对应的披萨.那么如何用java来设计这样的一个系统呢?
+1.2解决方法 最简单的方法就是在一个类中封装一个方法,根据输入的口味,来生成对应的披萨.</description>
     </item>
     
     <item>
@@ -156,7 +171,7 @@ Pizza.java</description>
       <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+      <description>介绍: 这是head first design patterns阅读笔记.
 1.应用场景 ​ 一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与此同时带来了一个问题,由于订单量暴增,他们的订单管理系统支撑不住了.需要设计一个新的系统,并且能够灵活,快速的改动.
 ​ 下面介绍下一点点,它是一家饮品店.</description>
     </item>
@@ -167,7 +182,7 @@ Pizza.java</description>
       <pubDate>Sun, 17 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/2-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+      <description>介绍: 这是head first design patterns阅读笔记.
 1.观察者模式 1.1定义 观察者模式定义了对象之间的一对多依赖,这样一来,当一个对象改变状态时,它的所有依赖者都会收到通知并自动更新.
 1.2设计原则 为了交互对象之间的松耦合设计而努力.</description>
     </item>
@@ -178,7 +193,7 @@ Pizza.java</description>
       <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://wangjc95.com/post/1-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</guid>
-      <description>介绍: 这是阅读head first design patterns的阅读笔记.
+      <description>介绍: 这是head first design patterns阅读笔记.
 1.应用场景 我们有一个鸭子模拟器,通过Duck父类表示鸭子的行为,子类通过重写display方法来表示鸭子的特征行为.现在有一个新需求,需要添加一个fly方法,让鸭子飞起来.
 2.解决思路 2.1在父类中添加fly方法 RubberDuck无法飞行,所以需要重写fly方法.</description>
     </item>

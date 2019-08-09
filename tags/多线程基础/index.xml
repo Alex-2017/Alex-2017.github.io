@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>多线程基础 on BaseC的博客</title>
+    <link>https://wangjc95.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/</link>
+    <description>Recent content in 多线程基础 on BaseC的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://wangjc95.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>线程的基本概念</title>
+      <link>https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</guid>
+      <description>介绍: 这是Java多线程编程核心技术阅读笔记
+1.进程与线程 进程:以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
+线程:在进程中独立运行的子任务.
+一个进程在运行时至少会有一个线程在运行.
+2.多线程的创建方式 在Java中,多线程有三种创建方式,分别是:
+ 继承Thread类 实现Runnable接口 FutureTask方式创建  2.</description>
+    </item>
+    
+  </channel>
+</rss>
