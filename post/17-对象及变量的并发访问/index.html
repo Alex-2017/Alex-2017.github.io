@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>对象及变量的并发访问</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
+  
+
+  
+
+  
+  
+  <meta name="description" content="介绍: 这是Java多线程编程核心技术阅读笔记
+1.synchronized同步方法 1.1方法内的变量为线程安全 非线程安全问题存在于实例变量中,如果是方法内部的私有变量,则不存在线程安全问题,所得结果也就是线程安全的了.
+public class MethodVariable { public void getNum(String username) { int num = 0; if (&amp;#34;a&amp;#34;.">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="对象及变量的并发访问">
+    <meta name="twitter:description" content="介绍: 这是Java多线程编程核心技术阅读笔记
+1.synchronized同步方法 1.1方法内的变量为线程安全 非线程安全问题存在于实例变量中,如果是方法内部的私有变量,则不存在线程安全问题,所得结果也就是线程安全的了.
+public class MethodVariable { public void getNum(String username) { int num = 0; if (&amp;#34;a&amp;#34;.">
+    <meta name="twitter:image" content="/images/avatar.png">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="对象及变量的并发访问">
+  <meta property="og:description" content="介绍: 这是Java多线程编程核心技术阅读笔记
+1.synchronized同步方法 1.1方法内的变量为线程安全 非线程安全问题存在于实例变量中,如果是方法内部的私有变量,则不存在线程安全问题,所得结果也就是线程安全的了.
+public class MethodVariable { public void getNum(String username) { int num = 0; if (&amp;#34;a&amp;#34;.">
+  <meta property="og:url" content="https://wangjc95.com/post/17-%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/">
+  <meta property="og:image" content="/images/avatar.png">
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6">
+
+
+<link rel="canonical" href="https://wangjc95.com/post/17-%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="google-site-verification" content="aNGp71IfnTxSUD01_q2_esTxRQBQ3GA3CEKa8s_7Qwg">
+
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="BaseC的博客">
+<meta name="msapplication-tooltip" content="BaseC的博客">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="manifest" href="/manifest.json">
+
+
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+	<a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  
+  <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
+  
+  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+           is-active">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:1017086516@qq.com" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="/images/qrcode.jpg" rel="me" title="Wechat" aria-label="Wechat">
+            <span class="icon icon-wechat" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">对象及变量的并发访问</h1>
+      <p class="post-meta">@BaseC · Aug 18, 2019 · 12 min read</p>
+    </header>
+    <article class="post-content">
+
+<p><strong>介绍:</strong> 这是<code>Java</code>多线程编程核心技术阅读笔记</p>
+
+<h1 id="1-synchronized-同步方法">1.<code>synchronized</code>同步方法</h1>
+
+<h2 id="1-1方法内的变量为线程安全">1.1方法内的变量为线程安全</h2>
+
+<p><strong>非线程安全</strong>问题存在于<strong>实例变量</strong>中,如果是方法内部的私有变量,则不存在<strong>线程安全</strong>问题,所得结果也就是<strong>线程安全</strong>的了.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MethodVariable</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getNum</span><span style="color:#f92672">(</span>String username<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>username<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            num <span style="color:#f92672">=</span> 100<span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a set is over&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>2000<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            num <span style="color:#f92672">=</span> 200<span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;b set is over&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>username <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; num = &#34;</span> <span style="color:#f92672">+</span> num<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        MethodVariable variable <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MethodVariable<span style="color:#f92672">();</span>
+
+        Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            variable<span style="color:#f92672">.</span><span style="color:#a6e22e">getNum</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">});</span>
+
+        Thread threadB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            variable<span style="color:#f92672">.</span><span style="color:#a6e22e">getNum</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;b&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">});</span>
+
+        threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+
+        threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>a set is over
+b set is over
+b num = 200
+a num = 100
+</code></pre>
+
+<p>由此可见,方法中的变量存在<strong>线程安全</strong>问题,永远都是线程安全的.这是方法内部变量是私有的特性造成的.</p>
+
+<h2 id="1-2实例变量非线程安全">1.2实例变量非线程安全</h2>
+
+<p>如果多个线程共同访问一个对象中的实例变量,则可能出现<strong>线程安全</strong>问题.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InstanceVariable</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getNum</span><span style="color:#f92672">(</span>String username<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>username<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            num <span style="color:#f92672">=</span> 100<span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a set is over&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>2000<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            num <span style="color:#f92672">=</span> 200<span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;b set is over&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>username <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; num = &#34;</span> <span style="color:#f92672">+</span> num<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        InstanceVariable variable <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InstanceVariable<span style="color:#f92672">();</span>
+
+        Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            variable<span style="color:#f92672">.</span><span style="color:#a6e22e">getNum</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">});</span>
+
+        Thread threadB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            variable<span style="color:#f92672">.</span><span style="color:#a6e22e">getNum</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;b&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">});</span>
+
+        threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+
+        threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>b set is over
+a set is over
+b num = 200
+a num = 200
+</code></pre>
+
+<p><code>a num</code>应该是100,但是控制台输出了200.这就出现了<strong>线程安全</strong>问题.</p>
+
+<p><strong>解决方法:</strong>对<code>getNum()</code>方法添加<code>synchronized</code>关键字</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//有线程安全问题,添加synchronized关键字.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getNum</span><span style="color:#f92672">(</span>String username<span style="color:#f92672">)</span> <span style="color:#f92672">{...}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>a set is over
+a num = 100
+b set is over
+b num = 200
+</code></pre>
+
+<p>各个线程依次执行.调用<code>synchronized</code>方法的线程一定是排队运行的.哪个线程先执行<code>synchronized</code>方法,该线程就获取此方法所属对象的锁<code>lock</code>,其他需要执行此方法的线程需要等待此锁.另外需要牢牢记住<strong>共享</strong>这两个字,只有共享资源的读写访问才需要同步化如果不是共享资源,那么就根本没有同步的必要.</p>
+
+<h2 id="1-3多个对象多个锁">1.3多个对象多个锁</h2>
+
+<p>先看看以下这段代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MultipleLock</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+
+    <span style="color:#75715e">//synchronized同步方法
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getNum</span><span style="color:#f92672">(</span>String username<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>username<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            num <span style="color:#f92672">=</span> 100<span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a set is over&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>2000<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            num <span style="color:#f92672">=</span> 200<span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;b set is over&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>username <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; num = &#34;</span> <span style="color:#f92672">+</span> num<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//创建了多个对象
+</span><span style="color:#75715e"></span>        InstanceVariable variable1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InstanceVariable<span style="color:#f92672">();</span>
+        InstanceVariable variable2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InstanceVariable<span style="color:#f92672">();</span>
+
+        <span style="color:#75715e">//将两个对象放到不同的线程中
+</span><span style="color:#75715e"></span>        Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            variable1<span style="color:#f92672">.</span><span style="color:#a6e22e">getNum</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">});</span>
+        Thread threadB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            variable2<span style="color:#f92672">.</span><span style="color:#a6e22e">getNum</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;b&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">});</span>
+
+        <span style="color:#75715e">//两个线程获取的是不同的对象锁,所以会异步执行.
+</span><span style="color:#75715e"></span>        threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>a set is over
+b set is over
+b num = 200
+a num = 100
+</code></pre>
+
+<p>从输出结果可以看出,两个线程是异步执行的.这是因为多个线程访问多个对象,<code>JVM</code>会创建多个锁.<code>synchronized</code>取得的锁都是对象锁,而不是把一段代码或方法当做锁.</p>
+
+<h2 id="1-4-synchronized-方法与锁对象">1.4<code>synchronized</code>方法与锁对象</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SynMethod</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">methodA</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; begin ,time is &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>5000<span style="color:#f92672">);</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; end ,time is &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">methodB</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; begin ,time is &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>3000<span style="color:#f92672">);</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; end ,time is &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        SynMethod synMethod <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SynMethod<span style="color:#f92672">();</span>
+
+        Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            synMethod<span style="color:#f92672">.</span><span style="color:#a6e22e">methodA</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadA&#34;</span><span style="color:#f92672">);</span>
+
+        Thread threadB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            synMethod<span style="color:#f92672">.</span><span style="color:#a6e22e">methodB</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">);</span>
+
+        threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+
+        threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>threadA begin ,time is 1565794472968
+threadB begin ,time is 1565794472968
+threadB end ,time is 1565794475969
+threadA end ,time is 1565794477970
+</code></pre>
+
+<p><strong>结论:</strong><code>A</code>线程先持有<code>Object</code>对象的<code>lock</code>锁,调用<code>synchronized</code>方法.<code>B</code>线程可以以异步的方式调用<code>Object</code>对象中非<code>synchronized</code>方法.</p>
+
+<h2 id="1-5脏读">1.5脏读</h2>
+
+<p>发生脏读的情况是在读取实例变量时,其值已经被其他线程改过了.</p>
+
+<p>运行如下代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DirtyRead</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> String name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> String password <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;AA&#34;</span><span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setValue</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">,</span> String password<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name<span style="color:#f92672">;</span>
+            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>5000<span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> password<span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;setValue method thread name = &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;,name is &#34;</span> <span style="color:#f92672">+</span> name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;, password is &#34;</span> <span style="color:#f92672">+</span> password<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getValue</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;getValue method thread name = &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;,name is &#34;</span> <span style="color:#f92672">+</span> name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;, password is &#34;</span> <span style="color:#f92672">+</span> password<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> InterruptedException <span style="color:#f92672">{</span>
+        DirtyRead dirtyRead <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DirtyRead<span style="color:#f92672">();</span>
+        Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            dirtyRead<span style="color:#f92672">.</span><span style="color:#a6e22e">setValue</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;B&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;BB&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">});</span>
+        threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        <span style="color:#75715e">//确保threadA先执行
+</span><span style="color:#75715e"></span>        Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>1000<span style="color:#f92672">);</span>
+        dirtyRead<span style="color:#f92672">.</span><span style="color:#a6e22e">getValue</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>getValue method thread name = main,name is B, password is AA
+setValue method thread name = Thread-0,name is B, password is BB
+</code></pre>
+
+<p><code>getValue</code>输出的<code>name</code>是<code>B</code>,而<code>password</code>是<code>AA</code>.出现脏读是因为<code>public void getValue()</code>方法不是同步的,所以可以在任一时刻被调用.解决方法就是加上<code>synchronized</code>关键字.</p>
+
+<h2 id="1-6-synchronized-锁重入">1.6<code>synchronized</code>锁重入</h2>
+
+<p><strong>可重入锁</strong>的概念是:当一个线程得到一个对象锁后,再次请求此对象锁时是可以再次得到该对象的锁的.比如有一个线程获得了某个对象的锁,此时这个对象锁还没有释放,当该线程想要再次获取这个线程的锁时还是可以获取的,如果不可锁重入的话,就会造成死锁.</p>
+
+<p><strong>示例代码:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Service</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">service1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;service1&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">//在已经获得锁的情况下,仍可继续调用同步方法
+</span><span style="color:#75715e"></span>        service2<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">service2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;service2&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">//在已经获得锁的情况下,仍可继续调用同步方法
+</span><span style="color:#75715e"></span>        service3<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">service3</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;service3&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Thread thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            Service service <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Service<span style="color:#f92672">();</span>
+            service<span style="color:#f92672">.</span><span style="color:#a6e22e">service1</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">});</span>
+        thread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出</strong></p>
+
+<pre><code>service1
+service2
+service3
+</code></pre>
+
+<p>当存在父子类继承关系时,子类是完全可以通过可重入锁调用父类的同步方法的.</p>
+
+<p><strong>示例代码:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Parent</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 10<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">operateNumInParent</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            i<span style="color:#f92672">--;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;parent print i= &#34;</span> <span style="color:#f92672">+</span> i<span style="color:#f92672">);</span>
+            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>100<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Thread thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            Child child <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Child<span style="color:#f92672">();</span>
+            child<span style="color:#f92672">.</span><span style="color:#a6e22e">operateNumInChild</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">});</span>
+
+        thread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Child</span> <span style="color:#66d9ef">extends</span> Parent <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">operateNumInChild</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            i<span style="color:#f92672">--;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;child print i= &#34;</span> <span style="color:#f92672">+</span> i<span style="color:#f92672">);</span>
+            <span style="color:#75715e">//在已经获得锁的情况下,还可继续调用父类同步方法
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">operateNumInParent</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>child print i= 9
+parent print i= 8
+child print i= 7
+parent print i= 6
+child print i= 5
+parent print i= 4
+child print i= 3
+parent print i= 2
+child print i= 1
+parent print i= 0
+</code></pre>
+
+<h2 id="1-7出现异常-锁自动释放">1.7出现异常,锁自动释放</h2>
+
+<p>执行如下代码:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ExceptionLock</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">service</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        String threadName <span style="color:#f92672">=</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>threadName<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;threadName is &#34;</span> <span style="color:#f92672">+</span> threadName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; run beginTime = &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+            <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;0.123456&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>String<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>Math<span style="color:#f92672">.</span><span style="color:#a6e22e">random</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">substring</span><span style="color:#f92672">(</span>0<span style="color:#f92672">,</span> 8<span style="color:#f92672">)))</span> <span style="color:#f92672">{</span>
+                    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;threadName is &#34;</span> <span style="color:#f92672">+</span> threadName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; exception time = &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+                    Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">parseInt</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">);</span>
+                <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;threadName is &#34;</span> <span style="color:#f92672">+</span> threadName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; run beginTime = &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> InterruptedException <span style="color:#f92672">{</span>
+        ExceptionLock exceptionLock <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ExceptionLock<span style="color:#f92672">();</span>
+        Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            exceptionLock<span style="color:#f92672">.</span><span style="color:#a6e22e">service</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">);</span>
+
+        Thread threadB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            exceptionLock<span style="color:#f92672">.</span><span style="color:#a6e22e">service</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;b&#34;</span><span style="color:#f92672">);</span>
+
+        threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        <span style="color:#75715e">//确保threadA获取锁,先执行.
+</span><span style="color:#75715e"></span>        Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>500<span style="color:#f92672">);</span>
+        threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>threadName is a run beginTime = 1565796212700
+threadName is a exception time = 1565796214112
+Exception in thread &quot;a&quot; java.lang.NumberFormatException: For input string: &quot;a&quot;
+threadName is b run beginTime = 1565796214112
+</code></pre>
+
+<p>线程<code>A</code>出现异常并释放锁,线程<code>B</code>进入方法并正常打印.</p>
+
+<h2 id="1-8同步不具有继承性">1.8同步不具有继承性</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">serviceMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; beigin run Main &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>2000<span style="color:#f92672">);</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; end run Main &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Sub sub <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Sub<span style="color:#f92672">();</span>
+        Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            sub<span style="color:#f92672">.</span><span style="color:#a6e22e">serviceMethod</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadA&#34;</span><span style="color:#f92672">);</span>
+
+        Thread threadB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            sub<span style="color:#f92672">.</span><span style="color:#a6e22e">serviceMethod</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">);</span>
+
+        threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//确保threadA先运行.
+</span><span style="color:#75715e"></span>            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>500<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+
+        threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sub</span> <span style="color:#66d9ef">extends</span> Main <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">serviceMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; beigin run Sub &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>2000<span style="color:#f92672">);</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; end run Sub &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+            <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">serviceMethod</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>thread threadA beigin run Sub 1565797158130
+thread threadB beigin run Sub 1565797158646
+thread threadA end run Sub 1565797160146
+thread threadA beigin run Main 1565797160146
+thread threadB end run Sub 1565797160647
+thread threadA end run Main 1565797162147
+thread threadB beigin run Main 1565797162147
+thread threadB end run Main 1565797164147
+</code></pre>
+
+<p>程序输出证明<code>Main</code>中的<code>serviceMethod()</code>仍是同步执行,而<code>Sub</code>的<code>serviceMethod()</code>是异步执行.所以同步不能继承.</p>
+
+<h1 id="2-synchronized-同步语句块">2.<code>synchronized</code>同步语句块</h1>
+
+<p>用关键字<code>synchronized</code>声明方法在某些情况下是有弊端的,比如<code>A</code>线程调用同步方法执行一个长时间的任务,那么<code>B</code>线程则必须等待比较长时间.在这样的情况下可以使用<code>synchronized</code>同步语法块来解决.</p>
+
+<h2 id="2-1一半异步-一半同步">2.1一半异步,一半同步.</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SyncCodeBlock</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#75715e">//同步方法
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">service1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> 5<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;index is &#34;</span> <span style="color:#f92672">+</span> i <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;,currentThreadName is &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">service2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> 5<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;asynchronized index is &#34;</span> <span style="color:#f92672">+</span> i <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;,currentThreadName is &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">//同步代码块
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> 5<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;synchronized index is &#34;</span> <span style="color:#f92672">+</span> i <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;,currentThreadName is &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">());</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        SyncCodeBlock syncCodeBlock <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SyncCodeBlock<span style="color:#f92672">();</span>
+        Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            syncCodeBlock<span style="color:#f92672">.</span><span style="color:#a6e22e">service1</span><span style="color:#f92672">();</span>
+            <span style="color:#75715e">//syncCodeBlock.service2();
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadA&#34;</span><span style="color:#f92672">);</span>
+
+        Thread threadB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            syncCodeBlock<span style="color:#f92672">.</span><span style="color:#a6e22e">service1</span><span style="color:#f92672">();</span>
+            <span style="color:#75715e">//syncCodeBlock.service2();
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">);</span>
+
+        threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>index is 1,currentThreadName is threadA
+index is 2,currentThreadName is threadA
+index is 3,currentThreadName is threadA
+index is 4,currentThreadName is threadA
+index is 5,currentThreadName is threadA
+index is 1,currentThreadName is threadB
+index is 2,currentThreadName is threadB
+index is 3,currentThreadName is threadB
+index is 4,currentThreadName is threadB
+index is 5,currentThreadName is threadB
+</code></pre>
+
+<p>由上看出,当<code>threadA</code>在执行时,<code>threadB</code>成阻塞状态.</p>
+
+<p>更改俩线程中的<code>service1()</code>方法为<code>service2()</code>方法.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">//syncCodeBlock.service1();
+</span><span style="color:#75715e"></span>    syncCodeBlock<span style="color:#f92672">.</span><span style="color:#a6e22e">service2</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadA&#34;</span><span style="color:#f92672">);</span>
+
+Thread threadB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">//syncCodeBlock.service1();
+</span><span style="color:#75715e"></span>    syncCodeBlock<span style="color:#f92672">.</span><span style="color:#a6e22e">service2</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">);</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>asynchronized index is 1,currentThreadName is threadA
+asynchronized index is 1,currentThreadName is threadB
+asynchronized index is 2,currentThreadName is threadB
+asynchronized index is 2,currentThreadName is threadA
+asynchronized index is 3,currentThreadName is threadB
+asynchronized index is 3,currentThreadName is threadA
+asynchronized index is 4,currentThreadName is threadB
+asynchronized index is 4,currentThreadName is threadA
+asynchronized index is 5,currentThreadName is threadB
+asynchronized index is 5,currentThreadName is threadA
+synchronized index is 1,currentThreadName is threadB
+synchronized index is 2,currentThreadName is threadB
+synchronized index is 3,currentThreadName is threadB
+synchronized index is 4,currentThreadName is threadB
+synchronized index is 5,currentThreadName is threadB
+synchronized index is 1,currentThreadName is threadA
+synchronized index is 2,currentThreadName is threadA
+synchronized index is 3,currentThreadName is threadA
+synchronized index is 4,currentThreadName is threadA
+synchronized index is 5,currentThreadName is threadA
+</code></pre>
+
+<p>可以看出,当一个线程访问<code>object</code>的一个<code>synchronized</code>同步代码块时,另一个线程仍然可以访问该对象的非<code>synchronized(this)</code>代码.在<code>synchronized</code>块中是同步执行,不在<code>synchronized</code>中就是异步执行.</p>
+
+<h2 id="2-2使用任意对象作为对象监视器">2.2使用任意对象作为对象监视器</h2>
+
+<p><strong>使用<code>synchronized</code>方法出现脏读</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyOneList</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> list <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;();</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>String data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        list<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>data<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getSize</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> list<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyService</span> <span style="color:#f92672">{</span>
+    
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addMyOneList</span><span style="color:#f92672">(</span>MyOneList myOneList<span style="color:#f92672">,</span> String data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>myOneList<span style="color:#f92672">.</span><span style="color:#a6e22e">getSize</span><span style="color:#f92672">()</span> <span style="color:#f92672">&lt;</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>2000<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+            myOneList<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>data<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        MyOneList myOneList <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyOneList<span style="color:#f92672">();</span>
+
+        Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            MyService service <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyService<span style="color:#f92672">();</span>
+            service<span style="color:#f92672">.</span><span style="color:#a6e22e">addMyOneList</span><span style="color:#f92672">(</span>myOneList<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;threadA&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadA&#34;</span><span style="color:#f92672">);</span>
+
+        Thread threadB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            MyService service <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyService<span style="color:#f92672">();</span>
+            service<span style="color:#f92672">.</span><span style="color:#a6e22e">addMyOneList</span><span style="color:#f92672">(</span>myOneList<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">);</span>
+
+        threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>5000<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>myOneList<span style="color:#f92672">.</span><span style="color:#a6e22e">getSize</span><span style="color:#f92672">());</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>2
+</code></pre>
+
+<p>如果程序正常执行,应当输出1.出现2的原因是发生了脏读,两个线程以异步的方式返回<code>list</code>参数的<code>size()</code>大小.</p>
+
+<p><strong>解决方法:</strong>对<code>addMyOneList()</code>方法进行同步化.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addMyOneList</span><span style="color:#f92672">(</span>MyOneList myOneList<span style="color:#f92672">,</span> String data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//使用synchronized(myOneList),确保myOneList在此方法中的操作是同步的.
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>myOneList<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>myOneList<span style="color:#f92672">.</span><span style="color:#a6e22e">getSize</span><span style="color:#f92672">()</span> <span style="color:#f92672">&lt;</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                    Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>2000<span style="color:#f92672">);</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+                <span style="color:#f92672">}</span>
+                myOneList<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>data<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<p>由于<code>list</code>参数对象在项目中是一份实例,是单例的,而且也正需要对<code>list</code>参数的<code>getSize()</code>方法做同步的调用,所以就对<code>list</code>参数进行同步处理.</p>
+
+<h2 id="2-3静态同步-synchronized-static-方法与-synchronized-class-代码块">2.3静态同步<code>synchronized static</code>方法与<code>synchronized(class)</code>代码块</h2>
+
+<p><strong>以<code>Class</code>对象作为锁,<code>public synchronized static</code>和<code>synchronized (SyncClass.class)</code>作用相同</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SyncClass</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">service1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread name is &#34;</span><span style="color:#f92672">+</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()+</span><span style="color:#e6db74">&#34;,在&#34;</span><span style="color:#f92672">+</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">()+</span><span style="color:#e6db74">&#34;进入service1方法&#34;</span><span style="color:#f92672">);</span>
+            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>3000<span style="color:#f92672">);</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread name is &#34;</span><span style="color:#f92672">+</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()+</span><span style="color:#e6db74">&#34;,在&#34;</span><span style="color:#f92672">+</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">()+</span><span style="color:#e6db74">&#34;退出service1方法&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">service2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>SyncClass<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread name is &#34;</span><span style="color:#f92672">+</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()+</span><span style="color:#e6db74">&#34;,在&#34;</span><span style="color:#f92672">+</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">()+</span><span style="color:#e6db74">&#34;进入service2方法&#34;</span><span style="color:#f92672">);</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread name is &#34;</span><span style="color:#f92672">+</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()+</span><span style="color:#e6db74">&#34;,在&#34;</span><span style="color:#f92672">+</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">()+</span><span style="color:#e6db74">&#34;退出service2方法&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            SyncClass<span style="color:#f92672">.</span><span style="color:#a6e22e">service1</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">},</span><span style="color:#e6db74">&#34;threadA&#34;</span><span style="color:#f92672">);</span>
+
+        Thread threadB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            SyncClass<span style="color:#f92672">.</span><span style="color:#a6e22e">service2</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">},</span><span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">);</span>
+
+        threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>thread name is threadA,在1565962159054进入service1方法
+thread name is threadA,在1565962162055退出service1方法
+thread name is threadB,在1565962162055进入service2方法
+thread name is threadB,在1565962162055退出service2方法
+</code></pre>
+
+<p><strong><code>Class</code>锁可以对类的所有对象实例起作用</strong></p>
+
+<p>将<code>main</code>方法改为:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            SyncClass syncClass <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SyncClass<span style="color:#f92672">();</span>
+            syncClass<span style="color:#f92672">.</span><span style="color:#a6e22e">service1</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">},</span><span style="color:#e6db74">&#34;threadA&#34;</span><span style="color:#f92672">);</span>
+
+        Thread threadB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            SyncClass syncClass <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SyncClass<span style="color:#f92672">();</span>
+            syncClass<span style="color:#f92672">.</span><span style="color:#a6e22e">service2</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">},</span><span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">);</span>
+
+        threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>thread name is threadA,在1565963189515进入service1方法
+thread name is threadA,在1565963192516退出service1方法
+thread name is threadB,在1565963192516进入service2方法
+thread name is threadB,在1565963192516退出service2方法
+</code></pre>
+
+<h2 id="2-4多线程的死锁">2.4多线程的死锁</h2>
+
+<p>不同的线程都在等待根本不可能被释放的锁.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DeadLock</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> Object lock1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Object<span style="color:#f92672">();</span>
+
+    <span style="color:#66d9ef">private</span> Object lock2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Object<span style="color:#f92672">();</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        String threadName <span style="color:#f92672">=</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;threadA&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>threadName<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>lock1<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread &#34;</span> <span style="color:#f92672">+</span> threadName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; get lock1 first&#34;</span><span style="color:#f92672">);</span>
+                <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                    Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>2000<span style="color:#f92672">);</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>lock2<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread &#34;</span> <span style="color:#f92672">+</span> threadName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; get lock2 later&#34;</span><span style="color:#f92672">);</span>
+                <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>threadName<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>lock2<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread &#34;</span> <span style="color:#f92672">+</span> threadName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; get lock2 first&#34;</span><span style="color:#f92672">);</span>
+                <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                    Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>2000<span style="color:#f92672">);</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>lock1<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread &#34;</span> <span style="color:#f92672">+</span> threadName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; get lock1 later&#34;</span><span style="color:#f92672">);</span>
+                <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        DeadLock deadLock <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DeadLock<span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>deadLock<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;threadA&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>deadLock<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>thread threadA get lock1 first
+thread threadB get lock2 first
+</code></pre>
+
+<p>程序一直运行,但在输出以上内容之后,不会在输出任何内容.</p>
+
+<h2 id="2-5锁对象的改变">2.5锁对象的改变</h2>
+
+<p>在将任何数据类型作为同步锁时,需要注意的是,是否有多个线程同时持有锁对象,如果持有相同的锁对象,则这些线程之间就是同步的.如果分别获得不同的锁对象,这些线程之间就是异步的.</p>
+
+<h3 id="2-5-1以-string-常量为-lock-时">2.5.1以<code>String</code>常量为<code>lock</code>时</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LockChange</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> String strLock <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;LockA&#34;</span><span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">private</span> UserInfo userInfoLock <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UserInfo<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Alex&#34;</span><span style="color:#f92672">);</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">service1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>strLock<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; begin run service1() at &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+            strLock <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;LockB&#34;</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>3000<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; end run service1() at &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">service2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>userInfoLock<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; begin run service2() at &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+            userInfoLock<span style="color:#f92672">.</span><span style="color:#a6e22e">setUsername</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;BaseC&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>3000<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;thread &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; end run service2() at &#34;</span> <span style="color:#f92672">+</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+        LockChange lockChange <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LockChange<span style="color:#f92672">();</span>
+
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 以String常量为lock时
+</span><span style="color:#75715e">         */</span>
+        Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            lockChange<span style="color:#f92672">.</span><span style="color:#a6e22e">service1</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadA&#34;</span><span style="color:#f92672">);</span>
+
+        Thread threadB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            lockChange<span style="color:#f92672">.</span><span style="color:#a6e22e">service1</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">);</span>
+
+        <span style="color:#75715e">//如果俩线程直接启动,threadA和threadB极有可能拿的锁都是&#34;LockA&#34;,同步执行.
+</span><span style="color:#75715e"></span>        threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//让threadA先运行,确保其改变了strLock,这样threadB启动时获取的锁就变成了&#34;LockB&#34;,异步执行.
+</span><span style="color:#75715e"></span>            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>50<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+        threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 以对象为lock时,即使改变了对象的值,但是方法仍会同步执行
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#75715e">//Thread threadA = new Thread(() -&gt; {
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//    lockChange.service2();
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//},&#34;threadA&#34;);
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//Thread threadB = new Thread(() -&gt; {
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//    lockChange.service2();
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//},&#34;threadB&#34;);
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//threadA.start();
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//try {
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//    //即使让threadA改变了userInfoLock的值,还是会同步执行.
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//    Thread.sleep(50);
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//} catch (InterruptedException e) {
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//    e.printStackTrace();
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//}
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//threadB.start();
+</span><span style="color:#75715e"></span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserInfo</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">private</span> String username<span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">UserInfo</span><span style="color:#f92672">(</span>String username<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> username<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getUsername</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> username<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setUsername</span><span style="color:#f92672">(</span>String username<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> username<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>thread threadA begin run service1() at 1565963755385
+thread threadB begin run service1() at 1565963755448
+thread threadA end run service1() at 1565963758392
+thread threadB end run service1() at 1565963758455
+</code></pre>
+
+<p>可以看出,线程之间是异步执行的,这说明俩线程获得的是不同的锁.<strong>因此在大多数情况下,同步<code>synchronized</code>代码块都不使用<code>String</code>作为锁对象.</strong></p>
+
+<h3 id="2-5-2以对象为-lock-时">2.5.2以对象为<code>lock</code>时</h3>
+
+<p>注释掉以<code>String</code>常量为<code>lock</code>时的代码,取消以对象为<code>lock</code>时的注释.运行<code>main</code>方法,<strong>控制台输出:</strong></p>
+
+<pre><code>thread threadA begin run service2() at 1565964356043
+thread threadA end run service2() at 1565964359048
+thread threadB begin run service2() at 1565964359048
+thread threadB end run service2() at 1565964362048
+</code></pre>
+
+<p>俩线程是以同步的方式运行的,这说明<strong>只要对象不变,即使对象的属性被改变,运行的结果还是同步.</strong></p>
+
+<h1 id="3-volatile-关键字">3.<code>volatile</code>关键字</h1>
+
+<p>关键字<code>volatile</code>的主要作用是使变量在多个线程间可见.</p>
+
+<h2 id="3-1解决异步死循环">3.1解决异步死循环</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RunThread</span> <span style="color:#66d9ef">extends</span> Thread <span style="color:#f92672">{</span>
+
+    <span style="color:#75715e">//如果不添加volatile,线程不会被停止.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span> isRunning <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;进入run()方法&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>isRunning<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;线程被停止了&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setRunning</span><span style="color:#f92672">(</span><span style="color:#66d9ef">boolean</span> isRunning<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">isRunning</span> <span style="color:#f92672">=</span> isRunning<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        RunThread thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RunThread<span style="color:#f92672">();</span>
+        thread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>1000<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+
+        thread<span style="color:#f92672">.</span><span style="color:#a6e22e">setRunning</span><span style="color:#f92672">(</span><span style="color:#66d9ef">false</span><span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;已经赋值为false&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>进入run()方法
+已经赋值为false
+</code></pre>
+
+<p>程序不会打印&lt;线程被停止了&gt;这句话,会一直死循环下去.</p>
+
+<p><strong>原因:</strong>在启动<code>RunThread</code>线程时,变量<code>isRunning</code>存在于公共堆栈及线程的私有堆栈中.线程在运行时,一直是在从私有堆栈中取得<code>isRunning</code>的值(<code>true</code>),而主线程更新的却是公共堆栈中的<code>isRunning</code>中的变量值(<code>false</code>).所以就会一直处于死循环的状态.这个问题实质上就是私有堆栈和公有堆栈中的值不同步造成的.</p>
+
+<p><strong>解决方法1:</strong>对<code>isRunning</code>添加<code>volatile</code>关键字,强制线程从公共堆栈中取值.</p>
+
+<p><code>private volatile boolean isRunning = true;</code></p>
+
+<p>程序将正常执行,使用<code>volatile</code>关键字增加了实例变量在多个线程之间的可见性.但<code>volatile</code>最致命的缺点是不支持原子性.</p>
+
+<p><strong>解决方法2</strong>:使用<code>synchronized</code>代码块.更改<code>run()</code>方法如下.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;进入run()方法&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>isRunning<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//synchronized也具有可见性.
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;123&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;线程被停止了&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<p>程序正常输出.<strong>这同时也证明了关键字<code>synchronized</code>具有将线程工作内存中的私有变量与公共内存中的变量同步的功能</strong>.</p>
+
+<h2 id="3-2-synchronized-和-volatile-的不同">3.2<code>synchronized</code>和<code>volatile</code>的不同.</h2>
+
+<ol>
+<li>关键字<code>volatile</code>是线程同步的轻量级实现,所以性能肯定要比<code>synchronized</code>要好.</li>
+<li><code>volatile</code>只可修饰变量,而<code>synchronized</code>可以修饰方法,代码块.</li>
+<li><code>volatile</code>不会发生阻塞,而<code>synchronized</code>会发生阻塞.</li>
+<li><code>synchronized</code>可以保证原子性和可见性,而<code>volatile</code>只保证可见性.</li>
+</ol>
+
+<h2 id="3-3-volatile-非原子的特性">3.3<code>volatile</code>非原子的特性</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VolatileThread</span> <span style="color:#66d9ef">extends</span> Thread <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> count <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+
+    <span style="color:#75715e">//添加synchronized可解决线程安全问题
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addCount</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> 100<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            count<span style="color:#f92672">++;</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;count=&#34;</span> <span style="color:#f92672">+</span> count<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        addCount<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        VolatileThread<span style="color:#f92672">[]</span> volatileThreads <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> VolatileThread<span style="color:#f92672">[</span>100<span style="color:#f92672">];</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> 100<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            volatileThreads<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> VolatileThread<span style="color:#f92672">();</span>
+            volatileThreads<span style="color:#f92672">[</span>i<span style="color:#f92672">].</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>count=100
+count=200
+...
+count=4900
+count=4800
+</code></pre>
+
+<p>如果程序正常执行,<code>count</code>应当是按照递增的顺序一直增加到10000.如上输出明显有问题.是因为<code>volatile</code>并不保证原子性.</p>
+
+<p>表达式<code>i++</code>并不是一个原子操作,也就是非线程安全的.<code>i++</code>可以被分为三步:</p>
+
+<ol>
+<li>从内存中取出<code>i</code>的值;</li>
+<li>计算<code>i</code>的值;</li>
+<li>将<code>i</code>的值写到内存中.</li>
+</ol>
+
+<p>假如在第2步计算值的时候,另外一个线程也修改<code>i</code>的值,那么这个时候就会出现脏读数据.解决的方法就是<code>synchronized</code>关键字.<code>private synchronized static void addCount()</code>.执行方法,<strong>控制台输出:</strong></p>
+
+<pre><code>count=100
+count=200
+...
+count=9900
+count=10000
+</code></pre>
+
+<p>程序正常执行.</p>
+
+<h2 id="3-4使用原子类进行-i-操作">3.4使用原子类进行<code>i++</code>操作</h2>
+
+<p>除了在<code>i++</code>操作时使用<code>synchronized</code>关键字实现同步外,还可以使用<code>AtomicInteger</code>原子类进行实现.</p>
+
+<p>原子操作是不能分割的整体,没有其他线程能够中断或检查正在原子操作中的变量.一个原子<code>atomic</code>类型就是一个原子操作可用的类型,它可以在没有锁的情况下做到线程安全.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AtomicIntegerTest</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> AtomicInteger count <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AtomicInteger<span style="color:#f92672">(</span>0<span style="color:#f92672">);</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>10000<span style="color:#f92672">;</span>i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>count<span style="color:#f92672">.</span><span style="color:#a6e22e">incrementAndGet</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        AtomicIntegerTest atomic <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AtomicIntegerTest<span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>atomic<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>atomic<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>atomic<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>atomic<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>atomic<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>1
+2
+3
+...
+49999
+50000
+</code></pre>
+
+<h2 id="3-5原子类也并不完全安全">3.5原子类也并不完全安全</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AtomicIntegerUnSafe</span> <span style="color:#66d9ef">implements</span> Runnable<span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> AtomicInteger count <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AtomicInteger<span style="color:#f92672">(</span>0<span style="color:#f92672">);</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addCount</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>count<span style="color:#f92672">.</span><span style="color:#a6e22e">addAndGet</span><span style="color:#f92672">(</span>100<span style="color:#f92672">));</span>
+        count<span style="color:#f92672">.</span><span style="color:#a6e22e">addAndGet</span><span style="color:#f92672">(</span>1<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        addCount<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        AtomicIntegerUnSafe unSafe <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AtomicIntegerUnSafe<span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>unSafe<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>unSafe<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>unSafe<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>unSafe<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>unSafe<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><strong>控制台输出:</strong></p>
+
+<pre><code>100
+201
+301
+403
+504
+</code></pre>
+
+<p>可以看出程序不正常执行.出现这样的情况是因为<code>addAndGet()</code>方法是原子的,但是方法和方法之间的调用不是原子的.所以还是需要添加<code>synchronized</code>关键字.<code>public synchronized void addCount()</code>,执行方法,<strong>控制台输出</strong>:</p>
+
+<pre><code>100
+201
+302
+403
+504
+</code></pre>
+
+<p>程序正常执行.</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0"><span class="tag">Java多线程编程核心技术阅读笔记</span></a></li>
+        
+          <li><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80"><span class="tag">多线程基础</span></a></li>
+        
+      </ul>
+      
+      
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "http-wangjc95-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2019 BaseC的博客</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

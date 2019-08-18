@@ -6,10 +6,21 @@
     <description>Recent content in Java多线程编程核心技术阅读笔记 on BaseC的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 18 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://wangjc95.com/tags/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>对象及变量的并发访问</title>
+      <link>https://wangjc95.com/post/17-%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/</link>
+      <pubDate>Sun, 18 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangjc95.com/post/17-%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/</guid>
+      <description>介绍: 这是Java多线程编程核心技术阅读笔记
+1.synchronized同步方法 1.1方法内的变量为线程安全 非线程安全问题存在于实例变量中,如果是方法内部的私有变量,则不存在线程安全问题,所得结果也就是线程安全的了.
+public class MethodVariable { public void getNum(String username) { int num = 0; if (&amp;#34;a&amp;#34;.</description>
+    </item>
     
     <item>
       <title>线程的基本概念</title>
