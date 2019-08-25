@@ -6,10 +6,24 @@
     <description>Recent content in 多线程基础 on BaseC的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 18 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://wangjc95.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>线程间通信</title>
+      <link>https://wangjc95.com/post/18-%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangjc95.com/post/18-%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</guid>
+      <description>介绍: 这是Java多线程编程核心技术阅读笔记
+1.等待/通知机制 wait():使当前执行代码的线程进行等待.在调用wait()之前,线程必须获得该对象的对象级别锁,即只能在同步方法或同步代码块中调用wait()方法.在执行wait()方法后,当前线程释放锁.
+notify():通知那些等待该对象的对象锁的其它线程,如果有多个线程等待,则由线程规划器随机挑选出其中一个呈wait状态的线程,对其发出通知notify,并使它等待获取该对象的对象锁.notify()方法也要在同步方法或同步代码块中调用,即在调用前,线程也必须获得该对象的对象级别锁.需要说明的是,在执行notify方法后,当前线程不会马上释放该对象锁,呈wait状态的线程也并不能马上获得该对象锁,要等到执行notify()方法的线程将程序执行完,也就是退出synchronized代码块后,当前线程才会释放锁,而呈wait状态的线程才可以获取该对象锁.当第一个获得了该对象锁的wait线程执行完毕后,它会释放掉该对象锁,此时如果该对象没有再次调用notify()方法,即便该对象已经空闲,其它wait状态的线程由于没有得到该对象的通知,还会继续阻塞在wait状态,直到这个对象发出一个notify或notifyAll.
+notifyAll():使所有正在等待队列中等待同一共享资源的全部线程从等待状态退出,进入可运行状态.优先级高的那个线程最先执行,但也有可能是随机执行,因为这要取决于JVM虚拟机的实现.
+每个锁对象都有两个队列,一个是阻塞队列,另一个是就绪队列.阻塞队列存储了被阻塞的线程,就绪队列存储了将要获得锁的线程.线程在被wait后,就会进入阻塞队列,等待下一次被唤醒.线程被唤醒后,就会进入就绪队列,等待CPU的调度.
+1.1在同步代码中进行等待和通知 public class WaitNotifyTest1 { public static void main(String[] args) { Object obj = new Object(); try { obj.</description>
+    </item>
     
     <item>
       <title>对象及变量的并发访问</title>
