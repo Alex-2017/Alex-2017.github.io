@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring on BaseC的博客</title>
+    <link>https://wangjc95.com/tags/spring/</link>
+    <description>Recent content in Spring on BaseC的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 28 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://wangjc95.com/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Spring AOP加签验签</title>
+      <link>https://wangjc95.com/post/19-spring-aop%E5%8A%A0%E7%AD%BE%E9%AA%8C%E7%AD%BE/</link>
+      <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangjc95.com/post/19-spring-aop%E5%8A%A0%E7%AD%BE%E9%AA%8C%E7%AD%BE/</guid>
+      <description>1.场景 项目中需要对特定的接口进行验签和加签操作.对方法的请求参数验签,保证请求方的数据可信性.对方法的返回参数进行加签操作,确保发送方的数据可信性.验签和加签这两个方法已经封装到了一个Service中,只要在需要加签验签的接口调用此方法,就能满足需要.但是这样的方法会导致在接口中存在重复的验签,加签调用代码.
+我们来大致看下项目此时的情况(伪代码,主要看代码逻辑)
+基本信息返回类BaseResponse
+public class BaseResponse&amp;lt;T&amp;gt; { private String code; private String msg; private String sign; //getter setter方法  public BaseResponse(String code,String msg){ this.</description>
+    </item>
+    
+  </channel>
+</rss>

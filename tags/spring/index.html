@@ -6,7 +6,9 @@
 
   
   <title>
-  Tags | BaseC的博客
+  Tag → Spring
+  
+   | BaseC的博客
 </title>
 
   
@@ -41,7 +43,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="BaseC的博客">
   
-  <meta property="og:url" content="https://wangjc95.com/tags/">
+  <meta property="og:url" content="https://wangjc95.com/tags/spring/">
   <meta property="og:image" content="/images/avatar.png">
 
 
@@ -50,8 +52,8 @@
 <meta name="generator" content="Hugo 0.55.6">
 
 
-<link rel="canonical" href="https://wangjc95.com/tags/">
-<link rel="alternate" type="application/rss+xml" href="https://wangjc95.com/tags/index.xml" title="BaseC的博客">
+<link rel="canonical" href="https://wangjc95.com/tags/spring/">
+<link rel="alternate" type="application/rss+xml" href="https://wangjc95.com/tags/spring/index.xml" title="BaseC的博客">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -155,8 +157,8 @@
         </li>
       
         <li class="menu-item
-           is-active
           
+           is-active
           ">
           <a href="/tags/">标签</a>
         </li>
@@ -184,38 +186,31 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
-    <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+  <section class="main post-list">
+    <header class="list-header offscreen">
+      <h2 class="list-label">Posts List</h2>
     </header>
-    <div class="tags-cloud">
+    
+    
       
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/19-spring-aop%E5%8A%A0%E7%AD%BE%E9%AA%8C%E7%AD%BE/" class="post-link">Spring AOP加签验签</a></h3>
+    <p class="post-meta">@BaseC · Aug 28, 2019 · 4 min read</p>
+  </header>
+  
+  <p class="post-summary">1.场景 项目中需要对特定的接口进行验签和加签操作.对方法的请求参数验签,保证请求方的数据可信性.对方法的返回参数进行加签操作,确保发送方的数据可信性.验签和加签这两个方法已经封装到了一个Service中,只要在需要加签验签的接口调用此方法,就能满足需要.但是这样的方法会导致在接口中存在重复的验签,加签调用代码.
+我们来大致看下项目此时的情况(伪代码,主要看代码逻辑)
+基本信息返回类BaseResponse
+public class BaseResponse&lt;T&gt; { private String code; private String msg; private String sign; //getter setter方法  public BaseResponse(String code,String msg){ this.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/19-spring-aop%E5%8A%A0%E7%AD%BE%E9%AA%8C%E7%AD%BE/">Read More →</a>
+  </footer>
+</article>
+
       
-        
-        <a href="/tags/head-first-design-patterns%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="tag-xxl">head-first-design-patterns阅读笔记</a>
-      
-        
-        <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="tag-xxl">设计模式</a>
-      
-        
-        <a href="/tags/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="tag-xxl">java多线程编程核心技术阅读笔记</a>
-      
-        
-        <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="tag-xxl">多线程基础</a>
-      
-        
-        <a href="/tags/javase/" class="tag-m">javase</a>
-      
-        
-        <a href="/tags/%E7%96%AF%E7%8B%82java%E8%AE%B2%E4%B9%89%E7%AC%AC%E4%B8%89%E7%89%88%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="tag-m">疯狂java讲义第三版阅读笔记</a>
-      
-        
-        <a href="/tags/aop/" class="tag-s">aop</a>
-      
-        
-        <a href="/tags/spring/" class="tag-s">spring</a>
-      
-    </div>
+    
+    
   </section>
   
 <footer class="site-footer">
