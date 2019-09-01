@@ -6,7 +6,9 @@
 
   
   <title>
-  Tags | BaseC的博客
+  Tag → JVM基础
+  
+   | BaseC的博客
 </title>
 
   
@@ -41,7 +43,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="BaseC的博客">
   
-  <meta property="og:url" content="https://wangjc95.com/tags/">
+  <meta property="og:url" content="https://wangjc95.com/tags/jvm%E5%9F%BA%E7%A1%80/">
   <meta property="og:image" content="/images/avatar.png">
 
 
@@ -50,8 +52,8 @@
 <meta name="generator" content="Hugo 0.55.6">
 
 
-<link rel="canonical" href="https://wangjc95.com/tags/">
-<link rel="alternate" type="application/rss+xml" href="https://wangjc95.com/tags/index.xml" title="BaseC的博客">
+<link rel="canonical" href="https://wangjc95.com/tags/jvm%E5%9F%BA%E7%A1%80/">
+<link rel="alternate" type="application/rss+xml" href="https://wangjc95.com/tags/jvm%E5%9F%BA%E7%A1%80/index.xml" title="BaseC的博客">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -155,8 +157,8 @@
         </li>
       
         <li class="menu-item
-           is-active
           
+           is-active
           ">
           <a href="/tags/">标签</a>
         </li>
@@ -184,41 +186,32 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
-    <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+  <section class="main post-list">
+    <header class="list-header offscreen">
+      <h2 class="list-label">Posts List</h2>
     </header>
-    <div class="tags-cloud">
+    
+    
       
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9F/" class="post-link">运行时数据区域</a></h3>
+    <p class="post-meta">@BaseC · Sep 1, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而创建，有的区域则依赖用户线程的启动和结束而建立和销毁。
+JDK1.8和之前的版本略有不同：
+1.线程私有 1.1程序计数器 程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型里，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支，循环，跳转，异常处理，线程恢复等基础功能都需要依赖这个计数器来完成。
+由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，一个处理器只会执行一条线程中的指令。为了线程切换后能恢复到正确的执行位置，每条线程需要有一个独立的程序计数器。各条线程之间互不影响，独立存储。
+如果线程正在执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令地址。如果正在执行的是Native方法，这个计数器则为空（Undefined）。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9F/">Read More →</a>
+  </footer>
+</article>
+
       
-        
-        <a href="/tags/head-first-design-patterns%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="tag-xxl">head-first-design-patterns阅读笔记</a>
-      
-        
-        <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="tag-xxl">设计模式</a>
-      
-        
-        <a href="/tags/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="tag-xxl">java多线程编程核心技术阅读笔记</a>
-      
-        
-        <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="tag-xxl">多线程基础</a>
-      
-        
-        <a href="/tags/javase/" class="tag-m">javase</a>
-      
-        
-        <a href="/tags/%E7%96%AF%E7%8B%82java%E8%AE%B2%E4%B9%89%E7%AC%AC%E4%B8%89%E7%89%88%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="tag-m">疯狂java讲义第三版阅读笔记</a>
-      
-        
-        <a href="/tags/aop/" class="tag-s">aop</a>
-      
-        
-        <a href="/tags/jvm%E5%9F%BA%E7%A1%80/" class="tag-s">jvm基础</a>
-      
-        
-        <a href="/tags/spring/" class="tag-s">spring</a>
-      
-    </div>
+    
+    
   </section>
   
 <footer class="site-footer">

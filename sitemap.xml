@@ -8,19 +8,36 @@
   </url>
   
   <url>
-    <loc>https://wangjc95.com/tags/aop/</loc>
-    <lastmod>2019-08-28T00:00:00+00:00</lastmod>
+    <loc>https://wangjc95.com/</loc>
+    <lastmod>2019-09-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://wangjc95.com/</loc>
-    <lastmod>2019-08-28T00:00:00+00:00</lastmod>
+    <loc>https://wangjc95.com/tags/jvm%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2019-09-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wangjc95.com/post/</loc>
+    <lastmod>2019-09-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangjc95.com/tags/</loc>
+    <lastmod>2019-09-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9F/</loc>
+    <lastmod>2019-09-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wangjc95.com/tags/aop/</loc>
     <lastmod>2019-08-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -34,12 +51,6 @@
   <url>
     <loc>https://wangjc95.com/post/19-spring-aop%E5%8A%A0%E7%AD%BE%E9%AA%8C%E7%AD%BE/</loc>
     <lastmod>2019-08-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://wangjc95.com/tags/</loc>
-    <lastmod>2019-08-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

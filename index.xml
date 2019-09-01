@@ -6,7 +6,7 @@
     <description>Recent content on BaseC的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 28 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Sep 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://wangjc95.com/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,19 @@
       
       <guid>https://wangjc95.com/about/</guid>
       <description>BaseC,一个普普通通的程序猿!</description>
+    </item>
+    
+    <item>
+      <title>运行时数据区域</title>
+      <link>https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9F/</link>
+      <pubDate>Sun, 01 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9F/</guid>
+      <description>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而创建，有的区域则依赖用户线程的启动和结束而建立和销毁。
+JDK1.8和之前的版本略有不同：
+1.线程私有 1.1程序计数器 程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型里，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支，循环，跳转，异常处理，线程恢复等基础功能都需要依赖这个计数器来完成。
+由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，一个处理器只会执行一条线程中的指令。为了线程切换后能恢复到正确的执行位置，每条线程需要有一个独立的程序计数器。各条线程之间互不影响，独立存储。
+如果线程正在执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令地址。如果正在执行的是Native方法，这个计数器则为空（Undefined）。</description>
     </item>
     
     <item>
