@@ -6,7 +6,7 @@
 
   
   <title>
-  Tag → JVM基础
+  Tag → JDK源码
   
    | BaseC的博客
 </title>
@@ -43,7 +43,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="BaseC的博客">
   
-  <meta property="og:url" content="https://wangjc95.com/tags/jvm%E5%9F%BA%E7%A1%80/">
+  <meta property="og:url" content="https://wangjc95.com/tags/jdk%E6%BA%90%E7%A0%81/">
   <meta property="og:image" content="/images/avatar.png">
 
 
@@ -52,8 +52,8 @@
 <meta name="generator" content="Hugo 0.55.6">
 
 
-<link rel="canonical" href="https://wangjc95.com/tags/jvm%E5%9F%BA%E7%A1%80/">
-<link rel="alternate" type="application/rss+xml" href="https://wangjc95.com/tags/jvm%E5%9F%BA%E7%A1%80/index.xml" title="BaseC的博客">
+<link rel="canonical" href="https://wangjc95.com/tags/jdk%E6%BA%90%E7%A0%81/">
+<link rel="alternate" type="application/rss+xml" href="https://wangjc95.com/tags/jdk%E6%BA%90%E7%A0%81/index.xml" title="BaseC的博客">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -195,17 +195,14 @@
       
         <article class="post-entry">
   <header class="post-header">
-    <h3 class="post-title"><a href="https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9Fjava%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" class="post-link">运行时数据区域(Java内存结构)</a></h3>
-    <p class="post-meta">@BaseC · Sep 1, 2019 · 1 min read</p>
+    <h3 class="post-title"><a href="https://wangjc95.com/post/21-arraylist%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-jdk1.8/" class="post-link">ArrayList源码分析-JDK1.8</a></h3>
+    <p class="post-meta">@BaseC · Sep 4, 2019 · 5 min read</p>
   </header>
   
-  <p class="post-summary">Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而创建，有的区域则依赖用户线程的启动和结束而建立和销毁。
-JDK1.8和之前的版本略有不同：
-1.线程私有 1.1程序计数器 程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型里，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支，循环，跳转，异常处理，线程恢复等基础功能都需要依赖这个计数器来完成。
-由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，一个处理器只会执行一条线程中的指令。为了线程切换后能恢复到正确的执行位置，每条线程需要有一个独立的程序计数器。各条线程之间互不影响，独立存储。
-如果线程正在执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令地址。如果正在执行的是Native方法，这个计数器则为空（Undefined）。</p>
+  <p class="post-summary">1.概述 ArrayList本质上是一个数组,它内部通过对数组的操作实现了List功能,所以ArrayList又被叫做动态数组.每个ArrayList实例都有容量,会自动扩容.它可添加null,有序可重复,线程不安全.Vector和ArrayList内部实现基本是一致的,除了Vector添加了synchronized保证其线程安全.
+1.1继承体系 2.源码解析 2.1属性 /** * 默认初始容量 */ private static final int DEFAULT_CAPACITY = 10; /** * 初始容量为0时,elementData指向此对象(空元素对象) */ private static final Object[] EMPTY_ELEMENTDATA = {}; /** * 调用ArrayList()构造方法时,elementData指向此对象(默认容量空元素对象) */ private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {}; /** * 用于存储集合元素,非private类型能够简化内部类的访问(在编译阶段) */ transient Object[] elementData; /** * 包含的元素个数 */ private int size; 为什么DEFAULT_CAPACITY这种变量为什么要声明为private static final类型</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9Fjava%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">Read More →</a>
+    <a class="read-more" href="https://wangjc95.com/post/21-arraylist%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-jdk1.8/">Read More →</a>
   </footer>
 </article>
 

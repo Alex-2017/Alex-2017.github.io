@@ -6,8 +6,7 @@
 
   
   <title>
-  Tag → JVM基础
-  
+  Posts
    | BaseC的博客
 </title>
 
@@ -43,7 +42,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="BaseC的博客">
   
-  <meta property="og:url" content="https://wangjc95.com/tags/jvm%E5%9F%BA%E7%A1%80/">
+  <meta property="og:url" content="https://wangjc95.com/post/">
   <meta property="og:image" content="/images/avatar.png">
 
 
@@ -52,8 +51,8 @@
 <meta name="generator" content="Hugo 0.55.6">
 
 
-<link rel="canonical" href="https://wangjc95.com/tags/jvm%E5%9F%BA%E7%A1%80/">
-<link rel="alternate" type="application/rss+xml" href="https://wangjc95.com/tags/jvm%E5%9F%BA%E7%A1%80/index.xml" title="BaseC的博客">
+<link rel="canonical" href="https://wangjc95.com/post/">
+<link rel="alternate" type="application/rss+xml" href="https://wangjc95.com/post/index.xml" title="BaseC的博客">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -152,13 +151,13 @@
         <li class="menu-item
           
           
-          ">
+           is-active">
           <a href="/">首页</a>
         </li>
       
         <li class="menu-item
           
-           is-active
+          
           ">
           <a href="/tags/">标签</a>
         </li>
@@ -195,22 +194,30 @@
       
         <article class="post-entry">
   <header class="post-header">
-    <h3 class="post-title"><a href="https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9Fjava%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" class="post-link">运行时数据区域(Java内存结构)</a></h3>
-    <p class="post-meta">@BaseC · Sep 1, 2019 · 1 min read</p>
+    <h3 class="post-title"><a href="https://wangjc95.com/post/1-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" class="post-link">策略模式</a></h3>
+    <p class="post-meta">@BaseC · Feb 13, 2019 · 2 min read</p>
   </header>
   
-  <p class="post-summary">Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而创建，有的区域则依赖用户线程的启动和结束而建立和销毁。
-JDK1.8和之前的版本略有不同：
-1.线程私有 1.1程序计数器 程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型里，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支，循环，跳转，异常处理，线程恢复等基础功能都需要依赖这个计数器来完成。
-由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，一个处理器只会执行一条线程中的指令。为了线程切换后能恢复到正确的执行位置，每条线程需要有一个独立的程序计数器。各条线程之间互不影响，独立存储。
-如果线程正在执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令地址。如果正在执行的是Native方法，这个计数器则为空（Undefined）。</p>
+  <p class="post-summary">介绍: 这是head first design patterns阅读笔记.
+1.应用场景 我们有一个鸭子模拟器,通过Duck父类表示鸭子的行为,子类通过重写display方法来表示鸭子的特征行为.现在有一个新需求,需要添加一个fly方法,让鸭子飞起来.
+2.解决思路 2.1在父类中添加fly方法 RubberDuck无法飞行,所以需要重写fly方法.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9Fjava%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">Read More →</a>
+    <a class="read-more" href="https://wangjc95.com/post/1-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">Read More →</a>
   </footer>
 </article>
 
       
     
+    
+      <footer class="list-footer">
+        <nav class="pagination">
+          <h3 class="offscreen">Pagination</h3>
+          
+            <a class="pagination-previous" href="/post/page/2/">← Newer Posts</a>
+          
+          
+        </nav>
+      </footer>
     
   </section>
   
