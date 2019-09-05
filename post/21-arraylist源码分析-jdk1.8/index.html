@@ -476,7 +476,7 @@
 
 <h2 id="2-5遍历">2.5遍历</h2>
 
-<p><code>ArrayList</code>实现了<code>RandomAccess</code>接口.<code>RandomAccess</code>是标识接口,标识实现类能够快速随机访问存储元素.因为<code>ArrayList</code>的底层是数组,通过下标<code>index</code>访问.所以在<code>ArrayList</code>元素量较大时,应当使用普通<code>for</code>循环,也就是通过下标进行访问.而<code>LinkedList</code>此层是链表,不具备快速随机访问的能力,因此没有实现<code>RandomAccess</code>接口,推荐使用<code>forEach</code>遍历(也就是<code>Iterator</code>遍历).</p>
+<p><code>ArrayList</code>实现了<code>RandomAccess</code>接口.<code>RandomAccess</code>是标识接口,标识实现类能够快速随机访问存储元素.因为<code>ArrayList</code>的底层是数组,通过下标<code>index</code>访问.所以在<code>ArrayList</code>元素量较大时,应当使用普通<code>for</code>循环,也就是通过下标进行访问.而<code>LinkedList</code>底层是链表,不具备快速随机访问的能力,因此没有实现<code>RandomAccess</code>接口,推荐使用<code>forEach</code>遍历(也就是<code>Iterator</code>遍历).</p>
 
 <p><strong>测试代码:</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
@@ -551,7 +551,7 @@ Iterator遍历用时:3ms
 
 <h2 id="3-2-fail-fast-失效">3.2<code>fail-fast</code>失效</h2>
 
-<p>在<code>forEach</code>中删除<code>List</code>的倒数第二个元素,<code>fail-fast</code>不会生效.</p>
+<p>在<code>forEach</code>中使用非<code>iterator</code>方法删除<code>List</code>的倒数第二个元素,<code>fail-fast</code>不会生效.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> list <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;(</span>Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">asList</span><span style="color:#f92672">(</span>1<span style="color:#f92672">,</span> 2<span style="color:#f92672">));</span>
