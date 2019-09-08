@@ -195,6 +195,23 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/22-hotspot%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E6%8E%A2%E7%A7%98/" class="post-link">HotSpot虚拟机对象揭秘</a></h3>
+    <p class="post-meta">@BaseC · Sep 8, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">本博客旨在介绍HotSpot虚拟机在Java堆中对象的创建，内存布局和访问定位的过程。
+1.对象的创建   下图是对象的创建流程：
+1.1类加载检查   虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载，解析和初始化过。如果没有，那必须先执行相应的类加载过程。
+1.2分配内存   在类加载检查通过后，接下来虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定，为对象分配空间的任务等同于把一块确定大小的内存从Java堆中划分出来。
+1.2.1内存分配方式  指针碰撞：如果Java堆中内存是绝对规整的，所有用过的内存都放在一边，空闲的内存放在另一边，中间放着一个指针作为分界点的指示器，那所分配内存就仅仅是把那个指针向空闲空间那边挪动一段与对象大小相等的距离； 空闲列表：如果Java堆中的内存不是规整的，已使用的内存和空闲的内存相互交错，那就没有办法简单地进行指针碰撞了，虚拟机就必须维护一个列表，记录那些内存块是可用的，在分配的时候找到一块足够大的空间划分给对象实例，并更新列表上的记录。  1.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/22-hotspot%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E6%8E%A2%E7%A7%98/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9Fjava%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" class="post-link">运行时数据区域(Java内存结构)</a></h3>
     <p class="post-meta">@BaseC · Sep 1, 2019 · 1 min read</p>
   </header>

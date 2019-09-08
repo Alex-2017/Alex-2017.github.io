@@ -189,6 +189,21 @@
   
    <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/22-hotspot%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E6%8E%A2%E7%A7%98/" class="post-link">HotSpot虚拟机对象揭秘</a></h3>
+    <p class="post-meta">@BaseC · Sep 8, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">本博客旨在介绍HotSpot虚拟机在Java堆中对象的创建，内存布局和访问定位的过程。
+1.对象的创建   下图是对象的创建流程：
+1.1类加载检查   虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载，解析和初始化过。如果没有，那必须先执行相应的类加载过程。
+1.2分配内存   在类加载检查通过后，接下来虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定，为对象分配空间的任务等同于把一块确定大小的内存从Java堆中划分出来。
+1.2.1内存分配方式  指针碰撞：如果Java堆中内存是绝对规整的，所有用过的内存都放在一边，空闲的内存放在另一边，中间放着一个指针作为分界点的指示器，那所分配内存就仅仅是把那个指针向空闲空间那边挪动一段与对象大小相等的距离； 空闲列表：如果Java堆中的内存不是规整的，已使用的内存和空闲的内存相互交错，那就没有办法简单地进行指针碰撞了，虚拟机就必须维护一个列表，记录那些内存块是可用的，在分配的时候找到一块足够大的空间划分给对象实例，并更新列表上的记录。  1.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/22-hotspot%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E6%8E%A2%E7%A7%98/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://wangjc95.com/post/21-arraylist%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-jdk1.8/" class="post-link">ArrayList源码分析-JDK1.8</a></h3>
     <p class="post-meta">@BaseC · Sep 4, 2019 · 5 min read</p>
   </header>
@@ -312,20 +327,6 @@ value成员变量的值只能是如下三个:
 1.2特点  代理模式为另一个对象提供代表,以便控制客户对对象的访问,管理访问的方式有许多种.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://wangjc95.com/post/12-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" class="post-link">状态模式</a></h3>
-    <p class="post-meta">@BaseC · Apr 27, 2019 · 6 min read</p>
-  </header>
-  
-  <p class="post-summary">介绍: 这是head first design patterns阅读笔记.
-1.场景介绍 假设我们要为糖果机设置一个控制器,来控制糖果器正常运转.控制流程如下图所示.
-这张图可以这么理解:
-糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://wangjc95.com/post/12-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">Read More →</a>
   </footer>
 </article>
  
