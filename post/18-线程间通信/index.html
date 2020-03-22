@@ -27,11 +27,11 @@
   
   
   <meta name="description" content="介绍: 这是Java多线程编程核心技术阅读笔记
-1.等待/通知机制 wait():使当前执行代码的线程进行等待.在调用wait()之前,线程必须获得该对象的对象级别锁,即只能在同步方法或同步代码块中调用wait()方法.在执行wait()方法后,当前线程释放锁.
+1.等待/通知机制 **wait():**使当前执行代码的线程进行等待.在调用wait()之前,线程必须获得该对象的对象级别锁,即只能在同步方法或同步代码块中调用wait()方法.在执行wait()方法后,当前线程释放锁.
 notify():通知那些等待该对象的对象锁的其它线程,如果有多个线程等待,则由线程规划器随机挑选出其中一个呈wait状态的线程,对其发出通知notify,并使它等待获取该对象的对象锁.notify()方法也要在同步方法或同步代码块中调用,即在调用前,线程也必须获得该对象的对象级别锁.需要说明的是,在执行notify方法后,当前线程不会马上释放该对象锁,呈wait状态的线程也并不能马上获得该对象锁,要等到执行notify()方法的线程将程序执行完,也就是退出synchronized代码块后,当前线程才会释放锁,而呈wait状态的线程才可以获取该对象锁.当第一个获得了该对象锁的wait线程执行完毕后,它会释放掉该对象锁,此时如果该对象没有再次调用notify()方法,即便该对象已经空闲,其它wait状态的线程由于没有得到该对象的通知,还会继续阻塞在wait状态,直到这个对象发出一个notify或notifyAll.
 notifyAll():使所有正在等待队列中等待同一共享资源的全部线程从等待状态退出,进入可运行状态.优先级高的那个线程最先执行,但也有可能是随机执行,因为这要取决于JVM虚拟机的实现.
 每个锁对象都有两个队列,一个是阻塞队列,另一个是就绪队列.阻塞队列存储了被阻塞的线程,就绪队列存储了将要获得锁的线程.线程在被wait后,就会进入阻塞队列,等待下一次被唤醒.线程被唤醒后,就会进入就绪队列,等待CPU的调度.
-1.1在同步代码中进行等待和通知 public class WaitNotifyTest1 { public static void main(String[] args) { Object obj = new Object(); try { obj.">
+1.1在同步代码中进行等待和通知 public class WaitNotifyTest1 {public static void main(String[] args) {Object obj = new Object();try {obj.">
 
   
   
@@ -39,30 +39,30 @@ notifyAll():使所有正在等待队列中等待同一共享资源的全部线�
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="线程间通信">
     <meta name="twitter:description" content="介绍: 这是Java多线程编程核心技术阅读笔记
-1.等待/通知机制 wait():使当前执行代码的线程进行等待.在调用wait()之前,线程必须获得该对象的对象级别锁,即只能在同步方法或同步代码块中调用wait()方法.在执行wait()方法后,当前线程释放锁.
+1.等待/通知机制 **wait():**使当前执行代码的线程进行等待.在调用wait()之前,线程必须获得该对象的对象级别锁,即只能在同步方法或同步代码块中调用wait()方法.在执行wait()方法后,当前线程释放锁.
 notify():通知那些等待该对象的对象锁的其它线程,如果有多个线程等待,则由线程规划器随机挑选出其中一个呈wait状态的线程,对其发出通知notify,并使它等待获取该对象的对象锁.notify()方法也要在同步方法或同步代码块中调用,即在调用前,线程也必须获得该对象的对象级别锁.需要说明的是,在执行notify方法后,当前线程不会马上释放该对象锁,呈wait状态的线程也并不能马上获得该对象锁,要等到执行notify()方法的线程将程序执行完,也就是退出synchronized代码块后,当前线程才会释放锁,而呈wait状态的线程才可以获取该对象锁.当第一个获得了该对象锁的wait线程执行完毕后,它会释放掉该对象锁,此时如果该对象没有再次调用notify()方法,即便该对象已经空闲,其它wait状态的线程由于没有得到该对象的通知,还会继续阻塞在wait状态,直到这个对象发出一个notify或notifyAll.
 notifyAll():使所有正在等待队列中等待同一共享资源的全部线程从等待状态退出,进入可运行状态.优先级高的那个线程最先执行,但也有可能是随机执行,因为这要取决于JVM虚拟机的实现.
 每个锁对象都有两个队列,一个是阻塞队列,另一个是就绪队列.阻塞队列存储了被阻塞的线程,就绪队列存储了将要获得锁的线程.线程在被wait后,就会进入阻塞队列,等待下一次被唤醒.线程被唤醒后,就会进入就绪队列,等待CPU的调度.
-1.1在同步代码中进行等待和通知 public class WaitNotifyTest1 { public static void main(String[] args) { Object obj = new Object(); try { obj.">
-    <meta name="twitter:image" content="/images/avatar.png">
+1.1在同步代码中进行等待和通知 public class WaitNotifyTest1 {public static void main(String[] args) {Object obj = new Object();try {obj.">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="线程间通信">
   <meta property="og:description" content="介绍: 这是Java多线程编程核心技术阅读笔记
-1.等待/通知机制 wait():使当前执行代码的线程进行等待.在调用wait()之前,线程必须获得该对象的对象级别锁,即只能在同步方法或同步代码块中调用wait()方法.在执行wait()方法后,当前线程释放锁.
+1.等待/通知机制 **wait():**使当前执行代码的线程进行等待.在调用wait()之前,线程必须获得该对象的对象级别锁,即只能在同步方法或同步代码块中调用wait()方法.在执行wait()方法后,当前线程释放锁.
 notify():通知那些等待该对象的对象锁的其它线程,如果有多个线程等待,则由线程规划器随机挑选出其中一个呈wait状态的线程,对其发出通知notify,并使它等待获取该对象的对象锁.notify()方法也要在同步方法或同步代码块中调用,即在调用前,线程也必须获得该对象的对象级别锁.需要说明的是,在执行notify方法后,当前线程不会马上释放该对象锁,呈wait状态的线程也并不能马上获得该对象锁,要等到执行notify()方法的线程将程序执行完,也就是退出synchronized代码块后,当前线程才会释放锁,而呈wait状态的线程才可以获取该对象锁.当第一个获得了该对象锁的wait线程执行完毕后,它会释放掉该对象锁,此时如果该对象没有再次调用notify()方法,即便该对象已经空闲,其它wait状态的线程由于没有得到该对象的通知,还会继续阻塞在wait状态,直到这个对象发出一个notify或notifyAll.
 notifyAll():使所有正在等待队列中等待同一共享资源的全部线程从等待状态退出,进入可运行状态.优先级高的那个线程最先执行,但也有可能是随机执行,因为这要取决于JVM虚拟机的实现.
 每个锁对象都有两个队列,一个是阻塞队列,另一个是就绪队列.阻塞队列存储了被阻塞的线程,就绪队列存储了将要获得锁的线程.线程在被wait后,就会进入阻塞队列,等待下一次被唤醒.线程被唤醒后,就会进入就绪队列,等待CPU的调度.
-1.1在同步代码中进行等待和通知 public class WaitNotifyTest1 { public static void main(String[] args) { Object obj = new Object(); try { obj.">
+1.1在同步代码中进行等待和通知 public class WaitNotifyTest1 {public static void main(String[] args) {Object obj = new Object();try {obj.">
   <meta property="og:url" content="https://wangjc95.com/post/18-%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.55.6">
+<meta name="generator" content="Hugo 0.68.0">
 
 
 <link rel="canonical" href="https://wangjc95.com/post/18-%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/">
@@ -102,7 +102,7 @@ notifyAll():使所有正在等待队列中等待同一共享资源的全部线�
 
 
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/avatar.jpg" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
 
 
@@ -153,11 +153,11 @@ notifyAll():使所有正在等待队列中等待同一共享资源的全部线�
     
     
   <header class="site-header">
-  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
   
   <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
   
-  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <p class="subtitle">安定的内心与长期的坚持</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -211,21 +211,13 @@ notifyAll():使所有正在等待队列中等待同一共享资源的全部线�
       <h1 class="post-title">线程间通信</h1>
       <p class="post-meta">@BaseC · Aug 25, 2019 · 8 min read</p>
     </header>
-    <article class="post-content">
-
-<p><strong>介绍:</strong> 这是<code>Java</code>多线程编程核心技术阅读笔记</p>
-
-<h1 id="1-等待-通知机制">1.等待/通知机制</h1>
-
-<p><strong><code>wait()</code>:</strong>使当前执行代码的线程进行等待.在调用<code>wait()</code>之前,线程必须获得该对象的对象级别锁,即只能在同步方法或同步代码块中调用<code>wait()</code>方法.在执行<code>wait()</code>方法后,当前线程释放锁.</p>
-
+    <article class="post-content"><p><strong>介绍:</strong> 这是<code>Java</code>多线程编程核心技术阅读笔记</p>
+<h1 id="1等待通知机制">1.等待/通知机制</h1>
+<p>**<code>wait()</code>:**使当前执行代码的线程进行等待.在调用<code>wait()</code>之前,线程必须获得该对象的对象级别锁,即只能在同步方法或同步代码块中调用<code>wait()</code>方法.在执行<code>wait()</code>方法后,当前线程释放锁.</p>
 <p><strong><code>notify():</code></strong>通知那些等待该对象的对象锁的其它线程,如果有多个线程等待,则由线程规划器随机挑选出其中一个呈<code>wait</code>状态的线程,对其发出通知<code>notify</code>,并使它等待获取该对象的对象锁.<code>notify()</code>方法也要在同步方法或同步代码块中调用,即在调用前,线程也必须获得该对象的对象级别锁.需要说明的是,在执行<code>notify</code>方法后,当前线程不会马上释放该对象锁,呈<code>wait</code>状态的线程也并不能马上获得该对象锁,要等到执行<code>notify()</code>方法的线程将程序执行完,也就是退出<code>synchronized</code>代码块后,当前线程才会释放锁,而呈<code>wait</code>状态的线程才可以获取该对象锁.当第一个获得了该对象锁的<code>wait</code>线程执行完毕后,它会释放掉该对象锁,此时如果该对象没有再次调用<code>notify()</code>方法,即便该对象已经空闲,其它<code>wait</code>状态的线程由于没有得到该对象的通知,还会继续阻塞在<code>wait</code>状态,直到这个对象发出一个<code>notify</code>或<code>notifyAll</code>.</p>
-
 <p><strong><code>notifyAll():</code></strong>使所有正在等待队列中等待同一共享资源的全部线程从等待状态退出,进入可运行状态.优先级高的那个线程最先执行,但也有可能是随机执行,因为这要取决于<code>JVM</code>虚拟机的实现.</p>
-
 <p>每个锁对象都有两个队列,一个是阻塞队列,另一个是就绪队列.阻塞队列存储了被阻塞的线程,就绪队列存储了将要获得锁的线程.线程在被<code>wait</code>后,就会进入阻塞队列,等待下一次被唤醒.线程被唤醒后,就会进入就绪队列,等待<code>CPU</code>的调度.</p>
-
-<h2 id="1-1在同步代码中进行等待和通知">1.1在同步代码中进行等待和通知</h2>
+<h2 id="11在同步代码中进行等待和通知">1.1在同步代码中进行等待和通知</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WaitNotifyTest1</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         Object obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Object<span style="color:#f92672">();</span>
@@ -236,10 +228,9 @@ notifyAll():使所有正在等待队列中等待同一共享资源的全部线�
         <span style="color:#f92672">}</span>
         <span style="color:#75715e">//obj.notify();
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p>如果对象调用<code>wait()</code>或<code>notify()</code>方法时没有在同步方法或同步代码块中,程序会抛出<code>IllegalMonitorStateException</code>.</p>
-
-<h2 id="1-2等待-通知机制的实现">1.2等待/通知机制的实现</h2>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>如果对象调用<code>wait()</code>或<code>notify()</code>方法时没有在同步方法或同步代码块中,程序会抛出<code>IllegalMonitorStateException</code>.</p>
+<h2 id="12等待通知机制的实现">1.2等待/通知机制的实现</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WaitNotifyTest2</span> <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> InterruptedException <span style="color:#f92672">{</span>
@@ -276,18 +267,14 @@ notifyAll():使所有正在等待队列中等待同一共享资源的全部线�
 </span><span style="color:#75715e"></span>        Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>1000<span style="color:#f92672">);</span>
         threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>threadA begin wait at 1566133775795
 threadB begin notify at 1566133776806
 threadB end notify at 1566133777312
 threadA end wait at 1566133777312
-</code></pre>
-
-<p>从程序的输出中可以看出,<code>threadA</code>恢复执行是在<code>threadB</code>执行完同步代码块之后,<code>threadA</code>才恢复执行.说明执行<code>notify()</code>方法之后不会立即释放锁.</p>
-
-<h2 id="1-3-wait-方法释放锁-sleep-方法不释放锁">1.3<code>wait</code>方法释放锁,<code>sleep</code>方法不释放锁</h2>
+</code></pre><p>从程序的输出中可以看出,<code>threadA</code>恢复执行是在<code>threadB</code>执行完同步代码块之后,<code>threadA</code>才恢复执行.说明执行<code>notify()</code>方法之后不会立即释放锁.</p>
+<h2 id="13wait方法释放锁sleep方法不释放锁">1.3<code>wait</code>方法释放锁,<code>sleep</code>方法不释放锁</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WaitSleepTest</span> <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testWait</span><span style="color:#f92672">(</span>Object lock<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -333,27 +320,18 @@ threadA end wait at 1566133777312
         threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
 
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>threadA begin wait at 1566134487153
 threadB begin wait at 1566134487153
-</code></pre>
-
-<p>可以看出两个线程开始执行的时间相同,说明<code>wait()</code>执行之后,会释放锁.</p>
-
+</code></pre><p>可以看出两个线程开始执行的时间相同,说明<code>wait()</code>执行之后,会释放锁.</p>
 <p>随后将两个线程中的<code>test</code>的调用方法从<code>testWait(lock)</code>改为<code>testSleep(lock)</code>方法.执行方法,控制台输出:</p>
-
 <pre><code>threadA begin sleep at 1566134794850
 threadA end sleep at 1566134797861
 threadB begin sleep at 1566134797861
 threadB end sleep at 1566134800872
-</code></pre>
-
-<p>两个线程同步执行,说明<code>sleep()</code>方法不会释放锁.</p>
-
-<h2 id="1-4当-interrupt-方法遇到-wait-方法">1.4当<code>interrupt</code>方法遇到<code>wait</code>方法</h2>
-
+</code></pre><p>两个线程同步执行,说明<code>sleep()</code>方法不会释放锁.</p>
+<h2 id="14当interrupt方法遇到wait方法">1.4当<code>interrupt</code>方法遇到<code>wait</code>方法</h2>
 <p>当线程呈<code>wait()</code>状态时,调用线程对象的<code>interrupt()</code>方法会抛出<code>InterruptedException</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WaitInterruptTest</span> <span style="color:#f92672">{</span>
 
@@ -377,14 +355,11 @@ threadB end sleep at 1566134800872
 </span><span style="color:#75715e"></span>        Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>1000<span style="color:#f92672">);</span>
         thread<span style="color:#f92672">.</span><span style="color:#a6e22e">interrupt</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>begin wait
 java.lang.InterruptedException
-</code></pre>
-
-<h2 id="1-5唤醒所有线程">1.5唤醒所有线程</h2>
+</code></pre><h2 id="15唤醒所有线程">1.5唤醒所有线程</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WaitNotifyTest3</span> <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">waitMethod</span><span style="color:#f92672">(</span>Object lock<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -435,31 +410,22 @@ java.lang.InterruptedException
 
         notifyThread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>threadA begin wait
 threadC begin wait
 threadB begin wait
 threadA end wait
-</code></pre>
-
-<p>可以看出,如果只唤醒一个进程会导致其余进程一直处于等待状态.</p>
-
+</code></pre><p>可以看出,如果只唤醒一个进程会导致其余进程一直处于等待状态.</p>
 <p>将<code>notifyThread</code>中的方法变为<code>lock.notifyAll()</code>,运行方法,<strong>控制台输出:</strong></p>
-
 <pre><code>threadA begin wait
 threadC begin wait
 threadB begin wait
 threadB end wait
 threadC end wait
 threadA end wait
-</code></pre>
-
-<p>能够使所有线程从等待状态恢复.</p>
-
-<h2 id="1-6方法-wait-long-的使用">1.6方法<code>wait(long)</code>的使用</h2>
-
+</code></pre><p>能够使所有线程从等待状态恢复.</p>
+<h2 id="16方法waitlong的使用">1.6方法<code>wait(long)</code>的使用</h2>
 <p>带一个参数的<code>wait(long)</code>方法的功能是等待某一时间内是否有线程对锁进行唤醒,如果超过这个时间则自动唤醒.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WaitLongTest</span> <span style="color:#f92672">{</span>
 
@@ -480,14 +446,11 @@ threadA end wait
 
         thread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>begin wait
 end wait
-</code></pre>
-
-<h2 id="1-7等待-wait-的条件发生变化">1.7等待<code>wait</code>的条件发生变化</h2>
+</code></pre><h2 id="17等待wait的条件发生变化">1.7等待<code>wait</code>的条件发生变化</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WaitNotifyTest4</span> <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">private</span> List list <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">();</span>
@@ -523,9 +486,9 @@ end wait
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> InterruptedException <span style="color:#f92672">{</span>
         WaitNotifyTest4 test <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> WaitNotifyTest4<span style="color:#f92672">();</span>
 
-        Thread subA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>test:<span style="color:#f92672">:</span>subtract<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;subA&#34;</span><span style="color:#f92672">);</span>
-        Thread subB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>test:<span style="color:#f92672">:</span>subtract<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;subB&#34;</span><span style="color:#f92672">);</span>
-        Thread addThread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>test:<span style="color:#f92672">:</span>add<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;addThread&#34;</span><span style="color:#f92672">);</span>
+        Thread subA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>test<span style="color:#f92672">::</span>subtract<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;subA&#34;</span><span style="color:#f92672">);</span>
+        Thread subB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>test<span style="color:#f92672">::</span>subtract<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;subB&#34;</span><span style="color:#f92672">);</span>
+        Thread addThread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>test<span style="color:#f92672">::</span>add<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;addThread&#34;</span><span style="color:#f92672">);</span>
 
         subA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         subB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
@@ -535,22 +498,17 @@ end wait
 
         addThread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>subA begin wait
 subB begin wait
 subB end wait
 subB 's list size is 0
 subA end wait
 Exception in thread &quot;subA&quot; java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
-</code></pre>
-
-<p>出现这样异常的原因是因为有两个具有<code>remove()</code>执行操作的线程,它们在<code>Thread.sleep(1000)</code>之前都执行了<code>wait()</code>方法,呈等待状态.当<code>addThread</code>执行并唤醒所有等待线程之后,那么第一个执行的等待线程能够正常执行删除操作,而第二个线程在执行此操作时则会出现索引溢出的异常.因为<code>list</code>中仅仅添加了一个数据,也只能删除一个数据.</p>
-
-<h2 id="1-8生产者-消费者模式实现">1.8生产者/消费者模式实现</h2>
-
-<h3 id="1-8-1一生产一消费">1.8.1一生产一消费</h3>
+</code></pre><p>出现这样异常的原因是因为有两个具有<code>remove()</code>执行操作的线程,它们在<code>Thread.sleep(1000)</code>之前都执行了<code>wait()</code>方法,呈等待状态.当<code>addThread</code>执行并唤醒所有等待线程之后,那么第一个执行的等待线程能够正常执行删除操作,而第二个线程在执行此操作时则会出现索引溢出的异常.因为<code>list</code>中仅仅添加了一个数据,也只能删除一个数据.</p>
+<h2 id="18生产者消费者模式实现">1.8生产者/消费者模式实现</h2>
+<h3 id="181一生产一消费">1.8.1一生产一消费</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProConTest1</span> <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">private</span> String value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">;</span>
@@ -606,17 +564,14 @@ Exception in thread &quot;subA&quot; java.lang.IndexOutOfBoundsException: Index:
         proThread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         conThread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>proThread produce 40506994664700
 conThread consume 40506994664700
 proThread produce 40506994689600
 conThread consume 40506994689600
 proThread produce 40506994709000
-</code></pre>
-
-<h3 id="1-8-2多生产与多消费-操作值-假死">1.8.2多生产与多消费:操作值-假死</h3>
+</code></pre><h3 id="182多生产与多消费操作值-假死">1.8.2多生产与多消费:操作值-假死</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProConTest2</span> <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">private</span> Object lock <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Object<span style="color:#f92672">();</span>
@@ -682,9 +637,8 @@ proThread produce 40506994709000
             conThreadArr<span style="color:#f92672">[</span>i<span style="color:#f92672">].</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>conThread1 begin wait
 conThread2 begin wait
 proThread1 begin produce
@@ -698,19 +652,12 @@ proThread2 begin produce
 proThread2 begin wait
 proThread1 end wait
 proThread1 begin wait
-</code></pre>
-
-<p>程序会进入假死状态,这是因为<code>notify()</code>方法唤醒的是异类,也许是同类.比如生产者唤醒生产者或消费者唤起消费者,就会导致所有的线程都不能继续进行下去,大家都在等待,都呈<code>WAITTING</code>状态.</p>
-
+</code></pre><p>程序会进入假死状态,这是因为<code>notify()</code>方法唤醒的是异类,也许是同类.比如生产者唤醒生产者或消费者唤起消费者,就会导致所有的线程都不能继续进行下去,大家都在等待,都呈<code>WAITTING</code>状态.</p>
 <p>解决方法就是将<code>notify()</code>方法换为<code>notifyAll()</code>方法,唤醒的是所有的线程,这样就不会存在假死问题.</p>
-
-<h2 id="1-9通过管道进行线程间通信">1.9通过管道进行线程间通信</h2>
-
+<h2 id="19通过管道进行线程间通信">1.9通过管道进行线程间通信</h2>
 <p>在<code>Java</code>语言中提供了各种各样的输入/输出流<code>Stream</code>,使我们能够很方便地对数据进行操作,其中管道流(<code>pipeStream</code>)是一种特殊的流,用于在不同线程间直接传送数据.一个线程发送数据到输出管道,另一个线程从输入管道中读数据.</p>
-
-<p><strong>字节流:</strong><code>PipedInputStream</code>和<code>PipedOutputStream</code></p>
-
-<p><strong>字符流:</strong><code>PipedReader</code>和<code>PipedWriter</code></p>
+<p>**字节流:**<code>PipedInputStream</code>和<code>PipedOutputStream</code></p>
+<p>**字符流:**<code>PipedReader</code>和<code>PipedWriter</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InputOutputTest</span> <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">writeMethod</span><span style="color:#f92672">(</span>PipedOutputStream out<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -768,19 +715,15 @@ proThread1 begin wait
         readThread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         writeThread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>begin read
 begin write
 1234567891011121314151617181920
 end write
 1234567891011121314151617181920
 end read
-</code></pre>
-
-<h1 id="2-方法-join-的使用">2.方法<code>join</code>的使用</h1>
-
+</code></pre><h1 id="2方法join的使用">2.方法<code>join</code>的使用</h1>
 <p><code>join()</code>的作用是使调用<code>join()</code>方法的线程正常执行<code>run()</code>方法中的任务,而使当前线程阻塞,等待调用线程执行完之后再继续执行当前线程的代码.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JoinTest</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -802,22 +745,15 @@ end read
         <span style="color:#f92672">}</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;main over&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>joinThread begin sleep 5485ms
 joinThread end sleep 5485ms
 main over
-</code></pre>
-
-<p><code>join()</code>与<code>synchronized</code>的区别是:<code>join()</code>在内部使用<code>wait()</code>方法进行等待,所以<code>join()</code>也会释放锁,而<code>synchronized</code>关键字使用的是<strong>对象监视器</strong>原理作为同步.</p>
-
+</code></pre><p><code>join()</code>与<code>synchronized</code>的区别是:<code>join()</code>在内部使用<code>wait()</code>方法进行等待,所以<code>join()</code>也会释放锁,而<code>synchronized</code>关键字使用的是<strong>对象监视器</strong>原理作为同步.</p>
 <p><code>join(long)</code>中的参数是设定等待的时间,超出等待时间后,阻塞线程将会被唤醒.</p>
-
-<h1 id="3-类-threadlocal-的使用">3.类<code>ThreadLocal</code>的使用</h1>
-
-<h2 id="3-1验证线程变量的隔离性">3.1验证线程变量的隔离性</h2>
-
+<h1 id="3类threadlocal的使用">3.类<code>ThreadLocal</code>的使用</h1>
+<h2 id="31验证线程变量的隔离性">3.1验证线程变量的隔离性</h2>
 <p>类<code>ThreadLocal</code>解决的是变量在不同线程间的隔离性,也就是不同线程拥有自己的值,不同线程中的值是可以放入<code>ThreadLocal</code>类进行保存的.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ThreadLocalTest</span> <span style="color:#f92672">{</span>
 
@@ -843,18 +779,15 @@ main over
         threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>main first get threadLocal value is null
 main after set threadLocal, the value is main
 threadA first get threadLocal value is null
 threadA after set threadLocal, the value is threadA
 threadB first get threadLocal value is null
 threadB after set threadLocal, the value is threadB
-</code></pre>
-
-<h2 id="3-2解决-threadlocal-变量首次-get-返回-null-问题">3.2解决<code>ThreadLocal</code>变量首次<code>get()</code>返回<code>null</code>问题</h2>
+</code></pre><h2 id="32解决threadlocal变量首次get返回null问题">3.2解决<code>ThreadLocal</code>变量首次<code>get()</code>返回<code>null</code>问题</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ThreadLocalGetTest</span> <span style="color:#f92672">{</span>
 
     <span style="color:#75715e">//继承ThreadLocal,重写initialValue()方法
@@ -870,14 +803,10 @@ threadB after set threadLocal, the value is threadB
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>ext<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">());</span>
     <span style="color:#f92672">}</span>
 
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>自定义初始值
-</code></pre>
-
-<h2 id="3-3类-inheritablethreadlocal-的使用">3.3类<code>InheritableThreadLocal</code>的使用</h2>
-
+</code></pre><h2 id="33类inheritablethreadlocal的使用">3.3类<code>InheritableThreadLocal</code>的使用</h2>
 <p>使用<code>InheritableThreadLocal</code>类可以让子线程从父线程中取得值.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InheritableThreadLocalTest</span> <span style="color:#f92672">{</span>
 
@@ -910,31 +839,19 @@ threadB after set threadLocal, the value is threadB
             <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">childValue</span><span style="color:#f92672">(</span>parentValue<span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; from subThread&#34;</span><span style="color:#f92672">;</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p>运行代码①,注释代码②,③.</p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p>运行代码①,注释代码②,③.</p>
 <p><strong>控制台输出:</strong></p>
-
 <pre><code>main get threadLocal value is hello world
 childThread get threadLocal value is null
-</code></pre>
-
-<p>运行代码②,注释代码①,③.</p>
-
+</code></pre><p>运行代码②,注释代码①,③.</p>
 <p><strong>控制台输出:</strong></p>
-
 <pre><code>main get threadLocal value is hello world
 childThread get threadLocal value is hello world
-</code></pre>
-
-<p>运行代码③,注释代码①,②.</p>
-
+</code></pre><p>运行代码③,注释代码①,②.</p>
 <pre><code>main get threadLocal value is hello world
 childThread get threadLocal value is hello world from subThread
-</code></pre>
-
-<p>在使用<code>InheritableThreadLocal</code>类需要注意的一点是,如果子线程在取得值的同时,其它线程将<code>InheritableThreadLocal</code>的值进行更改,子线程获得的仍是旧值.</p>
-
+</code></pre><p>在使用<code>InheritableThreadLocal</code>类需要注意的一点是,如果子线程在取得值的同时,其它线程将<code>InheritableThreadLocal</code>的值进行更改,子线程获得的仍是旧值.</p>
 <p><a href="https://github.com/Alex-2017/MultipleThreadBase">源码地址</a></p>
 </article>
     <footer class="post-footer">
@@ -947,7 +864,9 @@ childThread get threadLocal value is hello world from subThread
         
       </ul>
       
-      
+      <p class="post-copyright">
+        This post was published <strong>210</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
     </footer>
     
       <div id="disqus_thread"></div>
@@ -975,7 +894,7 @@ childThread get threadLocal value is hello world from subThread
   </section>
   
 <footer class="site-footer">
-  <p>© 2019 BaseC的博客</p>
+  <p>© 2017-2020 BaseC的博客</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

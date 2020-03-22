@@ -29,7 +29,7 @@
   <meta name="description" content="介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 基于之前迭代器模式的菜单整合模式下提出了一个新的需求,餐厅要创建一份甜点菜单,并把这个菜单放到餐厅菜单中.
 新增的需求让当前的系统到达了一个复杂级别,如果现在不重新设计,就无法容纳未来增加的菜单或子菜单等需求.我们需要某种树形结构,可以容纳菜单,子菜单和菜单项,同时能够确定在每个菜单的各个项之间游走,而且至少要像现在用迭代器一样方便.
-2.解决方案 2.">
+2.解决方案 2.1类图 MenuComponent:菜单组件提供了一个接口,让菜单项和菜单共同使用.">
 
   
   
@@ -39,8 +39,8 @@
     <meta name="twitter:description" content="介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 基于之前迭代器模式的菜单整合模式下提出了一个新的需求,餐厅要创建一份甜点菜单,并把这个菜单放到餐厅菜单中.
 新增的需求让当前的系统到达了一个复杂级别,如果现在不重新设计,就无法容纳未来增加的菜单或子菜单等需求.我们需要某种树形结构,可以容纳菜单,子菜单和菜单项,同时能够确定在每个菜单的各个项之间游走,而且至少要像现在用迭代器一样方便.
-2.解决方案 2.">
-    <meta name="twitter:image" content="/images/avatar.png">
+2.解决方案 2.1类图 MenuComponent:菜单组件提供了一个接口,让菜单项和菜单共同使用.">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
@@ -49,14 +49,14 @@
   <meta property="og:description" content="介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 基于之前迭代器模式的菜单整合模式下提出了一个新的需求,餐厅要创建一份甜点菜单,并把这个菜单放到餐厅菜单中.
 新增的需求让当前的系统到达了一个复杂级别,如果现在不重新设计,就无法容纳未来增加的菜单或子菜单等需求.我们需要某种树形结构,可以容纳菜单,子菜单和菜单项,同时能够确定在每个菜单的各个项之间游走,而且至少要像现在用迭代器一样方便.
-2.解决方案 2.">
+2.解决方案 2.1类图 MenuComponent:菜单组件提供了一个接口,让菜单项和菜单共同使用.">
   <meta property="og:url" content="https://wangjc95.com/post/11-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.55.6">
+<meta name="generator" content="Hugo 0.68.0">
 
 
 <link rel="canonical" href="https://wangjc95.com/post/11-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">
@@ -96,7 +96,7 @@
 
 
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/avatar.jpg" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
 
 
@@ -147,11 +147,11 @@
     
     
   <header class="site-header">
-  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
   
   <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
   
-  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <p class="subtitle">安定的内心与长期的坚持</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -205,34 +205,19 @@
       <h1 class="post-title">组合模式</h1>
       <p class="post-meta">@BaseC · Apr 21, 2019 · 3 min read</p>
     </header>
-    <article class="post-content">
-
-<p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
-
-<h1 id="1-场景介绍">1.场景介绍</h1>
-
-<p>基于之前<a href="https://wangjc95.com/post/10-迭代器模式/">迭代器模式</a>的菜单整合模式下提出了一个新的需求,餐厅要创建一份甜点菜单,并把这个菜单放到餐厅菜单中.</p>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190326103635.png" alt="" /></p>
-
+    <article class="post-content"><p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
+<h1 id="1场景介绍">1.场景介绍</h1>
+<p>基于之前<a href="https://wangjc95.com/post/10-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">迭代器模式</a>的菜单整合模式下提出了一个新的需求,餐厅要创建一份甜点菜单,并把这个菜单放到餐厅菜单中.</p>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190326103635.png" alt=""></p>
 <p>新增的需求让当前的系统到达了一个复杂级别,如果现在不重新设计,就无法容纳未来增加的菜单或子菜单等需求.我们需要某种树形结构,可以容纳菜单,子菜单和菜单项,同时能够确定在每个菜单的各个项之间游走,而且至少要像现在用迭代器一样方便.</p>
-
-<h1 id="2-解决方案">2.解决方案</h1>
-
-<h2 id="2-1类图">2.1类图</h2>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190326112759.png" alt="" /></p>
-
+<h1 id="2解决方案">2.解决方案</h1>
+<h2 id="21类图">2.1类图</h2>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190326112759.png" alt=""></p>
 <p><code>MenuComponent</code>:菜单组件提供了一个接口,让菜单项和菜单共同使用.因为我们希望能够为这些方法提供默认的实现.所以我们在这里使用了一个抽象类.</p>
-
 <p><code>MenuItem</code>:菜单项覆盖了对它有意义的方法.至于那么没有意义的方法(<code>add()</code>),就置之不理.<code>add()</code>之所以没意义,是因为菜单项已经是叶节点,它的下面不能再有任何组件.</p>
-
 <p><code>Menu</code>:菜单也覆盖了一些对它有意义的方法,例如增加或删除菜单项.除此之外,我们也使用<code>getName()</code>和<code>getDescription()</code>方法来返回菜单名称与描述.</p>
-
 <p><code>Waitress</code>:女招待将使用菜单组件接口访问菜单和菜单项.</p>
-
-<h2 id="2-2代码实现">2.2代码实现</h2>
-
+<h2 id="22代码实现">2.2代码实现</h2>
 <p><code>MenuComponent.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> composite<span style="color:#f92672">;</span>
 
@@ -283,8 +268,9 @@
         <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> UnsupportedOperationException<span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
 
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>MenuItem.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>MenuItem.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> composite<span style="color:#f92672">;</span>
 
 <span style="color:#75715e">/**
@@ -337,8 +323,9 @@
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">+</span> getPrice<span style="color:#f92672">());</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;      --&#34;</span> <span style="color:#f92672">+</span> getDescription<span style="color:#f92672">());</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>Menu.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>Menu.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> composite<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> java.util.ArrayList<span style="color:#f92672">;</span>
@@ -396,8 +383,9 @@
 </span><span style="color:#75715e"></span>            menuComponent<span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>Waitress.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>Waitress.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> composite<span style="color:#f92672">;</span>
 
 <span style="color:#75715e">/**
@@ -415,9 +403,10 @@
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printMenu</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         allMenus<span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>测试代码:</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#75715e">//全部的菜单
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><strong>测试代码:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">		<span style="color:#75715e">//全部的菜单
 </span><span style="color:#75715e"></span>        MenuComponent allMenus <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Menu<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;All Menu&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;There have all menues&#34;</span><span style="color:#f92672">);</span>
 
         <span style="color:#75715e">//菜单集合的生成
@@ -471,9 +460,8 @@
 
         <span style="color:#75715e">//初始化服务员类
 </span><span style="color:#75715e"></span>        Waitress waitress <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Waitress<span style="color:#f92672">(</span>allMenus<span style="color:#f92672">);</span>
-        waitress<span style="color:#f92672">.</span><span style="color:#a6e22e">printMenu</span><span style="color:#f92672">();</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+        waitress<span style="color:#f92672">.</span><span style="color:#a6e22e">printMenu</span><span style="color:#f92672">();</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>All Menu, There have all menues
 -------------------
 
@@ -506,16 +494,10 @@ Coffee, I'm Coffee!
       --This is Coffee1
    Coffee2, 6.0
       --This is Coffee2
-</code></pre>
-
-<h1 id="3-组合模式">3.组合模式</h1>
-
-<h2 id="3-1定义">3.1定义</h2>
-
-<p><strong>组合模式</strong>允许你将对象组成树形结构来表现&rdquo;整体/部分&rdquo;的层次结构.组合能让客户以一致的方式处理个别对象和对象组合.</p>
-
-<h2 id="3-2特点">3.2特点</h2>
-
+</code></pre><h1 id="3组合模式">3.组合模式</h1>
+<h2 id="31定义">3.1定义</h2>
+<p><strong>组合模式</strong>允许你将对象组成树形结构来表现&quot;整体/部分&quot;的层次结构.组合能让客户以一致的方式处理个别对象和对象组合.</p>
+<h2 id="32特点">3.2特点</h2>
 <ul>
 <li>组合模式提供一个结构,可同时包容个别对象和组合对象.</li>
 <li>组合模式允许客户对个别对象以及组合对象一视同仁.</li>
@@ -533,7 +515,9 @@ Coffee, I'm Coffee!
         
       </ul>
       
-      
+      <p class="post-copyright">
+        This post was published <strong>336</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
     </footer>
     
       <div id="disqus_thread"></div>
@@ -561,7 +545,7 @@ Coffee, I'm Coffee!
   </section>
   
 <footer class="site-footer">
-  <p>© 2019 BaseC的博客</p>
+  <p>© 2017-2020 BaseC的博客</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

@@ -27,8 +27,8 @@
   
   
   <meta name="description" content="介绍: 这是Java多线程编程核心技术阅读笔记
-1.进程与线程 进程:以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
-线程:在进程中独立运行的子任务.
+1.进程与线程 **进程:**以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
+**线程:**在进程中独立运行的子任务.
 一个进程在运行时至少会有一个线程在运行.
 2.多线程的创建方式 在Java中,多线程有三种创建方式,分别是:
  继承Thread类 实现Runnable接口 FutureTask方式创建  2.">
@@ -39,30 +39,30 @@
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="线程的基本概念">
     <meta name="twitter:description" content="介绍: 这是Java多线程编程核心技术阅读笔记
-1.进程与线程 进程:以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
-线程:在进程中独立运行的子任务.
+1.进程与线程 **进程:**以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
+**线程:**在进程中独立运行的子任务.
 一个进程在运行时至少会有一个线程在运行.
 2.多线程的创建方式 在Java中,多线程有三种创建方式,分别是:
  继承Thread类 实现Runnable接口 FutureTask方式创建  2.">
-    <meta name="twitter:image" content="/images/avatar.png">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="线程的基本概念">
   <meta property="og:description" content="介绍: 这是Java多线程编程核心技术阅读笔记
-1.进程与线程 进程:以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
-线程:在进程中独立运行的子任务.
+1.进程与线程 **进程:**以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
+**线程:**在进程中独立运行的子任务.
 一个进程在运行时至少会有一个线程在运行.
 2.多线程的创建方式 在Java中,多线程有三种创建方式,分别是:
  继承Thread类 实现Runnable接口 FutureTask方式创建  2.">
   <meta property="og:url" content="https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.55.6">
+<meta name="generator" content="Hugo 0.68.0">
 
 
 <link rel="canonical" href="https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
@@ -102,7 +102,7 @@
 
 
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/avatar.jpg" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
 
 
@@ -153,11 +153,11 @@
     
     
   <header class="site-header">
-  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
   
   <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
   
-  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <p class="subtitle">安定的内心与长期的坚持</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -211,29 +211,19 @@
       <h1 class="post-title">线程的基本概念</h1>
       <p class="post-meta">@BaseC · Aug 9, 2019 · 9 min read</p>
     </header>
-    <article class="post-content">
-
-<p><strong>介绍:</strong> 这是<code>Java</code>多线程编程核心技术阅读笔记</p>
-
-<h1 id="1-进程与线程">1.进程与线程</h1>
-
-<p><strong>进程:</strong>以<code>windows</code>系统举例,可以将运行在内存中的<code>exe</code>文件理解成进程,进程是受操作系统管理的基本运行单元.</p>
-
-<p><strong>线程:</strong>在进程中独立运行的子任务.</p>
-
+    <article class="post-content"><p><strong>介绍:</strong> 这是<code>Java</code>多线程编程核心技术阅读笔记</p>
+<h1 id="1进程与线程">1.进程与线程</h1>
+<p>**进程:**以<code>windows</code>系统举例,可以将运行在内存中的<code>exe</code>文件理解成进程,进程是受操作系统管理的基本运行单元.</p>
+<p>**线程:**在进程中独立运行的子任务.</p>
 <p>一个进程在运行时至少会有一个线程在运行.</p>
-
-<h1 id="2-多线程的创建方式">2.多线程的创建方式</h1>
-
+<h1 id="2多线程的创建方式">2.多线程的创建方式</h1>
 <p>在<code>Java</code>中,多线程有三种创建方式,分别是:</p>
-
 <ol>
 <li>继承<code>Thread</code>类</li>
 <li>实现<code>Runnable</code>接口</li>
 <li><code>FutureTask</code>方式创建</li>
 </ol>
-
-<h2 id="2-1继承-thread-类">2.1继承<code>Thread</code>类</h2>
+<h2 id="21继承thread类">2.1继承<code>Thread</code>类</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
 </span><span style="color:#75715e"> * 1.2.1 继承Thread类
 </span><span style="color:#75715e"> */</span>
@@ -251,19 +241,13 @@
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">//myThread.start();
 </span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;main over&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>main over
 MyThread
-</code></pre>
-
-<h3 id="2-1-1线程的启动">2.1.1线程的启动</h3>
-
+</code></pre><h3 id="211线程的启动">2.1.1线程的启动</h3>
 <p>线程是通过<code>start()</code>方法启动线程的.<code>Thread.java</code>类中的<code>start()</code>方法通知<strong>线程规划器</strong>此线程已经准备就绪,等待调用线程对象的<code>run()</code>方法.这个过程其实就是让系统安排一个时间来调用<code>Thread</code>中的<code>run()</code>方法,也就是使线程得到运行,启动线程,具有异步执行的效果.如果直接调用<code>run()</code>就不是异步执行了,而是同步,必须等<code>run()</code>方法中的代码执行完后才可以执行后面的代码.此线程不会交给<strong>线程规划器</strong>来进行处理,而是由调用线程来调用<code>run()</code>方法.</p>
-
-<h2 id="2-2实现-runnable-接口">2.2实现<code>Runnable</code>接口</h2>
-
+<h2 id="22实现runnable接口">2.2实现<code>Runnable</code>接口</h2>
 <p>使用继承<code>Thread</code>类方式创建线程是具有局限性的,因为<code>Java</code>不支持多继承.所以可以使用实现<code>Runnable</code>接口的方式来实现多线程技术.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
 </span><span style="color:#75715e"> * 实现Runnable接口
@@ -279,13 +263,10 @@ MyThread
         RunnableTask task <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RunnableTask<span style="color:#f92672">();</span>
         <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>task<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>i'm a runnable task
-</code></pre>
-
-<h2 id="2-3-futuretask-方式创建">2.3<code>FutureTask</code>方式创建</h2>
+</code></pre><h2 id="23futuretask方式创建">2.3<code>FutureTask</code>方式创建</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
 </span><span style="color:#75715e"> * 创建任务类，类似Runnable，但是会返回线程执行结果。
 </span><span style="color:#75715e"> */</span>
@@ -311,14 +292,10 @@ MyThread
             e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>i'm a callertask
-</code></pre>
-
-<h1 id="3-非线程安全">3.非线程安全</h1>
-
+</code></pre><h1 id="3非线程安全">3.非线程安全</h1>
 <p>先举一个线程安全的例子:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UnSafeRunnable</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
 
@@ -338,9 +315,8 @@ MyThread
         <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> UnSafeRunnable<span style="color:#f92672">(),</span> <span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> UnSafeRunnable<span style="color:#f92672">(),</span> <span style="color:#e6db74">&#34;threadC&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>threadB'count is 4
 threadA'count is 4
 threadB'count is 3
@@ -356,45 +332,32 @@ threadC'count is 3
 threadC'count is 2
 threadC'count is 1
 threadC'count is 0
-</code></pre>
-
-<p>从控制台输出可以看出,各个线程按照正常顺序输出.</p>
-
+</code></pre><p>从控制台输出可以看出,各个线程按照正常顺序输出.</p>
 <p>将<code>main()</code>方法更改为如下代码:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//每个线程使用相同变量时,输出的数字顺序不再一致.可通过给run方法添加synchronized.
 </span><span style="color:#75715e"></span>UnSafeRunnable unSafeRunnable <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UnSafeRunnable<span style="color:#f92672">();</span>
 <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>unSafeRunnable<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;threadA&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
 <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>unSafeRunnable<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
-<span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>unSafeRunnable<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;threadC&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>unSafeRunnable<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;threadC&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>threadA'count is 4
 threadB'count is 3
 threadC'count is 2
 threadB'count is 0
 threadA'count is 1
-</code></pre>
-
-<p><code>count</code>值从2直接变成了0,然后变成了1.这种异常的输出就是非线程安全.</p>
-
+</code></pre><p><code>count</code>值从2直接变成了0,然后变成了1.这种异常的输出就是非线程安全.</p>
 <p><strong>非线程安全</strong>主要是指多个线程对同一个实例变量进行操作时出现值被更改,值不同步的情况,从而影响程序的执行流程.</p>
-
 <p><strong>解决方法:添加<code>synchronized</code></strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Override</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{...}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{...}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>threadA'count is 4
 threadA'count is 3
 threadA'count is 2
 threadA'count is 1
 threadA'count is 0
-</code></pre>
-
-<h1 id="4-常用方法">4.常用方法</h1>
-
-<h2 id="4-1-currentthread-方法">4.1<code>currentThread()</code>方法</h2>
-
+</code></pre><h1 id="4常用方法">4.常用方法</h1>
+<h2 id="41currentthread方法">4.1<code>currentThread()</code>方法</h2>
 <p><code>currentThread()</code>方法可返回代码段正在被哪个线程调用的信息.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestCurrentThread</span> <span style="color:#66d9ef">extends</span> Thread <span style="color:#f92672">{</span>
 
@@ -425,9 +388,8 @@ threadA'count is 0
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;- - - - -执行start方法- - - - -&#34;</span><span style="color:#f92672">);</span>
         thread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>main
 - - -construct init- - -
 Thread.currentThread().getName():main
@@ -438,18 +400,14 @@ this.getName():Thread-0
 Thread.currentThread().getName():Thread-1
 this.getName():Thread-0
 - - -run end- - -
-</code></pre>
-
-<p>首先输出的是当前正在执行的线程<code>main</code>.随后新建<code>TestCurrentThread</code>对象,调用构造器方法,输出调用线程<code>main</code>,随后输出当前创建的线程名称<code>Thread-0</code>(由于并未指明线程名称,此为默认名称,0是指其第一个创建).然后将<code>TestCurrentThread</code>实例放到新建的<code>Thread</code>对象中执行(<code>Thread</code>实现了<code>Runnable</code>接口),由其调用<code>Thread-0</code>的<code>run()</code>方法.此时的调用线程是<code>Thread-1</code>.所以先输出调用线程<code>Thread-1</code>,然后输出<code>run()</code>所在对象的<code>Thread</code>名称<code>Thread-0</code>.</p>
-
+</code></pre><p>首先输出的是当前正在执行的线程<code>main</code>.随后新建<code>TestCurrentThread</code>对象,调用构造器方法,输出调用线程<code>main</code>,随后输出当前创建的线程名称<code>Thread-0</code>(由于并未指明线程名称,此为默认名称,0是指其第一个创建).然后将<code>TestCurrentThread</code>实例放到新建的<code>Thread</code>对象中执行(<code>Thread</code>实现了<code>Runnable</code>接口),由其调用<code>Thread-0</code>的<code>run()</code>方法.此时的调用线程是<code>Thread-1</code>.所以先输出调用线程<code>Thread-1</code>,然后输出<code>run()</code>所在对象的<code>Thread</code>名称<code>Thread-0</code>.</p>
 <p>对<code>main</code>方法做如下更改:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//System.out.println(&#34;- - - - -执行start方法- - - - -&#34;);
 </span><span style="color:#75715e">//thread.start();
 </span><span style="color:#75715e"></span>
 System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;- - - - -执行run方法- - - - -&#34;</span><span style="color:#f92672">);</span>
-thread<span style="color:#f92672">.</span><span style="color:#a6e22e">run</span><span style="color:#f92672">();</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+thread<span style="color:#f92672">.</span><span style="color:#a6e22e">run</span><span style="color:#f92672">();</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>main
 - - -construct init- - -
 Thread.currentThread().getName():main
@@ -460,14 +418,9 @@ this.getName():Thread-0
 Thread.currentThread().getName():main
 this.getName():Thread-0
 - - -run end- - -
-</code></pre>
-
-<p>可以看出调用<code>run()</code>方法的线程变成了<code>main</code>线程,验证了2.1.1的知识点.</p>
-
-<h2 id="4-2-isalive-方法和-getid-方法">4.2<code>isAlive()</code>方法和<code>getId()</code>方法</h2>
-
+</code></pre><p>可以看出调用<code>run()</code>方法的线程变成了<code>main</code>线程,验证了2.1.1的知识点.</p>
+<h2 id="42isalive方法和getid方法">4.2<code>isAlive()</code>方法和<code>getId()</code>方法</h2>
 <p><code>isAlive()</code>:判断线程是否处于活动状态,当线程处于就绪或者运行状态时,此线程就是活动的.</p>
-
 <p><code>getId()</code>:取得线程的唯一标识.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestThread</span> <span style="color:#66d9ef">extends</span> Thread <span style="color:#f92672">{</span>
 
@@ -485,19 +438,14 @@ this.getName():Thread-0
         testThread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;after start the thread -&gt;&#34;</span> <span style="color:#f92672">+</span> testThread<span style="color:#f92672">.</span><span style="color:#a6e22e">isAlive</span><span style="color:#f92672">());</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>Thread-0's id is 11
 before start the thread -&gt;false
 after start the thread -&gt;true
 run()-&gt;true
-</code></pre>
-
-<h2 id="4-3停止线程">4.3停止线程</h2>
-
-<h3 id="4-3-1停止不了的线程">4.3.1停止不了的线程</h3>
-
+</code></pre><h2 id="43停止线程">4.3停止线程</h2>
+<h3 id="431停止不了的线程">4.3.1停止不了的线程</h3>
 <p>使用<code>interrupt()</code>方法仅仅是在当前线程中打了一个停止的标记,并不是真正的停止线程.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InterruptThread</span> <span style="color:#66d9ef">extends</span> Thread <span style="color:#f92672">{</span>
 
@@ -522,16 +470,13 @@ run()-&gt;true
         <span style="color:#75715e">//执行中断操作之后,通过控制台的运行状态来看,线程并未停止运行
 </span><span style="color:#75715e"></span>        interruptThread<span style="color:#f92672">.</span><span style="color:#a6e22e">interrupt</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<h3 id="4-3-2判断线程是否处于停止状态">4.3.2判断线程是否处于停止状态</h3>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="432判断线程是否处于停止状态">4.3.2判断线程是否处于停止状态</h3>
 <p>当使用<code>interrupt()</code>方法中断线程后,如何获取线程的中断状态呢?有两种方法:</p>
-
 <ul>
 <li><code>public static boolean interrupted()</code>:静态方法,判断当前线程是否处于中断状态,<code>true</code>-&gt;中断,<code>false</code>-&gt;未中断.执行后具有将状态标志清除为<code>false</code>的功能.</li>
 <li><code>public boolean isInterrupted()</code>:实例对象方法,判断<code>Thread</code>对象是否处于中断状态,<code>true</code>-&gt;中断,<code>false</code>-&gt;未中断.</li>
 </ul>
-
 <p>先举个例子来说明下两个方法的<strong>作用对象不同</strong>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ThreadInterrupt3</span> <span style="color:#f92672">{</span>
 
@@ -552,14 +497,11 @@ run()-&gt;true
         <span style="color:#75715e">//获取的是当前执行线程`main`的中断状态
 </span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;main thread&#39;s interrupted state : &#34;</span> <span style="color:#f92672">+</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">interrupted</span><span style="color:#f92672">());</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>thread's interrupted state : true
 main thread's interrupted state : false
-</code></pre>
-
-<p>再举个例子说明<strong><code>interrupted()</code>方法会清空中断状态</strong>.</p>
+</code></pre><p>再举个例子说明<strong><code>interrupted()</code>方法会清空中断状态</strong>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InterruptThread1</span> <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -577,18 +519,14 @@ main thread's interrupted state : false
         <span style="color:#75715e">//第二次输出时,中断状态被清空了
 </span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;second use interrupted() get interrupted state -&gt; &#34;</span><span style="color:#f92672">+</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">interrupted</span><span style="color:#f92672">());</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>first use isInterrupted() get interrupted state -&gt; true
 second use isInterrupted() get interrupted state -&gt; true
 first use interrupted() get interrupted state -&gt; true
 second use interrupted() get interrupted state -&gt; false
-</code></pre>
-
-<h3 id="4-3-3如何正确停止线程">4.3.3如何正确停止线程</h3>
-
-<h4 id="4-3-3-1-break-停止法">4.3.3.1<code>break</code>停止法</h4>
+</code></pre><h3 id="433如何正确停止线程">4.3.3如何正确停止线程</h3>
+<h4 id="4331break停止法">4.3.3.1<code>break</code>停止法</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StopThread1</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
 
     <span style="color:#a6e22e">@Override</span>
@@ -619,19 +557,15 @@ second use interrupted() get interrupted state -&gt; false
         <span style="color:#75715e">//输出false,表明线程已经通过代码①的判断,并且被移除了中断标志.
 </span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>thread<span style="color:#f92672">.</span><span style="color:#a6e22e">isInterrupted</span><span style="color:#f92672">());</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>...省略之前的输出
 Thread-0383
 true
 false
 如果不抛出InterruptedException,那么中断线程后仍会输出这句话,说明线程并未正常中断.所以需要采用异常中断法.
-</code></pre>
-
-<p><code>break</code>方法只是停止了<code>for</code>循环的执行,但是并没有中断整个线程的执行,这时候就需要<strong>异常中断法</strong>.</p>
-
-<h4 id="4-3-3-2异常中断法">4.3.3.2异常中断法</h4>
+</code></pre><p><code>break</code>方法只是停止了<code>for</code>循环的执行,但是并没有中断整个线程的执行,这时候就需要<strong>异常中断法</strong>.</p>
+<h4 id="4332异常中断法">4.3.3.2异常中断法</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StopThread2</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
     <span style="color:#a6e22e">@Override</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
@@ -665,19 +599,16 @@ false
         <span style="color:#75715e">//输出false,表明线程已经通过代码①的判断,并且被移除了中断标志.
 </span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>thread<span style="color:#f92672">.</span><span style="color:#a6e22e">isInterrupted</span><span style="color:#f92672">());</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>...省略之前的输出
 Thread-05509
 Thread-0抛出异常
 true
 false
 java.lang.InterruptedException
-    at concurrent.core.chapter1.StopThread2.run(StopThread2.java:14)
-</code></pre>
-
-<h4 id="4-3-3-3使用-return-停止异常">4.3.3.3使用<code>return</code>停止异常</h4>
+	at concurrent.core.chapter1.StopThread2.run(StopThread2.java:14)
+</code></pre><h4 id="4333使用return停止异常">4.3.3.3使用<code>return</code>停止异常</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InterruptReturn</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
 
     <span style="color:#a6e22e">@Override</span>
@@ -702,19 +633,14 @@ java.lang.InterruptedException
             e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>...省略之前输出的毫秒值
 1565101628384
 interrupted! end!
-</code></pre>
-
-<h3 id="4-3-4-interrupt-和-sleep-的关系">4.3.4<code>interrupt</code>和<code>sleep</code>的关系</h3>
-
+</code></pre><h3 id="434interrupt和sleep的关系">4.3.4<code>interrupt</code>和<code>sleep</code>的关系</h3>
 <p>若<code>interrupt</code>和<code>sleep</code>碰上了,一定会抛出<code>java.lang.InterruptedException: sleep interrupted</code>.不论先后顺序.抛出<code>InterruptedException</code>,会清空中断标志.</p>
-
-<h4 id="4-3-4-1先-interrupt-后-sleep">4.3.4.1先<code>interrupt</code>,后<code>sleep</code></h4>
+<h4 id="4341先interrupt后sleep">4.3.4.1先<code>interrupt</code>,后<code>sleep</code></h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InterruptSleepThread</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
 
     <span style="color:#a6e22e">@Override</span>
@@ -739,19 +665,16 @@ interrupted! end!
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;begin interrupt thread&#34;</span><span style="color:#f92672">);</span>
         thread<span style="color:#f92672">.</span><span style="color:#a6e22e">interrupt</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>java.lang.InterruptedException: sleep interrupted
-    at java.lang.Thread.sleep(Native Method)
-    at concurrent.core.chapter1.InterruptSleepThread.run(InterruptSleepThread.java:16)
-    at java.lang.Thread.run(Thread.java:745)
+	at java.lang.Thread.sleep(Native Method)
+	at concurrent.core.chapter1.InterruptSleepThread.run(InterruptSleepThread.java:16)
+	at java.lang.Thread.run(Thread.java:745)
 begin interrupt thread
 begin sleep
 interrupt thread first,and then sleep the thread.what will happen? thread's interrupted state is false
-</code></pre>
-
-<h4 id="4-3-4-2先-sleep-后-interrupt">4.3.4.2先<code>sleep</code>,后<code>interrupt</code></h4>
+</code></pre><h4 id="4342先sleep后interrupt">4.3.4.2先<code>sleep</code>,后<code>interrupt</code></h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SleepInterruptThread</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
     <span style="color:#a6e22e">@Override</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
@@ -779,22 +702,17 @@ interrupt thread first,and then sleep the thread.what will happen? thread's inte
             e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>begin sleep
 begin interrupt thread
 thread was interrupted while sleeping,thread's interrupted state is false
 java.lang.InterruptedException: sleep interrupted
-    at java.lang.Thread.sleep(Native Method)
-    at concurrent.core.chapter1.SleepInterruptThread.run(SleepInterruptThread.java:12)
-    at java.lang.Thread.run(Thread.java:745)
-</code></pre>
-
-<h2 id="4-4-yield-方法">4.4<code>yield()</code>方法</h2>
-
+	at java.lang.Thread.sleep(Native Method)
+	at concurrent.core.chapter1.SleepInterruptThread.run(SleepInterruptThread.java:12)
+	at java.lang.Thread.run(Thread.java:745)
+</code></pre><h2 id="44yield方法">4.4<code>yield()</code>方法</h2>
 <p><code>yield()</code>方法的作用是放弃当前的<code>CPU</code>资源,将它让给其他的任务去占用<code>CPU</code>执行时间.但放弃的时间不确定,有可能刚刚放弃,马上又获得<code>CPU</code>时间片.</p>
-
 <pre><code>public class YieldThread implements Runnable {
 
     @Override
@@ -812,26 +730,14 @@ java.lang.InterruptedException: sleep interrupted
         thread.start();
     }
 }
-</code></pre>
-
-<p><strong>控制台输出:</strong></p>
-
+</code></pre><p><strong>控制台输出:</strong></p>
 <pre><code>花费时间为:2
-</code></pre>
-
-<p>取消<code>Thread.yield();</code>的注释,执行代码,<strong>控制台输出:</strong></p>
-
+</code></pre><p>取消<code>Thread.yield();</code>的注释,执行代码,<strong>控制台输出:</strong></p>
 <pre><code>花费时间为:17784
-</code></pre>
-
-<p>可以看出<code>yield()</code>之后线程的执行时间与未<code>yield()</code>之时形成鲜明对比.</p>
-
-<h2 id="4-5线程的优先级">4.5线程的优先级.</h2>
-
+</code></pre><p>可以看出<code>yield()</code>之后线程的执行时间与未<code>yield()</code>之时形成鲜明对比.</p>
+<h2 id="45线程的优先级">4.5线程的优先级.</h2>
 <p>在操作系统中,线程可以划分优先级,优先级较高的线程得到的<code>CPU</code>资源较多,也就是<code>CPU</code>优先执行优先级较高的线程对象中的任务(但不是绝对的).</p>
-
-<h3 id="4-5-1线程优先级的继承特性">4.5.1线程优先级的继承特性</h3>
-
+<h3 id="451线程优先级的继承特性">4.5.1线程优先级的继承特性</h3>
 <p>在<code>Java</code>中,线程的优先级具有继承性,比如<code>A</code>线程启动<code>B</code>线程,则<code>B</code>线程的优先级与<code>A</code>是一样的.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PriorityThread1</span> <span style="color:#f92672">{</span>
 
@@ -849,20 +755,15 @@ java.lang.InterruptedException: sleep interrupted
 
     <span style="color:#f92672">}</span>
 
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>init main thread's priority is 5
 after alter,main thread's priority is 6
 threadA's priority is 6
 threadB's priority is 6
-</code></pre>
-
-<h3 id="4-5-3优先级具有规则性和随机性">4.5.3优先级具有规则性和随机性</h3>
-
+</code></pre><h3 id="453优先级具有规则性和随机性">4.5.3优先级具有规则性和随机性</h3>
 <p><code>CPU</code>尽量将执行资源让给优先级比较高的线程,但优先级较高的线程不一定每一次都先执行完.</p>
-
-<p><strong>规则性:</strong><code>CPU</code>尽量将执行资源让给优先级比较高的线程</p>
+<p>**规则性:**<code>CPU</code>尽量将执行资源让给优先级比较高的线程</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PriorityThread2</span> <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -895,9 +796,8 @@ threadB's priority is 6
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
 
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>$$$$$$ threadB is done
 $$$$$$ threadB is done
 $$$$$$ threadB is done
@@ -910,19 +810,15 @@ $$$$$$ threadB is done
 ###### threadA is done
 ###### threadA is done
 ###### threadA is done
-</code></pre>
-
-<p><strong>随机性:</strong>但优先级较高的线程不一定每一次都先执行完</p>
-
+</code></pre><p>**随机性:**但优先级较高的线程不一定每一次都先执行完</p>
 <p>注释代码①,取消代码②的注释.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#75715e">//代码①
 </span><span style="color:#75715e"></span> <span style="color:#75715e">//threadA.setPriority(1);
 </span><span style="color:#75715e"></span> <span style="color:#75715e">//threadB.setPriority(10);
 </span><span style="color:#75715e"></span> <span style="color:#75715e">//代码②
 </span><span style="color:#75715e"></span> threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">setPriority</span><span style="color:#f92672">(</span>5<span style="color:#f92672">);</span>
- threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">setPriority</span><span style="color:#f92672">(</span>6<span style="color:#f92672">);</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+ threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">setPriority</span><span style="color:#f92672">(</span>6<span style="color:#f92672">);</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>$$$$$$ threadB is done
 ###### threadA is done
 $$$$$$ threadB is done
@@ -935,14 +831,9 @@ $$$$$$ threadB is done
 $$$$$$ threadB is done
 ###### threadA is done
 $$$$$$ threadB is done
-</code></pre>
-
-<p>可以看出<code>threadB</code>并不是第一个执行完</p>
-
-<h2 id="4-6守护线程">4.6守护线程</h2>
-
+</code></pre><p>可以看出<code>threadB</code>并不是第一个执行完</p>
+<h2 id="46守护线程">4.6守护线程</h2>
 <p>在<code>Java</code>线程中有两种线程,一种是用户线程,另一种就是守护(<code>Daemon</code>)线程.</p>
-
 <p>守护线程是一种特殊的进程,它的特性有陪伴的含义,当进程中不存在非守护线程了,则守护线程自动销毁.典型的守护线程就是垃圾回收线程.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DaemonThread</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
 
@@ -971,20 +862,15 @@ $$$$$$ threadB is done
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
 
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>1565103516149
 1565103517159
 main over
 1565103518159
-</code></pre>
-
-<p>主线程结束后,虚拟机检测到没有用户线程之后,将会销毁守护线程,关闭<code>JVM</code>.</p>
-
-<h1 id="5-需要注意的细节">5.需要注意的细节</h1>
-
-<h2 id="5-1留意-i-与-system-out-println-的异常">5.1留意<code>i--</code>与<code>System.out.println()</code>的异常</h2>
+</code></pre><p>主线程结束后,虚拟机检测到没有用户线程之后,将会销毁守护线程,关闭<code>JVM</code>.</p>
+<h1 id="5需要注意的细节">5.需要注意的细节</h1>
+<h2 id="51留意i--与systemoutprintln的异常">5.1留意<code>i--</code>与<code>System.out.println()</code>的异常</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UnSafeThread</span> <span style="color:#66d9ef">extends</span> Thread <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> count <span style="color:#f92672">=</span> 5<span style="color:#f92672">;</span>
@@ -1007,18 +893,14 @@ main over
         thread2<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         thread3<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>thread1's count is 5
 thread3's count is 3
 thread2's count is 4
 thread3's count is 1
 thread1's count is 2
-</code></pre>
-
-<p>虽然<code>println()</code>方法在内部是同步的,但<code>i--</code>的操作却是在进入<code>println()</code>之前发生的,所以有发生非线程安全的概率.</p>
-
+</code></pre><p>虽然<code>println()</code>方法在内部是同步的,但<code>i--</code>的操作却是在进入<code>println()</code>之前发生的,所以有发生非线程安全的概率.</p>
 <p>如果对<code>println()</code>方法是同步有疑问,可以看下<code>println()</code>源码:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>String x<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">//通过synchronized控制println()方法同步
@@ -1026,8 +908,8 @@ thread1's count is 2
             print<span style="color:#f92672">(</span>x<span style="color:#f92672">);</span>
             newLine<span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span></code></pre></div>
-<p><a href="https://github.com/Alex-2017/MultipleThreadBase">源码地址</a></p>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p><a href="https://github.com/Alex-2017/MultipleThreadBase">源码地址</a></p>
 </article>
     <footer class="post-footer">
       
@@ -1039,7 +921,9 @@ thread1's count is 2
         
       </ul>
       
-      
+      <p class="post-copyright">
+        This post was published <strong>226</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
     </footer>
     
       <div id="disqus_thread"></div>
@@ -1067,7 +951,7 @@ thread1's count is 2
   </section>
   
 <footer class="site-footer">
-  <p>© 2019 BaseC的博客</p>
+  <p>© 2017-2020 BaseC的博客</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

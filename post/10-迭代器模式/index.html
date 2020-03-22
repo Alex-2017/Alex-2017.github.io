@@ -29,7 +29,7 @@
   <meta name="description" content="介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 有两种菜单,分别是DinerMenu和PancakeHouseMenu.将这两种菜单整合,需要一个特定的服务员类Waitress来进行整合和菜单的遍历等功能.
 MenuItem.java
-package iterator; import lombok.">
+package iterator;import lombok.">
 
   
   
@@ -39,8 +39,8 @@ package iterator; import lombok.">
     <meta name="twitter:description" content="介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 有两种菜单,分别是DinerMenu和PancakeHouseMenu.将这两种菜单整合,需要一个特定的服务员类Waitress来进行整合和菜单的遍历等功能.
 MenuItem.java
-package iterator; import lombok.">
-    <meta name="twitter:image" content="/images/avatar.png">
+package iterator;import lombok.">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
@@ -49,14 +49,14 @@ package iterator; import lombok.">
   <meta property="og:description" content="介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 有两种菜单,分别是DinerMenu和PancakeHouseMenu.将这两种菜单整合,需要一个特定的服务员类Waitress来进行整合和菜单的遍历等功能.
 MenuItem.java
-package iterator; import lombok.">
+package iterator;import lombok.">
   <meta property="og:url" content="https://wangjc95.com/post/10-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.55.6">
+<meta name="generator" content="Hugo 0.68.0">
 
 
 <link rel="canonical" href="https://wangjc95.com/post/10-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">
@@ -96,7 +96,7 @@ package iterator; import lombok.">
 
 
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/avatar.jpg" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
 
 
@@ -147,11 +147,11 @@ package iterator; import lombok.">
     
     
   <header class="site-header">
-  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
   
   <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
   
-  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <p class="subtitle">安定的内心与长期的坚持</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -205,14 +205,9 @@ package iterator; import lombok.">
       <h1 class="post-title">迭代器模式</h1>
       <p class="post-meta">@BaseC · Apr 14, 2019 · 3 min read</p>
     </header>
-    <article class="post-content">
-
-<p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
-
-<h1 id="1-场景介绍">1.场景介绍</h1>
-
+    <article class="post-content"><p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
+<h1 id="1场景介绍">1.场景介绍</h1>
 <p>有两种菜单,分别是<code>DinerMenu</code>和<code>PancakeHouseMenu</code>.将这两种菜单整合,需要一个特定的服务员类<code>Waitress</code>来进行整合和菜单的遍历等功能.</p>
-
 <p><code>MenuItem.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> iterator<span style="color:#f92672">;</span>
 
@@ -238,8 +233,9 @@ package iterator; import lombok.">
         <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">vegetarian</span> <span style="color:#f92672">=</span> vegetarian<span style="color:#f92672">;</span>
         <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">price</span> <span style="color:#f92672">=</span> price<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>DinerMenu.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>DinerMenu.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> iterator<span style="color:#f92672">;</span>
 
 <span style="color:#75715e">/**
@@ -274,8 +270,9 @@ package iterator; import lombok.">
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> MenuItem<span style="color:#f92672">[]</span> <span style="color:#a6e22e">getMenuItems</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> menuItems<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>PancakeHouseMenu.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>PancakeHouseMenu.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> iterator<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> java.util.ArrayList<span style="color:#f92672">;</span>
@@ -307,8 +304,9 @@ package iterator; import lombok.">
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>MenuItem<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getMenuItems</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> menuItems<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>Waitress.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>Waitress.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> iterator<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> java.util.List<span style="color:#f92672">;</span>
@@ -340,17 +338,13 @@ package iterator; import lombok.">
             <span style="color:#f92672">}</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>Waitress</code>不仅负责了聚合两种不同的菜单,还要根据菜单集合的不同数据结构来进行遍历.如果以后还要添加新的菜单,将会导致<code>Waitress</code>大幅度的更改.此时就需要将这些不同的遍历实现封装起来.</p>
+<span style="color:#f92672">}</span>
 
-<h1 id="2-解决方案">2.解决方案</h1>
-
-<h2 id="2-1类图">2.1类图</h2>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190324135136.png" alt="" /></p>
-
-<h2 id="2-2代码实现-基于先前的代码做修改">2.2代码实现(基于先前的代码做修改)</h2>
-
+</code></pre></div><p><code>Waitress</code>不仅负责了聚合两种不同的菜单,还要根据菜单集合的不同数据结构来进行遍历.如果以后还要添加新的菜单,将会导致<code>Waitress</code>大幅度的更改.此时就需要将这些不同的遍历实现封装起来.</p>
+<h1 id="2解决方案">2.解决方案</h1>
+<h2 id="21类图">2.1类图</h2>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190324135136.png" alt=""></p>
+<h2 id="22代码实现基于先前的代码做修改">2.2代码实现(基于先前的代码做修改)</h2>
 <p><code>Iterator.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Iterator</span> <span style="color:#f92672">{</span>
 
@@ -360,8 +354,8 @@ package iterator; import lombok.">
     <span style="color:#75715e">//返回接下来的值
 </span><span style="color:#75715e"></span>    Object <span style="color:#a6e22e">next</span><span style="color:#f92672">();</span>
 
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>PancakeHouseMenuIterator.java</code></p>
+<span style="color:#f92672">}</span>
+</code></pre></div><p><code>PancakeHouseMenuIterator.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> iterator<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> java.util.List<span style="color:#f92672">;</span>
@@ -392,8 +386,9 @@ package iterator; import lombok.">
         index <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
         <span style="color:#66d9ef">return</span> menuItem<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>DinerMenuIterator.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>DinerMenuIterator.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> iterator<span style="color:#f92672">;</span>
 
 <span style="color:#75715e">/**
@@ -422,17 +417,18 @@ package iterator; import lombok.">
         index <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
         <span style="color:#66d9ef">return</span> menuItem<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>PancakeHouseMenu.java</code>新增代码</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">//获取迭代器
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>PancakeHouseMenu.java</code>新增代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#75715e">//获取迭代器
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> Iterator <span style="color:#a6e22e">createIterator</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> PancakeHouseMenuIterator<span style="color:#f92672">(</span>menuItems<span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span></code></pre></div>
-<p><code>DinerMenu.java</code>新增代码</p>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p><code>DinerMenu.java</code>新增代码</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#66d9ef">public</span> Iterator <span style="color:#a6e22e">createIterator</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> DinerMenuIterator<span style="color:#f92672">(</span>menuItems<span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span></code></pre></div>
-<p><code>Waitress2.java</code></p>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p><code>Waitress2.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> iterator<span style="color:#f92672">;</span>
 
 <span style="color:#75715e">/**
@@ -463,17 +459,17 @@ package iterator; import lombok.">
             System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>iterator<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">());</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>测试代码:</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#75715e">//初始化菜单
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><strong>测试代码:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">		<span style="color:#75715e">//初始化菜单
 </span><span style="color:#75715e"></span>        PancakeHouseMenu houseMenu <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PancakeHouseMenu<span style="color:#f92672">();</span>
         DinerMenu dinerMenu <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DinerMenu<span style="color:#f92672">();</span>
         <span style="color:#75715e">//初始化服务员
 </span><span style="color:#75715e"></span>        Waitress2 waitress2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Waitress2<span style="color:#f92672">(</span>houseMenu<span style="color:#f92672">,</span> dinerMenu<span style="color:#f92672">);</span>
         <span style="color:#75715e">//输出菜单
-</span><span style="color:#75715e"></span>        waitress2<span style="color:#f92672">.</span><span style="color:#a6e22e">printMenu</span><span style="color:#f92672">();</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+</span><span style="color:#75715e"></span>        waitress2<span style="color:#f92672">.</span><span style="color:#a6e22e">printMenu</span><span style="color:#f92672">();</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>==========Breakfast==========
 MenuItem(name=Pancake1, description=This is pancake1, vegetarian=false, price=2.0)
 MenuItem(name=Pancake2, description=This is pancake2, vegetarian=true, price=3.0)
@@ -484,29 +480,19 @@ MenuItem(name=Diner1, description=This is Diner1, vegetarian=true, price=10.0)
 MenuItem(name=Diner2, description=This is Diner2, vegetarian=false, price=9.5)
 MenuItem(name=Diner3, description=This is Diner3, vegetarian=true, price=9.0)
 MenuItem(name=Diner4, description=This is Diner4, vegetarian=false, price=8.5)
-</code></pre>
-
-<h1 id="3-迭代器模式">3.迭代器模式</h1>
-
-<h2 id="3-1定义">3.1定义</h2>
-
+</code></pre><h1 id="3迭代器模式">3.迭代器模式</h1>
+<h2 id="31定义">3.1定义</h2>
 <p><strong>迭代器模式</strong>提供一种方法顺序访问一个聚合对象中的各个元素,而又不暴露其内部的表示.</p>
-
-<h2 id="3-2特点">3.2特点</h2>
-
+<h2 id="32特点">3.2特点</h2>
 <ul>
 <li>迭代器模式允许访问聚合的元素,而不需要暴露它的内部结构.</li>
 <li>迭代器将遍历聚合的工作封装进一个对象中.</li>
 <li>当使用迭代器的时候,我们依赖聚合提供遍历.</li>
 <li>迭代器提供了一个通用的接口,让我们遍历聚合的项,当我们编码使用聚合的项时,就可以使用多态机制.</li>
 </ul>
-
-<h2 id="3-3设计原则">3.3设计原则</h2>
-
+<h2 id="33设计原则">3.3设计原则</h2>
 <p>一个类应该只有一个引起变化的原因.</p>
-
 <p>我们知道要避免类内的改变,因为修改代码很容易造成许多潜在的错误.如果有一个类具有两个及以上改变的原因,那么这会使得将来该类的变化机率上升,而当他真的改变时,你的设计中同时有多个方面将会受到影响.</p>
-
 <ul>
 <li>类的每个责任都有改变的潜在区域.超过一个责任,意味着超过一个改变的区域.</li>
 <li>这个原则告诉我们,尽量让每个类保持单一责任.</li>
@@ -522,7 +508,9 @@ MenuItem(name=Diner4, description=This is Diner4, vegetarian=false, price=8.5)
         
       </ul>
       
-      
+      <p class="post-copyright">
+        This post was published <strong>343</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
     </footer>
     
       <div id="disqus_thread"></div>
@@ -550,7 +538,7 @@ MenuItem(name=Diner4, description=This is Diner4, vegetarian=false, price=8.5)
   </section>
   
 <footer class="site-footer">
-  <p>© 2019 BaseC的博客</p>
+  <p>© 2017-2020 BaseC的博客</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

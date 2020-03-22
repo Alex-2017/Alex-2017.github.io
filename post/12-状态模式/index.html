@@ -29,7 +29,8 @@
   <meta name="description" content="介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设我们要为糖果机设置一个控制器,来控制糖果器正常运转.控制流程如下图所示.
 这张图可以这么理解:
-糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.">
+糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.
+知道需求,就可以开始实现了.">
 
   
   
@@ -39,8 +40,9 @@
     <meta name="twitter:description" content="介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设我们要为糖果机设置一个控制器,来控制糖果器正常运转.控制流程如下图所示.
 这张图可以这么理解:
-糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.">
-    <meta name="twitter:image" content="/images/avatar.png">
+糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.
+知道需求,就可以开始实现了.">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
@@ -49,14 +51,15 @@
   <meta property="og:description" content="介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设我们要为糖果机设置一个控制器,来控制糖果器正常运转.控制流程如下图所示.
 这张图可以这么理解:
-糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.">
+糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.
+知道需求,就可以开始实现了.">
   <meta property="og:url" content="https://wangjc95.com/post/12-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.55.6">
+<meta name="generator" content="Hugo 0.68.0">
 
 
 <link rel="canonical" href="https://wangjc95.com/post/12-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">
@@ -96,7 +99,7 @@
 
 
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/avatar.jpg" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
 
 
@@ -147,11 +150,11 @@
     
     
   <header class="site-header">
-  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
   
   <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
   
-  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <p class="subtitle">安定的内心与长期的坚持</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -205,22 +208,13 @@
       <h1 class="post-title">状态模式</h1>
       <p class="post-meta">@BaseC · Apr 27, 2019 · 6 min read</p>
     </header>
-    <article class="post-content">
-
-<p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
-
-<h1 id="1-场景介绍">1.场景介绍</h1>
-
+    <article class="post-content"><p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
+<h1 id="1场景介绍">1.场景介绍</h1>
 <p>假设我们要为糖果机设置一个控制器,来控制糖果器正常运转.控制流程如下图所示.</p>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190326225902.png" alt="" /></p>
-
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190326225902.png" alt=""></p>
 <p>这张图可以这么理解:</p>
-
 <p>糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.</p>
-
 <p>知道需求,就可以开始实现了.</p>
-
 <p><code>GumballMachine.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> state<span style="color:#f92672">;</span>
 
@@ -319,26 +313,27 @@
     <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">toString</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         String stateStr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">;</span>
         <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(</span>state<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            <span style="color:#66d9ef">case</span> 0:
+            <span style="color:#66d9ef">case</span> 0<span style="color:#f92672">:</span>
                 stateStr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;SOLD_OUT&#34;</span><span style="color:#f92672">;</span>
                 <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
-            <span style="color:#66d9ef">case</span> 1:
+            <span style="color:#66d9ef">case</span> 1<span style="color:#f92672">:</span>
                 stateStr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;NO_QUARTER&#34;</span><span style="color:#f92672">;</span>
                 <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
-            <span style="color:#66d9ef">case</span> 2:
+            <span style="color:#66d9ef">case</span> 2<span style="color:#f92672">:</span>
                 stateStr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HAS_QUARTER&#34;</span><span style="color:#f92672">;</span>
                 <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
-            <span style="color:#66d9ef">case</span> 3:
+            <span style="color:#66d9ef">case</span> 3<span style="color:#f92672">:</span>
                 stateStr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;SOLD&#34;</span><span style="color:#f92672">;</span>
-            default:
+            <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
         <span style="color:#f92672">}</span>
         <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;\nGumballMachine{&#34;</span> <span style="color:#f92672">+</span>
                 <span style="color:#e6db74">&#34;state=&#34;</span> <span style="color:#f92672">+</span> stateStr <span style="color:#f92672">+</span>
                 <span style="color:#e6db74">&#34;, count=&#34;</span> <span style="color:#f92672">+</span> count <span style="color:#f92672">+</span>
                 <span style="color:#e6db74">&#34;}\n&#34;</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>测试代码:</strong></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><strong>测试代码:</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         GumballMachine machine <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GumballMachine<span style="color:#f92672">(</span>3<span style="color:#f92672">);</span>
@@ -363,9 +358,8 @@
 
         machine<span style="color:#f92672">.</span><span style="color:#a6e22e">insertQuarter</span><span style="color:#f92672">();</span>
         machine<span style="color:#f92672">.</span><span style="color:#a6e22e">turnCrank</span><span style="color:#f92672">();</span>
-    <span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+    <span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>GumballMachine{state=NO_QUARTER, count=3}
 
 You Have Inserted A Quarter
@@ -394,22 +388,13 @@ GumballMachine{state=SOLD_OUT, count=0}
 The GumalMachine Is Soldout!
 TurnCrank Failed,The GumalMachine Is Soldout!
 
-</code></pre>
-
-<p>OK,搞定了!但这时候来了个新需求:&ldquo;购买糖果的客户平均每10个人中有一个人可以免费得到一个糖果.而且以后根据需要会添加或修改一些功能.&rdquo;</p>
-
+</code></pre><p>OK,搞定了!但这时候来了个新需求:&ldquo;购买糖果的客户平均每10个人中有一个人可以免费得到一个糖果.而且以后根据需要会添加或修改一些功能.&rdquo;</p>
 <p>这时候就需要考虑代码的健壮性了,上面这种用<code>if-else</code>语句堆砌出来的语句是经受不住需求变更的.一旦状态数变多而且相互之间的依赖增加,维护起来简直就是梦魇!这时候就需要本文的主角<strong>状态模式</strong>.</p>
-
-<h1 id="2-解决方法">2.解决方法</h1>
-
-<h2 id="2-1类图">2.1类图</h2>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190327143504.png" alt="" /></p>
-
-<h2 id="2-2代码实现">2.2代码实现</h2>
-
+<h1 id="2解决方法">2.解决方法</h1>
+<h2 id="21类图">2.1类图</h2>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190327143504.png" alt=""></p>
+<h2 id="22代码实现">2.2代码实现</h2>
 <p><strong>状态接口及其实现</strong></p>
-
 <p><code>State.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> state<span style="color:#f92672">;</span>
 
@@ -425,8 +410,9 @@ TurnCrank Failed,The GumalMachine Is Soldout!
     <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">turnCrank</span><span style="color:#f92672">();</span>
 
     <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dispense</span><span style="color:#f92672">();</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>SoldOutState.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>SoldOutState.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> state<span style="color:#f92672">;</span>
 
 <span style="color:#75715e">/**
@@ -464,8 +450,9 @@ TurnCrank Failed,The GumalMachine Is Soldout!
     <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">toString</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;SoldOutState{}&#34;</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>NoQuarterState.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>NoQuarterState.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> state<span style="color:#f92672">;</span>
 
 <span style="color:#75715e">/**
@@ -504,8 +491,8 @@ TurnCrank Failed,The GumalMachine Is Soldout!
     <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">toString</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;NoQuarterState{}&#34;</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>HasQuarterState.java</code></p>
+<span style="color:#f92672">}</span>
+</code></pre></div><p><code>HasQuarterState.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> state<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> java.util.Random<span style="color:#f92672">;</span>
@@ -553,8 +540,9 @@ TurnCrank Failed,The GumalMachine Is Soldout!
     <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">toString</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;HasQuarterState{}&#34;</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>SoldState.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>SoldState.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> state<span style="color:#f92672">;</span>
 
 <span style="color:#75715e">/**
@@ -599,8 +587,9 @@ TurnCrank Failed,The GumalMachine Is Soldout!
     <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">toString</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;SoldState{}&#34;</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>WinnerState.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>WinnerState.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> state<span style="color:#f92672">;</span>
 
 <span style="color:#75715e">/**
@@ -644,9 +633,9 @@ TurnCrank Failed,The GumalMachine Is Soldout!
             gumballMachine2<span style="color:#f92672">.</span><span style="color:#a6e22e">setState</span><span style="color:#f92672">(</span>gumballMachine2<span style="color:#f92672">.</span><span style="color:#a6e22e">getSoldOutState</span><span style="color:#f92672">());</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>糖果机(整合状态类)</strong></p>
+<span style="color:#f92672">}</span>
 
+</code></pre></div><p><strong>糖果机(整合状态类)</strong></p>
 <p><code>GumballMachine2.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> state<span style="color:#f92672">;</span>
 
@@ -727,9 +716,10 @@ TurnCrank Failed,The GumalMachine Is Soldout!
                 <span style="color:#e6db74">&#34;, count=&#34;</span> <span style="color:#f92672">+</span> count <span style="color:#f92672">+</span>
                 <span style="color:#e6db74">&#34;}\n&#34;</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>测试代码:</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">//糖果贩卖机-状态模式测试
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><strong>测试代码:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#75715e">//糖果贩卖机-状态模式测试
 </span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Test</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         GumballMachine2 machine <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GumballMachine2<span style="color:#f92672">(</span>5<span style="color:#f92672">);</span>
@@ -738,9 +728,8 @@ TurnCrank Failed,The GumalMachine Is Soldout!
             machine<span style="color:#f92672">.</span><span style="color:#a6e22e">insertQuarter</span><span style="color:#f92672">();</span>
             machine<span style="color:#f92672">.</span><span style="color:#a6e22e">turnCrank</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+    <span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>GumballMachine2{state=NoQuarterState{}, count=5}
 
 You Have Inserted A Quarter
@@ -758,28 +747,18 @@ GumballMachine2{state=NoQuarterState{}, count=2}
 You Have Inserted A Quarter
 TurnCrank Successful!
 Dispense Successful! A Gumball Is Rolling Out.
-</code></pre>
-
-<h1 id="3-状态模式">3.状态模式</h1>
-
-<h2 id="3-1定义">3.1定义</h2>
-
+</code></pre><h1 id="3状态模式">3.状态模式</h1>
+<h2 id="31定义">3.1定义</h2>
 <p><strong>状态模式</strong>允许对象在内部状态改变时改变它的行为,对象看起来好像修改了它的类.</p>
-
-<h2 id="3-2特点">3.2特点</h2>
-
+<h2 id="32特点">3.2特点</h2>
 <ul>
 <li>状态模式允许一个对象基于内部状态而拥有不同的行为.</li>
 <li><code>Context(GumballMachine2.java)</code>会将行为委托给当前状态对象.</li>
 <li>通过将每个状态封装进一个类,我们把以后需要做的任何改变局部化了.</li>
 </ul>
-
-<h2 id="3-3与策略模式的区别">3.3与策略模式的区别</h2>
-
+<h2 id="33与策略模式的区别">3.3与策略模式的区别</h2>
 <p>状态模式和策略模式十分相似,它们之间的区别在于意图.</p>
-
 <p>状态模式是将一群行为封装在状态对象中,<code>context</code>的行为随时可委托到那些状态对象中的一个.随着程序的运行,当前状态在状态对象集合中游走改变,以反映出<code>context</code>内部的状态,因此,<code>context</code>的行为也会跟着改变.但是<code>context</code>的调用者对状态对象了解不多,甚至可以说是浑然不觉.</p>
-
 <p>策略模式是将行为封装到策略对象中,客户自行将<code>context</code>和策略对象进行绑定.通过组合不同的策略对象来改变行为.</p>
 </article>
     <footer class="post-footer">
@@ -792,7 +771,9 @@ Dispense Successful! A Gumball Is Rolling Out.
         
       </ul>
       
-      
+      <p class="post-copyright">
+        This post was published <strong>330</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
     </footer>
     
       <div id="disqus_thread"></div>
@@ -820,7 +801,7 @@ Dispense Successful! A Gumball Is Rolling Out.
   </section>
   
 <footer class="site-footer">
-  <p>© 2019 BaseC的博客</p>
+  <p>© 2017-2020 BaseC的博客</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

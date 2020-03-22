@@ -40,7 +40,7 @@
 1.场景介绍 假设当前有两种咖啡因饮料,分别是茶和咖啡.
 茶的制作方法是:
  把水煮沸 用沸水浸泡茶叶 把茶倒进杯子 加柠檬  咖啡的制作方法:">
-    <meta name="twitter:image" content="/images/avatar.png">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
@@ -51,12 +51,12 @@
 茶的制作方法是:
  把水煮沸 用沸水浸泡茶叶 把茶倒进杯子 加柠檬  咖啡的制作方法:">
   <meta property="og:url" content="https://wangjc95.com/post/9-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.55.6">
+<meta name="generator" content="Hugo 0.68.0">
 
 
 <link rel="canonical" href="https://wangjc95.com/post/9-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">
@@ -96,7 +96,7 @@
 
 
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/avatar.jpg" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
 
 
@@ -147,11 +147,11 @@
     
     
   <header class="site-header">
-  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
   
   <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
   
-  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <p class="subtitle">安定的内心与长期的坚持</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -205,44 +205,29 @@
       <h1 class="post-title">模版方法模式</h1>
       <p class="post-meta">@BaseC · Apr 10, 2019 · 3 min read</p>
     </header>
-    <article class="post-content">
-
-<p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
-
-<h1 id="1-场景介绍">1.场景介绍</h1>
-
+    <article class="post-content"><p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
+<h1 id="1场景介绍">1.场景介绍</h1>
 <p>假设当前有两种咖啡因饮料,分别是茶和咖啡.</p>
-
 <p>茶的制作方法是:</p>
-
 <ol>
 <li>把水煮沸</li>
 <li>用沸水浸泡茶叶</li>
 <li>把茶倒进杯子</li>
 <li>加柠檬</li>
 </ol>
-
 <p>咖啡的制作方法:</p>
-
 <ol>
 <li>把水煮沸</li>
 <li>用沸水冲泡咖啡</li>
 <li>把咖啡倒进杯子</li>
 <li>加糖和牛奶</li>
 </ol>
-
 <p>针对这两种饮品,设计出咖啡因饮料制作器,避免代码重复同时保证灵活性.</p>
-
-<h1 id="2-应用举例">2.应用举例</h1>
-
-<h2 id="2-1简单的模版方法">2.1简单的模版方法</h2>
-
-<h3 id="2-1-1类图">2.1.1类图</h3>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190320184232.png" alt="" /></p>
-
-<h3 id="2-1-2代码实现">2.1.2代码实现</h3>
-
+<h1 id="2应用举例">2.应用举例</h1>
+<h2 id="21简单的模版方法">2.1简单的模版方法</h2>
+<h3 id="211类图">2.1.1类图</h3>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190320184232.png" alt=""></p>
+<h3 id="212代码实现">2.1.2代码实现</h3>
 <p><code>CaffeineBverage.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> template<span style="color:#f92672">;</span>
 
@@ -275,8 +260,9 @@
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Pouring into cup&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>Tea.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>Tea.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> template<span style="color:#f92672">;</span>
 
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Tea</span> <span style="color:#66d9ef">extends</span> CaffeineBverage <span style="color:#f92672">{</span>
@@ -289,8 +275,9 @@
     <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addCondiments</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Adding lemon&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>Coffee.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>Coffee.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> template<span style="color:#f92672">;</span>
 
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Coffee</span> <span style="color:#66d9ef">extends</span> CaffeineBverage <span style="color:#f92672">{</span>
@@ -304,8 +291,9 @@
     <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addCondiments</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Adding Sugar and Milk&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>测试代码:</strong></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><strong>测试代码:</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         CaffeineBverage coffee <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Coffee<span style="color:#f92672">();</span>
@@ -313,9 +301,8 @@
         coffee<span style="color:#f92672">.</span><span style="color:#a6e22e">prepareRecipe</span><span style="color:#f92672">();</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;======================================&#34;</span><span style="color:#f92672">);</span>
         tea<span style="color:#f92672">.</span><span style="color:#a6e22e">prepareRecipe</span><span style="color:#f92672">();</span>
-    <span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+    <span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>Boiling into water
 Dripping Coffee through filter
 Pouring into cup
@@ -325,18 +312,11 @@ Boiling into water
 Soaking the teabag
 Pouring into cup
 Adding lemon
-</code></pre>
-
-<h2 id="2-2带钩子的模板方法">2.2带钩子的模板方法</h2>
-
+</code></pre><h2 id="22带钩子的模板方法">2.2带钩子的模板方法</h2>
 <p>钩子是一种被声明在抽象类中的方法,但只有空的或者默认的实现.钩子的存在,可以让子类有能力对算法的不同点进行挂钩.要不要挂钩,由子类自行决定.</p>
-
-<h3 id="2-2-1类图">2.2.1类图</h3>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190320184635.png" alt="" /></p>
-
-<h3 id="2-2-2代码实现">2.2.2代码实现</h3>
-
+<h3 id="221类图">2.2.1类图</h3>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190320184635.png" alt=""></p>
+<h3 id="222代码实现">2.2.2代码实现</h3>
 <p><code>CaffeineBverageWithHook.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> template<span style="color:#f92672">;</span>
 
@@ -376,8 +356,9 @@ Adding lemon
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
 
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>TeaWithHook.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>TeaWithHook.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> template<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> java.io.BufferedReader<span style="color:#f92672">;</span>
@@ -420,8 +401,9 @@ Adding lemon
         <span style="color:#f92672">}</span>
         <span style="color:#66d9ef">return</span> answer<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>CoffeeWithHook.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>CoffeeWithHook.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> template<span style="color:#f92672">;</span>
 
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CoffeeWithHook</span> <span style="color:#66d9ef">extends</span> CaffeineBverageWithHook <span style="color:#f92672">{</span>
@@ -434,17 +416,17 @@ Adding lemon
     <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addCondiments</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Adding lemon&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>测试代码:</strong></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><strong>测试代码:</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         CaffeineBverageWithHook tea <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TeaWithHook<span style="color:#f92672">();</span>
         CaffeineBverageWithHook coffeeWithHook <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CoffeeWithHook<span style="color:#f92672">();</span>
         tea<span style="color:#f92672">.</span><span style="color:#a6e22e">prepareRecipe</span><span style="color:#f92672">();</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;======================================&#34;</span><span style="color:#f92672">);</span>
         coffeeWithHook<span style="color:#f92672">.</span><span style="color:#a6e22e">prepareRecipe</span><span style="color:#f92672">();</span>
-    <span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+    <span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>Boiling into water
 Soaking the teabag
 Pouring into cup
@@ -455,18 +437,11 @@ Adding lemon
 Boiling into water
 Soaking the teabag
 Pouring into cup
-</code></pre>
-
-<h1 id="3-模版方法模式">3.模版方法模式</h1>
-
-<h2 id="3-1定义">3.1定义</h2>
-
+</code></pre><h1 id="3模版方法模式">3.模版方法模式</h1>
+<h2 id="31定义">3.1定义</h2>
 <p><strong>模版方法模式</strong>在一个方法中定义一个算法的骨架,而将一些步骤延迟到子类中.模板方法使得子类可以在不改变算法结构的情况下,重新定义算法中的步骤.</p>
-
 <p>这个模式是用来创建一个算法的模版.什么是模版?如你所见的,模版就是一个方法.更具体的说,这个方法将算法定义成一组步骤,其中的任何步骤都可以是抽象的,由子类负责实现.这可以确保算法的结构保持不变,同时由子类提供部分实现.</p>
-
-<h2 id="3-2特点">3.2特点</h2>
-
+<h2 id="32特点">3.2特点</h2>
 <ul>
 <li>模版方法定义了算法的步骤,把这些步骤的实现延迟到子类.</li>
 <li>模版方法的抽象类可以定义为具体方法,抽象方法和钩子.</li>
@@ -474,14 +449,10 @@ Pouring into cup
 <li>现实世界代码中存在很多模版方法的变体,不要期待能够一眼将其辨识出来.</li>
 <li>工厂方法是模版方法的一种特殊版本.</li>
 </ul>
-
-<h2 id="3-3设计原则">3.3设计原则</h2>
-
-<p><strong>好莱坞原则:</strong>别调用我们,我们会调用你.</p>
-
-<p>好莱坞原则可以给我们一种防止&rdquo;依赖腐败&rdquo;的方法.当高层组件依赖低层组件,而低层组件又依赖高层组件,而高层组件又依赖边侧组件,而边侧组件又依赖低层组件时,依赖腐败就发生了.</p>
-
-<p>在好莱坞原则之下,我们允许低层组件将自己挂钩到系统上,但是高层组件会决定什么时候和怎样使用这些低层组件.换句话说,高层组件对待低层组件的方式是&rdquo;别调用我们,我们会调用你&rdquo;.</p>
+<h2 id="33设计原则">3.3设计原则</h2>
+<p>**好莱坞原则:**别调用我们,我们会调用你.</p>
+<p>好莱坞原则可以给我们一种防止&quot;依赖腐败&quot;的方法.当高层组件依赖低层组件,而低层组件又依赖高层组件,而高层组件又依赖边侧组件,而边侧组件又依赖低层组件时,依赖腐败就发生了.</p>
+<p>在好莱坞原则之下,我们允许低层组件将自己挂钩到系统上,但是高层组件会决定什么时候和怎样使用这些低层组件.换句话说,高层组件对待低层组件的方式是&quot;别调用我们,我们会调用你&rdquo;.</p>
 </article>
     <footer class="post-footer">
       
@@ -493,7 +464,9 @@ Pouring into cup
         
       </ul>
       
-      
+      <p class="post-copyright">
+        This post was published <strong>347</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
     </footer>
     
       <div id="disqus_thread"></div>
@@ -521,7 +494,7 @@ Pouring into cup
   </section>
   
 <footer class="site-footer">
-  <p>© 2019 BaseC的博客</p>
+  <p>© 2017-2020 BaseC的博客</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

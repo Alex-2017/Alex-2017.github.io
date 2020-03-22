@@ -28,7 +28,8 @@
   
   <meta name="description" content="介绍: 这是head first design patterns阅读笔记.
 1.应用场景 在项目中,有些对象我们只需要一个!比如说线程池,缓存,对话框等等.这类对象只能有一个实例,如果制造出多个实例,就会导致很多问题产生.
-2.定义 确保一个类只有一个实例,并提供全局访问点.">
+2.定义 确保一个类只有一个实例,并提供全局访问点.
+3.单例模式 Singleton1.">
 
   
   
@@ -37,8 +38,9 @@
     <meta name="twitter:title" content="单例模式">
     <meta name="twitter:description" content="介绍: 这是head first design patterns阅读笔记.
 1.应用场景 在项目中,有些对象我们只需要一个!比如说线程池,缓存,对话框等等.这类对象只能有一个实例,如果制造出多个实例,就会导致很多问题产生.
-2.定义 确保一个类只有一个实例,并提供全局访问点.">
-    <meta name="twitter:image" content="/images/avatar.png">
+2.定义 确保一个类只有一个实例,并提供全局访问点.
+3.单例模式 Singleton1.">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
@@ -46,14 +48,15 @@
   <meta property="og:title" content="单例模式">
   <meta property="og:description" content="介绍: 这是head first design patterns阅读笔记.
 1.应用场景 在项目中,有些对象我们只需要一个!比如说线程池,缓存,对话框等等.这类对象只能有一个实例,如果制造出多个实例,就会导致很多问题产生.
-2.定义 确保一个类只有一个实例,并提供全局访问点.">
+2.定义 确保一个类只有一个实例,并提供全局访问点.
+3.单例模式 Singleton1.">
   <meta property="og:url" content="https://wangjc95.com/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.55.6">
+<meta name="generator" content="Hugo 0.68.0">
 
 
 <link rel="canonical" href="https://wangjc95.com/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
@@ -93,7 +96,7 @@
 
 
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/avatar.jpg" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
 
 
@@ -144,11 +147,11 @@
     
     
   <header class="site-header">
-  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
   
   <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
   
-  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <p class="subtitle">安定的内心与长期的坚持</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -202,20 +205,12 @@
       <h1 class="post-title">单例模式</h1>
       <p class="post-meta">@BaseC · Mar 17, 2019 · 1 min read</p>
     </header>
-    <article class="post-content">
-
-<p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
-
-<h1 id="1-应用场景">1.应用场景</h1>
-
+    <article class="post-content"><p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
+<h1 id="1应用场景">1.应用场景</h1>
 <p>在项目中,有些对象我们只需要一个!比如说线程池,缓存,对话框等等.这类对象只能有一个实例,如果制造出多个实例,就会导致很多问题产生.</p>
-
-<h1 id="2-定义">2.定义</h1>
-
+<h1 id="2定义">2.定义</h1>
 <p>确保一个类只有一个实例,并提供全局访问点.</p>
-
-<h1 id="3-单例模式">3.单例模式</h1>
-
+<h1 id="3单例模式">3.单例模式</h1>
 <p><code>Singleton1.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> singleton<span style="color:#f92672">;</span>
 
@@ -237,15 +232,12 @@
         <span style="color:#66d9ef">return</span> singleton1<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
 
-<span style="color:#f92672">}</span></code></pre></div>
-<p>通过将构造器私有化,用内部的私有静态变量存储实例,通过静态方法获取该实例.</p>
+<span style="color:#f92672">}</span>
 
-<h1 id="4-线程安全问题">4.线程安全问题</h1>
-
+</code></pre></div><p>通过将构造器私有化,用内部的私有静态变量存储实例,通过静态方法获取该实例.</p>
+<h1 id="4线程安全问题">4.线程安全问题</h1>
 <p>上面的单例模式线程不安全,打个比方,如果两个线程同时在<code>singleton1</code>还未实例化时都进入了<code>getInstance</code>方法,这样就会导致出现两个不同的实例.</p>
-
-<h2 id="4-1-synchronized-修饰方法">4.1<code>synchronized</code>修饰方法</h2>
-
+<h2 id="41synchronized修饰方法">4.1<code>synchronized</code>修饰方法</h2>
 <p><code>Singleton2.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> singleton<span style="color:#f92672">;</span>
 
@@ -268,11 +260,10 @@
         <span style="color:#f92672">}</span>
         <span style="color:#66d9ef">return</span> singleton2<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p>使用<code>synchronized</code>确保方法线程安全,但是会降低方法的执行效率.如果此方法对程序不会造成性能上的问题,可以考虑用此方法.</p>
+<span style="color:#f92672">}</span>
 
-<h2 id="4-2直接生成单例对象">4.2直接生成单例对象</h2>
-
+</code></pre></div><p>使用<code>synchronized</code>确保方法线程安全,但是会降低方法的执行效率.如果此方法对程序不会造成性能上的问题,可以考虑用此方法.</p>
+<h2 id="42直接生成单例对象">4.2直接生成单例对象</h2>
 <p><code>Singleton3.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> singleton<span style="color:#f92672">;</span>
 
@@ -289,11 +280,9 @@
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Singleton3 <span style="color:#a6e22e">getInstance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> singleton3<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p>直接实例化变量,避免了线程问题,但是失去了对象懒加载.</p>
-
-<h2 id="4-3双重检查加锁">4.3双重检查加锁</h2>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p>直接实例化变量,避免了线程问题,但是失去了对象懒加载.</p>
+<h2 id="43双重检查加锁">4.3双重检查加锁</h2>
 <p><code>Singleton4.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> singleton<span style="color:#f92672">;</span>
 
@@ -321,9 +310,9 @@
         <span style="color:#66d9ef">return</span> singleton4<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
     
-<span style="color:#f92672">}</span></code></pre></div>
-<p>仅在第一实例化时进行<code>synchronized</code>,控制线程安全.既保证了效率,又保留了懒加载.</p>
+<span style="color:#f92672">}</span>
 
+</code></pre></div><p>仅在第一实例化时进行<code>synchronized</code>,控制线程安全.既保证了效率,又保留了懒加载.</p>
 <p><strong>注意:双重检查加锁仅在<code>jdk1.5</code>及之后的版本有效</strong></p>
 </article>
     <footer class="post-footer">
@@ -336,7 +325,9 @@
         
       </ul>
       
-      
+      <p class="post-copyright">
+        This post was published <strong>371</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
     </footer>
     
       <div id="disqus_thread"></div>
@@ -364,7 +355,7 @@
   </section>
   
 <footer class="site-footer">
-  <p>© 2019 BaseC的博客</p>
+  <p>© 2017-2020 BaseC的博客</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

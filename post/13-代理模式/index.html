@@ -38,7 +38,7 @@
     <meta name="twitter:description" content="介绍: 这是head first design patterns阅读笔记.
 1.代理模式 1.1定义 代理模式为另一个对象提供一个替身或占位符以访问这个对象.
 1.2特点  代理模式为另一个对象提供代表,以便控制客户对对象的访问,管理访问的方式有许多种.">
-    <meta name="twitter:image" content="/images/avatar.png">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
@@ -48,12 +48,12 @@
 1.代理模式 1.1定义 代理模式为另一个对象提供一个替身或占位符以访问这个对象.
 1.2特点  代理模式为另一个对象提供代表,以便控制客户对对象的访问,管理访问的方式有许多种.">
   <meta property="og:url" content="https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.55.6">
+<meta name="generator" content="Hugo 0.68.0">
 
 
 <link rel="canonical" href="https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
@@ -93,7 +93,7 @@
 
 
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/avatar.jpg" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
 
 
@@ -144,11 +144,11 @@
     
     
   <header class="site-header">
-  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
   
   <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
   
-  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <p class="subtitle">安定的内心与长期的坚持</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -202,18 +202,11 @@
       <h1 class="post-title">代理模式</h1>
       <p class="post-meta">@BaseC · May 2, 2019 · 4 min read</p>
     </header>
-    <article class="post-content">
-
-<p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
-
-<h1 id="1-代理模式">1.代理模式</h1>
-
-<h2 id="1-1定义">1.1定义</h2>
-
+    <article class="post-content"><p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
+<h1 id="1代理模式">1.代理模式</h1>
+<h2 id="11定义">1.1定义</h2>
 <p><strong>代理模式</strong>为另一个对象提供一个替身或占位符以访问这个对象.</p>
-
-<h2 id="1-2特点">1.2特点</h2>
-
+<h2 id="12特点">1.2特点</h2>
 <ul>
 <li>代理模式为另一个对象提供代表,以便控制客户对对象的访问,管理访问的方式有许多种.</li>
 <li>代理模式有许多种代理:远程代理,虚拟代理,保护代理,缓存代理,同步代理和防火墙代理.</li>
@@ -221,35 +214,20 @@
 <li>虚拟代理控制访问实例化开销大的对象.</li>
 <li>保护代理基于调用者控制对对象方法的访问.</li>
 </ul>
-
-<h1 id="2-远程代理">2.远程代理</h1>
-
+<h1 id="2远程代理">2.远程代理</h1>
 <p><strong>远程代理管理客户和远程对象之间的交互.</strong></p>
-
-<h2 id="2-1场景介绍">2.1场景介绍</h2>
-
+<h2 id="21场景介绍">2.1场景介绍</h2>
 <p>假设我们是糖果机的软件供应商,糖果机销量很好,在全国各地都有糖果机的身影!我们的<code>CEO</code>想要在他的办公室就能看到这些糖果机的名称,地址和销量.</p>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190329101703.png" alt="" /></p>
-
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190329101703.png" alt=""></p>
 <p>如上图所示,对<code>CEO</code>而言,这就是他想要的效果</p>
-
-<h2 id="2-2类图">2.2类图</h2>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190329103815.png" alt="" /></p>
-
+<h2 id="22类图">2.2类图</h2>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190329103815.png" alt=""></p>
 <p><code>GumballMachineRemote.java</code>:自定义远程接口,继承<code>java.rmi.Remote</code>接口.</p>
-
 <p><code>GumballMachine.java</code>:远程接口的实现.</p>
-
 <p><code>GumballMonitor.java</code>:糖果监视器,输出糖果机的相关信息.</p>
-
 <p><code>GumballMachineTestDrive.java</code>:将糖果机(<code>GumballMachineRemote</code>)注册到<code>RMI</code>中</p>
-
 <p><code>GumballMonitorTestDrive</code>:从<code>RMI</code>中获取糖果机(<code>GumballMachineRemote</code>)</p>
-
-<h2 id="2-3代码实现">2.3代码实现</h2>
-
+<h2 id="23代码实现">2.3代码实现</h2>
 <p><code>GumballMachineRemote.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.remote<span style="color:#f92672">;</span>
 
@@ -269,8 +247,9 @@
     String <span style="color:#a6e22e">getLocation</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> RemoteException<span style="color:#f92672">;</span>
 
     State <span style="color:#a6e22e">getState</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> RemoteException<span style="color:#f92672">;</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>GumballMachine.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>GumballMachine.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.remote<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> state.NoQuarterState<span style="color:#f92672">;</span>
@@ -313,8 +292,8 @@
     <span style="color:#66d9ef">public</span> State <span style="color:#a6e22e">getState</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> state<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>GumballMonitor.java</code></p>
+<span style="color:#f92672">}</span>
+</code></pre></div><p><code>GumballMonitor.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.remote<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> java.rmi.RemoteException<span style="color:#f92672">;</span>
@@ -339,8 +318,9 @@
             e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>GumballMachineTestDrive.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>GumballMachineTestDrive.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.remote<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> java.rmi.registry.LocateRegistry<span style="color:#f92672">;</span>
@@ -365,8 +345,9 @@
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
 
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>GumballMonitorTestDrive.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>GumballMonitorTestDrive.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.remote<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> java.rmi.registry.LocateRegistry<span style="color:#f92672">;</span>
@@ -390,9 +371,8 @@
             e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p>先执行<code>GumballMachineTestDrive</code>的<code>main</code>方法,然后再执行<code>GumballMonitorTestDrive</code>的<code>main</code>方法.<strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p>先执行<code>GumballMachineTestDrive</code>的<code>main</code>方法,然后再执行<code>GumballMonitorTestDrive</code>的<code>main</code>方法.<strong>控制台输出:</strong></p>
 <pre><code>GumballMachine Location:machine1
 GumballMachine Count:5
 GumballMachine State:NoQuarterState{}
@@ -402,26 +382,15 @@ GumballMachine State:NoQuarterState{}
 GumballMachine Location:machine3
 GumballMachine Count:15
 GumballMachine State:NoQuarterState{}
-</code></pre>
-
-<h2 id="2-4总结">2.4总结</h2>
-
+</code></pre><h2 id="24总结">2.4总结</h2>
 <p>通过调用代理的方法,远程调用可以跨过网络,返回字符串,整数和<code>State</code>对象.因为我们使用的是代理,调用的方法会在远程执行,<code>GumballMonitor</code>根本就不需要在乎这一点.</p>
-
-<h1 id="3-保护代理">3.保护代理</h1>
-
+<h1 id="3保护代理">3.保护代理</h1>
 <p><strong>保护代理基于调用者控制对对象方法的访问.</strong></p>
-
-<h2 id="3-1场景介绍">3.1场景介绍</h2>
-
+<h2 id="31场景介绍">3.1场景介绍</h2>
 <p>我们需要设计一个约会系统,每个人都有各自的基础信息和火辣值.基础信息只能让所属者设置,但是所属者不能设置自身的火辣值,对于其他用户而言,只可设置其他用户的火辣值,不可设置其余用户的基础信息.</p>
-
-<h2 id="3-2类图">3.2类图</h2>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190329110949.png" alt="" /></p>
-
-<h2 id="3-3代码实现">3.3代码实现</h2>
-
+<h2 id="32类图">3.2类图</h2>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190329110949.png" alt=""></p>
+<h2 id="33代码实现">3.3代码实现</h2>
 <p><code>PersonBean.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.protect<span style="color:#f92672">;</span>
 
@@ -447,8 +416,9 @@ GumballMachine State:NoQuarterState{}
 
     <span style="color:#75715e">//设置魅力值
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setHotOrNotRating</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> hotOrNotRating<span style="color:#f92672">);</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>PersonBeanImpl.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>PersonBeanImpl.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.protect<span style="color:#f92672">;</span>
 
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PersonBeanImpl</span> <span style="color:#66d9ef">implements</span> PersonBean <span style="color:#f92672">{</span>
@@ -507,8 +477,9 @@ GumballMachine State:NoQuarterState{}
         <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">hotOrNotRating</span> <span style="color:#f92672">+=</span> hotOrNotRating<span style="color:#f92672">;</span>
         ratingCount <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>OwnerInvocationHandler.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>OwnerInvocationHandler.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.protect<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> java.lang.reflect.InvocationHandler<span style="color:#f92672">;</span>
@@ -542,8 +513,9 @@ GumballMachine State:NoQuarterState{}
         <span style="color:#f92672">}</span>
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>NonOwnerInvocationHandler.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>NonOwnerInvocationHandler.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.protect<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> java.lang.reflect.InvocationHandler<span style="color:#f92672">;</span>
@@ -577,8 +549,9 @@ GumballMachine State:NoQuarterState{}
         <span style="color:#f92672">}</span>
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>测试代码:</strong><code>MatchMakingTestDrive.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p>**测试代码:**<code>MatchMakingTestDrive.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> proxy.protect<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> java.lang.reflect.InvocationHandler<span style="color:#f92672">;</span>
@@ -634,20 +607,16 @@ GumballMachine State:NoQuarterState{}
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printPerson</span><span style="color:#f92672">(</span>PersonBean person<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>String<span style="color:#f92672">.</span><span style="color:#a6e22e">format</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Person[name = %s,gender = %s,interests = %s,hotOrNotRating is %d]&#34;</span><span style="color:#f92672">,</span> person<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(),</span> person<span style="color:#f92672">.</span><span style="color:#a6e22e">getGender</span><span style="color:#f92672">(),</span> person<span style="color:#f92672">.</span><span style="color:#a6e22e">getInterests</span><span style="color:#f92672">(),</span> person<span style="color:#f92672">.</span><span style="color:#a6e22e">getHotOrNotRating</span><span style="color:#f92672">()));</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
+<span style="color:#f92672">}</span>
 
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>Person[name = Alex,gender = Man,interests = Game,Movie,hotOrNotRating is 6]
 所有者不可以设置自己的hotOrNotRating
 Person[name = Alex,gender = Man,interests = Run,Exercise,hotOrNotRating is 6]
 非所有者只能设置别人的hotOrNotRating
 Person[name = Alex,gender = Man,interests = Run,Exercise,hotOrNotRating is 4]
-</code></pre>
-
-<h2 id="3-4总结">3.4总结</h2>
-
+</code></pre><h2 id="34总结">3.4总结</h2>
 <p><code>Java</code>在<code>java.lang.reflect</code>包中有自己的代理支持,利用这个包我们可以在运行时动态地创建一个代理类,实现一个或多个接口,并将方法的调用转发到你所指定的类.因为实际的代理类是在运行时创建的,我们称这个<code>Java</code>技术为:动态代理.</p>
-
 <p><strong>保护代理</strong>就是基于动态代理实现的.</p>
 </article>
     <footer class="post-footer">
@@ -660,7 +629,9 @@ Person[name = Alex,gender = Man,interests = Run,Exercise,hotOrNotRating is 4]
         
       </ul>
       
-      
+      <p class="post-copyright">
+        This post was published <strong>325</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
     </footer>
     
       <div id="disqus_thread"></div>
@@ -688,7 +659,7 @@ Person[name = Alex,gender = Man,interests = Run,Exercise,hotOrNotRating is 4]
   </section>
   
 <footer class="site-footer">
-  <p>© 2019 BaseC的博客</p>
+  <p>© 2017-2020 BaseC的博客</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

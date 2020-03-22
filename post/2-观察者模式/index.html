@@ -38,7 +38,7 @@
     <meta name="twitter:description" content="介绍: 这是head first design patterns阅读笔记.
 1.观察者模式 1.1定义 观察者模式定义了对象之间的一对多依赖,这样一来,当一个对象改变状态时,它的所有依赖者都会收到通知并自动更新.
 1.2设计原则 为了交互对象之间的松耦合设计而努力.">
-    <meta name="twitter:image" content="/images/avatar.png">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
@@ -48,12 +48,12 @@
 1.观察者模式 1.1定义 观察者模式定义了对象之间的一对多依赖,这样一来,当一个对象改变状态时,它的所有依赖者都会收到通知并自动更新.
 1.2设计原则 为了交互对象之间的松耦合设计而努力.">
   <meta property="og:url" content="https://wangjc95.com/post/2-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.55.6">
+<meta name="generator" content="Hugo 0.68.0">
 
 
 <link rel="canonical" href="https://wangjc95.com/post/2-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">
@@ -93,7 +93,7 @@
 
 
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/avatar.jpg" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
 
 
@@ -144,11 +144,11 @@
     
     
   <header class="site-header">
-  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
   
   <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
   
-  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <p class="subtitle">安定的内心与长期的坚持</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -202,42 +202,23 @@
       <h1 class="post-title">观察者模式</h1>
       <p class="post-meta">@BaseC · Feb 17, 2019 · 4 min read</p>
     </header>
-    <article class="post-content">
-
-<p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
-
-<h1 id="1-观察者模式">1.观察者模式</h1>
-
-<h2 id="1-1定义">1.1定义</h2>
-
+    <article class="post-content"><p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
+<h1 id="1观察者模式">1.观察者模式</h1>
+<h2 id="11定义">1.1定义</h2>
 <p>观察者模式定义了对象之间的一对多依赖,这样一来,当一个对象改变状态时,它的所有依赖者都会收到通知并自动更新.</p>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190217170741.png" alt="" /></p>
-
-<h2 id="1-2设计原则">1.2设计原则</h2>
-
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190217170741.png" alt=""></p>
+<h2 id="12设计原则">1.2设计原则</h2>
 <p>为了交互对象之间的松耦合设计而努力.</p>
-
-<h1 id="2-情景模拟">2.情景模拟</h1>
-
-<h2 id="2-1情景介绍">2.1情景介绍</h2>
-
+<h1 id="2情景模拟">2.情景模拟</h1>
+<h2 id="21情景介绍">2.1情景介绍</h2>
 <p>建立一个天气推送应用,拉取气象站的最新数据(比如湿度,温度,气压等数据).并在显示装置中进行显示.<strong>显示装置会有多个.</strong></p>
-
-<h2 id="2-2结构图">2.2结构图</h2>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190217170639.png" alt="" /></p>
-
-<h1 id="3-代码实现">3.代码实现</h1>
-
-<h2 id="2-1代码类图">2.1代码类图</h2>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190217170835.png" alt="" /></p>
-
-<h2 id="2-2自定义搭建">2.2自定义搭建</h2>
-
-<h3 id="2-2-1接口">2.2.1接口</h3>
-
+<h2 id="22结构图">2.2结构图</h2>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190217170639.png" alt=""></p>
+<h1 id="3代码实现">3.代码实现</h1>
+<h2 id="21代码类图">2.1代码类图</h2>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190217170835.png" alt=""></p>
+<h2 id="22自定义搭建">2.2自定义搭建</h2>
+<h3 id="221接口">2.2.1接口</h3>
 <p><strong>Interface.java</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> observer.interfaces<span style="color:#f92672">;</span>
 <span style="color:#75715e">/**
@@ -263,9 +244,8 @@
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">DisplayElement</span><span style="color:#f92672">{</span>
         <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">display</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<h3 id="2-2-2主题对象">2.2.2主题对象</h3>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="222主题对象">2.2.2主题对象</h3>
 <p><strong>WeatherData.java</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> observer.subjects<span style="color:#f92672">;</span>
 
@@ -318,9 +298,8 @@
         <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pressure</span> <span style="color:#f92672">=</span> pressure<span style="color:#f92672">;</span>
         measureChanged<span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<h3 id="2-2-3观察者">2.2.3观察者</h3>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="223观察者">2.2.3观察者</h3>
 <p><strong>CurrentConditionDisplay.java</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> observer.subscribes<span style="color:#f92672">;</span>
 
@@ -354,8 +333,9 @@
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">display</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>String<span style="color:#f92672">.</span><span style="color:#a6e22e">format</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;CurrentCondition is %f temperatrue and %f humidity&#34;</span><span style="color:#f92672">,</span>temperature<span style="color:#f92672">,</span>humidity<span style="color:#f92672">));</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>ForecastDisplay.java</strong></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><strong>ForecastDisplay.java</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> observer.subscribes<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> observer.interfaces.Interface<span style="color:#f92672">;</span>
@@ -393,8 +373,9 @@
             System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Watch out for cooler, rainy weather&#34;</span><span style="color:#f92672">);</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<h3 id="2-2-4测试代码">2.2.4测试代码</h3>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><h3 id="224测试代码">2.2.4测试代码</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#75715e">//不使用Java自带的observer类模拟实现天气站数据的输送.
 </span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Test</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
@@ -404,21 +385,16 @@
         weatherData<span style="color:#f92672">.</span><span style="color:#a6e22e">setMeasurements</span><span style="color:#f92672">(</span>1<span style="color:#f92672">.</span><span style="color:#a6e22e">1f</span><span style="color:#f92672">,</span>2<span style="color:#f92672">.</span><span style="color:#a6e22e">2f</span><span style="color:#f92672">,</span>3<span style="color:#f92672">.</span><span style="color:#a6e22e">3f</span><span style="color:#f92672">);</span>
         weatherData<span style="color:#f92672">.</span><span style="color:#a6e22e">setMeasurements</span><span style="color:#f92672">(</span>2<span style="color:#f92672">,</span>3<span style="color:#f92672">,</span>4<span style="color:#f92672">.</span><span style="color:#a6e22e">01f</span><span style="color:#f92672">);</span>
         weatherData<span style="color:#f92672">.</span><span style="color:#a6e22e">setMeasurements</span><span style="color:#f92672">(</span>12<span style="color:#f92672">.</span><span style="color:#a6e22e">12f</span><span style="color:#f92672">,</span>13<span style="color:#f92672">,</span>22<span style="color:#f92672">.</span><span style="color:#a6e22e">01f</span><span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span></code></pre></div>
-<p><strong>结果输出:</strong></p>
-
+    <span style="color:#f92672">}</span>
+</code></pre></div><p><strong>结果输出:</strong></p>
 <pre><code>CurrentCondition is 1.100000 temperatrue and 2.200000 humidity
 Forecast: Watch out for cooler, rainy weather
 CurrentCondition is 2.000000 temperatrue and 3.000000 humidity
 Forecast: Improving weather on the way!
 CurrentCondition is 12.120000 temperatrue and 13.000000 humidity
 Forecast: Improving weather on the way!
-</code></pre>
-
-<h2 id="2-3使用-java-内置类搭建">2.3使用<code>Java</code>内置类搭建</h2>
-
-<h3 id="2-3-1主题对象">2.3.1主题对象</h3>
-
+</code></pre><h2 id="23使用java内置类搭建">2.3使用<code>Java</code>内置类搭建</h2>
+<h3 id="231主题对象">2.3.1主题对象</h3>
 <p><strong>WeatherData.java</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> observer.observable<span style="color:#f92672">;</span>
 
@@ -460,9 +436,9 @@ Forecast: Improving weather on the way!
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> <span style="color:#a6e22e">getPressure</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> pressure<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<h3 id="2-3-2观察者">2.3.2观察者</h3>
+<span style="color:#f92672">}</span>
 
+</code></pre></div><h3 id="232观察者">2.3.2观察者</h3>
 <p><strong>CurrentConditionDisplay.java</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> observer.observable<span style="color:#f92672">;</span>
 
@@ -506,8 +482,9 @@ Forecast: Improving weather on the way!
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">display</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>String<span style="color:#f92672">.</span><span style="color:#a6e22e">format</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;CurrentCondition is %f temperatrue and %f humidity&#34;</span><span style="color:#f92672">,</span> temperature<span style="color:#f92672">,</span> humidity<span style="color:#f92672">));</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>ForecastDisplay.java</strong></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><strong>ForecastDisplay.java</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> observer.observable<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> observer.interfaces.Interface<span style="color:#f92672">;</span>
@@ -550,8 +527,10 @@ Forecast: Improving weather on the way!
             System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Watch out for cooler, rainy weather&#34;</span><span style="color:#f92672">);</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<h3 id="2-3-3测试代码">2.3.3测试代码</h3>
+<span style="color:#f92672">}</span>
+
+
+</code></pre></div><h3 id="233测试代码">2.3.3测试代码</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         observer<span style="color:#f92672">.</span><span style="color:#a6e22e">observable</span><span style="color:#f92672">.</span><span style="color:#a6e22e">WeatherData</span> weatherData <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> observer<span style="color:#f92672">.</span><span style="color:#a6e22e">observable</span><span style="color:#f92672">.</span><span style="color:#a6e22e">WeatherData</span><span style="color:#f92672">();</span>
@@ -560,9 +539,9 @@ Forecast: Improving weather on the way!
         weatherData<span style="color:#f92672">.</span><span style="color:#a6e22e">setMeasurements</span><span style="color:#f92672">(</span>1<span style="color:#f92672">.</span><span style="color:#a6e22e">1f</span><span style="color:#f92672">,</span>2<span style="color:#f92672">.</span><span style="color:#a6e22e">2f</span><span style="color:#f92672">,</span>3<span style="color:#f92672">.</span><span style="color:#a6e22e">3f</span><span style="color:#f92672">);</span>
         weatherData<span style="color:#f92672">.</span><span style="color:#a6e22e">setMeasurements</span><span style="color:#f92672">(</span>2<span style="color:#f92672">,</span>3<span style="color:#f92672">,</span>4<span style="color:#f92672">.</span><span style="color:#a6e22e">01f</span><span style="color:#f92672">);</span>
         weatherData<span style="color:#f92672">.</span><span style="color:#a6e22e">setMeasurements</span><span style="color:#f92672">(</span>12<span style="color:#f92672">.</span><span style="color:#a6e22e">12f</span><span style="color:#f92672">,</span>13<span style="color:#f92672">,</span>22<span style="color:#f92672">.</span><span style="color:#a6e22e">01f</span><span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span></code></pre></div>
-<p><strong>结果输出:</strong></p>
+    <span style="color:#f92672">}</span>
 
+</code></pre></div><p><strong>结果输出:</strong></p>
 <pre><code>Forecast: Watch out for cooler, rainy weather
 CurrentCondition is 1.100000 temperatrue and 2.200000 humidity
 Forecast: Improving weather on the way!
@@ -570,10 +549,7 @@ CurrentCondition is 2.000000 temperatrue and 3.000000 humidity
 Forecast: Improving weather on the way!
 CurrentCondition is 12.120000 temperatrue and 13.000000 humidity
 
-</code></pre>
-
-<h3 id="2-3-4-java-util-observable-的黑暗面">2.3.4<code>java.util.Observable</code>的黑暗面</h3>
-
+</code></pre><h3 id="234javautilobservable的黑暗面">2.3.4<code>java.util.Observable</code>的黑暗面</h3>
 <p>它是一个<strong>类</strong>而不是一个<strong>接口</strong>,导致了它的局限性.它不能被已经有父类的类继承.因为<code>java</code>不能多继承.</p>
 </article>
     <footer class="post-footer">
@@ -586,7 +562,9 @@ CurrentCondition is 12.120000 temperatrue and 13.000000 humidity
         
       </ul>
       
-      
+      <p class="post-copyright">
+        This post was published <strong>399</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
     </footer>
     
       <div id="disqus_thread"></div>
@@ -614,7 +592,7 @@ CurrentCondition is 12.120000 temperatrue and 13.000000 humidity
   </section>
   
 <footer class="site-footer">
-  <p>© 2019 BaseC的博客</p>
+  <p>© 2017-2020 BaseC的博客</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

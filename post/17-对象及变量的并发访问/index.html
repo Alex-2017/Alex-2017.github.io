@@ -28,7 +28,7 @@
   
   <meta name="description" content="介绍: 这是Java多线程编程核心技术阅读笔记
 1.synchronized同步方法 1.1方法内的变量为线程安全 非线程安全问题存在于实例变量中,如果是方法内部的私有变量,则不存在线程安全问题,所得结果也就是线程安全的了.
-public class MethodVariable { public void getNum(String username) { int num = 0; if (&amp;#34;a&amp;#34;.">
+public class MethodVariable {public void getNum(String username) {int num = 0;if (&amp;#34;a&amp;#34;.">
 
   
   
@@ -37,8 +37,8 @@ public class MethodVariable { public void getNum(String username) { int num = 0;
     <meta name="twitter:title" content="对象及变量的并发访问">
     <meta name="twitter:description" content="介绍: 这是Java多线程编程核心技术阅读笔记
 1.synchronized同步方法 1.1方法内的变量为线程安全 非线程安全问题存在于实例变量中,如果是方法内部的私有变量,则不存在线程安全问题,所得结果也就是线程安全的了.
-public class MethodVariable { public void getNum(String username) { int num = 0; if (&amp;#34;a&amp;#34;.">
-    <meta name="twitter:image" content="/images/avatar.png">
+public class MethodVariable {public void getNum(String username) {int num = 0;if (&amp;#34;a&amp;#34;.">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
@@ -46,14 +46,14 @@ public class MethodVariable { public void getNum(String username) { int num = 0;
   <meta property="og:title" content="对象及变量的并发访问">
   <meta property="og:description" content="介绍: 这是Java多线程编程核心技术阅读笔记
 1.synchronized同步方法 1.1方法内的变量为线程安全 非线程安全问题存在于实例变量中,如果是方法内部的私有变量,则不存在线程安全问题,所得结果也就是线程安全的了.
-public class MethodVariable { public void getNum(String username) { int num = 0; if (&amp;#34;a&amp;#34;.">
+public class MethodVariable {public void getNum(String username) {int num = 0;if (&amp;#34;a&amp;#34;.">
   <meta property="og:url" content="https://wangjc95.com/post/17-%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.55.6">
+<meta name="generator" content="Hugo 0.68.0">
 
 
 <link rel="canonical" href="https://wangjc95.com/post/17-%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/">
@@ -93,7 +93,7 @@ public class MethodVariable { public void getNum(String username) { int num = 0;
 
 
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/avatar.jpg" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
 
 
@@ -144,11 +144,11 @@ public class MethodVariable { public void getNum(String username) { int num = 0;
     
     
   <header class="site-header">
-  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
   
   <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
   
-  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <p class="subtitle">安定的内心与长期的坚持</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -202,14 +202,9 @@ public class MethodVariable { public void getNum(String username) { int num = 0;
       <h1 class="post-title">对象及变量的并发访问</h1>
       <p class="post-meta">@BaseC · Aug 18, 2019 · 12 min read</p>
     </header>
-    <article class="post-content">
-
-<p><strong>介绍:</strong> 这是<code>Java</code>多线程编程核心技术阅读笔记</p>
-
-<h1 id="1-synchronized-同步方法">1.<code>synchronized</code>同步方法</h1>
-
-<h2 id="1-1方法内的变量为线程安全">1.1方法内的变量为线程安全</h2>
-
+    <article class="post-content"><p><strong>介绍:</strong> 这是<code>Java</code>多线程编程核心技术阅读笔记</p>
+<h1 id="1synchronized同步方法">1.<code>synchronized</code>同步方法</h1>
+<h2 id="11方法内的变量为线程安全">1.1方法内的变量为线程安全</h2>
 <p><strong>非线程安全</strong>问题存在于<strong>实例变量</strong>中,如果是方法内部的私有变量,则不存在<strong>线程安全</strong>问题,所得结果也就是<strong>线程安全</strong>的了.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MethodVariable</span> <span style="color:#f92672">{</span>
 
@@ -245,19 +240,14 @@ public class MethodVariable { public void getNum(String username) { int num = 0;
 
         threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>a set is over
 b set is over
 b num = 200
 a num = 100
-</code></pre>
-
-<p>由此可见,方法中的变量存在<strong>线程安全</strong>问题,永远都是线程安全的.这是方法内部变量是私有的特性造成的.</p>
-
-<h2 id="1-2实例变量非线程安全">1.2实例变量非线程安全</h2>
-
+</code></pre><p>由此可见,方法中的变量存在<strong>线程安全</strong>问题,永远都是线程安全的.这是方法内部变量是私有的特性造成的.</p>
+<h2 id="12实例变量非线程安全">1.2实例变量非线程安全</h2>
 <p>如果多个线程共同访问一个对象中的实例变量,则可能出现<strong>线程安全</strong>问题.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InstanceVariable</span> <span style="color:#f92672">{</span>
 
@@ -294,32 +284,23 @@ a num = 100
 
         threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>b set is over
 a set is over
 b num = 200
 a num = 200
-</code></pre>
-
-<p><code>a num</code>应该是100,但是控制台输出了200.这就出现了<strong>线程安全</strong>问题.</p>
-
-<p><strong>解决方法:</strong>对<code>getNum()</code>方法添加<code>synchronized</code>关键字</p>
+</code></pre><p><code>a num</code>应该是100,但是控制台输出了200.这就出现了<strong>线程安全</strong>问题.</p>
+<p>**解决方法:**对<code>getNum()</code>方法添加<code>synchronized</code>关键字</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//有线程安全问题,添加synchronized关键字.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getNum</span><span style="color:#f92672">(</span>String username<span style="color:#f92672">)</span> <span style="color:#f92672">{...}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getNum</span><span style="color:#f92672">(</span>String username<span style="color:#f92672">)</span> <span style="color:#f92672">{...}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>a set is over
 a num = 100
 b set is over
 b num = 200
-</code></pre>
-
-<p>各个线程依次执行.调用<code>synchronized</code>方法的线程一定是排队运行的.哪个线程先执行<code>synchronized</code>方法,该线程就获取此方法所属对象的锁<code>lock</code>,其他需要执行此方法的线程需要等待此锁.另外需要牢牢记住<strong>共享</strong>这两个字,只有共享资源的读写访问才需要同步化如果不是共享资源,那么就根本没有同步的必要.</p>
-
-<h2 id="1-3多个对象多个锁">1.3多个对象多个锁</h2>
-
+</code></pre><p>各个线程依次执行.调用<code>synchronized</code>方法的线程一定是排队运行的.哪个线程先执行<code>synchronized</code>方法,该线程就获取此方法所属对象的锁<code>lock</code>,其他需要执行此方法的线程需要等待此锁.另外需要牢牢记住<strong>共享</strong>这两个字,只有共享资源的读写访问才需要同步化如果不是共享资源,那么就根本没有同步的必要.</p>
+<h2 id="13多个对象多个锁">1.3多个对象多个锁</h2>
 <p>先看看以下这段代码</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MultipleLock</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
@@ -358,18 +339,14 @@ b num = 200
 </span><span style="color:#75715e"></span>        threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>a set is over
 b set is over
 b num = 200
 a num = 100
-</code></pre>
-
-<p>从输出结果可以看出,两个线程是异步执行的.这是因为多个线程访问多个对象,<code>JVM</code>会创建多个锁.<code>synchronized</code>取得的锁都是对象锁,而不是把一段代码或方法当做锁.</p>
-
-<h2 id="1-4-synchronized-方法与锁对象">1.4<code>synchronized</code>方法与锁对象</h2>
+</code></pre><p>从输出结果可以看出,两个线程是异步执行的.这是因为多个线程访问多个对象,<code>JVM</code>会创建多个锁.<code>synchronized</code>取得的锁都是对象锁,而不是把一段代码或方法当做锁.</p>
+<h2 id="14synchronized方法与锁对象">1.4<code>synchronized</code>方法与锁对象</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SynMethod</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">methodA</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
@@ -406,21 +383,15 @@ a num = 100
 
         threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>threadA begin ,time is 1565794472968
 threadB begin ,time is 1565794472968
 threadB end ,time is 1565794475969
 threadA end ,time is 1565794477970
-</code></pre>
-
-<p><strong>结论:</strong><code>A</code>线程先持有<code>Object</code>对象的<code>lock</code>锁,调用<code>synchronized</code>方法.<code>B</code>线程可以以异步的方式调用<code>Object</code>对象中非<code>synchronized</code>方法.</p>
-
-<h2 id="1-5脏读">1.5脏读</h2>
-
+</code></pre><p>**结论:**<code>A</code>线程先持有<code>Object</code>对象的<code>lock</code>锁,调用<code>synchronized</code>方法.<code>B</code>线程可以以异步的方式调用<code>Object</code>对象中非<code>synchronized</code>方法.</p>
+<h2 id="15脏读">1.5脏读</h2>
 <p>发生脏读的情况是在读取实例变量时,其值已经被其他线程改过了.</p>
-
 <p>运行如下代码</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DirtyRead</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">private</span> String name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">;</span>
@@ -451,19 +422,13 @@ threadA end ,time is 1565794477970
 </span><span style="color:#75715e"></span>        Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>1000<span style="color:#f92672">);</span>
         dirtyRead<span style="color:#f92672">.</span><span style="color:#a6e22e">getValue</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>getValue method thread name = main,name is B, password is AA
 setValue method thread name = Thread-0,name is B, password is BB
-</code></pre>
-
-<p><code>getValue</code>输出的<code>name</code>是<code>B</code>,而<code>password</code>是<code>AA</code>.出现脏读是因为<code>public void getValue()</code>方法不是同步的,所以可以在任一时刻被调用.解决方法就是加上<code>synchronized</code>关键字.</p>
-
-<h2 id="1-6-synchronized-锁重入">1.6<code>synchronized</code>锁重入</h2>
-
+</code></pre><p><code>getValue</code>输出的<code>name</code>是<code>B</code>,而<code>password</code>是<code>AA</code>.出现脏读是因为<code>public void getValue()</code>方法不是同步的,所以可以在任一时刻被调用.解决方法就是加上<code>synchronized</code>关键字.</p>
+<h2 id="16synchronized锁重入">1.6<code>synchronized</code>锁重入</h2>
 <p><strong>可重入锁</strong>的概念是:当一个线程得到一个对象锁后,再次请求此对象锁时是可以再次得到该对象的锁的.比如有一个线程获得了某个对象的锁,此时这个对象锁还没有释放,当该线程想要再次获取这个线程的锁时还是可以获取的,如果不可锁重入的话,就会造成死锁.</p>
-
 <p><strong>示例代码:</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Service</span> <span style="color:#f92672">{</span>
 
@@ -490,16 +455,12 @@ setValue method thread name = Thread-0,name is B, password is BB
         <span style="color:#f92672">});</span>
         thread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出</strong></p>
 <pre><code>service1
 service2
 service3
-</code></pre>
-
-<p>当存在父子类继承关系时,子类是完全可以通过可重入锁调用父类的同步方法的.</p>
-
+</code></pre><p>当存在父子类继承关系时,子类是完全可以通过可重入锁调用父类的同步方法的.</p>
 <p><strong>示例代码:</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Parent</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 10<span style="color:#f92672">;</span>
@@ -534,9 +495,8 @@ service3
 </span><span style="color:#75715e"></span>            <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">operateNumInParent</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>child print i= 9
 parent print i= 8
 child print i= 7
@@ -547,10 +507,7 @@ child print i= 3
 parent print i= 2
 child print i= 1
 parent print i= 0
-</code></pre>
-
-<h2 id="1-7出现异常-锁自动释放">1.7出现异常,锁自动释放</h2>
-
+</code></pre><h2 id="17出现异常锁自动释放">1.7出现异常,锁自动释放</h2>
 <p>执行如下代码:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ExceptionLock</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">service</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
@@ -583,18 +540,14 @@ parent print i= 0
 </span><span style="color:#75715e"></span>        Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>500<span style="color:#f92672">);</span>
         threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>threadName is a run beginTime = 1565796212700
 threadName is a exception time = 1565796214112
 Exception in thread &quot;a&quot; java.lang.NumberFormatException: For input string: &quot;a&quot;
 threadName is b run beginTime = 1565796214112
-</code></pre>
-
-<p>线程<code>A</code>出现异常并释放锁,线程<code>B</code>进入方法并正常打印.</p>
-
-<h2 id="1-8同步不具有继承性">1.8同步不具有继承性</h2>
+</code></pre><p>线程<code>A</code>出现异常并释放锁,线程<code>B</code>进入方法并正常打印.</p>
+<h2 id="18同步不具有继承性">1.8同步不具有继承性</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">serviceMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
@@ -641,9 +594,8 @@ threadName is b run beginTime = 1565796214112
             e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>thread threadA beigin run Sub 1565797158130
 thread threadB beigin run Sub 1565797158646
 thread threadA end run Sub 1565797160146
@@ -652,15 +604,10 @@ thread threadB end run Sub 1565797160647
 thread threadA end run Main 1565797162147
 thread threadB beigin run Main 1565797162147
 thread threadB end run Main 1565797164147
-</code></pre>
-
-<p>程序输出证明<code>Main</code>中的<code>serviceMethod()</code>仍是同步执行,而<code>Sub</code>的<code>serviceMethod()</code>是异步执行.所以同步不能继承.</p>
-
-<h1 id="2-synchronized-同步语句块">2.<code>synchronized</code>同步语句块</h1>
-
+</code></pre><p>程序输出证明<code>Main</code>中的<code>serviceMethod()</code>仍是同步执行,而<code>Sub</code>的<code>serviceMethod()</code>是异步执行.所以同步不能继承.</p>
+<h1 id="2synchronized同步语句块">2.<code>synchronized</code>同步语句块</h1>
 <p>用关键字<code>synchronized</code>声明方法在某些情况下是有弊端的,比如<code>A</code>线程调用同步方法执行一个长时间的任务,那么<code>B</code>线程则必须等待比较长时间.在这样的情况下可以使用<code>synchronized</code>同步语法块来解决.</p>
-
-<h2 id="2-1一半异步-一半同步">2.1一半异步,一半同步.</h2>
+<h2 id="21一半异步一半同步">2.1一半异步,一半同步.</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SyncCodeBlock</span> <span style="color:#f92672">{</span>
 
     <span style="color:#75715e">//同步方法
@@ -698,9 +645,8 @@ thread threadB end run Main 1565797164147
         threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>index is 1,currentThreadName is threadA
 index is 2,currentThreadName is threadA
 index is 3,currentThreadName is threadA
@@ -711,10 +657,7 @@ index is 2,currentThreadName is threadB
 index is 3,currentThreadName is threadB
 index is 4,currentThreadName is threadB
 index is 5,currentThreadName is threadB
-</code></pre>
-
-<p>由上看出,当<code>threadA</code>在执行时,<code>threadB</code>成阻塞状态.</p>
-
+</code></pre><p>由上看出,当<code>threadA</code>在执行时,<code>threadB</code>成阻塞状态.</p>
 <p>更改俩线程中的<code>service1()</code>方法为<code>service2()</code>方法.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e">//syncCodeBlock.service1();
@@ -724,9 +667,8 @@ index is 5,currentThreadName is threadB
 Thread threadB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e">//syncCodeBlock.service1();
 </span><span style="color:#75715e"></span>    syncCodeBlock<span style="color:#f92672">.</span><span style="color:#a6e22e">service2</span><span style="color:#f92672">();</span>
-<span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">);</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">},</span> <span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">);</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>asynchronized index is 1,currentThreadName is threadA
 asynchronized index is 1,currentThreadName is threadB
 asynchronized index is 2,currentThreadName is threadB
@@ -747,12 +689,8 @@ synchronized index is 2,currentThreadName is threadA
 synchronized index is 3,currentThreadName is threadA
 synchronized index is 4,currentThreadName is threadA
 synchronized index is 5,currentThreadName is threadA
-</code></pre>
-
-<p>可以看出,当一个线程访问<code>object</code>的一个<code>synchronized</code>同步代码块时,另一个线程仍然可以访问该对象的非<code>synchronized(this)</code>代码.在<code>synchronized</code>块中是同步执行,不在<code>synchronized</code>中就是异步执行.</p>
-
-<h2 id="2-2使用任意对象作为对象监视器">2.2使用任意对象作为对象监视器</h2>
-
+</code></pre><p>可以看出,当一个线程访问<code>object</code>的一个<code>synchronized</code>同步代码块时,另一个线程仍然可以访问该对象的非<code>synchronized(this)</code>代码.在<code>synchronized</code>块中是同步执行,不在<code>synchronized</code>中就是异步执行.</p>
+<h2 id="22使用任意对象作为对象监视器">2.2使用任意对象作为对象监视器</h2>
 <p><strong>使用<code>synchronized</code>方法出现脏读</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyOneList</span> <span style="color:#f92672">{</span>
 
@@ -765,7 +703,8 @@ synchronized index is 5,currentThreadName is threadA
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getSize</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> list<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyService</span> <span style="color:#f92672">{</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyService</span> <span style="color:#f92672">{</span>
     
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addMyOneList</span><span style="color:#f92672">(</span>MyOneList myOneList<span style="color:#f92672">,</span> String data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>myOneList<span style="color:#f92672">.</span><span style="color:#a6e22e">getSize</span><span style="color:#f92672">()</span> <span style="color:#f92672">&lt;</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -802,15 +741,11 @@ synchronized index is 5,currentThreadName is threadA
 
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>myOneList<span style="color:#f92672">.</span><span style="color:#a6e22e">getSize</span><span style="color:#f92672">());</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>2
-</code></pre>
-
-<p>如果程序正常执行,应当输出1.出现2的原因是发生了脏读,两个线程以异步的方式返回<code>list</code>参数的<code>size()</code>大小.</p>
-
-<p><strong>解决方法:</strong>对<code>addMyOneList()</code>方法进行同步化.</p>
+</code></pre><p>如果程序正常执行,应当输出1.出现2的原因是发生了脏读,两个线程以异步的方式返回<code>list</code>参数的<code>size()</code>大小.</p>
+<p>**解决方法:**对<code>addMyOneList()</code>方法进行同步化.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addMyOneList</span><span style="color:#f92672">(</span>MyOneList myOneList<span style="color:#f92672">,</span> String data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">//使用synchronized(myOneList),确保myOneList在此方法中的操作是同步的.
 </span><span style="color:#75715e"></span>        <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>myOneList<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -823,11 +758,9 @@ synchronized index is 5,currentThreadName is threadA
                 myOneList<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>data<span style="color:#f92672">);</span>
             <span style="color:#f92672">}</span>
         <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span></code></pre></div>
-<p>由于<code>list</code>参数对象在项目中是一份实例,是单例的,而且也正需要对<code>list</code>参数的<code>getSize()</code>方法做同步的调用,所以就对<code>list</code>参数进行同步处理.</p>
-
-<h2 id="2-3静态同步-synchronized-static-方法与-synchronized-class-代码块">2.3静态同步<code>synchronized static</code>方法与<code>synchronized(class)</code>代码块</h2>
-
+    <span style="color:#f92672">}</span>
+</code></pre></div><p>由于<code>list</code>参数对象在项目中是一份实例,是单例的,而且也正需要对<code>list</code>参数的<code>getSize()</code>方法做同步的调用,所以就对<code>list</code>参数进行同步处理.</p>
+<h2 id="23静态同步synchronized-static方法与synchronizedclass代码块">2.3静态同步<code>synchronized static</code>方法与<code>synchronized(class)</code>代码块</h2>
 <p><strong>以<code>Class</code>对象作为锁,<code>public synchronized static</code>和<code>synchronized (SyncClass.class)</code>作用相同</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SyncClass</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">service1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
@@ -859,17 +792,13 @@ synchronized index is 5,currentThreadName is threadA
         threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>thread name is threadA,在1565962159054进入service1方法
 thread name is threadA,在1565962162055退出service1方法
 thread name is threadB,在1565962162055进入service2方法
 thread name is threadB,在1565962162055退出service2方法
-</code></pre>
-
-<p><strong><code>Class</code>锁可以对类的所有对象实例起作用</strong></p>
-
+</code></pre><p><strong><code>Class</code>锁可以对类的所有对象实例起作用</strong></p>
 <p>将<code>main</code>方法改为:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        Thread threadA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
             SyncClass syncClass <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SyncClass<span style="color:#f92672">();</span>
@@ -882,17 +811,13 @@ thread name is threadB,在1565962162055退出service2方法
         <span style="color:#f92672">},</span><span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">);</span>
 
         threadA<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
-        threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+        threadB<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>thread name is threadA,在1565963189515进入service1方法
 thread name is threadA,在1565963192516退出service1方法
 thread name is threadB,在1565963192516进入service2方法
 thread name is threadB,在1565963192516退出service2方法
-</code></pre>
-
-<h2 id="2-4多线程的死锁">2.4多线程的死锁</h2>
-
+</code></pre><h2 id="24多线程的死锁">2.4多线程的死锁</h2>
 <p>不同的线程都在等待根本不可能被释放的锁.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DeadLock</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
 
@@ -935,20 +860,14 @@ thread name is threadB,在1565963192516退出service2方法
         <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>deadLock<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;threadA&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>deadLock<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;threadB&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>thread threadA get lock1 first
 thread threadB get lock2 first
-</code></pre>
-
-<p>程序一直运行,但在输出以上内容之后,不会在输出任何内容.</p>
-
-<h2 id="2-5锁对象的改变">2.5锁对象的改变</h2>
-
+</code></pre><p>程序一直运行,但在输出以上内容之后,不会在输出任何内容.</p>
+<h2 id="25锁对象的改变">2.5锁对象的改变</h2>
 <p>在将任何数据类型作为同步锁时,需要注意的是,是否有多个线程同时持有锁对象,如果持有相同的锁对象,则这些线程之间就是同步的.如果分别获得不同的锁对象,这些线程之间就是异步的.</p>
-
-<h3 id="2-5-1以-string-常量为-lock-时">2.5.1以<code>String</code>常量为<code>lock</code>时</h3>
+<h3 id="251以string常量为lock时">2.5.1以<code>String</code>常量为<code>lock</code>时</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LockChange</span> <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">private</span> String strLock <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;LockA&#34;</span><span style="color:#f92672">;</span>
@@ -1043,34 +962,23 @@ thread threadB get lock2 first
             <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> username<span style="color:#f92672">;</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>thread threadA begin run service1() at 1565963755385
 thread threadB begin run service1() at 1565963755448
 thread threadA end run service1() at 1565963758392
 thread threadB end run service1() at 1565963758455
-</code></pre>
-
-<p>可以看出,线程之间是异步执行的,这说明俩线程获得的是不同的锁.<strong>因此在大多数情况下,同步<code>synchronized</code>代码块都不使用<code>String</code>作为锁对象.</strong></p>
-
-<h3 id="2-5-2以对象为-lock-时">2.5.2以对象为<code>lock</code>时</h3>
-
+</code></pre><p>可以看出,线程之间是异步执行的,这说明俩线程获得的是不同的锁.<strong>因此在大多数情况下,同步<code>synchronized</code>代码块都不使用<code>String</code>作为锁对象.</strong></p>
+<h3 id="252以对象为lock时">2.5.2以对象为<code>lock</code>时</h3>
 <p>注释掉以<code>String</code>常量为<code>lock</code>时的代码,取消以对象为<code>lock</code>时的注释.运行<code>main</code>方法,<strong>控制台输出:</strong></p>
-
 <pre><code>thread threadA begin run service2() at 1565964356043
 thread threadA end run service2() at 1565964359048
 thread threadB begin run service2() at 1565964359048
 thread threadB end run service2() at 1565964362048
-</code></pre>
-
-<p>俩线程是以同步的方式运行的,这说明<strong>只要对象不变,即使对象的属性被改变,运行的结果还是同步.</strong></p>
-
-<h1 id="3-volatile-关键字">3.<code>volatile</code>关键字</h1>
-
+</code></pre><p>俩线程是以同步的方式运行的,这说明<strong>只要对象不变,即使对象的属性被改变,运行的结果还是同步.</strong></p>
+<h1 id="3volatile关键字">3.<code>volatile</code>关键字</h1>
 <p>关键字<code>volatile</code>的主要作用是使变量在多个线程间可见.</p>
-
-<h2 id="3-1解决异步死循环">3.1解决异步死循环</h2>
+<h2 id="31解决异步死循环">3.1解决异步死循环</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RunThread</span> <span style="color:#66d9ef">extends</span> Thread <span style="color:#f92672">{</span>
 
     <span style="color:#75715e">//如果不添加volatile,线程不会被停止.
@@ -1101,23 +1009,15 @@ thread threadB end run service2() at 1565964362048
         thread<span style="color:#f92672">.</span><span style="color:#a6e22e">setRunning</span><span style="color:#f92672">(</span><span style="color:#66d9ef">false</span><span style="color:#f92672">);</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;已经赋值为false&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>进入run()方法
 已经赋值为false
-</code></pre>
-
-<p>程序不会打印&lt;线程被停止了&gt;这句话,会一直死循环下去.</p>
-
-<p><strong>原因:</strong>在启动<code>RunThread</code>线程时,变量<code>isRunning</code>存在于公共堆栈及线程的私有堆栈中.线程在运行时,一直是在从私有堆栈中取得<code>isRunning</code>的值(<code>true</code>),而主线程更新的却是公共堆栈中的<code>isRunning</code>中的变量值(<code>false</code>).所以就会一直处于死循环的状态.这个问题实质上就是私有堆栈和公有堆栈中的值不同步造成的.</p>
-
-<p><strong>解决方法1:</strong>对<code>isRunning</code>添加<code>volatile</code>关键字,强制线程从公共堆栈中取值.</p>
-
+</code></pre><p>程序不会打印&lt;线程被停止了&gt;这句话,会一直死循环下去.</p>
+<p>**原因:**在启动<code>RunThread</code>线程时,变量<code>isRunning</code>存在于公共堆栈及线程的私有堆栈中.线程在运行时,一直是在从私有堆栈中取得<code>isRunning</code>的值(<code>true</code>),而主线程更新的却是公共堆栈中的<code>isRunning</code>中的变量值(<code>false</code>).所以就会一直处于死循环的状态.这个问题实质上就是私有堆栈和公有堆栈中的值不同步造成的.</p>
+<p>**解决方法1:**对<code>isRunning</code>添加<code>volatile</code>关键字,强制线程从公共堆栈中取值.</p>
 <p><code>private volatile boolean isRunning = true;</code></p>
-
 <p>程序将正常执行,使用<code>volatile</code>关键字增加了实例变量在多个线程之间的可见性.但<code>volatile</code>最致命的缺点是不支持原子性.</p>
-
 <p><strong>解决方法2</strong>:使用<code>synchronized</code>代码块.更改<code>run()</code>方法如下.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Override</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
@@ -1129,19 +1029,16 @@ thread threadB end run service2() at 1565964362048
             <span style="color:#f92672">}</span>
         <span style="color:#f92672">}</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;线程被停止了&#34;</span><span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span></code></pre></div>
-<p>程序正常输出.<strong>这同时也证明了关键字<code>synchronized</code>具有将线程工作内存中的私有变量与公共内存中的变量同步的功能</strong>.</p>
-
-<h2 id="3-2-synchronized-和-volatile-的不同">3.2<code>synchronized</code>和<code>volatile</code>的不同.</h2>
-
+    <span style="color:#f92672">}</span>
+</code></pre></div><p>程序正常输出.<strong>这同时也证明了关键字<code>synchronized</code>具有将线程工作内存中的私有变量与公共内存中的变量同步的功能</strong>.</p>
+<h2 id="32synchronized和volatile的不同">3.2<code>synchronized</code>和<code>volatile</code>的不同.</h2>
 <ol>
 <li>关键字<code>volatile</code>是线程同步的轻量级实现,所以性能肯定要比<code>synchronized</code>要好.</li>
 <li><code>volatile</code>只可修饰变量,而<code>synchronized</code>可以修饰方法,代码块.</li>
 <li><code>volatile</code>不会发生阻塞,而<code>synchronized</code>会发生阻塞.</li>
 <li><code>synchronized</code>可以保证原子性和可见性,而<code>volatile</code>只保证可见性.</li>
 </ol>
-
-<h2 id="3-3-volatile-非原子的特性">3.3<code>volatile</code>非原子的特性</h2>
+<h2 id="33volatile非原子的特性">3.3<code>volatile</code>非原子的特性</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VolatileThread</span> <span style="color:#66d9ef">extends</span> Thread <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> count <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
@@ -1166,41 +1063,29 @@ thread threadB end run service2() at 1565964362048
             volatileThreads<span style="color:#f92672">[</span>i<span style="color:#f92672">].</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>count=100
 count=200
 ...
 count=4900
 count=4800
-</code></pre>
-
-<p>如果程序正常执行,<code>count</code>应当是按照递增的顺序一直增加到10000.如上输出明显有问题.是因为<code>volatile</code>并不保证原子性.</p>
-
+</code></pre><p>如果程序正常执行,<code>count</code>应当是按照递增的顺序一直增加到10000.如上输出明显有问题.是因为<code>volatile</code>并不保证原子性.</p>
 <p>表达式<code>i++</code>并不是一个原子操作,也就是非线程安全的.<code>i++</code>可以被分为三步:</p>
-
 <ol>
 <li>从内存中取出<code>i</code>的值;</li>
 <li>计算<code>i</code>的值;</li>
 <li>将<code>i</code>的值写到内存中.</li>
 </ol>
-
 <p>假如在第2步计算值的时候,另外一个线程也修改<code>i</code>的值,那么这个时候就会出现脏读数据.解决的方法就是<code>synchronized</code>关键字.<code>private synchronized static void addCount()</code>.执行方法,<strong>控制台输出:</strong></p>
-
 <pre><code>count=100
 count=200
 ...
 count=9900
 count=10000
-</code></pre>
-
-<p>程序正常执行.</p>
-
-<h2 id="3-4使用原子类进行-i-操作">3.4使用原子类进行<code>i++</code>操作</h2>
-
+</code></pre><p>程序正常执行.</p>
+<h2 id="34使用原子类进行i操作">3.4使用原子类进行<code>i++</code>操作</h2>
 <p>除了在<code>i++</code>操作时使用<code>synchronized</code>关键字实现同步外,还可以使用<code>AtomicInteger</code>原子类进行实现.</p>
-
 <p>原子操作是不能分割的整体,没有其他线程能够中断或检查正在原子操作中的变量.一个原子<code>atomic</code>类型就是一个原子操作可用的类型,它可以在没有锁的情况下做到线程安全.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AtomicIntegerTest</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">private</span> AtomicInteger count <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AtomicInteger<span style="color:#f92672">(</span>0<span style="color:#f92672">);</span>
@@ -1220,18 +1105,15 @@ count=10000
         <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>atomic<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>atomic<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>1
 2
 3
 ...
 49999
 50000
-</code></pre>
-
-<h2 id="3-5原子类也并不完全安全">3.5原子类也并不完全安全</h2>
+</code></pre><h2 id="35原子类也并不完全安全">3.5原子类也并不完全安全</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AtomicIntegerUnSafe</span> <span style="color:#66d9ef">implements</span> Runnable<span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">private</span> AtomicInteger count <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AtomicInteger<span style="color:#f92672">(</span>0<span style="color:#f92672">);</span>
@@ -1254,27 +1136,20 @@ count=10000
         <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>unSafe<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
         <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>unSafe<span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>100
 201
 301
 403
 504
-</code></pre>
-
-<p>可以看出程序不正常执行.出现这样的情况是因为<code>addAndGet()</code>方法是原子的,但是方法和方法之间的调用不是原子的.所以还是需要添加<code>synchronized</code>关键字.<code>public synchronized void addCount()</code>,执行方法,<strong>控制台输出</strong>:</p>
-
+</code></pre><p>可以看出程序不正常执行.出现这样的情况是因为<code>addAndGet()</code>方法是原子的,但是方法和方法之间的调用不是原子的.所以还是需要添加<code>synchronized</code>关键字.<code>public synchronized void addCount()</code>,执行方法,<strong>控制台输出</strong>:</p>
 <pre><code>100
 201
 302
 403
 504
-</code></pre>
-
-<p>程序正常执行.</p>
-
+</code></pre><p>程序正常执行.</p>
 <p><a href="https://github.com/Alex-2017/MultipleThreadBase">源码地址</a></p>
 </article>
     <footer class="post-footer">
@@ -1287,7 +1162,9 @@ count=10000
         
       </ul>
       
-      
+      <p class="post-copyright">
+        This post was published <strong>217</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
     </footer>
     
       <div id="disqus_thread"></div>
@@ -1315,7 +1192,7 @@ count=10000
   </section>
   
 <footer class="site-footer">
-  <p>© 2019 BaseC的博客</p>
+  <p>© 2017-2020 BaseC的博客</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

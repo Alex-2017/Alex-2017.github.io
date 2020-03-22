@@ -27,8 +27,8 @@
   
   
   <meta name="description" content="介绍: 这是head first design patterns阅读笔记.
-1.应用场景 ​ 一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与此同时带来了一个问题,由于订单量暴增,他们的订单管理系统支撑不住了.需要设计一个新的系统,并且能够灵活,快速的改动.
-​ 下面介绍下一点点,它是一家饮品店.">
+1.应用场景 ​	一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与此同时带来了一个问题,由于订单量暴增,他们的订单管理系统支撑不住了.需要设计一个新的系统,并且能够灵活,快速的改动.
+​	下面介绍下一点点,它是一家饮品店.主要卖的饮料分为奶制品,茶,果汁,在饮料的基础上可以根据个人需要添加配料,常见的配料有珍珠,椰果,奶盖等.因此饮品的价钱是由客户选择的饮品类型和配料多少来决定的.">
 
   
   
@@ -36,24 +36,24 @@
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="装饰者模式">
     <meta name="twitter:description" content="介绍: 这是head first design patterns阅读笔记.
-1.应用场景 ​ 一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与此同时带来了一个问题,由于订单量暴增,他们的订单管理系统支撑不住了.需要设计一个新的系统,并且能够灵活,快速的改动.
-​ 下面介绍下一点点,它是一家饮品店.">
-    <meta name="twitter:image" content="/images/avatar.png">
+1.应用场景 ​	一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与此同时带来了一个问题,由于订单量暴增,他们的订单管理系统支撑不住了.需要设计一个新的系统,并且能够灵活,快速的改动.
+​	下面介绍下一点点,它是一家饮品店.主要卖的饮料分为奶制品,茶,果汁,在饮料的基础上可以根据个人需要添加配料,常见的配料有珍珠,椰果,奶盖等.因此饮品的价钱是由客户选择的饮品类型和配料多少来决定的.">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="装饰者模式">
   <meta property="og:description" content="介绍: 这是head first design patterns阅读笔记.
-1.应用场景 ​ 一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与此同时带来了一个问题,由于订单量暴增,他们的订单管理系统支撑不住了.需要设计一个新的系统,并且能够灵活,快速的改动.
-​ 下面介绍下一点点,它是一家饮品店.">
+1.应用场景 ​	一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与此同时带来了一个问题,由于订单量暴增,他们的订单管理系统支撑不住了.需要设计一个新的系统,并且能够灵活,快速的改动.
+​	下面介绍下一点点,它是一家饮品店.主要卖的饮料分为奶制品,茶,果汁,在饮料的基础上可以根据个人需要添加配料,常见的配料有珍珠,椰果,奶盖等.因此饮品的价钱是由客户选择的饮品类型和配料多少来决定的.">
   <meta property="og:url" content="https://wangjc95.com/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.55.6">
+<meta name="generator" content="Hugo 0.68.0">
 
 
 <link rel="canonical" href="https://wangjc95.com/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/">
@@ -93,7 +93,7 @@
 
 
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/avatar.jpg" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
 
 
@@ -144,11 +144,11 @@
     
     
   <header class="site-header">
-  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
   
   <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
   
-  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <p class="subtitle">安定的内心与长期的坚持</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -202,57 +202,32 @@
       <h1 class="post-title">装饰者模式</h1>
       <p class="post-meta">@BaseC · Feb 28, 2019 · 3 min read</p>
     </header>
-    <article class="post-content">
-
-<p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
-
-<h1 id="1-应用场景">1.应用场景</h1>
-
-<p>​   一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与此同时带来了一个问题,由于订单量暴增,他们的订单管理系统支撑不住了.需要设计一个新的系统,并且能够灵活,快速的改动.</p>
-
-<p>​   下面介绍下一点点,它是一家饮品店.主要卖的饮料分为奶制品,茶,果汁,在饮料的基础上可以根据个人需要添加配料,常见的配料有珍珠,椰果,奶盖等.因此饮品的价钱是由客户选择的饮品类型和配料多少来决定的.</p>
-
-<h1 id="2-如何设计">2.如何设计?</h1>
-
-<h2 id="2-1第一种">2.1第一种</h2>
-
+    <article class="post-content"><p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
+<h1 id="1应用场景">1.应用场景</h1>
+<p>​	一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与此同时带来了一个问题,由于订单量暴增,他们的订单管理系统支撑不住了.需要设计一个新的系统,并且能够灵活,快速的改动.</p>
+<p>​	下面介绍下一点点,它是一家饮品店.主要卖的饮料分为奶制品,茶,果汁,在饮料的基础上可以根据个人需要添加配料,常见的配料有珍珠,椰果,奶盖等.因此饮品的价钱是由客户选择的饮品类型和配料多少来决定的.</p>
+<h1 id="2如何设计">2.如何设计?</h1>
+<h2 id="21第一种">2.1第一种</h2>
 <p>创建一个<code>Bverage</code>抽象类,抽象方法<code>cost()</code>,每种不同类型的饮品都需要新建一个类并且重写<code>cost()</code>方法返回对应的价钱.</p>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190228204606.png" alt="" /></p>
-
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190228204606.png" alt=""></p>
 <p>从上面的类图中可以看出,10种饮料就意味着要10个子类.如果遇上了配料价格变动的需求,就需要将所有涉及到该配料的<code>cost</code>方法重写.维护这种项目光是想想就让人头皮发麻.</p>
-
-<h2 id="2-2第二种">2.2第二种</h2>
-
+<h2 id="22第二种">2.2第二种</h2>
 <p>另一种的方式就是将是否添加配料和配料的价钱放在父类<code>Bverage</code>中,只有每种不同的饮品才会去继承<code>Bverage</code>类,根据是否添加配料的方法来计算价钱.</p>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190228205320.png" alt="" /></p>
-
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190228205320.png" alt=""></p>
 <p>这种方式比第一种要简洁了很多,但是有如下问题:</p>
-
 <ol>
 <li>饮品必须强制继承所有的配料方法,这是不实际的.</li>
 <li>无法添加多个相同的配料</li>
 </ol>
-
-<h1 id="3-装饰者模式">3.装饰者模式</h1>
-
+<h1 id="3装饰者模式">3.装饰者模式</h1>
 <p>在这种情况下就可以引入装饰者模式了!</p>
-
-<h2 id="3-1定义">3.1定义</h2>
-
+<h2 id="31定义">3.1定义</h2>
 <p>通过继承和组合的方式动态地将责任附加到对象上,而不会改动原有的代码.</p>
-
-<h2 id="3-2设计原则">3.2设计原则</h2>
-
-<p><strong>开放原则:</strong>类应该对扩展开放,对修改关闭.</p>
-
-<h2 id="3-3类图">3.3类图</h2>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190228173424.png" alt="" /></p>
-
-<h2 id="3-4实现代码">3.4实现代码</h2>
-
+<h2 id="32设计原则">3.2设计原则</h2>
+<p>**开放原则:**类应该对扩展开放,对修改关闭.</p>
+<h2 id="33类图">3.3类图</h2>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190228173424.png" alt=""></p>
+<h2 id="34实现代码">3.4实现代码</h2>
 <p><code>Bverage.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> decorator.bverages<span style="color:#f92672">;</span>
 
@@ -295,8 +270,9 @@
     <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Bverage</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> size<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">=</span> size<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>Bverage</code>的饮品子类</p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>Bverage</code>的饮品子类</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> decorator.bverages.subClasses<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> decorator.bverages.Bverage<span style="color:#f92672">;</span>
@@ -360,8 +336,9 @@
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">cost</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> 8<span style="color:#f92672">.</span><span style="color:#a6e22e">5</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>Ingredient.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>Ingredient.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> decorator.ingredients<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> decorator.bverages.Bverage<span style="color:#f92672">;</span>
@@ -377,8 +354,9 @@
 </span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Override</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> String <span style="color:#a6e22e">getDescrption</span><span style="color:#f92672">();</span>
 
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>Ingredient</code>的配料子类</p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>Ingredient</code>的配料子类</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> decorator.ingredients.subClasses<span style="color:#f92672">;</span>
 
 <span style="color:#f92672">import</span> decorator.bverages.Bverage<span style="color:#f92672">;</span>
@@ -508,8 +486,10 @@
         <span style="color:#f92672">}</span>
         <span style="color:#66d9ef">return</span> cost<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>测试代码</strong></p>
+<span style="color:#f92672">}</span>
+
+
+</code></pre></div><p><strong>测试代码</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">//纯奶茶
@@ -533,9 +513,8 @@
         juice <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MilkCap<span style="color:#f92672">(</span>juice<span style="color:#f92672">);</span>
         juice <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MilkCap<span style="color:#f92672">(</span>juice<span style="color:#f92672">);</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>juice<span style="color:#f92672">.</span><span style="color:#a6e22e">getDescrption</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; costs $&#34;</span> <span style="color:#f92672">+</span> juice<span style="color:#f92672">.</span><span style="color:#a6e22e">cost</span><span style="color:#f92672">());</span>
-    <span style="color:#f92672">}</span></code></pre></div>
-<h2 id="3-5总结">3.5总结</h2>
-
+    <span style="color:#f92672">}</span>
+</code></pre></div><h2 id="35总结">3.5总结</h2>
 <ol>
 <li>装饰者模式可以在不改变原有代码的情况下,给对象赋予新功能.既对扩展开发,对修改关闭</li>
 <li>装饰者模式会导致有过多的子类,如果使用者在不了解该模式的情况下,会觉得此设计晦涩难懂.</li>
@@ -552,7 +531,9 @@
         
       </ul>
       
-      
+      <p class="post-copyright">
+        This post was published <strong>388</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
     </footer>
     
       <div id="disqus_thread"></div>
@@ -580,7 +561,7 @@
   </section>
   
 <footer class="site-footer">
-  <p>© 2019 BaseC的博客</p>
+  <p>© 2017-2020 BaseC的博客</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

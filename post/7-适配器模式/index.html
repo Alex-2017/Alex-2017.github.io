@@ -29,7 +29,7 @@
   <meta name="description" content="介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设已有一个软件系统,你希望它能和一个新的厂商类库搭配使用,但是这个新厂商所设计出来的接口,不同于旧厂商的接口.你不想改变现有的代码,这样的话就可以编写一个类,让新厂商接口转接成你所期望的接口.
 这个适配器工作起来就如同一个中间人,它将客户所发出的请求转换成厂商类能理解的请求.
-2.应用举例 2.">
+2.应用举例 2.1介绍 有两个动物模拟器,分别是Duck (鸭子),Turkey(火鸡).">
 
   
   
@@ -39,8 +39,8 @@
     <meta name="twitter:description" content="介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设已有一个软件系统,你希望它能和一个新的厂商类库搭配使用,但是这个新厂商所设计出来的接口,不同于旧厂商的接口.你不想改变现有的代码,这样的话就可以编写一个类,让新厂商接口转接成你所期望的接口.
 这个适配器工作起来就如同一个中间人,它将客户所发出的请求转换成厂商类能理解的请求.
-2.应用举例 2.">
-    <meta name="twitter:image" content="/images/avatar.png">
+2.应用举例 2.1介绍 有两个动物模拟器,分别是Duck (鸭子),Turkey(火鸡).">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
@@ -49,14 +49,14 @@
   <meta property="og:description" content="介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设已有一个软件系统,你希望它能和一个新的厂商类库搭配使用,但是这个新厂商所设计出来的接口,不同于旧厂商的接口.你不想改变现有的代码,这样的话就可以编写一个类,让新厂商接口转接成你所期望的接口.
 这个适配器工作起来就如同一个中间人,它将客户所发出的请求转换成厂商类能理解的请求.
-2.应用举例 2.">
+2.应用举例 2.1介绍 有两个动物模拟器,分别是Duck (鸭子),Turkey(火鸡).">
   <meta property="og:url" content="https://wangjc95.com/post/7-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.55.6">
+<meta name="generator" content="Hugo 0.68.0">
 
 
 <link rel="canonical" href="https://wangjc95.com/post/7-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">
@@ -96,7 +96,7 @@
 
 
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/avatar.jpg" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
 
 
@@ -147,11 +147,11 @@
     
     
   <header class="site-header">
-  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
   
   <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
   
-  <p class="subtitle">学会生活,理解生活,领悟生活!</p>
+  <p class="subtitle">安定的内心与长期的坚持</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -205,30 +205,17 @@
       <h1 class="post-title">适配器模式</h1>
       <p class="post-meta">@BaseC · Mar 31, 2019 · 2 min read</p>
     </header>
-    <article class="post-content">
-
-<p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
-
-<h1 id="1-场景介绍">1.场景介绍</h1>
-
+    <article class="post-content"><p><strong>介绍:</strong> 这是<code>head first design patterns</code>阅读笔记.</p>
+<h1 id="1场景介绍">1.场景介绍</h1>
 <p>假设已有一个软件系统,你希望它能和一个新的厂商类库搭配使用,但是这个新厂商所设计出来的接口,不同于旧厂商的接口.你不想改变现有的代码,这样的话就可以编写一个类,让新厂商接口转接成你所期望的接口.</p>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190319191044.png" alt="" /></p>
-
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190319191044.png" alt=""></p>
 <p>这个适配器工作起来就如同一个中间人,它将客户所发出的请求转换成厂商类能理解的请求.</p>
-
-<h1 id="2-应用举例">2.应用举例</h1>
-
-<h2 id="2-1介绍">2.1介绍</h2>
-
-<p>有两个动物模拟器,分别是<code>Duck</code>(鸭子),<code>Turkey</code>(火鸡).通过适配器模式让<code>Turkey</code>模仿<code>Duck</code>.</p>
-
-<h2 id="2-2类图">2.2类图</h2>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190319192803.png" alt="" /></p>
-
-<h2 id="2-3代码实现">2.3代码实现</h2>
-
+<h1 id="2应用举例">2.应用举例</h1>
+<h2 id="21介绍">2.1介绍</h2>
+<p>有两个动物模拟器,分别是<code>Duck </code>(鸭子),<code>Turkey</code>(火鸡).通过适配器模式让<code>Turkey</code>模仿<code>Duck</code>.</p>
+<h2 id="22类图">2.2类图</h2>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190319192803.png" alt=""></p>
+<h2 id="23代码实现">2.3代码实现</h2>
 <p><code>Duck.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
 </span><span style="color:#75715e"> * 鸭子接口
@@ -241,8 +228,8 @@
     <span style="color:#75715e">//飞行
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fly</span><span style="color:#f92672">();</span>
     
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>MallardDuck.java</code></p>
+<span style="color:#f92672">}</span>
+</code></pre></div><p><code>MallardDuck.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> adapter<span style="color:#f92672">;</span>
 
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MallardDuck</span> <span style="color:#66d9ef">implements</span> Duck<span style="color:#f92672">{</span>
@@ -255,8 +242,9 @@
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fly</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;I&#39;m flying&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>Turkey.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>Turkey.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> adapter<span style="color:#f92672">;</span>
 
 <span style="color:#75715e">/**
@@ -270,8 +258,9 @@
     <span style="color:#75715e">//飞行
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fly</span><span style="color:#f92672">();</span>
 
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>WildTurkey.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>WildTurkey.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> adapter<span style="color:#f92672">;</span>
 
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WildTurkey</span> <span style="color:#66d9ef">implements</span> Turkey <span style="color:#f92672">{</span>
@@ -285,8 +274,9 @@
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fly</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;I&#39;m flying with a little distance&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><code>TurkeyAdapter.java</code></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>TurkeyAdapter.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> adapter<span style="color:#f92672">;</span>
 
 <span style="color:#75715e">/**
@@ -315,8 +305,9 @@
             turkey<span style="color:#f92672">.</span><span style="color:#a6e22e">fly</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p><strong>测试代码:</strong></p>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><strong>测试代码:</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">//初始化鸭子,火鸡和适配器
@@ -341,9 +332,8 @@
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testDuck</span><span style="color:#f92672">(</span>Duck duck<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         duck<span style="color:#f92672">.</span><span style="color:#a6e22e">quack</span><span style="color:#f92672">();</span>
         duck<span style="color:#f92672">.</span><span style="color:#a6e22e">fly</span><span style="color:#f92672">();</span>
-    <span style="color:#f92672">}</span></code></pre></div>
-<p><strong>控制台输出:</strong></p>
-
+    <span style="color:#f92672">}</span>
+</code></pre></div><p><strong>控制台输出:</strong></p>
 <pre><code>The Duck ==================
 Quack
 I'm flying
@@ -357,35 +347,21 @@ I'm flying with a little distance
 I'm flying with a little distance
 I'm flying with a little distance
 I'm flying with a little distance
-</code></pre>
-
-<h1 id="3-适配器模式">3.适配器模式</h1>
-
-<h2 id="3-1定义">3.1定义</h2>
-
+</code></pre><h1 id="3适配器模式">3.适配器模式</h1>
+<h2 id="31定义">3.1定义</h2>
 <p><strong>适配器模式</strong>将一个类的接口,转换成客户期望的另一个接口.适配器让原本接口不兼容的类可以合作无间.</p>
-
-<h2 id="3-2特点">3.2特点</h2>
-
+<h2 id="32特点">3.2特点</h2>
 <ul>
 <li>通过创建适配器进行接口转换,让不兼容的接口变成兼容,让客户从实现的接口解耦.</li>
 <li>使用对象组合,以修改的接口包装被适配者.被适配者的任何子类都可以搭配着适配器使用.</li>
 </ul>
-
-<h2 id="3-3类图">3.3类图</h2>
-
-<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190319194136.png" alt="" /></p>
-
-<h2 id="3-4拓展">3.4拓展</h2>
-
-<h3 id="3-4-1对象和类的适配器">3.4.1对象和类的适配器</h3>
-
+<h2 id="33类图">3.3类图</h2>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190319194136.png" alt=""></p>
+<h2 id="34拓展">3.4拓展</h2>
+<h3 id="341对象和类的适配器">3.4.1对象和类的适配器</h3>
 <p>适配器分为两种,分别是对象适配器和类适配器.之前的内容我们讲的是对象适配器.对象适配器和类适配器使用两种不同的适配方法.对象使用的是组合,类使用的是多继承.由于<code>Java</code>中不支持多继承,故不再赘述.</p>
-
-<h3 id="3-4-2将枚举适配到迭代器">3.4.2将枚举适配到迭代器</h3>
-
+<h3 id="342将枚举适配到迭代器">3.4.2将枚举适配到迭代器</h3>
 <p>由于<code>Java</code>早期集合类使用的是<code>Enumeration</code>接口,而随后推出的新集合类使用的是<code>Iterator</code>接口.为了在新集合类中能够兼容旧集合类<code>Enumeration</code>接口.需要将枚举适配到迭代器.</p>
-
 <p><code>EnumerationIterator.java</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> adapter<span style="color:#f92672">;</span>
 
@@ -418,7 +394,9 @@ I'm flying with a little distance
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">remove</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> UnsupportedOperationException<span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div></article>
+<span style="color:#f92672">}</span>
+
+</code></pre></div></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
@@ -429,7 +407,9 @@ I'm flying with a little distance
         
       </ul>
       
-      
+      <p class="post-copyright">
+        This post was published <strong>357</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
     </footer>
     
       <div id="disqus_thread"></div>
@@ -457,7 +437,7 @@ I'm flying with a little distance
   </section>
   
 <footer class="site-footer">
-  <p>© 2019 BaseC的博客</p>
+  <p>© 2017-2020 BaseC的博客</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>多线程基础 on BaseC的博客</title>
@@ -18,11 +18,11 @@
       
       <guid>https://wangjc95.com/post/18-%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</guid>
       <description>介绍: 这是Java多线程编程核心技术阅读笔记
-1.等待/通知机制 wait():使当前执行代码的线程进行等待.在调用wait()之前,线程必须获得该对象的对象级别锁,即只能在同步方法或同步代码块中调用wait()方法.在执行wait()方法后,当前线程释放锁.
+1.等待/通知机制 **wait():**使当前执行代码的线程进行等待.在调用wait()之前,线程必须获得该对象的对象级别锁,即只能在同步方法或同步代码块中调用wait()方法.在执行wait()方法后,当前线程释放锁.
 notify():通知那些等待该对象的对象锁的其它线程,如果有多个线程等待,则由线程规划器随机挑选出其中一个呈wait状态的线程,对其发出通知notify,并使它等待获取该对象的对象锁.notify()方法也要在同步方法或同步代码块中调用,即在调用前,线程也必须获得该对象的对象级别锁.需要说明的是,在执行notify方法后,当前线程不会马上释放该对象锁,呈wait状态的线程也并不能马上获得该对象锁,要等到执行notify()方法的线程将程序执行完,也就是退出synchronized代码块后,当前线程才会释放锁,而呈wait状态的线程才可以获取该对象锁.当第一个获得了该对象锁的wait线程执行完毕后,它会释放掉该对象锁,此时如果该对象没有再次调用notify()方法,即便该对象已经空闲,其它wait状态的线程由于没有得到该对象的通知,还会继续阻塞在wait状态,直到这个对象发出一个notify或notifyAll.
 notifyAll():使所有正在等待队列中等待同一共享资源的全部线程从等待状态退出,进入可运行状态.优先级高的那个线程最先执行,但也有可能是随机执行,因为这要取决于JVM虚拟机的实现.
 每个锁对象都有两个队列,一个是阻塞队列,另一个是就绪队列.阻塞队列存储了被阻塞的线程,就绪队列存储了将要获得锁的线程.线程在被wait后,就会进入阻塞队列,等待下一次被唤醒.线程被唤醒后,就会进入就绪队列,等待CPU的调度.
-1.1在同步代码中进行等待和通知 public class WaitNotifyTest1 { public static void main(String[] args) { Object obj = new Object(); try { obj.</description>
+1.1在同步代码中进行等待和通知 public class WaitNotifyTest1 {public static void main(String[] args) {Object obj = new Object();try {obj.</description>
     </item>
     
     <item>
@@ -33,7 +33,7 @@ notifyAll():使所有正在等待队列中等待同一共享资源的全部线�
       <guid>https://wangjc95.com/post/17-%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/</guid>
       <description>介绍: 这是Java多线程编程核心技术阅读笔记
 1.synchronized同步方法 1.1方法内的变量为线程安全 非线程安全问题存在于实例变量中,如果是方法内部的私有变量,则不存在线程安全问题,所得结果也就是线程安全的了.
-public class MethodVariable { public void getNum(String username) { int num = 0; if (&amp;#34;a&amp;#34;.</description>
+public class MethodVariable {public void getNum(String username) {int num = 0;if (&amp;#34;a&amp;#34;.</description>
     </item>
     
     <item>
@@ -43,8 +43,8 @@ public class MethodVariable { public void getNum(String username) { int num = 0;
       
       <guid>https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</guid>
       <description>介绍: 这是Java多线程编程核心技术阅读笔记
-1.进程与线程 进程:以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
-线程:在进程中独立运行的子任务.
+1.进程与线程 **进程:**以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
+**线程:**在进程中独立运行的子任务.
 一个进程在运行时至少会有一个线程在运行.
 2.多线程的创建方式 在Java中,多线程有三种创建方式,分别是:
  继承Thread类 实现Runnable接口 FutureTask方式创建  2.</description>

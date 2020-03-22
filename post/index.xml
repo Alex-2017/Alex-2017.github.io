@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on BaseC的博客</title>
@@ -6,71 +6,10 @@
     <description>Recent content in Posts on BaseC的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 24 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 28 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://wangjc95.com/post/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>垃圾收集器与内存分配策略</title>
-      <link>https://wangjc95.com/post/24-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</link>
-      <pubDate>Tue, 24 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://wangjc95.com/post/24-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</guid>
-      <description>1.概述 &amp;emsp;&amp;emsp;程序计数器，虚拟机栈，本地方法栈3个区域随线程而生，随线程而灭。在这几个区域内就不需要过多考虑回收的问题，因为方法结束或者线程结束，内存自然就跟着回收了。而Java堆和方法区则不一样，一个接口中的多个实现类需要的内存可能不一样，一个方法中的多个分支需要的内存也可能不一样，我们只有在程序处于运行期间才能知道会创建哪些对象，这部分内存的分配和回收都是动态的，垃圾收集器所关注的也是这部分内存。
-2.对象已死吗 &amp;emsp;&amp;emsp;垃圾收集器在对堆进行回收前，第一件事情就是要确定这些对象之中哪些还存活着，哪些已经死去（即不可能再被任何途径使用的对象）。
-2.1引用计数算法 2.1.1定义 &amp;emsp;&amp;emsp;给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1，当引用失败时，计数器值就减1。任何时刻计数器为0的对象就是不可能再被使用的。
-2.1.2优势和缺陷 &amp;emsp;&amp;emsp;优点：实现简单，判定效率也很高；</description>
-    </item>
-    
-    <item>
-      <title>LinkedList源码分析-JDK1.8</title>
-      <link>https://wangjc95.com/post/23-linkedlist%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-jdk1.8/</link>
-      <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://wangjc95.com/post/23-linkedlist%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-jdk1.8/</guid>
-      <description>1.概述 LinkedList是基于双向链表来编写的，不需要考虑容量的问题，但节点需要额外的空间存储前驱和后继的引用。有序可重复，可存储null值，非线程安全。
-1.1继承体系 LinkedList实现了Deque接口，这样LinkedList就具备了双端队列的功能，本文旨在介绍LinkedList的List功能，队列功能不再进行说明。
-LinkedList没有实现RandomAccess接口，所以不要通过访问下标方式（for(int i=0;i&amp;lt;size;i++)）遍历，否则效率极差。
-2.源码分析 本文主要针对LinkedList的常用操作进行分析，代码如下。
-List&amp;lt;String&amp;gt; linkedList = new LinkedList&amp;lt;&amp;gt;(); //add(E e) linkedList.</description>
-    </item>
-    
-    <item>
-      <title>HotSpot虚拟机对象揭秘</title>
-      <link>https://wangjc95.com/post/22-hotspot%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E6%8E%A2%E7%A7%98/</link>
-      <pubDate>Sun, 08 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://wangjc95.com/post/22-hotspot%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E6%8E%A2%E7%A7%98/</guid>
-      <description>本博客旨在介绍HotSpot虚拟机在Java堆中对象的创建，内存布局和访问定位的过程。
-1.对象的创建 &amp;emsp;&amp;emsp;下图是对象的创建流程：
-1.1类加载检查 &amp;emsp;&amp;emsp;虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载，解析和初始化过。如果没有，那必须先执行相应的类加载过程。
-1.2分配内存 &amp;emsp;&amp;emsp;在类加载检查通过后，接下来虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定，为对象分配空间的任务等同于把一块确定大小的内存从Java堆中划分出来。
-1.2.1内存分配方式  指针碰撞：如果Java堆中内存是绝对规整的，所有用过的内存都放在一边，空闲的内存放在另一边，中间放着一个指针作为分界点的指示器，那所分配内存就仅仅是把那个指针向空闲空间那边挪动一段与对象大小相等的距离； 空闲列表：如果Java堆中的内存不是规整的，已使用的内存和空闲的内存相互交错，那就没有办法简单地进行指针碰撞了，虚拟机就必须维护一个列表，记录那些内存块是可用的，在分配的时候找到一块足够大的空间划分给对象实例，并更新列表上的记录。  1.</description>
-    </item>
-    
-    <item>
-      <title>ArrayList源码分析-JDK1.8</title>
-      <link>https://wangjc95.com/post/21-arraylist%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-jdk1.8/</link>
-      <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://wangjc95.com/post/21-arraylist%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-jdk1.8/</guid>
-      <description>1.概述 ArrayList本质上是一个数组,它内部通过对数组的操作实现了List功能,所以ArrayList又被叫做动态数组.每个ArrayList实例都有容量,会自动扩容.它可添加null,有序可重复,线程不安全.Vector和ArrayList内部实现基本是一致的,除了Vector添加了synchronized保证其线程安全.
-1.1继承体系 2.源码解析 2.1属性 /** * 默认初始容量 */ private static final int DEFAULT_CAPACITY = 10; /** * 初始容量为0时,elementData指向此对象(空元素对象) */ private static final Object[] EMPTY_ELEMENTDATA = {}; /** * 调用ArrayList()构造方法时,elementData指向此对象(默认容量空元素对象) */ private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {}; /** * 用于存储集合元素,非private类型能够简化内部类的访问(在编译阶段) */ transient Object[] elementData; /** * 包含的元素个数 */ private int size; 为什么DEFAULT_CAPACITY这种变量为什么要声明为private static final类型</description>
-    </item>
-    
-    <item>
-      <title>运行时数据区域(Java内存结构)</title>
-      <link>https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9Fjava%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</link>
-      <pubDate>Sun, 01 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9Fjava%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</guid>
-      <description>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而创建，有的区域则依赖用户线程的启动和结束而建立和销毁。
-JDK1.8和之前的版本略有不同：
-1.线程私有 1.1程序计数器 程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型里，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支，循环，跳转，异常处理，线程恢复等基础功能都需要依赖这个计数器来完成。
-由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，一个处理器只会执行一条线程中的指令。为了线程切换后能恢复到正确的执行位置，每条线程需要有一个独立的程序计数器。各条线程之间互不影响，独立存储。
-如果线程正在执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令地址。如果正在执行的是Native方法，这个计数器则为空（Undefined）。</description>
-    </item>
     
     <item>
       <title>Spring AOP加签验签</title>
@@ -81,7 +20,7 @@ JDK1.8和之前的版本略有不同：
       <description>1.场景 项目中需要对特定的接口进行验签和加签操作.对方法的请求参数验签,保证请求方的数据可信性.对方法的返回参数进行加签操作,确保发送方的数据可信性.验签和加签这两个方法已经封装到了一个Service中,只要在需要加签验签的接口调用此方法,就能满足需要.但是这样的方法会导致在接口中存在重复的验签,加签调用代码.
 我们来大致看下项目此时的情况(伪代码,主要看代码逻辑)
 基本信息返回类BaseResponse
-public class BaseResponse&amp;lt;T&amp;gt; { private String code; private String msg; private String sign; //getter setter方法  public BaseResponse(String code,String msg){ this.</description>
+public class BaseResponse&amp;lt;T&amp;gt; {private String code;private String msg;private String sign;//getter setter方法 public BaseResponse(String code,String msg){this.</description>
     </item>
     
     <item>
@@ -91,11 +30,11 @@ public class BaseResponse&amp;lt;T&amp;gt; { private String code; private String
       
       <guid>https://wangjc95.com/post/18-%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</guid>
       <description>介绍: 这是Java多线程编程核心技术阅读笔记
-1.等待/通知机制 wait():使当前执行代码的线程进行等待.在调用wait()之前,线程必须获得该对象的对象级别锁,即只能在同步方法或同步代码块中调用wait()方法.在执行wait()方法后,当前线程释放锁.
+1.等待/通知机制 **wait():**使当前执行代码的线程进行等待.在调用wait()之前,线程必须获得该对象的对象级别锁,即只能在同步方法或同步代码块中调用wait()方法.在执行wait()方法后,当前线程释放锁.
 notify():通知那些等待该对象的对象锁的其它线程,如果有多个线程等待,则由线程规划器随机挑选出其中一个呈wait状态的线程,对其发出通知notify,并使它等待获取该对象的对象锁.notify()方法也要在同步方法或同步代码块中调用,即在调用前,线程也必须获得该对象的对象级别锁.需要说明的是,在执行notify方法后,当前线程不会马上释放该对象锁,呈wait状态的线程也并不能马上获得该对象锁,要等到执行notify()方法的线程将程序执行完,也就是退出synchronized代码块后,当前线程才会释放锁,而呈wait状态的线程才可以获取该对象锁.当第一个获得了该对象锁的wait线程执行完毕后,它会释放掉该对象锁,此时如果该对象没有再次调用notify()方法,即便该对象已经空闲,其它wait状态的线程由于没有得到该对象的通知,还会继续阻塞在wait状态,直到这个对象发出一个notify或notifyAll.
 notifyAll():使所有正在等待队列中等待同一共享资源的全部线程从等待状态退出,进入可运行状态.优先级高的那个线程最先执行,但也有可能是随机执行,因为这要取决于JVM虚拟机的实现.
 每个锁对象都有两个队列,一个是阻塞队列,另一个是就绪队列.阻塞队列存储了被阻塞的线程,就绪队列存储了将要获得锁的线程.线程在被wait后,就会进入阻塞队列,等待下一次被唤醒.线程被唤醒后,就会进入就绪队列,等待CPU的调度.
-1.1在同步代码中进行等待和通知 public class WaitNotifyTest1 { public static void main(String[] args) { Object obj = new Object(); try { obj.</description>
+1.1在同步代码中进行等待和通知 public class WaitNotifyTest1 {public static void main(String[] args) {Object obj = new Object();try {obj.</description>
     </item>
     
     <item>
@@ -106,7 +45,7 @@ notifyAll():使所有正在等待队列中等待同一共享资源的全部线�
       <guid>https://wangjc95.com/post/17-%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/</guid>
       <description>介绍: 这是Java多线程编程核心技术阅读笔记
 1.synchronized同步方法 1.1方法内的变量为线程安全 非线程安全问题存在于实例变量中,如果是方法内部的私有变量,则不存在线程安全问题,所得结果也就是线程安全的了.
-public class MethodVariable { public void getNum(String username) { int num = 0; if (&amp;#34;a&amp;#34;.</description>
+public class MethodVariable {public void getNum(String username) {int num = 0;if (&amp;#34;a&amp;#34;.</description>
     </item>
     
     <item>
@@ -116,8 +55,8 @@ public class MethodVariable { public void getNum(String username) { int num = 0;
       
       <guid>https://wangjc95.com/post/16-%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</guid>
       <description>介绍: 这是Java多线程编程核心技术阅读笔记
-1.进程与线程 进程:以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
-线程:在进程中独立运行的子任务.
+1.进程与线程 **进程:**以windows系统举例,可以将运行在内存中的exe文件理解成进程,进程是受操作系统管理的基本运行单元.
+**线程:**在进程中独立运行的子任务.
 一个进程在运行时至少会有一个线程在运行.
 2.多线程的创建方式 在Java中,多线程有三种创建方式,分别是:
  继承Thread类 实现Runnable接口 FutureTask方式创建  2.</description>
@@ -132,7 +71,7 @@ public class MethodVariable { public void getNum(String username) { int num = 0;
       <description>介绍: 这是疯狂Java讲义第三版阅读笔记.
 1.JDK的元Annotation 1.1@Retention @Retention只能用于修饰Annotation定义,用于指定被修饰的Annotation可以保留多长时间.@Retention包含一个RetentionPolicy类型的value成员变量,所以使用@Retention时必须为该value成员变量指定值.
 value成员变量的值只能是如下三个:
- RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.</description>
+ RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.SOURCE:Annotation只能保留在源代码中,编译器直接丢弃这种Annotation.  示例代码:</description>
     </item>
     
     <item>
@@ -144,7 +83,7 @@ value成员变量的值只能是如下三个:
       <description>介绍: 这是疯狂Java讲义第三版阅读笔记.
 1.Collection和Iterator接口 1.1Iterator Iterator接口也是Java集合框架的成员,但它与Collection系列,Map系列的集合不一样:Collection系列集合,Map系列集合主要用于装其他对象,而Iterator则主要用于遍历(即迭代访问)Collection集合中的元素,Iterator对象也被称为迭代器.
 示例代码:
-@Test public void test5() { List&amp;lt;String&amp;gt; list = new ArrayList&amp;lt;&amp;gt;(Arrays.</description>
+@Testpublic void test5() {List&amp;lt;String&amp;gt; list = new ArrayList&amp;lt;&amp;gt;(Arrays.</description>
     </item>
     
     <item>
@@ -167,7 +106,8 @@ value成员变量的值只能是如下三个:
       <description>介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设我们要为糖果机设置一个控制器,来控制糖果器正常运转.控制流程如下图所示.
 这张图可以这么理解:
-糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.</description>
+糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.
+知道需求,就可以开始实现了.</description>
     </item>
     
     <item>
@@ -179,7 +119,7 @@ value成员变量的值只能是如下三个:
       <description>介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 基于之前迭代器模式的菜单整合模式下提出了一个新的需求,餐厅要创建一份甜点菜单,并把这个菜单放到餐厅菜单中.
 新增的需求让当前的系统到达了一个复杂级别,如果现在不重新设计,就无法容纳未来增加的菜单或子菜单等需求.我们需要某种树形结构,可以容纳菜单,子菜单和菜单项,同时能够确定在每个菜单的各个项之间游走,而且至少要像现在用迭代器一样方便.
-2.解决方案 2.</description>
+2.解决方案 2.1类图 MenuComponent:菜单组件提供了一个接口,让菜单项和菜单共同使用.</description>
     </item>
     
     <item>
@@ -191,7 +131,7 @@ value成员变量的值只能是如下三个:
       <description>介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 有两种菜单,分别是DinerMenu和PancakeHouseMenu.将这两种菜单整合,需要一个特定的服务员类Waitress来进行整合和菜单的遍历等功能.
 MenuItem.java
-package iterator; import lombok.</description>
+package iterator;import lombok.</description>
     </item>
     
     <item>
@@ -215,7 +155,7 @@ package iterator; import lombok.</description>
       <description>介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 家里有一套家庭影院的设备(爆米花机,屏幕,投影仪).每次看电影的时候需要打开爆米花机,开始爆米花,把屏幕放下来,打开投影仪来看电影.结束后要关闭投影仪,收起屏幕,关掉爆米花机.整个过程实在太过于繁琐.
 为了改善这个过程,就需要用到外观模式了.通过实现一个提供合理接口的外观类,你可以将复杂的子系统变得容易使用.而且还能够保留原有的子系统接口.
-2.应用举例 2.</description>
+2.应用举例 2.1类图 2.</description>
     </item>
     
     <item>
@@ -227,7 +167,7 @@ package iterator; import lombok.</description>
       <description>介绍: 这是head first design patterns阅读笔记.
 1.场景介绍 假设已有一个软件系统,你希望它能和一个新的厂商类库搭配使用,但是这个新厂商所设计出来的接口,不同于旧厂商的接口.你不想改变现有的代码,这样的话就可以编写一个类,让新厂商接口转接成你所期望的接口.
 这个适配器工作起来就如同一个中间人,它将客户所发出的请求转换成厂商类能理解的请求.
-2.应用举例 2.</description>
+2.应用举例 2.1介绍 有两个动物模拟器,分别是Duck (鸭子),Turkey(火鸡).</description>
     </item>
     
     <item>
@@ -249,7 +189,8 @@ package iterator; import lombok.</description>
       <guid>https://wangjc95.com/post/5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</guid>
       <description>介绍: 这是head first design patterns阅读笔记.
 1.应用场景 在项目中,有些对象我们只需要一个!比如说线程池,缓存,对话框等等.这类对象只能有一个实例,如果制造出多个实例,就会导致很多问题产生.
-2.定义 确保一个类只有一个实例,并提供全局访问点.</description>
+2.定义 确保一个类只有一个实例,并提供全局访问点.
+3.单例模式 Singleton1.</description>
     </item>
     
     <item>
@@ -260,7 +201,7 @@ package iterator; import lombok.</description>
       <guid>https://wangjc95.com/post/4-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</guid>
       <description>介绍: 这是head first design patterns阅读笔记.
 1.简单工厂 1.1应用场景 最近开了一家披萨店,有四种不同口味的披萨.客人只需要输入他需要的口味就可以得到对应的披萨.那么如何用java来设计这样的一个系统呢?
-1.2解决方法 最简单的方法就是在一个类中封装一个方法,根据输入的口味,来生成对应的披萨.</description>
+1.2解决方法 最简单的方法就是在一个类中封装一个方法,根据输入的口味,来生成对应的披萨.但是如果商店的披萨品种需要变动时,此类的代码就需要修改.这肯定不是我们所希望的.下面就来使用简单工厂模式来解决这一问题.</description>
     </item>
     
     <item>
@@ -270,8 +211,8 @@ package iterator; import lombok.</description>
       
       <guid>https://wangjc95.com/post/3-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
       <description>介绍: 这是head first design patterns阅读笔记.
-1.应用场景 ​ 一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与此同时带来了一个问题,由于订单量暴增,他们的订单管理系统支撑不住了.需要设计一个新的系统,并且能够灵活,快速的改动.
-​ 下面介绍下一点点,它是一家饮品店.</description>
+1.应用场景 ​	一点点奶茶店如今在一线及二线城市中大受欢迎,并且在以迅速的速度扩张着.与此同时带来了一个问题,由于订单量暴增,他们的订单管理系统支撑不住了.需要设计一个新的系统,并且能够灵活,快速的改动.
+​	下面介绍下一点点,它是一家饮品店.主要卖的饮料分为奶制品,茶,果汁,在饮料的基础上可以根据个人需要添加配料,常见的配料有珍珠,椰果,奶盖等.因此饮品的价钱是由客户选择的饮品类型和配料多少来决定的.</description>
     </item>
     
     <item>
@@ -293,7 +234,7 @@ package iterator; import lombok.</description>
       <guid>https://wangjc95.com/post/1-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</guid>
       <description>介绍: 这是head first design patterns阅读笔记.
 1.应用场景 我们有一个鸭子模拟器,通过Duck父类表示鸭子的行为,子类通过重写display方法来表示鸭子的特征行为.现在有一个新需求,需要添加一个fly方法,让鸭子飞起来.
-2.解决思路 2.1在父类中添加fly方法 RubberDuck无法飞行,所以需要重写fly方法.</description>
+2.解决思路 2.1在父类中添加fly方法 RubberDuck无法飞行,所以需要重写fly方法.WoodenDuck不能飞行不能叫,需要重写fly,quack方法.假设以后还会有新的鸭子被添加而且频率很多!那么维护该项目将会成为一个噩梦.这是典型的过度使用继承,导致项目维护起来很繁琐!</description>
     </item>
     
   </channel>
