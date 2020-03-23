@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>HotSpot虚拟机对象揭秘</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
+  
+
+  
+
+  
+  
+  <meta name="description" content="本博客旨在介绍HotSpot虚拟机在Java堆中对象的创建，内存布局和访问定位的过程。
+1.对象的创建  下图是对象的创建流程：
+1.1类加载检查  虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载，解析和初始化过。如果没有，那必须先执行相应的类加载过程。
+1.2分配内存  在类加载检查通过后，接下来虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定，为对象分配空间的任务等同于把一块确定大小的内存从Java堆中划分出来。">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="HotSpot虚拟机对象揭秘">
+    <meta name="twitter:description" content="本博客旨在介绍HotSpot虚拟机在Java堆中对象的创建，内存布局和访问定位的过程。
+1.对象的创建  下图是对象的创建流程：
+1.1类加载检查  虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载，解析和初始化过。如果没有，那必须先执行相应的类加载过程。
+1.2分配内存  在类加载检查通过后，接下来虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定，为对象分配空间的任务等同于把一块确定大小的内存从Java堆中划分出来。">
+    <meta name="twitter:image" content="/images/avatar.jpg">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="HotSpot虚拟机对象揭秘">
+  <meta property="og:description" content="本博客旨在介绍HotSpot虚拟机在Java堆中对象的创建，内存布局和访问定位的过程。
+1.对象的创建  下图是对象的创建流程：
+1.1类加载检查  虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载，解析和初始化过。如果没有，那必须先执行相应的类加载过程。
+1.2分配内存  在类加载检查通过后，接下来虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定，为对象分配空间的任务等同于把一块确定大小的内存从Java堆中划分出来。">
+  <meta property="og:url" content="https://wangjc95.com/post/21-hotspot%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E6%8F%AD%E7%A7%98/">
+  <meta property="og:image" content="/images/avatar.jpg">
+
+
+
+
+<meta name="generator" content="Hugo 0.68.0">
+
+
+<link rel="canonical" href="https://wangjc95.com/post/21-hotspot%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E6%8F%AD%E7%A7%98/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="google-site-verification" content="aNGp71IfnTxSUD01_q2_esTxRQBQ3GA3CEKa8s_7Qwg">
+
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="BaseC的博客">
+<meta name="msapplication-tooltip" content="BaseC的博客">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="manifest" href="/manifest.json">
+
+
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="/images/avatar.jpg" as="image">
+<link rel="preload" href="/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+	<a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="https://wangjc95.com"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
+  
+  <h2 class="title"><a href="https://wangjc95.com">BaseC的博客</a></h2>
+  
+  <p class="subtitle">安定的内心与长期的坚持</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+           is-active">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:1017086516@qq.com" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="/images/qrcode.jpg" rel="me" title="Wechat" aria-label="Wechat">
+            <span class="icon icon-wechat" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">HotSpot虚拟机对象揭秘</h1>
+      <p class="post-meta">@BaseC · Sep 8, 2019 · 1 min read</p>
+    </header>
+    <article class="post-content"><p>本博客旨在介绍<code>HotSpot</code>虚拟机在<code>Java</code>堆中对象的创建，内存布局和访问定位的过程。</p>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190907131358.png" alt=""></p>
+<h1 id="1对象的创建">1.对象的创建</h1>
+<p>  下图是对象的创建流程：</p>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190907132600.png" alt=""></p>
+<h2 id="11类加载检查">1.1类加载检查</h2>
+<p>  虚拟机遇到一条<code>new</code>指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载，解析和初始化过。如果没有，那必须先执行相应的类加载过程。</p>
+<h2 id="12分配内存">1.2分配内存</h2>
+<p>  在类加载检查通过后，接下来虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定，为对象分配空间的任务等同于把一块确定大小的内存从<code>Java</code>堆中划分出来。</p>
+<h3 id="121内存分配方式">1.2.1内存分配方式</h3>
+<ol>
+<li>**指针碰撞：**如果<code>Java</code>堆中内存是绝对规整的，所有用过的内存都放在一边，空闲的内存放在另一边，中间放着一个指针作为分界点的指示器，那所分配内存就仅仅是把那个指针向空闲空间那边挪动一段与对象大小相等的距离；</li>
+<li>**空闲列表：**如果<code>Java</code>堆中的内存不是规整的，已使用的内存和空闲的内存相互交错，那就没有办法简单地进行指针碰撞了，虚拟机就必须维护一个列表，记录那些内存块是可用的，在分配的时候找到一块足够大的空间划分给对象实例，并更新列表上的记录。</li>
+</ol>
+<h3 id="122hotspot如何确定内存的分配方式">1.2.2<code>HotSpot</code>如何确定内存的分配方式？</h3>
+<p>  选择哪种分配方式由<code>Java</code>堆是否规整决定，而<code>Java</code>堆是否规整又由所采用的垃圾收集器是否带有压缩整理功能决定。因此，在使用<code>Serial</code>，<code>ParNew</code>等带<code>Compact</code>过程的收集器时，系统采用的分配算法是指针碰撞，而使用<code>CMS</code>这种基于<code>Mark-Sweep</code>算法的收集器时，通常采用空闲列表。</p>
+<h3 id="122内存分配并发问题">1.2.2内存分配并发问题</h3>
+<p>  对象创建在虚拟机中是非常频繁的行为，即使是仅仅修改一个指针所指向的位置，在并发情况下也并不是线程安全的。可能出现正在给对象<code>A</code>分配内存，指针还没来得及修改，对象<code>B</code>又同时使用了原来的指针来分配内存的情况。</p>
+<p><strong>解决方案：</strong></p>
+<ol>
+<li>一种是对分配内存空间的动作进行同步处理，实际上虚拟机采用<code>CAS</code>配上失败重试的方式保证更新操作的原子性；</li>
+<li>另一种是把内存分配的动作按照线程划分在不同的空间之中进行，即每个线程在<code>Java</code>堆中预先分配一小块内存，称为本地线程分配缓冲（<code>Thread Local Allocation Buffer,TLAB</code>）。哪个线程要分配内存，就在哪个线程的<code>TLAB</code>上分配，只有<code>TLAB</code>用完并分配新的<code>TLAB</code>时，才需要同步锁定；</li>
+</ol>
+<h2 id="13初始化零值">1.3初始化零值</h2>
+<p>  内存分配完成后，虚拟机需要将分配到的内存空间都初始化为零值（不包括对象头），这一步操作保证了对象的实例字段在<code>Java</code>代码中可以不赋初始值就直接使用，程序能访问到这些字段的数据类型所对应的零值。</p>
+<h2 id="14设置对象头">1.4设置对象头</h2>
+<p>  接下来，虚拟机要对对象的对象头进行必要的设置，例如这个对象是哪个类的实例，如何才能找到类的元数据信息，对象的哈希码，对象的<code>GC</code>分代年龄等信息。</p>
+<h2 id="15执行init方法">1.5执行<code>init</code>方法</h2>
+<p>  执行<code>new</code>指令之后会接着执行<code>init</code>方法，把对象按照程序员的意愿进行初始化，这样一个真正可用的对象才算完全产生出来。</p>
+<h1 id="2对象的内存布局">2.对象的内存布局</h1>
+<p>  在<code>HotSpot</code>虚拟机中，对象在内存中存储的布局可以分为三块区域：</p>
+<ul>
+<li>对象头（<code>Header</code>）</li>
+<li>实例数据（<code>Instance Data</code>）</li>
+<li>对齐填充（<code>Padding</code>）</li>
+</ul>
+<h2 id="21对象头">2.1对象头</h2>
+<p>  <code>HotSpot</code>虚拟机的对象头包括两部分信息。</p>
+<p>  第一部分用于存储对象自身的运行时数据，如哈希码（<code>HashCode</code>），<code>GC</code>分代年龄，锁状态标志，线程持有的锁，偏向线程<code>ID</code>，偏向时间戳等。</p>
+<p>  对象头的另外一部分是类型指针，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。</p>
+<h2 id="22实例数据">2.2实例数据</h2>
+<p>  实例数据部分是对象真正存储的有效信息，也是在程序代码中所定义的各种类型的字段内容。无论是从父类继承下来的，还是在子类中定义的，都需要记录下来。</p>
+<h2 id="23对齐填充">2.3对齐填充</h2>
+<p>  此部分并不是必然存在的 它仅仅起着占位符的作用。由于<code>HotSpot VM</code>的自动内存管理系统要求对象的大小必须是8字节的整数倍。而对象头部分正好是8字节的倍数，无需对齐。所以只有当对象实例数据没有对齐时，就需要通过对齐填充来补全。</p>
+<h1 id="3对象的访问定位">3.对象的访问定位</h1>
+<p>  建立对象是为了使用对象，我们的<code>Java</code>程序需要通过栈上的<code>reference</code>数据来操作堆上的具体对象。目前主流的访问方式有使用句柄和直接指针两种。</p>
+<h2 id="31使用句柄">3.1使用句柄</h2>
+<p>  如果使用句柄访问的话，那么<code>Java</code>堆中将会抛出一块内存来作为句柄池，<code>reference</code>中存储的就是对象的句柄地址，而句柄中包含了对象实例数据与类型数据各自的具体地址信息。</p>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190907151513.png" alt=""></p>
+<h2 id="32直接指针">3.2直接指针</h2>
+<p>  如果使用直接指针访问，那么<code>Java</code>堆对象的布局中就必须考虑如何访问类型数据的相关信息，而<code>reference</code>中存储的直接就是对象地址。</p>
+<p><img src="https://raw.githubusercontent.com/Alex-2017/image-respository/master/img/20190907152533.png" alt=""></p>
+<h2 id="33比较">3.3比较</h2>
+<p>  这两种对象访问方式各有优势。</p>
+<p>  使用句柄来访问的最大好处就是<code>reference</code>中存储的是稳定的句柄地址，在对象被移动（垃圾收集时移动对象是非常普遍的行为）时只会改变句柄中实例数据指针，而<code>reference</code>本身不需要修改。</p>
+<p>  使用直接指针访问方式的最大好处就是速度更快，它节省了一次指针定位的时间开销。<code>HotSpot</code>使用的就是此访问方式。</p>
+<h1 id="4参考">4.参考</h1>
+<ol>
+<li><a href="https://book.douban.com/subject/24722612/">深入理解Java虚拟机（第2版）</a></li>
+<li><a href="https://snailclimb.top/JavaGuide/#/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F?id=java-%e5%86%85%e5%ad%98%e5%8c%ba%e5%9f%9f%e8%af%a6%e8%a7%a3">JavaGuide</a></li>
+</ol>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/jvm"><span class="tag">JVM</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        This post was published <strong>197</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "http-wangjc95-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2017-2020 BaseC的博客</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -194,6 +194,86 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/24-linkedlist%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-jdk1.8/" class="post-link">LinkedList源码分析-JDK1.8</a></h3>
+    <p class="post-meta">@BaseC · Oct 26, 2019 · 3 min read</p>
+  </header>
+  
+  <p class="post-summary">1.概述 LinkedList是基于双向链表来编写的，不需要考虑容量的问题，但节点需要额外的空间存储前驱和后继的引用。有序可重复，可存储null值，非线程安全。
+1.1继承体系 LinkedList实现了Deque接口，这样LinkedList就具备了双端队列的功能，本文旨在介绍LinkedList的List功能，队列功能不再进行说明。
+LinkedList没有实现RandomAccess接口，所以不要通过访问下标方式（for(int i=0;i&lt;size;i&#43;&#43;)）遍历，否则效率极差。
+2.源码分析 本文主要针对LinkedList的常用操作进行分析，代码如下。
+List&lt;String&gt; linkedList = new LinkedList&lt;&gt;();//add(E e)linkedList.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/24-linkedlist%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-jdk1.8/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/23-arraylist%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-jdk1.8/" class="post-link">ArrayList源码分析-JDK1.8</a></h3>
+    <p class="post-meta">@BaseC · Oct 15, 2019 · 5 min read</p>
+  </header>
+  
+  <p class="post-summary">1.概述 ArrayList本质上是一个数组,它内部通过对数组的操作实现了List功能,所以ArrayList又被叫做动态数组.每个ArrayList实例都有容量,会自动扩容.它可添加null,有序可重复,线程不安全.Vector和ArrayList内部实现基本是一致的,除了Vector添加了synchronized保证其线程安全.
+1.1继承体系 2.源码解析 2.1属性 /*** 默认初始容量*/private static final int DEFAULT_CAPACITY = 10;/*** 初始容量为0时,elementData指向此对象(空元素对象)*/private static final Object[] EMPTY_ELEMENTDATA = {};/*** 调用ArrayList()构造方法时,elementData指向此对象(默认容量空元素对象)*/private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};/*** 用于存储集合元素,非private类型能够简化内部类的访问(在编译阶段)*/transient Object[] elementData;/*** 包含的元素个数*/private int size;为什么DEFAULT_CAPACITY这种变量为什么要声明为private static final类型</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/23-arraylist%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-jdk1.8/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/22-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/" class="post-link">垃圾收集器与内存分配策略</a></h3>
+    <p class="post-meta">@BaseC · Sep 24, 2019 · 2 min read</p>
+  </header>
+  
+  <p class="post-summary">1.概述  程序计数器，虚拟机栈，本地方法栈3个区域随线程而生，随线程而灭。在这几个区域内就不需要过多考虑回收的问题，因为方法结束或者线程结束，内存自然就跟着回收了。而Java堆和方法区则不一样，一个接口中的多个实现类需要的内存可能不一样，一个方法中的多个分支需要的内存也可能不一样，我们只有在程序处于运行期间才能知道会创建哪些对象，这部分内存的分配和回收都是动态的，垃圾收集器所关注的也是这部分内存。
+2.对象已死吗  垃圾收集器在对堆进行回收前，第一件事情就是要确定这些对象之中哪些还存活着，哪些已经死去（即不可能再被任何途径使用的对象）。
+2.1引用计数算法 2.1.1定义  给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1，当引用失败时，计数器值就减1。任何时刻计数器为0的对象就是不可能再被使用的。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/22-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/21-hotspot%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E6%8F%AD%E7%A7%98/" class="post-link">HotSpot虚拟机对象揭秘</a></h3>
+    <p class="post-meta">@BaseC · Sep 8, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">本博客旨在介绍HotSpot虚拟机在Java堆中对象的创建，内存布局和访问定位的过程。
+1.对象的创建  下图是对象的创建流程：
+1.1类加载检查  虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载，解析和初始化过。如果没有，那必须先执行相应的类加载过程。
+1.2分配内存  在类加载检查通过后，接下来虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定，为对象分配空间的任务等同于把一块确定大小的内存从Java堆中划分出来。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/21-hotspot%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E6%8F%AD%E7%A7%98/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9Fjava%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" class="post-link">运行时数据区域（Java内存结构）</a></h3>
+    <p class="post-meta">@BaseC · Sep 4, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而创建，有的区域则依赖用户线程的启动和结束而建立和销毁。
+JDK1.8和之前的版本略有不同：
+1.线程私有 1.1程序计数器 程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型里，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支，循环，跳转，异常处理，线程恢复等基础功能都需要依赖这个计数器来完成。
+由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，一个处理器只会执行一条线程中的指令。为了线程切换后能恢复到正确的执行位置，每条线程需要有一个独立的程序计数器。各条线程之间互不影响，独立存储。
+如果线程正在执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令地址。如果正在执行的是Native方法，这个计数器则为空（Undefined）。
+此内存区域是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9Fjava%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://wangjc95.com/post/19-spring-aop%E5%8A%A0%E7%AD%BE%E9%AA%8C%E7%AD%BE/" class="post-link">Spring AOP加签验签</a></h3>
     <p class="post-meta">@BaseC · Aug 28, 2019 · 4 min read</p>
   </header>
@@ -271,86 +351,6 @@ value成员变量的值只能是如下三个:
  RetentionPolicy.CLASS:编译器将把Annotation记录在class文件中.当运行Java程序时,JVM不可获取Annotation信息.这是默认值. RetentionPolicy.RUNTIME：编译器将把Annotation记录在class文件中.当运行Java程序时,JVM可获取Annotation信息,程序可以通过反射获取该Annotation信息. RetentionPolicy.SOURCE:Annotation只能保留在源代码中,编译器直接丢弃这种Annotation.  示例代码:</p>
   <footer class="post-footer">
     <a class="read-more" href="https://wangjc95.com/post/15-annotation/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://wangjc95.com/post/14-java%E9%9B%86%E5%90%88/" class="post-link">Java集合</a></h3>
-    <p class="post-meta">@BaseC · Jun 7, 2019 · 8 min read</p>
-  </header>
-  
-  <p class="post-summary">介绍: 这是疯狂Java讲义第三版阅读笔记.
-1.Collection和Iterator接口 1.1Iterator Iterator接口也是Java集合框架的成员,但它与Collection系列,Map系列的集合不一样:Collection系列集合,Map系列集合主要用于装其他对象,而Iterator则主要用于遍历(即迭代访问)Collection集合中的元素,Iterator对象也被称为迭代器.
-示例代码:
-@Testpublic void test5() {List&lt;String&gt; list = new ArrayList&lt;&gt;(Arrays.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://wangjc95.com/post/14-java%E9%9B%86%E5%90%88/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" class="post-link">代理模式</a></h3>
-    <p class="post-meta">@BaseC · May 2, 2019 · 4 min read</p>
-  </header>
-  
-  <p class="post-summary">介绍: 这是head first design patterns阅读笔记.
-1.代理模式 1.1定义 代理模式为另一个对象提供一个替身或占位符以访问这个对象.
-1.2特点  代理模式为另一个对象提供代表,以便控制客户对对象的访问,管理访问的方式有许多种.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://wangjc95.com/post/13-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://wangjc95.com/post/12-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" class="post-link">状态模式</a></h3>
-    <p class="post-meta">@BaseC · Apr 27, 2019 · 6 min read</p>
-  </header>
-  
-  <p class="post-summary">介绍: 这是head first design patterns阅读笔记.
-1.场景介绍 假设我们要为糖果机设置一个控制器,来控制糖果器正常运转.控制流程如下图所示.
-这张图可以这么理解:
-糖果机在未投币的状态时通过投入25分钱的操作进入已投币的状态.在已投币的状态时,如果退回25分钱就是回到未投币状态,扭动曲柄则是售出糖果状态.但是需要的注意状态与操作的合法性!比如未投币时是不可以进行退回25分钱,扭动曲柄等操作的.
-知道需求,就可以开始实现了.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://wangjc95.com/post/12-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://wangjc95.com/post/11-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" class="post-link">组合模式</a></h3>
-    <p class="post-meta">@BaseC · Apr 21, 2019 · 3 min read</p>
-  </header>
-  
-  <p class="post-summary">介绍: 这是head first design patterns阅读笔记.
-1.场景介绍 基于之前迭代器模式的菜单整合模式下提出了一个新的需求,餐厅要创建一份甜点菜单,并把这个菜单放到餐厅菜单中.
-新增的需求让当前的系统到达了一个复杂级别,如果现在不重新设计,就无法容纳未来增加的菜单或子菜单等需求.我们需要某种树形结构,可以容纳菜单,子菜单和菜单项,同时能够确定在每个菜单的各个项之间游走,而且至少要像现在用迭代器一样方便.
-2.解决方案 2.1类图 MenuComponent:菜单组件提供了一个接口,让菜单项和菜单共同使用.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://wangjc95.com/post/11-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://wangjc95.com/post/10-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="post-link">迭代器模式</a></h3>
-    <p class="post-meta">@BaseC · Apr 14, 2019 · 3 min read</p>
-  </header>
-  
-  <p class="post-summary">介绍: 这是head first design patterns阅读笔记.
-1.场景介绍 有两种菜单,分别是DinerMenu和PancakeHouseMenu.将这两种菜单整合,需要一个特定的服务员类Waitress来进行整合和菜单的遍历等功能.
-MenuItem.java
-package iterator;import lombok.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://wangjc95.com/post/10-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">Read More →</a>
   </footer>
 </article>
 

@@ -6,7 +6,9 @@
 
   
   <title>
-  Tags | BaseC的博客
+  Tag → JVM
+  
+   | BaseC的博客
 </title>
 
   
@@ -41,7 +43,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="BaseC的博客">
   
-  <meta property="og:url" content="https://wangjc95.com/tags/">
+  <meta property="og:url" content="https://wangjc95.com/tags/jvm/">
   <meta property="og:image" content="/images/avatar.jpg">
 
 
@@ -50,8 +52,8 @@
 <meta name="generator" content="Hugo 0.68.0">
 
 
-<link rel="canonical" href="https://wangjc95.com/tags/">
-<link rel="alternate" type="application/rss+xml" href="https://wangjc95.com/tags/index.xml" title="BaseC的博客">
+<link rel="canonical" href="https://wangjc95.com/tags/jvm/">
+<link rel="alternate" type="application/rss+xml" href="https://wangjc95.com/tags/jvm/index.xml" title="BaseC的博客">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -155,8 +157,8 @@
         </li>
       
         <li class="menu-item
-           is-active
           
+           is-active
           ">
           <a href="/tags/">标签</a>
         </li>
@@ -184,44 +186,64 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
-    <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+  <section class="main post-list">
+    <header class="list-header offscreen">
+      <h2 class="list-label">Posts List</h2>
     </header>
-    <div class="tags-cloud">
+    
+    
       
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/22-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/" class="post-link">垃圾收集器与内存分配策略</a></h3>
+    <p class="post-meta">@BaseC · Sep 24, 2019 · 2 min read</p>
+  </header>
+  
+  <p class="post-summary">1.概述  程序计数器，虚拟机栈，本地方法栈3个区域随线程而生，随线程而灭。在这几个区域内就不需要过多考虑回收的问题，因为方法结束或者线程结束，内存自然就跟着回收了。而Java堆和方法区则不一样，一个接口中的多个实现类需要的内存可能不一样，一个方法中的多个分支需要的内存也可能不一样，我们只有在程序处于运行期间才能知道会创建哪些对象，这部分内存的分配和回收都是动态的，垃圾收集器所关注的也是这部分内存。
+2.对象已死吗  垃圾收集器在对堆进行回收前，第一件事情就是要确定这些对象之中哪些还存活着，哪些已经死去（即不可能再被任何途径使用的对象）。
+2.1引用计数算法 2.1.1定义  给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1，当引用失败时，计数器值就减1。任何时刻计数器为0的对象就是不可能再被使用的。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/22-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/">Read More →</a>
+  </footer>
+</article>
+
       
-        
-        <a href="/tags/head-first-design-patterns%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="tag-xxl">head-first-design-patterns阅读笔记</a>
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/21-hotspot%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E6%8F%AD%E7%A7%98/" class="post-link">HotSpot虚拟机对象揭秘</a></h3>
+    <p class="post-meta">@BaseC · Sep 8, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">本博客旨在介绍HotSpot虚拟机在Java堆中对象的创建，内存布局和访问定位的过程。
+1.对象的创建  下图是对象的创建流程：
+1.1类加载检查  虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载，解析和初始化过。如果没有，那必须先执行相应的类加载过程。
+1.2分配内存  在类加载检查通过后，接下来虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定，为对象分配空间的任务等同于把一块确定大小的内存从Java堆中划分出来。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/21-hotspot%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E8%B1%A1%E6%8F%AD%E7%A7%98/">Read More →</a>
+  </footer>
+</article>
+
       
-        
-        <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="tag-xxl">设计模式</a>
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9Fjava%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" class="post-link">运行时数据区域（Java内存结构）</a></h3>
+    <p class="post-meta">@BaseC · Sep 4, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而创建，有的区域则依赖用户线程的启动和结束而建立和销毁。
+JDK1.8和之前的版本略有不同：
+1.线程私有 1.1程序计数器 程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型里，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支，循环，跳转，异常处理，线程恢复等基础功能都需要依赖这个计数器来完成。
+由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，一个处理器只会执行一条线程中的指令。为了线程切换后能恢复到正确的执行位置，每条线程需要有一个独立的程序计数器。各条线程之间互不影响，独立存储。
+如果线程正在执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令地址。如果正在执行的是Native方法，这个计数器则为空（Undefined）。
+此内存区域是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://wangjc95.com/post/20-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9Fjava%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">Read More →</a>
+  </footer>
+</article>
+
       
-        
-        <a href="/tags/javase/" class="tag-l">javase</a>
-      
-        
-        <a href="/tags/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="tag-xxl">java多线程编程核心技术阅读笔记</a>
-      
-        
-        <a href="/tags/jvm/" class="tag-xxl">jvm</a>
-      
-        
-        <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="tag-xxl">多线程基础</a>
-      
-        
-        <a href="/tags/jdk/" class="tag-m">jdk</a>
-      
-        
-        <a href="/tags/%E7%96%AF%E7%8B%82java%E8%AE%B2%E4%B9%89%E7%AC%AC%E4%B8%89%E7%89%88%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="tag-m">疯狂java讲义第三版阅读笔记</a>
-      
-        
-        <a href="/tags/aop/" class="tag-s">aop</a>
-      
-        
-        <a href="/tags/spring/" class="tag-s">spring</a>
-      
-    </div>
+    
+    
   </section>
   
 <footer class="site-footer">
