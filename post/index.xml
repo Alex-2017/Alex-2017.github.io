@@ -6,10 +6,21 @@
     <description>Recent content in Posts on BaseC的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 26 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://wangjc95.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>定时器Timer</title>
+      <link>https://wangjc95.com/post/25-%E5%AE%9A%E6%97%B6%E5%99%A8timer/</link>
+      <pubDate>Thu, 21 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangjc95.com/post/25-%E5%AE%9A%E6%97%B6%E5%99%A8timer/</guid>
+      <description>1.Timer的介绍及使用  Timer的主要任务是设置计划任务,但封装任务的类确是TimerTask类
+1.1设置一个5s后执行的任务 MyTask.java
+public class MyTask extends TimerTask {@Overridepublic void run() {System.</description>
+    </item>
     
     <item>
       <title>LinkedList源码分析-JDK1.8</title>
